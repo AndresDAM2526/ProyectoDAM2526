@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_dam_2526/model/Product.dart';
+import 'package:proyecto_dam_2526/view/product_information.dart';
 
 class InventoryScreen extends StatefulWidget {
   const InventoryScreen({super.key});
@@ -61,6 +62,26 @@ class _InventoryScreenState extends State<InventoryScreen> {
                       (producto) => DataRow(
                         cells: [
                           DataCell(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return Dialog(
+                                    child: SizedBox(
+                                      width: MediaQuery.of(context).size.width/3,
+                                      height: MediaQuery.of(context).size.height/3,
+                                      child: ProductInformation(
+                                        product: Product(
+                                          name: producto.name,
+                                          type: producto.type,
+                                          location: producto.location,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
                             ConstrainedBox(
                               constraints: BoxConstraints(
                                 maxHeight: double.infinity,
