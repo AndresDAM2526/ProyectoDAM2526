@@ -1,0 +1,9 @@
+{
+    "inventoryManagement":"Gestión del inventario";
+    
+    "productName": "Nombre";
+    "productType": "Tipo";
+    "productLocation": "Ubicación";
+
+    
+}
