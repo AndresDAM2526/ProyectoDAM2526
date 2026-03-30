@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_dam_2526/model/Product.dart';
+import 'package:proyecto_dam_2526/view/addProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/getProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/inventory_screen.dart';
+import 'package:proyecto_dam_2526/view/login_screen.dart';
 import 'package:proyecto_dam_2526/view/product_information.dart';
 import 'package:proyecto_dam_2526/view/settings_screen.dart';
 
@@ -47,7 +49,10 @@ class _MyAppState extends State<MyApp> {
             ),
           ],
         ),
-        appBar: AppBar(title: Center(child: Text("Gestión del inventario"))),
+        appBar: AppBar(
+          title: Center(child: Text("Gestión del inventario")),
+          backgroundColor: Colors.grey,
+        ),
         body: /*ProductInformation(
           product: Product(
             name: "Raton",
@@ -55,7 +60,9 @@ class _MyAppState extends State<MyApp> {
             location: "Sala-01",
           ),
         ),*/
-        screens[selectedScreen],
+            //screens[selectedScreen],
+        //AddproductScreen(list: [],)
+        LoginScreen()
       ),
     );
   }

@@ -95,6 +95,34 @@ class ProductInformation extends StatelessWidget {
                 ],
               ),
             ),
+            Container(
+              margin: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                border: Border.all(width: 1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: [
+                  Text("Cantidad"),
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      border: Border.all(width: 1),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 10,
+                      left: 70,
+                      right: 70,
+                      bottom: 10,
+                    ),
+                    child: Text(product.quantity.toString()),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

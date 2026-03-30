@@ -11,28 +11,25 @@ class InventoryScreen extends StatefulWidget {
 
 class _InventoryScreenState extends State<InventoryScreen> {
   List<Product> productosPrueba = [
-    Product(name: "Ratón", type: "Hardware", location: "Sala-01"),
-    Product(name: "Ordenador", type: "Hardware", location: "Sala-01"),
-    Product(name: "Cable USB", type: "Hardware", location: "Sala-01"),
-    Product(name: "Cable USB", type: "Hardware", location: "Sala-01"),
-    Product(name: "Cable USB", type: "Hardware", location: "Sala-01"),
-    Product(name: "Cable USB", type: "Hardware", location: "Sala-01"),
-    Product(name: "Cable USB", type: "Hardware", location: "Sala-01"),
-    Product(name: "Cable USB", type: "Hardware", location: "Sala-01"),
-    Product(name: "Cable USB", type: "Hardware", location: "Sala-01"),
-    Product(name: "Cable USB", type: "Hardware", location: "Sala-01"),
-    Product(name: "Cable USB", type: "Hardware", location: "Sala-01"),
-    Product(name: "Cable USB", type: "Hardware", location: "Sala-01"),
-    Product(name: "Cable USB", type: "Hardware", location: "Sala-01"),
-    Product(name: "Cable USB", type: "Hardware", location: "Sala-01"),
+    Product(name: "Ratón", type: "Hardware", location: "Sala-01", quantity: 10),
     Product(
-      name: "Cable USBasdasdasdasdaasdasdasdasdasdasddgggfyhgs",
+      name: "Ordenador",
       type: "Hardware",
       location: "Sala-01",
+      quantity: 2,
     ),
-    Product(name: "Cable USB", type: "Hardware", location: "Sala-01"),
-    Product(name: "Cable USB", type: "Hardware", location: "Sala-01dfsgdfgfd"),
-    Product(name: "Cable USB", type: "Hardware", location: "Sala-01"),
+    Product(
+      name: "Cable USB",
+      type: "Hardware",
+      location: "Sala-01",
+      quantity: 4,
+    ),
+    Product(
+      name: "Cable USB",
+      type: "Hardware",
+      location: "Sala-01",
+      quantity: 3,
+    ),
   ];
   @override
   Widget build(BuildContext context) {
@@ -40,9 +37,12 @@ class _InventoryScreenState extends State<InventoryScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [Text("Filtro"), Text("Filtro")],
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [Text("Filtro"), Text("Filtro")],
+              ),
             ),
             Container(
               width: MediaQuery.of(context).size.width,
@@ -53,9 +53,15 @@ class _InventoryScreenState extends State<InventoryScreen> {
                 dataRowMaxHeight: double.infinity,
                 border: TableBorder.all(width: 1),
                 columns: [
-                  DataColumn(label: Expanded(child: Text("Nombre"))),
-                  DataColumn(label: Expanded(child: Text("Tipo"))),
-                  DataColumn(label: Expanded(child: Text("Ubicación"))),
+                  DataColumn(
+                    label: Expanded(child: Center(child: Text("Nombre"))),
+                  ),
+                  DataColumn(
+                    label: Expanded(child: Center(child: Text("Tipo"))),
+                  ),
+                  DataColumn(
+                    label: Expanded(child: Center(child: Text("Ubicación"))),
+                  ),
                 ],
                 rows: productosPrueba
                     .map(
@@ -68,13 +74,17 @@ class _InventoryScreenState extends State<InventoryScreen> {
                                 builder: (context) {
                                   return Dialog(
                                     child: SizedBox(
-                                      width: MediaQuery.of(context).size.width/3,
-                                      height: MediaQuery.of(context).size.height/3,
+                                      width:
+                                          MediaQuery.of(context).size.width / 3,
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                          2,
                                       child: ProductInformation(
                                         product: Product(
                                           name: producto.name,
                                           type: producto.type,
                                           location: producto.location,
+                                          quantity: producto.quantity,
                                         ),
                                       ),
                                     ),
@@ -85,10 +95,10 @@ class _InventoryScreenState extends State<InventoryScreen> {
                             ConstrainedBox(
                               constraints: BoxConstraints(
                                 maxHeight: double.infinity,
-                                maxWidth: MediaQuery.of(context).size.width / 5,
+                                maxWidth: MediaQuery.of(context).size.width / 4,
                               ),
                               child: Padding(
-                                padding: EdgeInsets.all(5.0),
+                                padding: EdgeInsets.all(15.0),
                                 child: Text(producto.name),
                               ),
                             ),
