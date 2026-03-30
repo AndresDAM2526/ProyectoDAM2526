@@ -1,11 +1,12 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/Product.dart';
+import 'package:proyecto_dam_2526/viewmodel/database_viewmodel.dart';
 
 class AddproductScreen extends StatefulWidget {
-  List<Product> list;
-  AddproductScreen({super.key, required this.list});
+  AddproductScreen({super.key});
 
   @override
   State<AddproductScreen> createState() => _AddproductScreenState();
@@ -16,6 +17,8 @@ class _AddproductScreenState extends State<AddproductScreen> {
   TextEditingController typeController = TextEditingController();
   TextEditingController locationController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
+  String? selectedCategory;
+  String? selectedLocation;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,15 +36,49 @@ class _AddproductScreenState extends State<AddproductScreen> {
                     ),
                   ),
                   Card(
-                    child: TextFormField(
-                      controller: typeController,
-                      decoration: InputDecoration(label: Text("Tipo")),
+                    child: FutureBuilder(
+                      future: context.read<DatabaseViewmodel>().showTypes(),
+                      builder: (context, snapshot) {
+                        final types = snapshot.data ?? [];
+                        return DropdownButtonFormField(
+                          items: types
+                              .map(
+                                (type) => DropdownMenuItem(
+                                  value: type.toString(),
+                                  child: Text(type),
+                                ),
+                              )
+                              .toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              selectedCategory = value;
+                            });
+                          },
+                        );
+                      },
                     ),
                   ),
                   Card(
-                    child: TextFormField(
-                      controller: locationController,
-                      decoration: InputDecoration(label: Text("Ubicación")),
+                    child: FutureBuilder(
+                      future: context.read<DatabaseViewmodel>().showLocations(),
+                      builder: (context, snapshot) {
+                        final locations = snapshot.data ?? [];
+                        return DropdownButtonFormField(
+                          items: locations
+                              .map(
+                                (location) => DropdownMenuItem(
+                                  value: location,
+                                  child: Text(location),
+                                ),
+                              )
+                              .toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              selectedLocation = value;
+                            });
+                          },
+                        );
+                      },
                     ),
                   ),
                   Card(
@@ -58,14 +95,6 @@ class _AddproductScreenState extends State<AddproductScreen> {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  widget.list.add(
-                    Product(
-                      name: nameController.text,
-                      type: typeController.text,
-                      location: locationController.text,
-                      quantity: int.parse(quantityController.text),
-                    ),
-                  );
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text("Se ha añadido el producto")),
                   );
