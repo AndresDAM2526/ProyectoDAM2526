@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/Product.dart';
 import 'package:proyecto_dam_2526/view/addProduct_screen.dart';
+import 'package:proyecto_dam_2526/view/deleteProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/getProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/inventory_screen.dart';
 import 'package:proyecto_dam_2526/view/login_screen.dart';
@@ -78,9 +79,10 @@ class _MyAppState extends State<MyApp> {
             location: "Sala-01",
           ),
         ),*/
-                screens[selectedScreen],
+                //screens[selectedScreen],
                 //AddproductScreen(),
-            //LoginScreen(),
+                //LoginScreen(),
+                DeleteproductScreen(),
           ),
         );
       },

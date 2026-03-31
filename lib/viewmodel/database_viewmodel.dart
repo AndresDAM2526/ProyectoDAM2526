@@ -130,6 +130,24 @@ class DatabaseViewmodel extends ChangeNotifier {
       'idLocation': idLocation,
     });
     getAllProducts();
-    notifyListeners(); 
+    notifyListeners();
+  }
+
+  Future<void> deleteProduct(int idProduct) async {
+    final db = await database;
+    await db.delete('product', where: 'idProduct=?', whereArgs: [idProduct]);
+    getAllProducts();
+    notifyListeners();
+  }
+
+  Future<List<Map<String, dynamic>>> getProductsFromName(String name) async {
+    final db = await database;
+    return db.rawQuery(
+      '''SELECT p.product,p.quantity,t.type as type,l.location  as location FROM product p 
+      INNER JOIN type t ON p.idType=t.idType 
+      INNER JOIN location l ON l.idLocation=p.idLocation
+      WHERE p.product LIKE ?''',
+      ['%$name%'],
+    );
   }
 }
