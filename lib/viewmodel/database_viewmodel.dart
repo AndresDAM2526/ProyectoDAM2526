@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
+import 'package:proyecto_dam_2526/model/Product.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseViewmodel extends ChangeNotifier {
@@ -90,9 +91,45 @@ class DatabaseViewmodel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<List<String>> showLocations() async{
+  Future<List<String>> showLocations() async {
     return locations
         .map((location) => location['location'].toString())
         .toList();
+  }
+
+  Future<int> getIdTypeFromNameType(String type) async {
+    final db = await database;
+    final List<Map<String, dynamic>> result = await db.query(
+      'type',
+      columns: ['idType'],
+      where: 'type=?',
+      whereArgs: [type],
+    );
+    return result.first['idType'];
+  }
+
+  Future<int> getIdLocationFromNameLocation(String location) async {
+    final db = await database;
+    final List<Map<String, dynamic>> result = await db.query(
+      'location',
+      columns: ['idLocation'],
+      where: 'location=?',
+      whereArgs: [location],
+    );
+    return result.first['idLocation'];
+  }
+
+  Future<void> addProduct(Product product) async {
+    final db = await database;
+    int idType = await getIdTypeFromNameType(product.type);
+    int idLocation = await getIdLocationFromNameLocation(product.location);
+    await db.insert('product', {
+      'product': product.name,
+      'quantity': product.quantity,
+      'idType': idType,
+      'idLocation': idLocation,
+    });
+    getAllProducts();
+    notifyListeners(); 
   }
 }

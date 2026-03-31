@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/Product.dart';
+import 'package:proyecto_dam_2526/viewmodel/addProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/database_viewmodel.dart';
 
 class AddproductScreen extends StatefulWidget {
@@ -13,12 +14,7 @@ class AddproductScreen extends StatefulWidget {
 }
 
 class _AddproductScreenState extends State<AddproductScreen> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController typeController = TextEditingController();
-  TextEditingController locationController = TextEditingController();
-  TextEditingController quantityController = TextEditingController();
-  String? selectedCategory;
-  String? selectedLocation;
+  final checkForm = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,11 +23,17 @@ class _AddproductScreenState extends State<AddproductScreen> {
           Container(
             margin: EdgeInsets.all(10),
             child: Form(
+              key: checkForm,
               child: Column(
                 children: [
                   Card(
                     child: TextFormField(
-                      controller: nameController,
+                      controller: context
+                          .read<AddProductoFormViewModel>()
+                          .nameController,
+                      validator: (value) => context
+                          .read<AddProductoFormViewModel>()
+                          .checkName(value),
                       decoration: InputDecoration(label: Text("Nombre")),
                     ),
                   ),
@@ -41,6 +43,13 @@ class _AddproductScreenState extends State<AddproductScreen> {
                       builder: (context, snapshot) {
                         final types = snapshot.data ?? [];
                         return DropdownButtonFormField(
+                          key: context
+                              .read<AddProductoFormViewModel>()
+                              .typeDropDown,
+                          validator: (value) => context
+                              .read<AddProductoFormViewModel>()
+                              .checkType(value),
+                          hint: Text("Seleccione un tipo"),
                           items: types
                               .map(
                                 (type) => DropdownMenuItem(
@@ -51,7 +60,8 @@ class _AddproductScreenState extends State<AddproductScreen> {
                               .toList(),
                           onChanged: (value) {
                             setState(() {
-                              selectedCategory = value;
+                              context.read<AddProductoFormViewModel>().type =
+                                  value;
                             });
                           },
                         );
@@ -64,6 +74,13 @@ class _AddproductScreenState extends State<AddproductScreen> {
                       builder: (context, snapshot) {
                         final locations = snapshot.data ?? [];
                         return DropdownButtonFormField(
+                          validator: (value) => context
+                              .read<AddProductoFormViewModel>()
+                              .checkLocation(value),
+                          key: context
+                              .read<AddProductoFormViewModel>()
+                              .locationDropDown,
+                          hint: Text("Seleccione una ubicación"),
                           items: locations
                               .map(
                                 (location) => DropdownMenuItem(
@@ -74,7 +91,10 @@ class _AddproductScreenState extends State<AddproductScreen> {
                               .toList(),
                           onChanged: (value) {
                             setState(() {
-                              selectedLocation = value;
+                              context
+                                      .read<AddProductoFormViewModel>()
+                                      .location =
+                                  value;
                             });
                           },
                         );
@@ -83,39 +103,66 @@ class _AddproductScreenState extends State<AddproductScreen> {
                   ),
                   Card(
                     child: TextFormField(
+                      controller: context
+                          .read<AddProductoFormViewModel>()
+                          .quantityController,
+                      validator: (value) => context
+                          .read<AddProductoFormViewModel>()
+                          .checkQuantity(value),
                       decoration: InputDecoration(label: Text("Cantidad")),
                     ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          if (checkForm.currentState!.validate()) {
+                            Product newProduct = Product(
+                              name: context
+                                  .read<AddProductoFormViewModel>()
+                                  .nameController
+                                  .text,
+                              type: context
+                                  .read<AddProductoFormViewModel>()
+                                  .type!,
+                              location: context
+                                  .read<AddProductoFormViewModel>()
+                                  .location!,
+                              quantity: int.parse(
+                                context
+                                    .read<AddProductoFormViewModel>()
+                                    .quantityController
+                                    .text,
+                              ),
+                            );
+                            context.read<DatabaseViewmodel>().addProduct(
+                              newProduct,
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("Se ha añadido el producto"),
+                              ),
+                            );
+                          }
+                          //context.read<AddProductoFormViewModel>().clearForm();
+                        },
+                        child: Text("Añadir"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () => context
+                            .read<AddProductoFormViewModel>()
+                            .clearForm(),
+                        child: Text("Vaciar"),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Se ha añadido el producto")),
-                  );
-                  clearForm();
-                },
-                child: Text("Añadir"),
-              ),
-              ElevatedButton(
-                onPressed: () => clearForm(),
-                child: Text("Vaciar"),
-              ),
-            ],
-          ),
         ],
       ),
     );
-  }
-
-  void clearForm() {
-    nameController.clear();
-    typeController.clear();
-    locationController.clear();
   }
 }

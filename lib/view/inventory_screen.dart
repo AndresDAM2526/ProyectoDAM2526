@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/Product.dart';
 import 'package:proyecto_dam_2526/view/product_information.dart';
+import 'package:proyecto_dam_2526/viewmodel/database_viewmodel.dart';
 
 class InventoryScreen extends StatefulWidget {
   const InventoryScreen({super.key});
@@ -10,29 +12,21 @@ class InventoryScreen extends StatefulWidget {
 }
 
 class _InventoryScreenState extends State<InventoryScreen> {
-  List<Product> productosPrueba = [
-    Product(name: "Ratón", type: "Hardware", location: "Sala-01", quantity: 10),
-    Product(
-      name: "Ordenador",
-      type: "Hardware",
-      location: "Sala-01",
-      quantity: 2,
-    ),
-    Product(
-      name: "Cable USB",
-      type: "Hardware",
-      location: "Sala-01",
-      quantity: 4,
-    ),
-    Product(
-      name: "Cable USB",
-      type: "Hardware",
-      location: "Sala-01",
-      quantity: 3,
-    ),
-  ];
   @override
   Widget build(BuildContext context) {
+    List<Map<String, dynamic>> databaseProducts = context
+        .watch<DatabaseViewmodel>()
+        .products;
+    List<Product> products = databaseProducts
+        .map(
+          (product) => Product(
+            name: product['product'],
+            type: product['type'],
+            location: product['location'],
+            quantity: int.parse(product['quantity']),
+          ),
+        )
+        .toList();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -63,9 +57,9 @@ class _InventoryScreenState extends State<InventoryScreen> {
                     label: Expanded(child: Center(child: Text("Ubicación"))),
                   ),
                 ],
-                rows: productosPrueba
+                rows: products
                     .map(
-                      (producto) => DataRow(
+                      (product) => DataRow(
                         cells: [
                           DataCell(
                             onTap: () {
@@ -81,10 +75,10 @@ class _InventoryScreenState extends State<InventoryScreen> {
                                           2,
                                       child: ProductInformation(
                                         product: Product(
-                                          name: producto.name,
-                                          type: producto.type,
-                                          location: producto.location,
-                                          quantity: producto.quantity,
+                                          name: product.name,
+                                          type: product.type,
+                                          location: product.location,
+                                          quantity: product.quantity,
                                         ),
                                       ),
                                     ),
@@ -99,7 +93,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                               ),
                               child: Padding(
                                 padding: EdgeInsets.all(15.0),
-                                child: Text(producto.name),
+                                child: Text(product.name),
                               ),
                             ),
                           ),
@@ -111,7 +105,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(5.0),
-                                child: Text(producto.type),
+                                child: Text(product.type),
                               ),
                             ),
                           ),
@@ -123,7 +117,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(5.0),
-                                child: Text(producto.location),
+                                child: Text(product.location),
                               ),
                             ),
                           ),

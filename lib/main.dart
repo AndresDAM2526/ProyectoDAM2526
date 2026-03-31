@@ -7,6 +7,7 @@ import 'package:proyecto_dam_2526/view/inventory_screen.dart';
 import 'package:proyecto_dam_2526/view/login_screen.dart';
 import 'package:proyecto_dam_2526/view/product_information.dart';
 import 'package:proyecto_dam_2526/view/settings_screen.dart';
+import 'package:proyecto_dam_2526/viewmodel/addProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/database_viewmodel.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -16,6 +17,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => DatabaseViewmodel()),
+        ChangeNotifierProvider(create: (context) => AddProductoFormViewModel()),
       ],
       child: MyApp(),
     ),
@@ -76,9 +78,9 @@ class _MyAppState extends State<MyApp> {
             location: "Sala-01",
           ),
         ),*/
-                //screens[selectedScreen],
-                AddproductScreen()
-                //LoginScreen(),
+                screens[selectedScreen],
+                //AddproductScreen(),
+            //LoginScreen(),
           ),
         );
       },
