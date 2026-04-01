@@ -3,7 +3,7 @@ import 'package:path/path.dart';
 import 'package:proyecto_dam_2526/model/Product.dart';
 import 'package:sqflite/sqflite.dart';
 
-class DatabaseViewmodel extends ChangeNotifier {
+class DatabaseService extends ChangeNotifier {
   late final Future<Database> database;
 
   List<Map<String, dynamic>> _products = [];
@@ -15,7 +15,7 @@ class DatabaseViewmodel extends ChangeNotifier {
   List<Map<String, dynamic>> _locations = [];
   List<Map<String, dynamic>> get locations => _locations;
 
-  DatabaseViewmodel() {
+  DatabaseService() {
     database = _loadDatabase();
     getAllProducts();
     getTypes();
@@ -143,7 +143,7 @@ class DatabaseViewmodel extends ChangeNotifier {
   Future<List<Map<String, dynamic>>> getProductsFromName(String name) async {
     final db = await database;
     return db.rawQuery(
-      '''SELECT p.product,p.quantity,t.type as type,l.location  as location FROM product p 
+      '''SELECT p.idProduct,p.product,p.quantity,t.type as type,l.location  as location FROM product p 
       INNER JOIN type t ON p.idType=t.idType 
       INNER JOIN location l ON l.idLocation=p.idLocation
       WHERE p.product LIKE ?''',

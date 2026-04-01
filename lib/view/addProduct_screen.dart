@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/Product.dart';
 import 'package:proyecto_dam_2526/viewmodel/addProductForm_viewmodel.dart';
-import 'package:proyecto_dam_2526/viewmodel/database_viewmodel.dart';
+import 'package:proyecto_dam_2526/service/database_service.dart';
 
-class AddproductScreen extends StatefulWidget {
-  AddproductScreen({super.key});
+class AddProductScreen extends StatefulWidget {
+  AddProductScreen({super.key});
 
   @override
-  State<AddproductScreen> createState() => _AddproductScreenState();
+  State<AddProductScreen> createState() => _AddProductScreenState();
 }
 
-class _AddproductScreenState extends State<AddproductScreen> {
+class _AddProductScreenState extends State<AddProductScreen> {
   final checkForm = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class _AddproductScreenState extends State<AddproductScreen> {
                   ),
                   Card(
                     child: FutureBuilder(
-                      future: context.read<DatabaseViewmodel>().showTypes(),
+                      future: context.read<DatabaseService>().showTypes(),
                       builder: (context, snapshot) {
                         final types = snapshot.data ?? [];
                         return DropdownButtonFormField(
@@ -70,7 +70,7 @@ class _AddproductScreenState extends State<AddproductScreen> {
                   ),
                   Card(
                     child: FutureBuilder(
-                      future: context.read<DatabaseViewmodel>().showLocations(),
+                      future: context.read<DatabaseService>().showLocations(),
                       builder: (context, snapshot) {
                         final locations = snapshot.data ?? [];
                         return DropdownButtonFormField(
@@ -136,7 +136,7 @@ class _AddproductScreenState extends State<AddproductScreen> {
                                     .text,
                               ),
                             );
-                            context.read<DatabaseViewmodel>().addProduct(
+                            context.read<DatabaseService>().addProduct(
                               newProduct,
                             );
                             ScaffoldMessenger.of(context).showSnackBar(

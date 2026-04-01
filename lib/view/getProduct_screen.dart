@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class GetproductScreen extends StatefulWidget {
-  const GetproductScreen({super.key});
+class GetProductScreen extends StatefulWidget {
+  const GetProductScreen({super.key});
 
   @override
-  State<GetproductScreen> createState() => _GetproductScreenState();
+  State<GetProductScreen> createState() => _GetProductScreenState();
 }
 
-class _GetproductScreenState extends State<GetproductScreen> {
+class _GetProductScreenState extends State<GetProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: Center(child: Text("Get product"),),);

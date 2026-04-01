@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/Product.dart';
 import 'package:proyecto_dam_2526/view/product_information.dart';
-import 'package:proyecto_dam_2526/viewmodel/database_viewmodel.dart';
+import 'package:proyecto_dam_2526/service/database_service.dart';
 
 class InventoryScreen extends StatefulWidget {
   const InventoryScreen({super.key});
@@ -15,7 +15,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> databaseProducts = context
-        .watch<DatabaseViewmodel>()
+        .watch<DatabaseService>()
         .products;
     List<Product> products = databaseProducts
         .map(

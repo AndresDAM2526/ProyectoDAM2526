@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/Product.dart';
 import 'package:proyecto_dam_2526/view/addProduct_screen.dart';
-import 'package:proyecto_dam_2526/view/deleteProduct_screen.dart';
+import 'package:proyecto_dam_2526/view/modifyInventory_screen.dart';
 import 'package:proyecto_dam_2526/view/getProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/inventory_screen.dart';
 import 'package:proyecto_dam_2526/view/login_screen.dart';
+import 'package:proyecto_dam_2526/view/modifyProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/product_information.dart';
 import 'package:proyecto_dam_2526/view/settings_screen.dart';
 import 'package:proyecto_dam_2526/viewmodel/addProductForm_viewmodel.dart';
-import 'package:proyecto_dam_2526/viewmodel/database_viewmodel.dart';
+import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/widgets/productView_widget.dart';
 import 'package:sqflite/sqflite.dart';
 
 void main() {
@@ -17,7 +19,7 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => DatabaseViewmodel()),
+        ChangeNotifierProvider(create: (context) => DatabaseService()),
         ChangeNotifierProvider(create: (context) => AddProductoFormViewModel()),
       ],
       child: MyApp(),
@@ -35,13 +37,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int selectedScreen = 0;
   List<Widget> screens = [
-    GetproductScreen(),
+    GetProductScreen(),
     InventoryScreen(),
     SettingsScreen(),
   ];
   @override
   Widget build(BuildContext context) {
-    return Consumer<DatabaseViewmodel>(
+    return Consumer<DatabaseService>(
       builder: (context, value, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -80,9 +82,11 @@ class _MyAppState extends State<MyApp> {
           ),
         ),*/
                 //screens[selectedScreen],
-                //AddproductScreen(),
+                //AddProductScreen()
                 //LoginScreen(),
-                DeleteproductScreen(),
+                //ProductViewWidget()
+                //ModifyProductScreen()
+                ModifyInventory(),
           ),
         );
       },

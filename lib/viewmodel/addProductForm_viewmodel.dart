@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:proyecto_dam_2526/model/Product.dart';
-import 'package:proyecto_dam_2526/viewmodel/database_viewmodel.dart';
+import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:sqflite/sqflite.dart';
 
 class AddProductoFormViewModel extends ChangeNotifier {
