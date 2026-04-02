@@ -150,4 +150,61 @@ class DatabaseService extends ChangeNotifier {
       ['%$name%'],
     );
   }
+
+  Future<void> modifyNameProduct(int idProduct, String name) async {
+    final db = await database;
+    await db.update(
+      'product',
+      {'product': name},
+      where: 'idProduct=?',
+      whereArgs: [idProduct],
+    );
+    getAllProducts();
+    notifyListeners();
+  }
+
+  Future<void> modifyTypeProduct(int idProduct, String type) async {
+    final db = await database;
+    int idType = await getIdTypeFromNameType(type);
+    await db.update(
+      'product',
+      {'idType': idType},
+      where: 'idProduct=?',
+      whereArgs: [idProduct],
+    );
+    getAllProducts();
+    notifyListeners();
+  }
+
+  Future<void> modifyLocationProduct(int idProduct, String location) async {
+    final db = await database;
+    int idLocation = await getIdLocationFromNameLocation(location);
+    await db.update(
+      'product',
+      {'idLocation': idLocation},
+      where: 'idProduct=?',
+      whereArgs: [idProduct],
+    );
+    getAllProducts();
+    notifyListeners();
+  }
+
+  Future<void> modifyProduct(Product product, int idProduct) async {
+    final db = await database;
+    int idType = await getIdTypeFromNameType(product.type);
+    int idLocation = await getIdLocationFromNameLocation(product.location);
+    await db.update(
+      'product',
+      {
+        'product': product.name,
+        'quantity': product.quantity,
+        'idType': idType,
+        'idLocation': idLocation,
+      },
+      where: 'idProduct=?',
+      whereArgs: [idProduct],
+    );
+    getAllProducts();
+    notifyListeners();
+  }
 }
