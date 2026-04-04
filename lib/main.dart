@@ -85,14 +85,13 @@ class _MyAppState extends State<MyApp> {
             location: "Sala-01",
           ),
         ),*/
-                screens[selectedScreen],
-                //ddProductScreen()
+                //screens[selectedScreen],
+                //AddProductScreen()
                 //LoginScreen(),
                 //ProductViewWidget()
                 //ModifyProductScreen(),
               //AddProductScreen()
-            
-            //ModifyInventory(),
+            ModifyInventory(),
           ),
         );
       },

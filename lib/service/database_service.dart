@@ -189,6 +189,18 @@ class DatabaseService extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> modifyQuantiyProduct(int idProduct, int quantity) async {
+    final db = await database;
+    await db.update(
+      'product',
+      {'quantity': quantity},
+      where: 'idProduct=?',
+      whereArgs: [quantity],
+    );
+    getAllProducts();
+    notifyListeners();
+  }
+
   Future<void> modifyProduct(Product product, int idProduct) async {
     final db = await database;
     int idType = await getIdTypeFromNameType(product.type);

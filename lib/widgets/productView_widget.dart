@@ -92,6 +92,10 @@ class ProductViewWidget extends StatelessWidget {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text("Modificado")));
+    } else {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("No se ha modificado")));
     }
   }
 }
