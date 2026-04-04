@@ -11,6 +11,7 @@ import 'package:proyecto_dam_2526/view/product_information.dart';
 import 'package:proyecto_dam_2526/view/settings_screen.dart';
 import 'package:proyecto_dam_2526/viewmodel/addProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/viewmodel/loginForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/widgets/productView_widget.dart';
 import 'package:sqflite/sqflite.dart';
@@ -25,6 +26,7 @@ void main() {
         ChangeNotifierProvider(
           create: (context) => ModifyProductformViewmodel(),
         ),
+        ChangeNotifierProvider(create: (context) => LoginFormViewmodel(),)
       ],
       child: MyApp(),
     ),
@@ -87,11 +89,11 @@ class _MyAppState extends State<MyApp> {
         ),*/
                 //screens[selectedScreen],
                 //AddProductScreen()
-                //LoginScreen(),
+                LoginScreen(),
                 //ProductViewWidget()
                 //ModifyProductScreen(),
               //AddProductScreen()
-            ModifyInventory(),
+            //ModifyInventory(),
           ),
         );
       },

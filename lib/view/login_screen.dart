@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/viewmodel/loginForm_viewmodel.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -8,6 +11,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  GlobalKey<FormState> checkForm = GlobalKey<FormState>();
   bool _obscureText = true;
   @override
   Widget build(BuildContext context) {
@@ -23,17 +27,38 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Form(
+              key: checkForm,
               child: Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(top:10,left: 40,right: 40,bottom: 10),
+                    margin: EdgeInsets.only(
+                      top: 10,
+                      left: 40,
+                      right: 40,
+                      bottom: 10,
+                    ),
                     child: TextFormField(
+                      validator: (value) =>
+                          context.read<LoginFormViewmodel>().checkUser(value),
+                      controller: context
+                          .read<LoginFormViewmodel>()
+                          .userController,
                       decoration: InputDecoration(label: Text("Usuario")),
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top:10,left: 40,right: 40,bottom: 30),
+                    margin: EdgeInsets.only(
+                      top: 10,
+                      left: 40,
+                      right: 40,
+                      bottom: 30,
+                    ),
                     child: TextFormField(
+                      validator: (value) =>
+                          context.read<LoginFormViewmodel>().checkPass(value),
+                      controller: context
+                          .read<LoginFormViewmodel>()
+                          .passController,
                       obscureText: _obscureText,
                       decoration: InputDecoration(
                         label: Text("Contraseña"),
@@ -51,7 +76,32 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  ElevatedButton(onPressed: (){}, child: Text("Iniciar sesión"))
+                  ElevatedButton(
+                    onPressed: () async {
+                      if (checkForm.currentState!.validate()) {
+                        if (await context.read<DatabaseService>().checkLogin(
+                              context
+                                  .read<LoginFormViewmodel>()
+                                  .userController
+                                  .text,
+                              context
+                                  .read<LoginFormViewmodel>()
+                                  .passController
+                                  .text,
+                            ) ==
+                            1) {
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(SnackBar(content: Text("Existe")));
+                        } else {
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(SnackBar(content: Text("No existe")));
+                        }
+                      }
+                    },
+                    child: Text("Iniciar sesión"),
+                  ),
                 ],
               ),
             ),

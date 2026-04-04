@@ -51,7 +51,18 @@ class DatabaseService extends ChangeNotifier {
   FOREIGN KEY (idType) REFERENCES type(idType) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (idLocation) REFERENCES location(idLocation) ON DELETE CASCADE ON UPDATE CASCADE
 )''');
+          await db.execute('''CREATE TABLE IF NOT EXISTS user(
+            idUser INTEGER PRIMARY KEY AUTOINCREMENT,
+            user TEXT NOT NULL,
+            password TEXT NOT NULL,
+            name TEXT NOT NULL
+          )''');
 
+          await db.insert('user', {
+            'user': 'andres',
+            'password': 'andres',
+            'name': 'Andres Correa Garcia',
+          });
           await db.insert('type', {'type': 'Memoria'});
           await db.insert('type', {'type': 'Cable'});
           await db.insert('type', {'type': 'Ordenador'});
@@ -218,5 +229,16 @@ class DatabaseService extends ChangeNotifier {
     );
     getAllProducts();
     notifyListeners();
+  }
+
+  Future<int> checkLogin(String user, String password) async {
+    final db = await database;
+    List<Map<String, dynamic>> users = await db.query(
+      'user',
+      where: 'user=? AND password=?',
+      whereArgs: [user, password],
+    );
+
+    return users.length;
   }
 }
