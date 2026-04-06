@@ -11,7 +11,7 @@ class GetProductScreen extends StatefulWidget {
 }
 
 class _GetProductScreenState extends State<GetProductScreen> {
-  String? name="";
+  String? name = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,8 +48,30 @@ class _GetProductScreenState extends State<GetProductScreen> {
                           location: foundProducts[index]['location'],
                           type: foundProducts[index]['type'],
                           quantity: int.parse(foundProducts[index]['quantity']),
-                          leftSideWidget: IconButton(onPressed: (){}, icon: Icon(Icons.get_app)),
-                          rightSideWidget: IconButton(onPressed: (){}, icon: Icon(Icons.restore_from_trash_rounded)),
+                          leftSideWidget: IconButton(
+                            onPressed: () {
+                              context.read<DatabaseService>().newRegister(
+                                foundProducts[index]['idProduct'],
+                                context.read<DatabaseService>().user!.idUser,
+                                "Coger",
+                                DateTime.now().toIso8601String(),
+                                1,
+                              );
+                            },
+                            icon: Icon(Icons.get_app),
+                          ),
+                          rightSideWidget: IconButton(
+                            onPressed: () {
+                              context.read<DatabaseService>().newRegister(
+                                foundProducts[index]['idProduct'],
+                                context.read<DatabaseService>().user!.idUser,
+                                "Devolver",
+                                DateTime.now().toIso8601String(),
+                                1,
+                              );
+                            },
+                            icon: Icon(Icons.restore_from_trash_rounded),
+                          ),
                         ),
                       );
                     },

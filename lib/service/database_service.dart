@@ -17,6 +17,8 @@ class DatabaseService extends ChangeNotifier {
   List<Map<String, dynamic>> _locations = [];
   List<Map<String, dynamic>> get locations => _locations;
 
+  List<Map<String, dynamic>> _historyRegister = [];
+  List<Map<String, dynamic>> get historyRegister => _historyRegister;
   User? _user;
   User? get user => _user;
 
@@ -299,7 +301,7 @@ class DatabaseService extends ChangeNotifier {
     int idProduct,
     int idUser,
     String registerType,
-    DateTime date,
+    String date,
     int quantity,
   ) async {
     final db = await database;
@@ -313,5 +315,17 @@ class DatabaseService extends ChangeNotifier {
     });
     getAllProducts();
     notifyListeners();
+  }
+
+  Future<List<Map<String, dynamic>>> getHistoryRegisterByIdUser(
+    int idUser,
+  ) async {
+    final db = await database;
+    return await db.rawQuery(
+      '''SELECT p.product,rt.type as type,r.quantity as quantity ,r.date FROM register r
+                                INNER JOIN product p ON p.idProduct=r.idProduct
+                                INNER JOIN registerType rt ON rt.idType=r.idRegisterType
+                              ''',
+    );
   }
 }

@@ -8,7 +8,9 @@ import 'package:proyecto_dam_2526/view/inventory_screen.dart';
 import 'package:proyecto_dam_2526/view/login_screen.dart';
 import 'package:proyecto_dam_2526/view/modifyProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/product_information.dart';
+import 'package:proyecto_dam_2526/view/profile_screen.dart';
 import 'package:proyecto_dam_2526/view/settings_screen.dart';
+import 'package:proyecto_dam_2526/view/userHistory_screen.dart';
 import 'package:proyecto_dam_2526/viewmodel/addProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/loginForm_viewmodel.dart';
@@ -53,38 +55,73 @@ class _MyAppState extends State<MyApp> {
       builder: (context, value, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: Scaffold(
-            bottomNavigationBar: context.read<DatabaseService>().user == null
-                ? null
-                : BottomNavigationBar(
-                    currentIndex: selectedScreen,
-                    onTap: (value) {
-                      setState(() {
-                        selectedScreen = value;
-                      });
-                    },
-                    items: [
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.note),
-                        label: "Obtener",
+          home: Builder(
+            builder: (context) {
+              return Scaffold(
+                bottomNavigationBar:
+                    context.read<DatabaseService>().user == null
+                    ? null
+                    : BottomNavigationBar(
+                        currentIndex: selectedScreen,
+                        onTap: (value) {
+                          setState(() {
+                            selectedScreen = value;
+                          });
+                        },
+                        items: [
+                          BottomNavigationBarItem(
+                            icon: Icon(Icons.note),
+                            label: "Obtener",
+                          ),
+                          BottomNavigationBarItem(
+                            icon: Icon(Icons.inventory),
+                            label: "Inventario",
+                          ),
+                          BottomNavigationBarItem(
+                            icon: Icon(Icons.settings),
+                            label: "Ajustes",
+                          ),
+                        ],
                       ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.inventory),
-                        label: "Inventario",
+                appBar: AppBar(
+                  title: Center(child: Text("Gestión del inventario")),
+                  backgroundColor: Colors.grey,
+                ),
+                drawer: context.read<DatabaseService>().user == null
+                    ? null
+                    : Drawer(
+                        child: ListView(
+                          children: [
+                            ListTile(
+                              title: Text("Mi perfil"),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProfileScreen(),
+                                  ),
+                                );
+                              },
+                            ),
+                            ListTile(
+                              title: Text("Historial"),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => UserHistoryScreen(),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.settings),
-                        label: "Ajustes",
-                      ),
-                    ],
-                  ),
-            appBar: AppBar(
-              title: Center(child: Text("Gestión del inventario")),
-              backgroundColor: Colors.grey,
-            ),
-            body: context.read<DatabaseService>().user == null
-                ? LoginScreen()
-                : screens[selectedScreen],
+                body: context.read<DatabaseService>().user == null
+                    ? LoginScreen()
+                    : screens[selectedScreen],
+              );
+            },
           ),
         );
       },
