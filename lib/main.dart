@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/product.dart';
+import 'package:proyecto_dam_2526/view/addLocation_screen.dart';
 import 'package:proyecto_dam_2526/view/addProduct_screen.dart';
+import 'package:proyecto_dam_2526/view/administration_screen.dart';
 import 'package:proyecto_dam_2526/view/modifyInventory_screen.dart';
 import 'package:proyecto_dam_2526/view/getProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/inventory_screen.dart';
@@ -13,8 +15,10 @@ import 'package:proyecto_dam_2526/view/settings_screen.dart';
 import 'package:proyecto_dam_2526/view/userHistory_screen.dart';
 import 'package:proyecto_dam_2526/viewmodel/addProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/loginForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyProductForm_viewmodel.dart';
+import 'package:proyecto_dam_2526/widgets/historyRegister_widget.dart';
 import 'package:proyecto_dam_2526/widgets/productView_widget.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -24,11 +28,12 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => DatabaseService()),
-        ChangeNotifierProvider(create: (context) => AddProductoFormViewModel()),
+        ChangeNotifierProvider(create: (context) => AddProductFormViewModel()),
         ChangeNotifierProvider(
           create: (context) => ModifyProductformViewmodel(),
         ),
         ChangeNotifierProvider(create: (context) => LoginFormViewmodel()),
+        ChangeNotifierProvider(create: (context) => AdministrationscreenViewmodel(),)
       ],
       child: MyApp(),
     ),
@@ -114,12 +119,30 @@ class _MyAppState extends State<MyApp> {
                                 );
                               },
                             ),
+
+                            ?(context.read<DatabaseService>().user != null &&
+                                    context.read<DatabaseService>().user!.rol ==
+                                        "Admin")
+                                ? ListTile(
+                                    title: Text("Adminstración"),
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              AdministrationScreen()
+                                        ),
+                                      );
+                                    },
+                                  )
+                                : null,
                           ],
                         ),
                       ),
-                body: context.read<DatabaseService>().user == null
+                body: /*context.read<DatabaseService>().user == null
                     ? LoginScreen()
-                    : screens[selectedScreen],
+                    : screens[selectedScreen],*/
+                    AddlocationScreen()
               );
             },
           ),

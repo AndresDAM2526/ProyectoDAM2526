@@ -1,2 +1,5 @@
 -Pantalla modificar un producto:
     Al seleccionar una categoria dentro del dropdownformfield, si después se cambia a otra pestaña, sale una excepción
+
+-Widget de historico de transacciones:
+    Cuando se introduce un texto muy largo no se coloca correctamente

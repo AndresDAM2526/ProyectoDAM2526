@@ -4,7 +4,7 @@ import 'package:proyecto_dam_2526/model/product.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:sqflite/sqflite.dart';
 
-class AddProductoFormViewModel extends ChangeNotifier {
+class AddProductFormViewModel extends ChangeNotifier {
   String? type;
   String? location;
   final nameController = TextEditingController();

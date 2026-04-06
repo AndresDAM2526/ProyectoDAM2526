@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/widgets/productView_widget.dart';
@@ -54,7 +55,9 @@ class _GetProductScreenState extends State<GetProductScreen> {
                                 foundProducts[index]['idProduct'],
                                 context.read<DatabaseService>().user!.idUser,
                                 "Coger",
-                                DateTime.now().toIso8601String(),
+                                DateFormat.yMd().add_jm().format(
+                                  DateTime.now(),
+                                ),
                                 1,
                               );
                             },
@@ -66,7 +69,9 @@ class _GetProductScreenState extends State<GetProductScreen> {
                                 foundProducts[index]['idProduct'],
                                 context.read<DatabaseService>().user!.idUser,
                                 "Devolver",
-                                DateTime.now().toIso8601String(),
+                                DateFormat.yMd().add_jm().format(
+                                  DateTime.now(),
+                                ),
                                 1,
                               );
                             },

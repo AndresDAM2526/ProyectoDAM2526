@@ -58,11 +58,19 @@ class DatabaseService extends ChangeNotifier {
                             FOREIGN KEY (idType) REFERENCES type(idType) ON DELETE CASCADE ON UPDATE CASCADE,
                             FOREIGN KEY (idLocation) REFERENCES location(idLocation) ON DELETE CASCADE ON UPDATE CASCADE
                           )''');
+          await db.execute('''CREATE TABLE IF NOT EXISTS rol(
+                            idRol INTEGER PRIMARY KEY AUTOINCREMENT,
+                            rol TEXT NOT NULL
+                          )''');
+
           await db.execute('''CREATE TABLE IF NOT EXISTS user(
                             idUser INTEGER PRIMARY KEY AUTOINCREMENT,
                             user TEXT NOT NULL,
                             password TEXT NOT NULL,
-                            name TEXT NOT NULL
+                            name TEXT NOT NULL,
+                            idRol INTEGER NOT NULL,
+
+                            FOREIGN KEY (idRol) REFERENCES rol(idRol) ON DELETE CASCADE ON UPDATE CASCADE
                           )''');
 
           await db.execute('''CREATE TABLE IF NOT EXISTS registerType(
@@ -82,12 +90,24 @@ class DatabaseService extends ChangeNotifier {
                             FOREIGN KEY (idUser) REFERENCES user(idUser) ON DELETE CASCADE ON UPDATE CASCADE,
                             FOREIGN KEY (idRegisterType) REFERENCES registerType(idType) ON DELETE CASCADE ON UPDATE CASCADE
                           )''');
+          await db.insert('rol', {'rol': 'Admin'});
+          await db.insert('rol', {'rol': 'Profesor'});
+          await db.insert('rol', {'rol': 'Alumno'});
 
           await db.insert('user', {
             'user': 'andres',
             'password': 'andres',
             'name': 'Andres Correa Garcia',
+            'idRol': '1',
           });
+
+          await db.insert('user', {
+            'user': 'juan',
+            'password': 'juan',
+            'name': 'Juan Perez Dominguez',
+            'idRol': '3',
+          });
+
           await db.insert('type', {'type': 'Memoria'});
           await db.insert('type', {'type': 'Cable'});
           await db.insert('type', {'type': 'Ordenador'});
@@ -261,17 +281,18 @@ class DatabaseService extends ChangeNotifier {
 
   Future<bool> checkLogin(String user, String password) async {
     final db = await database;
-    List<Map<String, dynamic>> users = await db.query(
-      'user',
-      where: 'user=? AND password=?',
-      whereArgs: [user, password],
+    List<Map<String, dynamic>> users = await db.rawQuery(
+      '''SELECT u.idUser,u.user,u.name,r.rol as rol FROM user u
+                                                            INNER JOIN rol r ON r.idRol=u.idRol
+                                                            WHERE u.user=? AND u.password=?''',
+      [user, password],
     );
-
     if (users.length == 1) {
       _user = User(
         idUser: users.first['idUser'],
         name: users.first['name'],
         user: users.first['user'],
+        rol: users.first['rol'],
       );
       notifyListeners();
       return true;
@@ -322,10 +343,17 @@ class DatabaseService extends ChangeNotifier {
   ) async {
     final db = await database;
     return await db.rawQuery(
-      '''SELECT p.product,rt.type as type,r.quantity as quantity ,r.date FROM register r
+      '''SELECT p.product,t.type as typeProduct,rt.type as typeRegister,r.quantity as quantity ,r.date, l.location FROM register r
                                 INNER JOIN product p ON p.idProduct=r.idProduct
                                 INNER JOIN registerType rt ON rt.idType=r.idRegisterType
+                                INNER JOIN location l ON p.idLocation=l.idLocation
+                                INNER JOIN type t on p.idType=t.idType
                               ''',
     );
+  }
+
+  Future<void> addLocation(String location) async {
+    final db = await database;
+    await db.insert('location', {'location': location});
   }
 }
