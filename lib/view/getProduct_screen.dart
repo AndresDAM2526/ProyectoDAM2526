@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/widgets/productView_widget.dart';
 
 class GetProductScreen extends StatefulWidget {
   const GetProductScreen({super.key});
@@ -8,25 +11,54 @@ class GetProductScreen extends StatefulWidget {
 }
 
 class _GetProductScreenState extends State<GetProductScreen> {
+  String? name="";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          color: Colors.amber,
-          width: MediaQuery.of(context).size.width / 2,
-          height: MediaQuery.of(context).size.height / 3,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(onPressed: () {}, child: Text("Coger producto")),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text("Devolver producto"),
-              ),
-            ],
+      body: Column(
+        children: [
+          Container(
+            color: Colors.amber,
+            child: TextField(
+              decoration: InputDecoration(label: Text("Introduzca el nombre")),
+              onSubmitted: (value) {
+                setState(() {
+                  name = value;
+                });
+              },
+            ),
           ),
-        ),
+          Expanded(
+            child: FutureBuilder(
+              future: context.read<DatabaseService>().getProductsFromName(
+                name!,
+              ),
+              builder: (context, snapshot) {
+                final foundProducts = snapshot.data ?? [];
+                return Container(
+                  margin: EdgeInsets.all(10),
+                  child: ListView.builder(
+                    itemCount: foundProducts.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: EdgeInsets.all(10),
+                        child: ProductViewWidget(
+                          idProduct: foundProducts[index]['idProduct'],
+                          name: foundProducts[index]['product'],
+                          location: foundProducts[index]['location'],
+                          type: foundProducts[index]['type'],
+                          quantity: int.parse(foundProducts[index]['quantity']),
+                          leftSideWidget: IconButton(onPressed: (){}, icon: Icon(Icons.get_app)),
+                          rightSideWidget: IconButton(onPressed: (){}, icon: Icon(Icons.restore_from_trash_rounded)),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

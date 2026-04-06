@@ -10,6 +10,8 @@ class ProductViewWidget extends StatelessWidget {
   String location;
   String type;
   int quantity;
+  Widget rightSideWidget;
+  Widget leftSideWidget;
   ProductViewWidget({
     super.key,
     required this.idProduct,
@@ -17,6 +19,8 @@ class ProductViewWidget extends StatelessWidget {
     required this.location,
     required this.type,
     required this.quantity,
+    required this.leftSideWidget,
+    required this.rightSideWidget,
   });
 
   @override
@@ -29,34 +33,15 @@ class ProductViewWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text("Nombre: $name"),
-              Text("Nombre: $location"),
-              Text("Nombre: $quantity"),
+              Text("Ubicación: $location"),
+              Text("Cantidad: $quantity"),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              IconButton(
-                onPressed: () {
-                  context.read<DatabaseService>().deleteProduct(idProduct);
-                },
-                icon: Icon(Icons.delete),
-              ),
-              IconButton(
-                onPressed: () {
-                  showModifyDialog(
-                    context,
-                    DatabaseProduct(
-                      idProduct: idProduct,
-                      name: name,
-                      type: type,
-                      location: location,
-                      quantity: quantity,
-                    ),
-                  );
-                },
-                icon: Icon(Icons.person_4),
-              ),
+              leftSideWidget,
+              rightSideWidget,
             ],
           ),
         ],
