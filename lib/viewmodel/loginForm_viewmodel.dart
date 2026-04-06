@@ -5,7 +5,7 @@ class LoginFormViewmodel extends ChangeNotifier {
   TextEditingController passController = TextEditingController();
 
   String? checkUser(String? value) =>
-      (value == null || value!.isEmpty) ? "Campo vacio" : "";
+      (value == null || value.isEmpty) ? "Campo vacio" : null;
   String? checkPass(String? value) =>
-      (value == null || value!.isEmpty) ? "Campo vacio" : "";
+      (value == null || value.isEmpty) ? "Campo vacio" : null;
 }

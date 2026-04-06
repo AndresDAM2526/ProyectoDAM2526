@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_dam_2526/model/Product.dart';
+import 'package:proyecto_dam_2526/model/product.dart';
 import 'package:proyecto_dam_2526/view/addProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/modifyInventory_screen.dart';
 import 'package:proyecto_dam_2526/view/getProduct_screen.dart';
@@ -26,7 +26,7 @@ void main() {
         ChangeNotifierProvider(
           create: (context) => ModifyProductformViewmodel(),
         ),
-        ChangeNotifierProvider(create: (context) => LoginFormViewmodel(),)
+        ChangeNotifierProvider(create: (context) => LoginFormViewmodel()),
       ],
       child: MyApp(),
     ),
@@ -54,46 +54,37 @@ class _MyAppState extends State<MyApp> {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           home: Scaffold(
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: selectedScreen,
-              onTap: (value) {
-                setState(() {
-                  selectedScreen = value;
-                });
-              },
-              items: [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.note),
-                  label: "Obtener",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.inventory),
-                  label: "Inventario",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.settings),
-                  label: "Ajustes",
-                ),
-              ],
-            ),
+            bottomNavigationBar: context.read<DatabaseService>().user == null
+                ? null
+                : BottomNavigationBar(
+                    currentIndex: selectedScreen,
+                    onTap: (value) {
+                      setState(() {
+                        selectedScreen = value;
+                      });
+                    },
+                    items: [
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.note),
+                        label: "Obtener",
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.inventory),
+                        label: "Inventario",
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.settings),
+                        label: "Ajustes",
+                      ),
+                    ],
+                  ),
             appBar: AppBar(
               title: Center(child: Text("Gestión del inventario")),
               backgroundColor: Colors.grey,
             ),
-            body: /*ProductInformation(
-          product: Product(
-            name: "Raton",
-            type: "Hardware",
-            location: "Sala-01",
-          ),
-        ),*/
-                //screens[selectedScreen],
-                //AddProductScreen()
-                LoginScreen(),
-                //ProductViewWidget()
-                //ModifyProductScreen(),
-              //AddProductScreen()
-            //ModifyInventory(),
+            body: context.read<DatabaseService>().user == null
+                ? LoginScreen()
+                : screens[selectedScreen],
           ),
         );
       },

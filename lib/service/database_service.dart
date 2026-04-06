@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
-import 'package:proyecto_dam_2526/model/Product.dart';
+import 'package:proyecto_dam_2526/model/DatabaseProduct.dart';
+import 'package:proyecto_dam_2526/model/product.dart';
+import 'package:proyecto_dam_2526/model/user.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseService extends ChangeNotifier {
@@ -14,6 +16,9 @@ class DatabaseService extends ChangeNotifier {
 
   List<Map<String, dynamic>> _locations = [];
   List<Map<String, dynamic>> get locations => _locations;
+
+  User? _user;
+  User? get user => _user;
 
   DatabaseService() {
     database = _loadDatabase();
@@ -34,29 +39,47 @@ class DatabaseService extends ChangeNotifier {
         version: 1,
         onCreate: (db, version) async {
           await db.execute('''CREATE TABLE IF NOT EXISTS type(
-	                            idType INTEGER PRIMARY KEY AUTOINCREMENT,
-	                            type TEXT NOT NULL
-                    )''');
+	                              idType INTEGER PRIMARY KEY AUTOINCREMENT,
+	                              type TEXT NOT NULL
+                          )''');
           await db.execute('''CREATE TABLE IF NOT EXISTS location(
-	idLocation INTEGER PRIMARY KEY AUTOINCREMENT,
-	location TEXT NOT NULL
-)''');
+                            idLocation INTEGER PRIMARY KEY AUTOINCREMENT,
+                            location TEXT NOT NULL
+                          )''');
           await db.execute('''CREATE TABLE IF NOT EXISTS product(
-	idProduct INTEGER PRIMARY KEY AUTOINCREMENT,
-	product TEXT NOT NULL,
-	quantity TEXT NOT NULL,
-	idType INTEGER NOT NULL,
-	idLocation INTEGER NOT NULL,
+                            idProduct INTEGER PRIMARY KEY AUTOINCREMENT,
+                            product TEXT NOT NULL,
+                            quantity TEXT NOT NULL,
+                            idType INTEGER NOT NULL,
+                            idLocation INTEGER NOT NULL,
 
-  FOREIGN KEY (idType) REFERENCES type(idType) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (idLocation) REFERENCES location(idLocation) ON DELETE CASCADE ON UPDATE CASCADE
-)''');
+                            FOREIGN KEY (idType) REFERENCES type(idType) ON DELETE CASCADE ON UPDATE CASCADE,
+                            FOREIGN KEY (idLocation) REFERENCES location(idLocation) ON DELETE CASCADE ON UPDATE CASCADE
+                          )''');
           await db.execute('''CREATE TABLE IF NOT EXISTS user(
-            idUser INTEGER PRIMARY KEY AUTOINCREMENT,
-            user TEXT NOT NULL,
-            password TEXT NOT NULL,
-            name TEXT NOT NULL
-          )''');
+                            idUser INTEGER PRIMARY KEY AUTOINCREMENT,
+                            user TEXT NOT NULL,
+                            password TEXT NOT NULL,
+                            name TEXT NOT NULL
+                          )''');
+
+          await db.execute('''CREATE TABLE IF NOT EXISTS registerType(
+                            idType INTEGER PRIMARY KEY AUTOINCREMENT,
+                            type TEXT NOT NULL
+                          )''');
+
+          await db.execute('''CREATE TABLE IF NOT EXISTS register(
+                            idRegister INTEGER PRIMARY KEY AUTOINCREMENT,
+                            idProduct INTEGER NOT NULL,
+                            idUser INTEGER NOT NULL,
+                            idRegisterType INTEGER NOT NULL,
+                            date TEXT NOT NULL,
+                            quantity INTEGER NOT NULL,
+
+                            FOREIGN KEY (idProduct) REFERENCES product(idProduct) ON DELETE CASCADE ON UPDATE CASCADE,
+                            FOREIGN KEY (idUser) REFERENCES user(idUser) ON DELETE CASCADE ON UPDATE CASCADE,
+                            FOREIGN KEY (idRegisterType) REFERENCES registerType(idType) ON DELETE CASCADE ON UPDATE CASCADE
+                          )''');
 
           await db.insert('user', {
             'user': 'andres',
@@ -70,6 +93,9 @@ class DatabaseService extends ChangeNotifier {
 
           await db.insert('location', {'location': 'Almacen-01'});
           await db.insert('location', {'location': 'Almacen-02'});
+
+          await db.insert('registerType', {'type': 'Coger'});
+          await db.insert('registerType', {'type': 'Devolver'});
         },
       ),
     );
@@ -231,7 +257,7 @@ class DatabaseService extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<int> checkLogin(String user, String password) async {
+  Future<bool> checkLogin(String user, String password) async {
     final db = await database;
     List<Map<String, dynamic>> users = await db.query(
       'user',
@@ -239,6 +265,53 @@ class DatabaseService extends ChangeNotifier {
       whereArgs: [user, password],
     );
 
-    return users.length;
+    if (users.length == 1) {
+      _user = User(
+        idUser: users.first['idUser'],
+        name: users.first['name'],
+        user: users.first['user'],
+      );
+      notifyListeners();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void logout() {
+    _user = null;
+    notifyListeners();
+  }
+
+  Future<int> getTypeRegister(String type) async {
+    final db = await database;
+    List<Map<String, dynamic>> result = await db.query(
+      'registerType',
+      columns: ['idType'],
+      where: 'type=?',
+      whereArgs: [type],
+    );
+
+    return result.first['idType'];
+  }
+
+  Future<void> newRegister(
+    int idProduct,
+    int idUser,
+    String registerType,
+    DateTime date,
+    int quantity,
+  ) async {
+    final db = await database;
+    int idRegisterType = await getTypeRegister(registerType);
+    await db.insert('register', {
+      'idProduct': idProduct,
+      'idUser': idUser,
+      'idRegistertype': idRegisterType,
+      'date': date,
+      'quantity': quantity,
+    });
+    getAllProducts();
+    notifyListeners();
   }
 }

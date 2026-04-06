@@ -80,16 +80,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () async {
                       if (checkForm.currentState!.validate()) {
                         if (await context.read<DatabaseService>().checkLogin(
-                              context
-                                  .read<LoginFormViewmodel>()
-                                  .userController
-                                  .text,
-                              context
-                                  .read<LoginFormViewmodel>()
-                                  .passController
-                                  .text,
-                            ) ==
-                            1) {
+                          context
+                              .read<LoginFormViewmodel>()
+                              .userController
+                              .text,
+                          context
+                              .read<LoginFormViewmodel>()
+                              .passController
+                              .text,
+                        )) {
                           ScaffoldMessenger.of(
                             context,
                           ).showSnackBar(SnackBar(content: Text("Existe")));

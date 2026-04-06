@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_dam_2526/model/Product.dart';
+import 'package:proyecto_dam_2526/model/product.dart';
 
 class ProductInformation extends StatelessWidget {
   Product product;

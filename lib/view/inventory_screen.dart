@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_dam_2526/model/Product.dart';
+import 'package:proyecto_dam_2526/model/product.dart';
 import 'package:proyecto_dam_2526/view/product_information.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 
