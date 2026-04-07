@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/view/addProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/addUser_screen.dart';
 import 'package:proyecto_dam_2526/view/modifyInventory_screen.dart';
+import 'package:proyecto_dam_2526/view/modifyUser_screen.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 
 class AdministrationScreen extends StatelessWidget {
@@ -61,6 +62,12 @@ class AdministrationScreen extends StatelessWidget {
                       .showAddTypeProductDialog(context);
                 },
                 child: Text("Añadir tipo de producto"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ModifyUserScreen(),));
+                },
+                child: Text("Modificar usuario"),
               ),
               ElevatedButton(
                 onPressed: () {

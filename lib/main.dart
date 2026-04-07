@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/product.dart';
+import 'package:proyecto_dam_2526/model/userDao.dart';
 import 'package:proyecto_dam_2526/view/addLocation_screen.dart';
 import 'package:proyecto_dam_2526/view/addProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/administration_screen.dart';
@@ -21,6 +22,7 @@ import 'package:proyecto_dam_2526/viewmodel/loginForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/widgets/historyRegister_widget.dart';
 import 'package:proyecto_dam_2526/widgets/productView_widget.dart';
+import 'package:proyecto_dam_2526/widgets/userInformation_widget.dart';
 import 'package:sqflite/sqflite.dart';
 
 void main() {
@@ -129,7 +131,7 @@ class _MyAppState extends State<MyApp> {
                                     context
                                             .read<DatabaseService>()
                                             .userDatabase!
-                                            .rol ==
+                                            .role ==
                                         "Admin")
                                 ? ListTile(
                                     title: Text("Adminstración"),

@@ -85,7 +85,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
                           .read<AdduserFormViewmodel>()
                           .nameController
                           .text,
-                      user: context
+                      username: context
                           .read<AdduserFormViewmodel>()
                           .userController
                           .text,

@@ -70,7 +70,7 @@ class DatabaseService extends ChangeNotifier {
 
           await db.execute('''CREATE TABLE IF NOT EXISTS user(
                             idUser INTEGER PRIMARY KEY AUTOINCREMENT,
-                            user TEXT NOT NULL,
+                            username TEXT NOT NULL,
                             password TEXT NOT NULL,
                             name TEXT NOT NULL,
                             idRole INTEGER NOT NULL,
@@ -100,14 +100,14 @@ class DatabaseService extends ChangeNotifier {
           await db.insert('role', {'role': 'Alumno'});
 
           await db.insert('user', {
-            'user': 'andres',
+            'username': 'andres',
             'password': 'andres',
             'name': 'Andres Correa Garcia',
             'idRole': '1',
           });
 
           await db.insert('user', {
-            'user': 'juan',
+            'username': 'juan',
             'password': 'juan',
             'name': 'Juan Perez Dominguez',
             'idRole': '3',
@@ -129,11 +129,24 @@ class DatabaseService extends ChangeNotifier {
     return database;
   }
 
+  Future<List<Map<String, dynamic>>> getUserByNameOrUsername(
+    String? value,
+  ) async {
+    final db = await database;
+    return await db.rawQuery(
+      '''SELECT u.idUser,u.username,u.name,r.role as role FROM user u
+                          INNER JOIN role r on u.idRole=r.idRole
+                          WHERE u.username LIKE ? OR u.name LIKE ?
+                    ''',
+      ['%$value%', '%$value%'],
+    );
+  }
+
   Future<void> addUser(User user) async {
     final db = await database;
     int idRole = await getIdRoleFromNameRole(user.role);
     await db.insert('user', {
-      'user': user.user,
+      'username': user.username,
       'name': user.name,
       'password': user.password,
       'idRole': idRole,
@@ -305,20 +318,20 @@ class DatabaseService extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> checkLogin(String user, String password) async {
+  Future<bool> checkLogin(String username, String password) async {
     final db = await database;
     List<Map<String, dynamic>> users = await db.rawQuery(
-      '''SELECT u.idUser,u.user,u.name,r.role as role FROM user u
+      '''SELECT u.idUser,u.username,u.name,r.role as role FROM user u
                                                             INNER JOIN role r ON r.idRole=u.idRole
-                                                            WHERE u.user=? AND u.password=?''',
-      [user, password],
+                                                            WHERE u.username=? AND u.password=?''',
+      [username, password],
     );
     if (users.length == 1) {
       _userDatabase = UserDatabase(
         idUser: users.first['idUser'],
         name: users.first['name'],
-        user: users.first['user'],
-        rol: users.first['role'],
+        username: users.first['username'],
+        role: users.first['role'],
       );
       notifyListeners();
       return true;
@@ -401,5 +414,11 @@ class DatabaseService extends ChangeNotifier {
       whereArgs: [role],
     );
     return resul.first['idRole'];
+  }
+
+  Future<void> deleteUser(int idUser) async {
+    final db = await database;
+    await db.delete('user', where: 'idUser=?', whereArgs: [idUser]);
+    notifyListeners();
   }
 }

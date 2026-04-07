@@ -1,12 +1,12 @@
 class User {
   String name;
-  String user;
+  String username;
   String password;
   String role;
 
   User({
     required this.name,
-    required this.user,
+    required this.username,
     required this.password,
     required this.role,
   });

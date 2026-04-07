@@ -1,8 +1,8 @@
 class UserDatabase {
   int idUser;
-  String user;
+  String username;
   String name;
-  String rol;
+  String role;
 
-  UserDatabase({required this.idUser, required this.name, required this.user,required this.rol});
+  UserDatabase({required this.idUser, required this.name, required this.username,required this.role});
 }
