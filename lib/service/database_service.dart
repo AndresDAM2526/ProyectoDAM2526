@@ -421,4 +421,45 @@ class DatabaseService extends ChangeNotifier {
     await db.delete('user', where: 'idUser=?', whereArgs: [idUser]);
     notifyListeners();
   }
+
+  Future<void> changePassword(int idUser, String password) async {
+    final db = await database;
+    await db.update(
+      'user',
+      {'password': password},
+      where: 'idUser=?',
+      whereArgs: [idUser],
+    );
+  }
+
+  Future<void> updateUsername(int idUser, String username) async {
+    final db = await database;
+    await db.update(
+      'user',
+      {'username': username},
+      where: 'idUser=?',
+      whereArgs: [idUser],
+    );
+  }
+
+  Future<void> updateName(int idUser, String name) async {
+    final db = await database;
+    await db.update(
+      'user',
+      {'name': name},
+      where: 'idUser=?',
+      whereArgs: [idUser],
+    );
+  }
+
+  Future<void> updateRol(int idUser, String role) async {
+    final db = await database;
+    int idRole = await getIdRoleFromNameRole(role);
+    await db.update(
+      'user',
+      {'idRole': idRole},
+      where: 'idUser=?',
+      whereArgs: [idUser],
+    );
+  }
 }

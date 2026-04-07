@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_dam_2526/model/product.dart';
-import 'package:proyecto_dam_2526/model/userDao.dart';
-import 'package:proyecto_dam_2526/view/addLocation_screen.dart';
-import 'package:proyecto_dam_2526/view/addProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/administration_screen.dart';
-import 'package:proyecto_dam_2526/view/modifyInventory_screen.dart';
 import 'package:proyecto_dam_2526/view/getProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/inventory_screen.dart';
 import 'package:proyecto_dam_2526/view/login_screen.dart';
-import 'package:proyecto_dam_2526/view/modifyProduct_screen.dart';
-import 'package:proyecto_dam_2526/view/product_information.dart';
 import 'package:proyecto_dam_2526/view/profile_screen.dart';
 import 'package:proyecto_dam_2526/view/settings_screen.dart';
 import 'package:proyecto_dam_2526/view/userHistory_screen.dart';
@@ -20,10 +13,6 @@ import 'package:proyecto_dam_2526/viewmodel/addUserForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/loginForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyProductForm_viewmodel.dart';
-import 'package:proyecto_dam_2526/widgets/historyRegister_widget.dart';
-import 'package:proyecto_dam_2526/widgets/productView_widget.dart';
-import 'package:proyecto_dam_2526/widgets/userInformation_widget.dart';
-import 'package:sqflite/sqflite.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,7 +43,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int selectedScreen = 0;
   List<Widget> screens = [
     GetProductScreen(),
     InventoryScreen(),
@@ -62,6 +50,7 @@ class _MyAppState extends State<MyApp> {
   ];
   @override
   Widget build(BuildContext context) {
+    int selectedScreen = 0;
     return Consumer<DatabaseService>(
       builder: (context, value, child) {
         return MaterialApp(

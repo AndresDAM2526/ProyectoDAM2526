@@ -3,3 +3,6 @@
 
 -Widget de historico de transacciones y widget usuario :
     Cuando se introduce un texto muy largo no se coloca correctamente
+
+-Pantalla de modificar usuario:
+    Al borrar alguno, aparece una alerta avisando de un Null

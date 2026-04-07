@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/user.dart';
-import 'package:proyecto_dam_2526/model/userDao.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 
 class UserInformationWidget extends StatelessWidget {
   UserDatabase user;
@@ -35,8 +35,22 @@ class UserInformationWidget extends StatelessWidget {
             margin: EdgeInsets.all(10),
             child: Row(
               children: [
-                IconButton(onPressed: () {}, icon: Icon(Icons.update)),
-                IconButton(onPressed: () {}, icon: Icon(Icons.password)),
+                IconButton(
+                  onPressed: () {
+                    context
+                        .read<AdministrationscreenViewmodel>()
+                        .showModifyPropertiesUserDialog(context, user);
+                  },
+                  icon: Icon(Icons.update),
+                ),
+                IconButton(
+                  onPressed: () {
+                    context
+                        .read<AdministrationscreenViewmodel>()
+                        .showChangePasswordDialog(context, user);
+                  },
+                  icon: Icon(Icons.password),
+                ),
                 IconButton(
                   onPressed: () {
                     context.read<DatabaseService>().deleteUser(user.idUser);
