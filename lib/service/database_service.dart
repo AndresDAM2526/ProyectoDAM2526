@@ -3,6 +3,7 @@ import 'package:path/path.dart';
 import 'package:proyecto_dam_2526/model/DatabaseProduct.dart';
 import 'package:proyecto_dam_2526/model/product.dart';
 import 'package:proyecto_dam_2526/model/user.dart';
+import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseService extends ChangeNotifier {
@@ -17,16 +18,20 @@ class DatabaseService extends ChangeNotifier {
   List<Map<String, dynamic>> _locations = [];
   List<Map<String, dynamic>> get locations => _locations;
 
+  List<Map<String, dynamic>> _roles = [];
+  List<Map<String, dynamic>> get roles => _roles;
+
   List<Map<String, dynamic>> _historyRegister = [];
   List<Map<String, dynamic>> get historyRegister => _historyRegister;
-  User? _user;
-  User? get user => _user;
+  UserDatabase? _userDatabase;
+  UserDatabase? get userDatabase => _userDatabase;
 
   DatabaseService() {
     database = _loadDatabase();
     getAllProducts();
     getTypes();
     getLocations();
+    getRoles();
   }
 
   Future<Database> _loadDatabase() async {
@@ -58,9 +63,9 @@ class DatabaseService extends ChangeNotifier {
                             FOREIGN KEY (idType) REFERENCES type(idType) ON DELETE CASCADE ON UPDATE CASCADE,
                             FOREIGN KEY (idLocation) REFERENCES location(idLocation) ON DELETE CASCADE ON UPDATE CASCADE
                           )''');
-          await db.execute('''CREATE TABLE IF NOT EXISTS rol(
-                            idRol INTEGER PRIMARY KEY AUTOINCREMENT,
-                            rol TEXT NOT NULL
+          await db.execute('''CREATE TABLE IF NOT EXISTS role(
+                            idRole INTEGER PRIMARY KEY AUTOINCREMENT,
+                            role TEXT NOT NULL
                           )''');
 
           await db.execute('''CREATE TABLE IF NOT EXISTS user(
@@ -68,9 +73,9 @@ class DatabaseService extends ChangeNotifier {
                             user TEXT NOT NULL,
                             password TEXT NOT NULL,
                             name TEXT NOT NULL,
-                            idRol INTEGER NOT NULL,
+                            idRole INTEGER NOT NULL,
 
-                            FOREIGN KEY (idRol) REFERENCES rol(idRol) ON DELETE CASCADE ON UPDATE CASCADE
+                            FOREIGN KEY (idRole) REFERENCES rol(idRole) ON DELETE CASCADE ON UPDATE CASCADE
                           )''');
 
           await db.execute('''CREATE TABLE IF NOT EXISTS registerType(
@@ -90,22 +95,22 @@ class DatabaseService extends ChangeNotifier {
                             FOREIGN KEY (idUser) REFERENCES user(idUser) ON DELETE CASCADE ON UPDATE CASCADE,
                             FOREIGN KEY (idRegisterType) REFERENCES registerType(idType) ON DELETE CASCADE ON UPDATE CASCADE
                           )''');
-          await db.insert('rol', {'rol': 'Admin'});
-          await db.insert('rol', {'rol': 'Profesor'});
-          await db.insert('rol', {'rol': 'Alumno'});
+          await db.insert('role', {'role': 'Admin'});
+          await db.insert('role', {'role': 'Profesor'});
+          await db.insert('role', {'role': 'Alumno'});
 
           await db.insert('user', {
             'user': 'andres',
             'password': 'andres',
             'name': 'Andres Correa Garcia',
-            'idRol': '1',
+            'idRole': '1',
           });
 
           await db.insert('user', {
             'user': 'juan',
             'password': 'juan',
             'name': 'Juan Perez Dominguez',
-            'idRol': '3',
+            'idRole': '3',
           });
 
           await db.insert('type', {'type': 'Memoria'});
@@ -122,6 +127,17 @@ class DatabaseService extends ChangeNotifier {
       ),
     );
     return database;
+  }
+
+  Future<void> addUser(User user) async {
+    final db = await database;
+    int idRole = await getIdRoleFromNameRole(user.role);
+    await db.insert('user', {
+      'user': user.user,
+      'name': user.name,
+      'password': user.password,
+      'idRole': idRole,
+    });
   }
 
   Future<void> getAllProducts() async {
@@ -154,6 +170,16 @@ class DatabaseService extends ChangeNotifier {
     return locations
         .map((location) => location['location'].toString())
         .toList();
+  }
+
+  Future<void> getRoles() async {
+    final db = await database;
+    _roles = await db.query('role', columns: ['role']);
+    notifyListeners();
+  }
+
+  Future<List<String>> showRoles() async {
+    return roles.map((rol) => rol['role'].toString()).toList();
   }
 
   Future<int> getIdTypeFromNameType(String type) async {
@@ -282,17 +308,17 @@ class DatabaseService extends ChangeNotifier {
   Future<bool> checkLogin(String user, String password) async {
     final db = await database;
     List<Map<String, dynamic>> users = await db.rawQuery(
-      '''SELECT u.idUser,u.user,u.name,r.rol as rol FROM user u
-                                                            INNER JOIN rol r ON r.idRol=u.idRol
+      '''SELECT u.idUser,u.user,u.name,r.role as role FROM user u
+                                                            INNER JOIN role r ON r.idRole=u.idRole
                                                             WHERE u.user=? AND u.password=?''',
       [user, password],
     );
     if (users.length == 1) {
-      _user = User(
+      _userDatabase = UserDatabase(
         idUser: users.first['idUser'],
         name: users.first['name'],
         user: users.first['user'],
-        rol: users.first['rol'],
+        rol: users.first['role'],
       );
       notifyListeners();
       return true;
@@ -302,7 +328,7 @@ class DatabaseService extends ChangeNotifier {
   }
 
   void logout() {
-    _user = null;
+    _userDatabase = null;
     notifyListeners();
   }
 
@@ -355,5 +381,25 @@ class DatabaseService extends ChangeNotifier {
   Future<void> addLocation(String location) async {
     final db = await database;
     await db.insert('location', {'location': location});
+    getLocations();
+    notifyListeners();
+  }
+
+  Future<void> addTypeProduct(String type) async {
+    final db = await database;
+    await db.insert('type', {'type': type});
+    getTypes();
+    notifyListeners();
+  }
+
+  Future<int> getIdRoleFromNameRole(String role) async {
+    final db = await database;
+    List<Map<String, dynamic>> resul = await db.query(
+      'role',
+      columns: ['idRole'],
+      where: 'role=?',
+      whereArgs: [role],
+    );
+    return resul.first['idRole'];
   }
 }

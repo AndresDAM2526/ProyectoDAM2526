@@ -15,6 +15,7 @@ import 'package:proyecto_dam_2526/view/settings_screen.dart';
 import 'package:proyecto_dam_2526/view/userHistory_screen.dart';
 import 'package:proyecto_dam_2526/viewmodel/addProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/viewmodel/addUserForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/loginForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyProductForm_viewmodel.dart';
@@ -33,7 +34,10 @@ void main() {
           create: (context) => ModifyProductformViewmodel(),
         ),
         ChangeNotifierProvider(create: (context) => LoginFormViewmodel()),
-        ChangeNotifierProvider(create: (context) => AdministrationscreenViewmodel(),)
+        ChangeNotifierProvider(
+          create: (context) => AdministrationscreenViewmodel(),
+        ),
+        ChangeNotifierProvider(create: (context) => AdduserFormViewmodel()),
       ],
       child: MyApp(),
     ),
@@ -64,7 +68,7 @@ class _MyAppState extends State<MyApp> {
             builder: (context) {
               return Scaffold(
                 bottomNavigationBar:
-                    context.read<DatabaseService>().user == null
+                    context.read<DatabaseService>().userDatabase == null
                     ? null
                     : BottomNavigationBar(
                         currentIndex: selectedScreen,
@@ -92,7 +96,7 @@ class _MyAppState extends State<MyApp> {
                   title: Center(child: Text("Gestión del inventario")),
                   backgroundColor: Colors.grey,
                 ),
-                drawer: context.read<DatabaseService>().user == null
+                drawer: context.read<DatabaseService>().userDatabase == null
                     ? null
                     : Drawer(
                         child: ListView(
@@ -120,8 +124,12 @@ class _MyAppState extends State<MyApp> {
                               },
                             ),
 
-                            ?(context.read<DatabaseService>().user != null &&
-                                    context.read<DatabaseService>().user!.rol ==
+                            ?(context.read<DatabaseService>().userDatabase !=
+                                        null &&
+                                    context
+                                            .read<DatabaseService>()
+                                            .userDatabase!
+                                            .rol ==
                                         "Admin")
                                 ? ListTile(
                                     title: Text("Adminstración"),
@@ -130,7 +138,7 @@ class _MyAppState extends State<MyApp> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              AdministrationScreen()
+                                              AdministrationScreen(),
                                         ),
                                       );
                                     },
@@ -139,10 +147,9 @@ class _MyAppState extends State<MyApp> {
                           ],
                         ),
                       ),
-                body: /*context.read<DatabaseService>().user == null
+                body: context.read<DatabaseService>().userDatabase == null
                     ? LoginScreen()
-                    : screens[selectedScreen],*/
-                    AddlocationScreen()
+                    : screens[selectedScreen],
               );
             },
           ),

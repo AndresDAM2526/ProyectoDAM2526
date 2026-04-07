@@ -1,8 +1,13 @@
 class User {
-  int idUser;
-  String user;
   String name;
-  String rol;
+  String user;
+  String password;
+  String role;
 
-  User({required this.idUser, required this.name, required this.user,required this.rol});
+  User({
+    required this.name,
+    required this.user,
+    required this.password,
+    required this.role,
+  });
 }

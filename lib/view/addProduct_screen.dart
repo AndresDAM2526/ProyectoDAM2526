@@ -18,7 +18,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(title: Text("Añadir producto")),
       body: Column(
         children: [
           Container(
@@ -92,9 +92,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               .toList(),
                           onChanged: (value) {
                             setState(() {
-                              context
-                                      .read<AddProductFormViewModel>()
-                                      .location =
+                              context.read<AddProductFormViewModel>().location =
                                   value;
                             });
                           },
@@ -140,18 +138,15 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             context.read<DatabaseService>().addProduct(
                               newProduct,
                             );
-                            context
-                                .read<AddProductFormViewModel>()
-                                .clearForm();
+                            context.read<AddProductFormViewModel>().clearForm();
                             Navigator.pop(context, true);
                           }
                         },
                         child: Text("Añadir"),
                       ),
                       ElevatedButton(
-                        onPressed: () => context
-                            .read<AddProductFormViewModel>()
-                            .clearForm(),
+                        onPressed: () =>
+                            context.read<AddProductFormViewModel>().clearForm(),
                         child: Text("Vaciar"),
                       ),
                     ],

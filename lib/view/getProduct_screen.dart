@@ -53,7 +53,7 @@ class _GetProductScreenState extends State<GetProductScreen> {
                             onPressed: () {
                               context.read<DatabaseService>().newRegister(
                                 foundProducts[index]['idProduct'],
-                                context.read<DatabaseService>().user!.idUser,
+                                context.read<DatabaseService>().userDatabase!.idUser,
                                 "Coger",
                                 DateFormat.yMd().add_jm().format(
                                   DateTime.now(),
@@ -67,7 +67,7 @@ class _GetProductScreenState extends State<GetProductScreen> {
                             onPressed: () {
                               context.read<DatabaseService>().newRegister(
                                 foundProducts[index]['idProduct'],
-                                context.read<DatabaseService>().user!.idUser,
+                                context.read<DatabaseService>().userDatabase!.idUser,
                                 "Devolver",
                                 DateFormat.yMd().add_jm().format(
                                   DateTime.now(),

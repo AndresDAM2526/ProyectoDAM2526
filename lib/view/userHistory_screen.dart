@@ -18,7 +18,7 @@ class _UserHistoryScreenState extends State<UserHistoryScreen> {
       appBar: AppBar(title: Text("data")),
       body: FutureBuilder(
         future: context.read<DatabaseService>().getHistoryRegisterByIdUser(
-          context.read<DatabaseService>().user!.idUser,
+          context.read<DatabaseService>().userDatabase!.idUser,
         ),
         builder: (context, snapshot) {
           final history = snapshot.data ?? [];

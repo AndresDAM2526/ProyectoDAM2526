@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/view/addProduct_screen.dart';
+import 'package:proyecto_dam_2526/view/addUser_screen.dart';
 import 'package:proyecto_dam_2526/view/modifyInventory_screen.dart';
+import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 
 class AdministrationScreen extends StatelessWidget {
   const AdministrationScreen({super.key});
@@ -8,7 +11,7 @@ class AdministrationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text("Administración"),),),
+      appBar: AppBar(title: Center(child: Text("Administración"))),
       body: Center(
         child: Container(
           color: Colors.greenAccent,
@@ -29,10 +32,34 @@ class AdministrationScreen extends StatelessWidget {
                 },
                 child: Text("Añadir producto"),
               ),
-              ElevatedButton(onPressed: () {}, child: Text("Añadir usuario")),
-              ElevatedButton(onPressed: () {}, child: Text("Añadir ubicación")),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  bool? result = await Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddUserScreen()),
+                  );
+                  if (result == true) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Se ha añadido el usuario")),
+                    );
+                  }
+                },
+                child: Text("Añadir usuario"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  context
+                      .read<AdministrationscreenViewmodel>()
+                      .showAddLocationDialog(context);
+                },
+                child: Text("Añadir ubicación"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  context
+                      .read<AdministrationscreenViewmodel>()
+                      .showAddTypeProductDialog(context);
+                },
                 child: Text("Añadir tipo de producto"),
               ),
               ElevatedButton(
