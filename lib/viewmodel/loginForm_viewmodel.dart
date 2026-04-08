@@ -8,4 +8,9 @@ class LoginFormViewmodel extends ChangeNotifier {
       (value == null || value.isEmpty) ? "Campo vacio" : null;
   String? checkPass(String? value) =>
       (value == null || value.isEmpty) ? "Campo vacio" : null;
+
+  void clearForm() {
+    userController.clear();
+    passController.clear();
+  }
 }

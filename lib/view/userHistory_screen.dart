@@ -15,7 +15,7 @@ class _UserHistoryScreenState extends State<UserHistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("data")),
+      appBar: AppBar(title: Text("Historial")),
       body: FutureBuilder(
         future: context.read<DatabaseService>().getHistoryRegisterByIdUser(
           context.read<DatabaseService>().userDatabase!.idUser,

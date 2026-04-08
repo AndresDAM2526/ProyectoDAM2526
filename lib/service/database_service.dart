@@ -21,6 +21,9 @@ class DatabaseService extends ChangeNotifier {
   List<Map<String, dynamic>> _roles = [];
   List<Map<String, dynamic>> get roles => _roles;
 
+  List<Map<String, dynamic>> _users = [];
+  List<Map<String, dynamic>> get users => _users;
+
   List<Map<String, dynamic>> _historyRegister = [];
   List<Map<String, dynamic>> get historyRegister => _historyRegister;
   UserDatabase? _userDatabase;
@@ -129,6 +132,15 @@ class DatabaseService extends ChangeNotifier {
     return database;
   }
 
+  Future<void> getAllUsers() async {
+    final db = await database;
+    _users = await db.rawQuery(
+      '''SELECT u.username,u.name,r.role as role FROM user u
+                                INNER JOIN role r ON r.idRole=u.idRole''',
+    );
+    notifyListeners();
+  }
+
   Future<List<Map<String, dynamic>>> getUserByNameOrUsername(
     String? value,
   ) async {
@@ -151,6 +163,7 @@ class DatabaseService extends ChangeNotifier {
       'password': user.password,
       'idRole': idRole,
     });
+    notifyListeners();
   }
 
   Future<void> getAllProducts() async {
@@ -387,7 +400,9 @@ class DatabaseService extends ChangeNotifier {
                                 INNER JOIN registerType rt ON rt.idType=r.idRegisterType
                                 INNER JOIN location l ON p.idLocation=l.idLocation
                                 INNER JOIN type t on p.idType=t.idType
+                                WHERE r.idUser=?
                               ''',
+      [idUser],
     );
   }
 
@@ -430,6 +445,8 @@ class DatabaseService extends ChangeNotifier {
       where: 'idUser=?',
       whereArgs: [idUser],
     );
+    getAllUsers();
+    notifyListeners();
   }
 
   Future<void> updateUsername(int idUser, String username) async {
@@ -440,6 +457,8 @@ class DatabaseService extends ChangeNotifier {
       where: 'idUser=?',
       whereArgs: [idUser],
     );
+    getAllUsers();
+    notifyListeners();
   }
 
   Future<void> updateName(int idUser, String name) async {
@@ -450,6 +469,8 @@ class DatabaseService extends ChangeNotifier {
       where: 'idUser=?',
       whereArgs: [idUser],
     );
+    getAllUsers();
+    notifyListeners();
   }
 
   Future<void> updateRol(int idUser, String role) async {
@@ -461,5 +482,7 @@ class DatabaseService extends ChangeNotifier {
       where: 'idUser=?',
       whereArgs: [idUser],
     );
+    getAllUsers();
+    notifyListeners();
   }
 }

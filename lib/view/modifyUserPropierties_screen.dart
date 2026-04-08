@@ -40,6 +40,7 @@ class _ModifyUserPropiertiesScreenState
           ),
           _selected[0]
               ? Form(
+                  key: checkForm,
                   child: Column(
                     children: [
                       Container(
@@ -57,7 +58,13 @@ class _ModifyUserPropiertiesScreenState
                       ElevatedButton(
                         onPressed: () {
                           if (checkForm.currentState!.validate()) {
-                            context.read<DatabaseService>().updateName(
+                            print(
+                              context
+                                  .read<AdministrationscreenViewmodel>()
+                                  .userController
+                                  .text,
+                            );
+                            context.read<DatabaseService>().updateUsername(
                               widget.user!.idUser,
                               context
                                   .read<AdministrationscreenViewmodel>()
@@ -76,6 +83,7 @@ class _ModifyUserPropiertiesScreenState
                 )
               : _selected[1]
               ? Form(
+                  key: checkForm,
                   child: Column(
                     children: [
                       Container(
@@ -119,13 +127,10 @@ class _ModifyUserPropiertiesScreenState
                         child: FutureBuilder(
                           future: context.read<DatabaseService>().showRoles(),
                           builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return Text("No se han podido obtener los datos");
-                            } else if (!snapshot.hasData) {
+                            if (!snapshot.hasData) {
                               return Text("Error al obtener los roles");
                             }
-                            final roles = snapshot.data;
+                            final roles = snapshot.data ?? [];
                             return DropdownButtonFormField(
                               decoration: InputDecoration(label: Text("Rol")),
                               validator: (value) => context
@@ -151,7 +156,13 @@ class _ModifyUserPropiertiesScreenState
                       ElevatedButton(
                         onPressed: () {
                           if (checkForm.currentState!.validate()) {
-                            print("validado");
+                            context.read<DatabaseService>().updateRol(
+                              widget.user!.idUser,
+                              selectedRole!,
+                            );
+                            Navigator.pop(context, true);
+                          } else {
+                            Navigator.pop(context, false);
                           }
                         },
                         child: Text("Enviar"),

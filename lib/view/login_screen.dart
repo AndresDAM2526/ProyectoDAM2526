@@ -89,13 +89,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               .passController
                               .text,
                         )) {
-                          ScaffoldMessenger.of(
-                            context,
-                          ).showSnackBar(SnackBar(content: Text("Existe")));
+                          
+                          context.read<LoginFormViewmodel>().clearForm();
                         } else {
                           ScaffoldMessenger.of(
                             context,
-                          ).showSnackBar(SnackBar(content: Text("No existe")));
+                          ).showSnackBar(SnackBar(content: Text("Usuario y/o contraseña incorrectos")));
                         }
                       }
                     },

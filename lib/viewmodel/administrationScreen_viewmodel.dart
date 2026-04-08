@@ -101,5 +101,10 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
         );
       },
     );
+    if (result == true) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Se ha modificado el usuario")));
+    }
   }
 }

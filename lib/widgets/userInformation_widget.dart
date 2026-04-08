@@ -5,10 +5,15 @@ import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 
-class UserInformationWidget extends StatelessWidget {
+class UserInformationWidget extends StatefulWidget {
   UserDatabase user;
   UserInformationWidget({super.key, required this.user});
 
+  @override
+  State<UserInformationWidget> createState() => _UserInformationWidgetState();
+}
+
+class _UserInformationWidgetState extends State<UserInformationWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,9 +29,9 @@ class UserInformationWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Usuario: ${user.username}"),
-                  Text("Nombre: ${user.name}"),
-                  Text("Rol: ${user.role}"),
+                  Text("Usuario: ${widget.user.username}"),
+                  Text("Nombre: ${widget.user.name}"),
+                  Text("Rol: ${widget.user.role}"),
                 ],
               ),
             ),
@@ -39,7 +44,7 @@ class UserInformationWidget extends StatelessWidget {
                   onPressed: () {
                     context
                         .read<AdministrationscreenViewmodel>()
-                        .showModifyPropertiesUserDialog(context, user);
+                        .showModifyPropertiesUserDialog(context, widget.user);
                   },
                   icon: Icon(Icons.update),
                 ),
@@ -47,13 +52,13 @@ class UserInformationWidget extends StatelessWidget {
                   onPressed: () {
                     context
                         .read<AdministrationscreenViewmodel>()
-                        .showChangePasswordDialog(context, user);
+                        .showChangePasswordDialog(context, widget.user);
                   },
                   icon: Icon(Icons.password),
                 ),
                 IconButton(
                   onPressed: () {
-                    context.read<DatabaseService>().deleteUser(user.idUser);
+                    context.read<DatabaseService>().deleteUser(widget.user.idUser);
                   },
                   icon: Icon(Icons.delete),
                 ),

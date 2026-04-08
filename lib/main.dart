@@ -43,6 +43,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  int selectedScreen = 0;
   List<Widget> screens = [
     GetProductScreen(),
     InventoryScreen(),
@@ -50,7 +51,6 @@ class _MyAppState extends State<MyApp> {
   ];
   @override
   Widget build(BuildContext context) {
-    int selectedScreen = 0;
     return Consumer<DatabaseService>(
       builder: (context, value, child) {
         return MaterialApp(
@@ -92,17 +92,33 @@ class _MyAppState extends State<MyApp> {
                     : Drawer(
                         child: ListView(
                           children: [
+                            DrawerHeader(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Gestión del inventario"),
+                                  Text(
+                                    "Usuario : ${context.read<DatabaseService>().userDatabase!.username}",
+                                  ),
+                                ],
+                              ),
+                            ),
                             ListTile(
                               title: Text("Mi perfil"),
                               onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ProfileScreen(),
+                                    builder: (context) => ProfileScreen(
+                                      user: context
+                                          .read<DatabaseService>()
+                                          .userDatabase,
+                                    ),
                                   ),
                                 );
                               },
                             ),
+
                             ListTile(
                               title: Text("Historial"),
                               onTap: () {
@@ -135,6 +151,15 @@ class _MyAppState extends State<MyApp> {
                                     },
                                   )
                                 : null,
+
+                            ListTile(
+                              title: IconButton(
+                                onPressed: () {
+                                  context.read<DatabaseService>().logout();
+                                },
+                                icon: Icon(Icons.logout),
+                              ),
+                            ),
                           ],
                         ),
                       ),
