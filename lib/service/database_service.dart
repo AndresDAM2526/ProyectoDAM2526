@@ -485,4 +485,15 @@ class DatabaseService extends ChangeNotifier {
     getAllUsers();
     notifyListeners();
   }
+
+  Future<String> getPasswordFromUser(int idUser) async {
+    final db = await database;
+    List<Map<String, dynamic>> result = await db.query(
+      'user',
+      columns: ['password'],
+      where: 'idUser=?',
+      whereArgs: [idUser],
+    );
+    return result.first['password'];
+  }
 }

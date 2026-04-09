@@ -69,7 +69,11 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
     }
   }
 
-  void showChangePasswordDialog(BuildContext context, UserDatabase user) async {
+  void showChangePasswordDialog(
+    BuildContext context,
+    UserDatabase user,
+    String sourceScreen,
+  ) async {
     bool? result = await showDialog(
       context: context,
       builder: (context) {
@@ -77,7 +81,7 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height / 5,
-            child: ChangePasswordScreen(user: user),
+            child: ChangePasswordScreen(user: user, sourceScreen: sourceScreen),
           ),
         );
       },

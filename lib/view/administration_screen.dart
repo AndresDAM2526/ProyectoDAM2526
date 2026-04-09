@@ -13,40 +13,69 @@ class AdministrationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Center(child: Text("Administración"))),
-      body: Center(
-        child: Container(
-          color: Colors.greenAccent,
-          width: MediaQuery.of(context).size.width / 2,
-          child: Column(
+      body: Column(
+        children: [
+          Text("Usuarios"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton(
-                onPressed: () async {
-                  bool? result = await Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AddProductScreen()),
-                  );
-                  if (result == true) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Se ha añadido el producto")),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    bool? result = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddUserScreen(),
+                      ),
                     );
-                  }
-                },
-                child: Text("Añadir producto"),
+                    if (result == true) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Se ha añadido el usuario")),
+                      );
+                    }
+                  },
+                  child: Text("Añadir usuario"),
+                ),
               ),
               ElevatedButton(
-                onPressed: () async {
-                  bool? result = await Navigator.push(
+                onPressed: () {
+                  Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AddUserScreen()),
+                    MaterialPageRoute(
+                      builder: (context) => ModifyUserScreen(),
+                    ),
                   );
-                  if (result == true) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Se ha añadido el usuario")),
-                    );
-                  }
                 },
-                child: Text("Añadir usuario"),
+                child: Text("Modificar usuario"),
               ),
+            ],
+          ),
+
+          Text("Inventario"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    bool? result = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddProductScreen(),
+                      ),
+                    );
+                    if (result == true) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Se ha añadido el producto")),
+                      );
+                    }
+                  },
+                  child: Text("Añadir producto"),
+                ),
+              ),
+          
               ElevatedButton(
                 onPressed: () {
                   context
@@ -55,32 +84,37 @@ class AdministrationScreen extends StatelessWidget {
                 },
                 child: Text("Añadir ubicación"),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  context
-                      .read<AdministrationscreenViewmodel>()
-                      .showAddTypeProductDialog(context);
-                },
-                child: Text("Añadir tipo de producto"),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    context
+                        .read<AdministrationscreenViewmodel>()
+                        .showAddTypeProductDialog(context);
+                  },
+                  child: Text("Añadir tipo"),
+                ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ModifyUserScreen(),));
-                },
-                child: Text("Modificar usuario"),
-              ),
+          
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ModifyInventory()),
+                    MaterialPageRoute(
+                      builder: (context) => ModifyInventory(),
+                    ),
                   );
                 },
                 child: Text("Modificar inventario"),
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }

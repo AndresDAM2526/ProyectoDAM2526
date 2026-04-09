@@ -52,13 +52,19 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
                   onPressed: () {
                     context
                         .read<AdministrationscreenViewmodel>()
-                        .showChangePasswordDialog(context, widget.user);
+                        .showChangePasswordDialog(
+                          context,
+                          widget.user,
+                          (UserInformationWidget).toString(),
+                        );
                   },
                   icon: Icon(Icons.password),
                 ),
                 IconButton(
                   onPressed: () {
-                    context.read<DatabaseService>().deleteUser(widget.user.idUser);
+                    context.read<DatabaseService>().deleteUser(
+                      widget.user.idUser,
+                    );
                   },
                   icon: Icon(Icons.delete),
                 ),

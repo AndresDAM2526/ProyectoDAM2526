@@ -13,6 +13,7 @@ import 'package:proyecto_dam_2526/viewmodel/addUserForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/loginForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyProductForm_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/profileForm_viewmodel.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +30,7 @@ void main() {
           create: (context) => AdministrationscreenViewmodel(),
         ),
         ChangeNotifierProvider(create: (context) => AdduserFormViewmodel()),
+        ChangeNotifierProvider(create: (context) => ProfileFormViewmodel()),
       ],
       child: MyApp(),
     ),

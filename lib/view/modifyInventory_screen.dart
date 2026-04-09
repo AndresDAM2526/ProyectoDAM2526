@@ -132,10 +132,6 @@ class _ModifyInventoryState extends State<ModifyInventory> {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text("Modificado")));
-    } else {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("No se ha modificado")));
     }
   }
 }
