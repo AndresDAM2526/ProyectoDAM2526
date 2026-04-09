@@ -18,16 +18,13 @@ class _GetProductScreenState extends State<GetProductScreen> {
     return Scaffold(
       body: Column(
         children: [
-          Container(
-            color: Colors.amber,
-            child: TextField(
-              decoration: InputDecoration(label: Text("Introduzca el nombre")),
-              onSubmitted: (value) {
-                setState(() {
-                  name = value;
-                });
-              },
-            ),
+          TextField(
+            decoration: InputDecoration(label: Text("Introduzca el nombre")),
+            onSubmitted: (value) {
+              setState(() {
+                name = value;
+              });
+            },
           ),
           Expanded(
             child: FutureBuilder(

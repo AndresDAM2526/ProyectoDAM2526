@@ -25,11 +25,14 @@ class HistoryRegisterWidget extends StatelessWidget {
           margin: EdgeInsets.only(top: 10, right: 15, left: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [Text("Nombre: $name"), Text("Tipo de producto: $typeProduct")],
+            children: [
+              Text("Nombre: $name"),
+              Text("Tipo de producto: $typeProduct"),
+            ],
           ),
         ),
         Container(
-          margin: EdgeInsets.only(top: 10, right: 10, left: 15,bottom: 10),
+          margin: EdgeInsets.only(top: 10, right: 10, left: 15, bottom: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
