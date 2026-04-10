@@ -15,6 +15,7 @@ import 'package:proyecto_dam_2526/viewmodel/loginForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyUserForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/profileForm_viewmodel.dart';
+import 'package:proyecto_dam_2526/widgets/filter_widget.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -167,9 +168,10 @@ class _MyAppState extends State<MyApp> {
                           ],
                         ),
                       ),
-                body: context.read<DatabaseService>().userDatabase == null
+                body: /*context.read<DatabaseService>().userDatabase == null
                     ? LoginScreen()
-                    : screens[selectedScreen],
+                    : screens[selectedScreen],*/
+                    FilterWidget()
               );
             },
           ),
