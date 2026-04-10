@@ -13,6 +13,7 @@ import 'package:proyecto_dam_2526/viewmodel/addUserForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/loginForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyProductForm_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/modifyUserForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/profileForm_viewmodel.dart';
 
 void main() {
@@ -23,7 +24,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => DatabaseService()),
         ChangeNotifierProvider(create: (context) => AddProductFormViewModel()),
         ChangeNotifierProvider(
-          create: (context) => ModifyProductformViewmodel(),
+          create: (context) => ModifyProductFormViewmodel(),
         ),
         ChangeNotifierProvider(create: (context) => LoginFormViewmodel()),
         ChangeNotifierProvider(
@@ -31,6 +32,7 @@ void main() {
         ),
         ChangeNotifierProvider(create: (context) => AdduserFormViewmodel()),
         ChangeNotifierProvider(create: (context) => ProfileFormViewmodel()),
+        ChangeNotifierProvider(create: (context) => ModifyUserFormViewmodel(),)
       ],
       child: MyApp(),
     ),

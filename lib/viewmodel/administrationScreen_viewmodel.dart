@@ -6,6 +6,7 @@ import 'package:proyecto_dam_2526/view/changePassword_screen.dart';
 import 'package:proyecto_dam_2526/view/modifyUserPropierties_screen.dart';
 
 class AdministrationscreenViewmodel extends ChangeNotifier {
+
   TextEditingController userController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController locationController = TextEditingController();

@@ -496,4 +496,15 @@ class DatabaseService extends ChangeNotifier {
     );
     return result.first['password'];
   }
+
+  Future<void> updateUser(UserDatabase user) async {
+    final db = await database;
+    int idRole = await getIdRoleFromNameRole(user.role);
+    await db.update(
+      'user',
+      {'username': user.username, 'name': user.name, 'idRole': idRole},
+      where: 'idUser=?',
+      whereArgs: [user.idUser],
+    );
+  }
 }

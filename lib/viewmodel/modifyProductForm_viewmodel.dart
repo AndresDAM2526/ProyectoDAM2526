@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ModifyProductformViewmodel extends ChangeNotifier {
-  final nameController = TextEditingController();
-  final quantityController = TextEditingController();
+class ModifyProductFormViewmodel extends ChangeNotifier {
+  String? nameProperty;
+  String? typeProperty;
+  String? locationProperty;
+  String? quantity;
+
   GlobalKey<FormFieldState> typeDropDown = GlobalKey();
   GlobalKey<FormFieldState> locationDropDown = GlobalKey();
 
@@ -18,8 +21,10 @@ class ModifyProductformViewmodel extends ChangeNotifier {
       : null;
 
   void clearForm() {
-    nameController.clear();
-    quantityController.clear();
+    nameProperty = "";
+    typeProperty = "";
+    locationProperty = "";
+    quantity = null;
     typeDropDown.currentState!.reset();
     notifyListeners();
   }
