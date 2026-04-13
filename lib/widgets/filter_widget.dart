@@ -1,40 +1,113 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:sqflite/sqflite.dart';
 
 class FilterWidget extends StatefulWidget {
-  const FilterWidget({super.key});
+  FilterWidget({super.key});
 
   @override
   State<FilterWidget> createState() => _FilterWidgetState();
 }
 
 class _FilterWidgetState extends State<FilterWidget> {
-  List<String> elementos = ["Primer boton", "Segundo botón"];
-  String? selectedRadio;
+  String? selectedLocationRadio;
+  String? selectedTypeRadio;
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: RadioGroup<String>(
-        groupValue: selectedRadio,
-        onChanged: (value) {
-          setState(() {
-            selectedRadio=value;
-          });
-          print(selectedRadio);
-        },
-        child: ListView.builder(
-          itemCount: elementos.length,
-          itemBuilder: (context, index) {
-            return SizedBox(
-              child: ListTile(
-                leading: Radio(value: elementos[index]),
-                title: Text(elementos[index]),
+      appBar: AppBar(title: Center(child: Text("Ubicaciones"))),
+      body: Row(
+        children: [
+          NavigationRail(
+            destinations: [
+              NavigationRailDestination(
+                icon: Icon(Icons.location_on_sharp),
+                label: Text("location"),
               ),
-            );
-          },
-        ),
+              NavigationRailDestination(
+                icon: Icon(Icons.computer),
+                label: Text("data"),
+              ),
+            ],
+            onDestinationSelected: (value) {
+              setState(() {
+                selectedIndex = value;
+              });
+            },
+            selectedIndex: selectedIndex,
+          ),
+          selectedIndex == 0
+              ? Expanded(
+                  child: FutureBuilder(
+                    future: context.read<DatabaseService>().showLocations(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Text("Error al cargar los datos");
+                      }
+                      final elementList = snapshot.data;
+                      return RadioGroup<String>(
+                        groupValue: selectedLocationRadio,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedLocationRadio = value;
+                          });
+                        },
+                        child: ListView.builder(
+                          itemCount: elementList!.length,
+                          itemBuilder: (context, index) {
+                            return SizedBox(
+                              child: ListTile(
+                                leading: Radio(value: elementList[index]),
+                                title: Text(elementList[index]),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                )
+              : Expanded(
+                  child: FutureBuilder(
+                    future: context.read<DatabaseService>().showTypes(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Text("Error al cargar los datos");
+                      }
+                      final elementList = snapshot.data;
+                      return RadioGroup<String>(
+                        groupValue: selectedTypeRadio,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedTypeRadio = value;
+                          });
+                        },
+                        child: ListView.builder(
+                          itemCount: elementList!.length,
+                          itemBuilder: (context, index) {
+                            return SizedBox(
+                              child: ListTile(
+                                leading: Radio(value: elementList[index]),
+                                title: Text(elementList[index]),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pop<List<String?>?>(context, [selectedLocationRadio, selectedTypeRadio]);
+        },
+        child: Text("Filtrar"),
       ),
     );
   }

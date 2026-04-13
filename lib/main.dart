@@ -11,11 +11,11 @@ import 'package:proyecto_dam_2526/viewmodel/addProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/addUserForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/inventoryScreen_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/loginForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyUserForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/profileForm_viewmodel.dart';
-import 'package:proyecto_dam_2526/widgets/filter_widget.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +33,8 @@ void main() {
         ),
         ChangeNotifierProvider(create: (context) => AdduserFormViewmodel()),
         ChangeNotifierProvider(create: (context) => ProfileFormViewmodel()),
-        ChangeNotifierProvider(create: (context) => ModifyUserFormViewmodel(),)
+        ChangeNotifierProvider(create: (context) => ModifyUserFormViewmodel()),
+        ChangeNotifierProvider(create: (context) => InventoryScreenViewmodel()),
       ],
       child: MyApp(),
     ),
@@ -168,10 +169,9 @@ class _MyAppState extends State<MyApp> {
                           ],
                         ),
                       ),
-                body: /*context.read<DatabaseService>().userDatabase == null
+                body: context.read<DatabaseService>().userDatabase == null
                     ? LoginScreen()
-                    : screens[selectedScreen],*/
-                    FilterWidget()
+                    : screens[selectedScreen],
               );
             },
           ),

@@ -1,3 +1,7 @@
+IMPORTANTISIMO
+    -Revisar como quedan los elementos al girar el movil
+
+
 -Inicio sesión
     -Al iniciar sesión se queda guardada la pantalla donde estaba el anterior usuario
 

@@ -12,6 +12,9 @@ class DatabaseService extends ChangeNotifier {
   List<Map<String, dynamic>> _products = [];
   List<Map<String, dynamic>> get products => _products;
 
+  List<Map<String, dynamic>> _filteredProducts = [];
+  List<Map<String, dynamic>> get filteredProducts => _filteredProducts;
+
   List<Map<String, dynamic>> _types = [];
   List<Map<String, dynamic>> get types => _types;
 
@@ -173,6 +176,36 @@ class DatabaseService extends ChangeNotifier {
       INNER JOIN type t ON p.idType=t.idType 
       INNER JOIN location l ON l.idLocation=p.idLocation''',
     );
+    notifyListeners();
+  }
+
+  Future<void> getFilteredProducts(String? location, String? type) async {
+    final db = await database;
+    if (location == null) {
+      _filteredProducts = await db.rawQuery(
+        '''SELECT p.product,p.quantity,t.type as type,l.location  as location FROM product p 
+      INNER JOIN type t ON p.idType=t.idType 
+      INNER JOIN location l ON l.idLocation=p.idLocation
+      WHERE t.type=?''',
+        [type],
+      );
+    } else if (type == null) {
+      _filteredProducts = await db.rawQuery(
+        '''SELECT p.product,p.quantity,t.type as type,l.location  as location FROM product p 
+      INNER JOIN type t ON p.idType=t.idType 
+      INNER JOIN location l ON l.idLocation=p.idLocation
+      WHERE l.location=?''',
+        [location],
+      );
+    } else {
+      _filteredProducts = await db.rawQuery(
+        '''SELECT p.product,p.quantity,t.type as type,l.location  as location FROM product p 
+      INNER JOIN type t ON p.idType=t.idType 
+      INNER JOIN location l ON l.idLocation=p.idLocation
+      WHERE l.location=? OR t.type=?''',
+        [location, type],
+      );
+    }
     notifyListeners();
   }
 
