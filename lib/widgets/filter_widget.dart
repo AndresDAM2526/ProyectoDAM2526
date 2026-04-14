@@ -19,7 +19,7 @@ class _FilterWidgetState extends State<FilterWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text("Ubicaciones"))),
+      appBar: AppBar(title: Text("Filtrar por:")),
       body: Row(
         children: [
           NavigationRail(
@@ -105,7 +105,10 @@ class _FilterWidgetState extends State<FilterWidget> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pop<List<String?>?>(context, [selectedLocationRadio, selectedTypeRadio]);
+          Navigator.pop<List<String?>?>(context, [
+            selectedLocationRadio,
+            selectedTypeRadio,
+          ]);
         },
         child: Text("Filtrar"),
       ),

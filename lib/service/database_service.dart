@@ -12,8 +12,8 @@ class DatabaseService extends ChangeNotifier {
   List<Map<String, dynamic>> _products = [];
   List<Map<String, dynamic>> get products => _products;
 
-  List<Map<String, dynamic>> _filteredProducts = [];
-  List<Map<String, dynamic>> get filteredProducts => _filteredProducts;
+  List<Map<String, dynamic>>? _filteredProducts = null;
+  List<Map<String, dynamic>>? get filteredProducts => _filteredProducts;
 
   List<Map<String, dynamic>> _types = [];
   List<Map<String, dynamic>> get types => _types;
@@ -181,7 +181,7 @@ class DatabaseService extends ChangeNotifier {
 
   Future<void> getFilteredProducts(String? location, String? type) async {
     final db = await database;
-    if (location == null) {
+    if (location == null && type != null) {
       _filteredProducts = await db.rawQuery(
         '''SELECT p.product,p.quantity,t.type as type,l.location  as location FROM product p 
       INNER JOIN type t ON p.idType=t.idType 
@@ -189,7 +189,7 @@ class DatabaseService extends ChangeNotifier {
       WHERE t.type=?''',
         [type],
       );
-    } else if (type == null) {
+    } else if (type == null && location != null) {
       _filteredProducts = await db.rawQuery(
         '''SELECT p.product,p.quantity,t.type as type,l.location  as location FROM product p 
       INNER JOIN type t ON p.idType=t.idType 
@@ -202,7 +202,7 @@ class DatabaseService extends ChangeNotifier {
         '''SELECT p.product,p.quantity,t.type as type,l.location  as location FROM product p 
       INNER JOIN type t ON p.idType=t.idType 
       INNER JOIN location l ON l.idLocation=p.idLocation
-      WHERE l.location=? OR t.type=?''',
+      WHERE l.location=? AND t.type=?''',
         [location, type],
       );
     }
@@ -419,6 +419,9 @@ class DatabaseService extends ChangeNotifier {
       'date': date,
       'quantity': quantity,
     });
+    int currentQuantity = await getQuantityFromProduct(idProduct);
+    int newQuantity = currentQuantity - quantity;
+    updateQuantity(idProduct, newQuantity);
     getAllProducts();
     notifyListeners();
   }
@@ -539,5 +542,45 @@ class DatabaseService extends ChangeNotifier {
       where: 'idUser=?',
       whereArgs: [user.idUser],
     );
+  }
+
+  Future<List<Product>> showAllProducts() async {
+    return _products
+        .map(
+          (product) => Product(
+            name: product['name'],
+            type: product['type'],
+            location: product['location'],
+            quantity: product['quantity'],
+          ),
+        )
+        .toList();
+  }
+
+  Future<int> getQuantityFromProduct(int idProduct) async {
+    final db = await database;
+    List<Map<String, dynamic>> result = await db.query(
+      'product',
+      columns: ['quantity'],
+      where: 'idProduct=?',
+      whereArgs: [idProduct],
+    );
+    return int.parse(result.first['quantity']);
+  }
+
+  Future<void> updateQuantity(int idProduct, int newQuantity) async {
+    final db = await database;
+    db.update(
+      'product',
+      {'quantity': newQuantity},
+      where: 'idProduct=?',
+      whereArgs: [idProduct],
+    );
+    notifyListeners();
+  }
+
+  void clearFilter() {
+    _filteredProducts = null;
+    notifyListeners();
   }
 }

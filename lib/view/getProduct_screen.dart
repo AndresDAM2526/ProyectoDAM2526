@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/model/requestProduct.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/viewmodel/getProduct_viewmodel.dart';
 import 'package:proyecto_dam_2526/widgets/productView_widget.dart';
 
 class GetProductScreen extends StatefulWidget {
@@ -47,16 +49,26 @@ class _GetProductScreenState extends State<GetProductScreen> {
                           type: foundProducts[index]['type'],
                           quantity: int.parse(foundProducts[index]['quantity']),
                           leftSideWidget: IconButton(
-                            onPressed: () {
-                              context.read<DatabaseService>().newRegister(
-                                foundProducts[index]['idProduct'],
-                                context.read<DatabaseService>().userDatabase!.idUser,
-                                "Coger",
-                                DateFormat.yMd().add_jm().format(
-                                  DateTime.now(),
-                                ),
-                                1,
-                              );
+                            onPressed: () async {
+                              int maxQuantity = await context
+                                  .read<DatabaseService>()
+                                  .getQuantityFromProduct(
+                                    foundProducts[index]['idProduct'],
+                                  );
+                              context
+                                  .read<GetProductViewmodel>()
+                                  .showGetProductWidgetDialog(
+                                    context,
+                                    RequestProduct(
+                                      idProduct:
+                                          foundProducts[index]['idProduct'],
+                                      name: foundProducts[index]['product'],
+                                      type: foundProducts[index]['type'],
+                                      location:
+                                          foundProducts[index]['location'],
+                                    ),
+                                    maxQuantity,
+                                  );
                             },
                             icon: Icon(Icons.get_app),
                           ),
@@ -64,7 +76,10 @@ class _GetProductScreenState extends State<GetProductScreen> {
                             onPressed: () {
                               context.read<DatabaseService>().newRegister(
                                 foundProducts[index]['idProduct'],
-                                context.read<DatabaseService>().userDatabase!.idUser,
+                                context
+                                    .read<DatabaseService>()
+                                    .userDatabase!
+                                    .idUser,
                                 "Devolver",
                                 DateFormat.yMd().add_jm().format(
                                   DateTime.now(),

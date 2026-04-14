@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/model/requestProduct.dart';
 import 'package:proyecto_dam_2526/view/administration_screen.dart';
 import 'package:proyecto_dam_2526/view/getProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/inventory_screen.dart';
@@ -11,11 +12,14 @@ import 'package:proyecto_dam_2526/viewmodel/addProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/addUserForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/getProduct_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/inventoryScreen_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/loginForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyUserForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/profileForm_viewmodel.dart';
+import 'package:proyecto_dam_2526/widgets/errorMessage_widget.dart';
+import 'package:proyecto_dam_2526/widgets/getProduct_widget.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +39,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => ProfileFormViewmodel()),
         ChangeNotifierProvider(create: (context) => ModifyUserFormViewmodel()),
         ChangeNotifierProvider(create: (context) => InventoryScreenViewmodel()),
+        ChangeNotifierProvider(create: (context) => GetProductViewmodel()),
       ],
       child: MyApp(),
     ),

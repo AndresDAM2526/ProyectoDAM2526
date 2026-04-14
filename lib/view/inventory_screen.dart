@@ -4,6 +4,8 @@ import 'package:proyecto_dam_2526/model/product.dart';
 import 'package:proyecto_dam_2526/view/product_information.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/inventoryScreen_viewmodel.dart';
+import 'package:proyecto_dam_2526/widgets/productsTable_widget.dart';
+import 'package:sqflite/sqflite.dart';
 
 class InventoryScreen extends StatefulWidget {
   const InventoryScreen({super.key});
@@ -15,31 +17,6 @@ class InventoryScreen extends StatefulWidget {
 class _InventoryScreenState extends State<InventoryScreen> {
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> databaseProducts = context
-        .watch<DatabaseService>()
-        .products;
-    List<Product> products = databaseProducts
-        .map(
-          (product) => Product(
-            name: product['product'],
-            type: product['type'],
-            location: product['location'],
-            quantity: int.parse(product['quantity']),
-          ),
-        )
-        .toList();
-    List<Product> filteredProducts = context
-        .read<DatabaseService>()
-        .filteredProducts
-        .map(
-          ((product) => Product(
-            name: product['product'],
-            type: product['type'],
-            location: product['location'],
-            quantity: int.parse(product['quantity']),
-          )),
-        )
-        .toList();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -47,7 +24,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
             Container(
               margin: EdgeInsets.all(10),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   ElevatedButton(
                     onPressed: () {
@@ -55,7 +32,13 @@ class _InventoryScreenState extends State<InventoryScreen> {
                         context,
                       );
                     },
-                    child: Text("Ubicaciones"),
+                    child: Text("Filtro"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      context.read<DatabaseService>().clearFilter();
+                    },
+                    child: Text("Quitar filtro"),
                   ),
                 ],
               ),
@@ -63,176 +46,17 @@ class _InventoryScreenState extends State<InventoryScreen> {
             Container(
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.all(15),
-              child: DataTable(
-                horizontalMargin: 5,
-                dataRowMinHeight: 0,
-                dataRowMaxHeight: double.infinity,
-                border: TableBorder.all(width: 1),
-                columns: [
-                  DataColumn(
-                    label: Expanded(child: Center(child: Text("Nombre"))),
-                  ),
-                  DataColumn(
-                    label: Expanded(child: Center(child: Text("Tipo"))),
-                  ),
-                  DataColumn(
-                    label: Expanded(child: Center(child: Text("Ubicación"))),
-                  ),
-                ],
-                rows: filteredProducts.isEmpty
-                    ? products
-                          .map(
-                            (product) => DataRow(
-                              cells: [
-                                DataCell(
-                                  onTap: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return Dialog(
-                                          child: SizedBox(
-                                            width:
-                                                MediaQuery.of(
-                                                  context,
-                                                ).size.width /
-                                                3,
-                                            height:
-                                                MediaQuery.of(
-                                                  context,
-                                                ).size.height /
-                                                2,
-                                            child: ProductInformation(
-                                              product: Product(
-                                                name: product.name,
-                                                type: product.type,
-                                                location: product.location,
-                                                quantity: product.quantity,
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                  ConstrainedBox(
-                                    constraints: BoxConstraints(
-                                      maxHeight: double.infinity,
-                                      maxWidth:
-                                          MediaQuery.of(context).size.width / 4,
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.all(15.0),
-                                      child: Text(product.name),
-                                    ),
-                                  ),
-                                ),
-                                DataCell(
-                                  ConstrainedBox(
-                                    constraints: BoxConstraints(
-                                      maxHeight: double.infinity,
-                                      maxWidth:
-                                          MediaQuery.of(context).size.width / 5,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Text(product.type),
-                                    ),
-                                  ),
-                                ),
-                                DataCell(
-                                  ConstrainedBox(
-                                    constraints: BoxConstraints(
-                                      maxHeight: double.infinity,
-                                      maxWidth:
-                                          MediaQuery.of(context).size.width / 5,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Text(product.location),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                          .toList()
-                    : filteredProducts
-                          .map(
-                            (product) => DataRow(
-                              cells: [
-                                DataCell(
-                                  onTap: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return Dialog(
-                                          child: SizedBox(
-                                            width:
-                                                MediaQuery.of(
-                                                  context,
-                                                ).size.width /
-                                                3,
-                                            height:
-                                                MediaQuery.of(
-                                                  context,
-                                                ).size.height /
-                                                2,
-                                            child: ProductInformation(
-                                              product: Product(
-                                                name: product.name,
-                                                type: product.type,
-                                                location: product.location,
-                                                quantity: product.quantity,
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                  ConstrainedBox(
-                                    constraints: BoxConstraints(
-                                      maxHeight: double.infinity,
-                                      maxWidth:
-                                          MediaQuery.of(context).size.width / 4,
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.all(15.0),
-                                      child: Text(product.name),
-                                    ),
-                                  ),
-                                ),
-                                DataCell(
-                                  ConstrainedBox(
-                                    constraints: BoxConstraints(
-                                      maxHeight: double.infinity,
-                                      maxWidth:
-                                          MediaQuery.of(context).size.width / 5,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Text(product.type),
-                                    ),
-                                  ),
-                                ),
-                                DataCell(
-                                  ConstrainedBox(
-                                    constraints: BoxConstraints(
-                                      maxHeight: double.infinity,
-                                      maxWidth:
-                                          MediaQuery.of(context).size.width / 5,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Text(product.location),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                          .toList(),
-              ),
+              child: context.watch<DatabaseService>().filteredProducts == null
+                  ? ProductsTableWidget(
+                      productList: context.read<DatabaseService>().products,
+                    )
+                  : context.read<DatabaseService>().filteredProducts!.isEmpty
+                  ? Text("No se han encontrado productos")
+                  : ProductsTableWidget(
+                      productList: context
+                          .read<DatabaseService>()
+                          .filteredProducts!,
+                    ),
             ),
           ],
         ),
