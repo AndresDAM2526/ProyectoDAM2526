@@ -5,6 +5,7 @@ import 'package:proyecto_dam_2526/model/requestProduct.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/getProduct_viewmodel.dart';
 import 'package:proyecto_dam_2526/widgets/productView_widget.dart';
+import 'package:proyecto_dam_2526/widgets/transactions_widget.dart';
 
 class GetProductScreen extends StatefulWidget {
   const GetProductScreen({super.key});
@@ -49,12 +50,7 @@ class _GetProductScreenState extends State<GetProductScreen> {
                           type: foundProducts[index]['type'],
                           quantity: int.parse(foundProducts[index]['quantity']),
                           leftSideWidget: IconButton(
-                            onPressed: () async {
-                              int maxQuantity = await context
-                                  .read<DatabaseService>()
-                                  .getQuantityFromProduct(
-                                    foundProducts[index]['idProduct'],
-                                  );
+                            onPressed: () {
                               context
                                   .read<GetProductViewmodel>()
                                   .showGetProductWidgetDialog(
@@ -67,27 +63,31 @@ class _GetProductScreenState extends State<GetProductScreen> {
                                       location:
                                           foundProducts[index]['location'],
                                     ),
-                                    maxQuantity,
+                                    int.parse(foundProducts[index]['quantity']),
+                                    "Coger",
                                   );
                             },
                             icon: Icon(Icons.get_app),
                           ),
                           rightSideWidget: IconButton(
                             onPressed: () {
-                              context.read<DatabaseService>().newRegister(
-                                foundProducts[index]['idProduct'],
-                                context
-                                    .read<DatabaseService>()
-                                    .userDatabase!
-                                    .idUser,
-                                "Devolver",
-                                DateFormat.yMd().add_jm().format(
-                                  DateTime.now(),
-                                ),
-                                1,
-                              );
+                              context
+                                  .read<GetProductViewmodel>()
+                                  .showGetProductWidgetDialog(
+                                    context,
+                                    RequestProduct(
+                                      idProduct:
+                                          foundProducts[index]['idProduct'],
+                                      name: foundProducts[index]['product'],
+                                      type: foundProducts[index]['type'],
+                                      location:
+                                          foundProducts[index]['location'],
+                                    ),
+                                    int.parse(foundProducts[index]['quantity']),
+                                    "Devolver",
+                                  );
                             },
-                            icon: Icon(Icons.restore_from_trash_rounded),
+                            icon: Icon(Icons.backup),
                           ),
                         ),
                       );

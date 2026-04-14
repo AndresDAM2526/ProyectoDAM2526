@@ -410,6 +410,7 @@ class DatabaseService extends ChangeNotifier {
     String date,
     int quantity,
   ) async {
+    int newQuantity;
     final db = await database;
     int idRegisterType = await getTypeRegister(registerType);
     await db.insert('register', {
@@ -420,7 +421,12 @@ class DatabaseService extends ChangeNotifier {
       'quantity': quantity,
     });
     int currentQuantity = await getQuantityFromProduct(idProduct);
-    int newQuantity = currentQuantity - quantity;
+    if ((registerType.compareTo("Coger") == 0)) {
+      newQuantity = currentQuantity - quantity;
+    } else {
+      newQuantity = currentQuantity + quantity;
+    }
+
     updateQuantity(idProduct, newQuantity);
     getAllProducts();
     notifyListeners();

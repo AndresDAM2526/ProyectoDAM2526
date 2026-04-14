@@ -4,28 +4,37 @@ import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/requestProduct.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/getProduct_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 
-class GetProductWidget extends StatefulWidget {
+class Transactions extends StatefulWidget {
   RequestProduct product;
-  int maxQuantity;
-  GetProductWidget({
+  int? maxQuantity;
+  String typeRequest;
+  Transactions({
     super.key,
     required this.product,
     required this.maxQuantity,
+    required this.typeRequest,
   });
 
   @override
-  State<GetProductWidget> createState() => _GetProductWidgetState();
+  State<Transactions> createState() => _TransactionsState();
 }
 
-class _GetProductWidgetState extends State<GetProductWidget> {
+class _TransactionsState extends State<Transactions> {
   int userQuantity = 0;
   bool? readOnlyTextForm = false;
   final checkForm = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text("Obtener producto"))),
+      appBar: AppBar(
+        title: Center(
+          child: (widget.typeRequest.compareTo("Coger") == 0)
+              ? Text("Obtener producto")
+              : Text("Devolver producto"),
+        ),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -35,8 +44,8 @@ class _GetProductWidgetState extends State<GetProductWidget> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text("Producto : ${widget.product.name}"),
-                Text("Tipo elegido: ${widget.product.type}"),
-                Text("Ubicación elegido: ${widget.product.location}"),
+                Text("Tipo : ${widget.product.type}"),
+                Text("Ubicación : ${widget.product.location}"),
               ],
             ),
           ),
@@ -67,7 +76,9 @@ class _GetProductWidgetState extends State<GetProductWidget> {
                 validator: (value) =>
                     context.read<GetProductViewmodel>().checkQuantity(value),
                 decoration: InputDecoration(
-                  label: Text("Unidades disponibles: ${widget.maxQuantity}"),
+                  label: (widget.typeRequest.compareTo("Coger") == 0)
+                      ? Text("Unidades disponibles: ${widget.maxQuantity}")
+                      : Text("Unidades a devolver"),
                   prefixIcon: IconButton(
                     onPressed: () {
                       context.read<GetProductViewmodel>().subtractUnity();
@@ -94,22 +105,50 @@ class _GetProductWidgetState extends State<GetProductWidget> {
               child: ElevatedButton(
                 onPressed: () {
                   if (checkForm.currentState!.validate()) {
-                    context.read<DatabaseService>().newRegister(
-                      widget.product.idProduct,
-                      context.read<DatabaseService>().userDatabase!.idUser,
-                      "Devolver",
-                      DateFormat.yMd().add_jm().format(DateTime.now()),
-                      int.parse(
-                        context
-                            .read<GetProductViewmodel>()
-                            .quantityController
-                            .text,
-                      ),
-                    );
-                    
+                    if (widget.typeRequest.compareTo("Coger") == 0) {
+                      context.read<DatabaseService>().newRegister(
+                        widget.product.idProduct,
+                        context.read<DatabaseService>().userDatabase!.idUser,
+                        "Coger",
+                        DateFormat.yMd().add_jm().format(DateTime.now()),
+                        int.parse(
+                          context
+                              .read<GetProductViewmodel>()
+                              .quantityController
+                              .text,
+                        ),
+                      );
+                      context.read<MessagesViewmodel>().showInformationDialog(
+                        context,
+                        MediaQuery.of(context).size.width / 4,
+                        MediaQuery.of(context).size.height / 4,
+                        "Se ha ejecutado correctamente su petición",
+                      );
+                    } else {
+                      context.read<DatabaseService>().newRegister(
+                        widget.product.idProduct,
+                        context.read<DatabaseService>().userDatabase!.idUser,
+                        "Devolver",
+                        DateFormat.yMd().add_jm().format(DateTime.now()),
+                        int.parse(
+                          context
+                              .read<GetProductViewmodel>()
+                              .quantityController
+                              .text,
+                        ),
+                      );
+                      context.read<MessagesViewmodel>().showInformationDialog(
+                        context,
+                        MediaQuery.of(context).size.width / 4,
+                        MediaQuery.of(context).size.height / 4,
+                        "Se ha ejecutado correctamente su petición",
+                      );
+                    }
                   }
                 },
-                child: Text("Enviar"),
+                child: (widget.typeRequest.compareTo("Coger") == 0)
+                    ? Text("Coger")
+                    : Text("Devolver"),
               ),
             ),
           ),

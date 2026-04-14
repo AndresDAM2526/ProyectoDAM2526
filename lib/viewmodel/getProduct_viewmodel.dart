@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_dam_2526/model/requestProduct.dart';
-import 'package:proyecto_dam_2526/widgets/getProduct_widget.dart';
+import 'package:proyecto_dam_2526/widgets/transactions_widget.dart';
 
 class GetProductViewmodel extends ChangeNotifier {
   int userQuantity = 0;
@@ -34,6 +34,7 @@ class GetProductViewmodel extends ChangeNotifier {
     BuildContext context,
     RequestProduct product,
     int maxQuantity,
+    String typeRequest
   ) async {
     int? result = await showDialog(
       context: context,
@@ -42,7 +43,7 @@ class GetProductViewmodel extends ChangeNotifier {
           child: SizedBox(
             height: MediaQuery.of(context).size.height / 2,
             width: MediaQuery.of(context).size.height / 2,
-            child: GetProductWidget(product: product, maxQuantity: maxQuantity),
+            child: Transactions(product: product, maxQuantity: maxQuantity,typeRequest: typeRequest,),
           ),
         );
       },

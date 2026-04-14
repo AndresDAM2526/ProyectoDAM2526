@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/profileForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/widgets/errorMessage_widget.dart';
 import 'package:proyecto_dam_2526/widgets/userInformation_widget.dart';
@@ -131,20 +132,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                   widget.user!.idUser,
                                 ) !=
                             true) {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Dialog(
-                                child: SizedBox(
-                                  width: MediaQuery.of(context).size.width / 5,
-                                  height:
-                                      MediaQuery.of(context).size.height / 4,
-                                  child: ErrorMessageWidget(
-                                    message: "La contraseña actual no es correcta, inténtelo de nuevo",
-                                  ),
-                                ),
-                              );
-                            },
+                          context.read<MessagesViewmodel>().showErrorDialog(
+                            context,
+                            MediaQuery.of(context).size.width / 4,
+                            MediaQuery.of(context).size.height / 4,
+                            "La contraseña actual no es correcta, inténtelo de nuevo",
                           );
                         }
                       }
