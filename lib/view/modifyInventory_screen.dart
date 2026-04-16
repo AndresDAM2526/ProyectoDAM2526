@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/databaseProduct.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
-import 'package:proyecto_dam_2526/view/modifyProduct_screen.dart';
+import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 import 'package:proyecto_dam_2526/widgets/productView_widget.dart';
 
 class ModifyInventory extends StatefulWidget {
@@ -37,9 +38,7 @@ class _ModifyInventoryState extends State<ModifyInventory> {
               ),
             ),
           ),
-          name!.isEmpty
-              ? Center(child: Text(""))
-              : Expanded(
+          Expanded(
                   child: FutureBuilder(
                     future: context.read<DatabaseService>().getProductsFromName(
                       name!,
@@ -79,23 +78,36 @@ class _ModifyInventoryState extends State<ModifyInventory> {
                                         .deleteProduct(
                                           products[index]['idProduct'],
                                         );
+                                    context
+                                        .read<MessagesViewmodel>()
+                                        .showInformationDialog(
+                                          context,
+                                          MediaQuery.of(context).size.width / 2,
+                                          MediaQuery.of(context).size.height /
+                                              4,
+                                          "Se ha procedido con el borrado del producto",
+                                        );
                                   },
                                   icon: Icon(Icons.delete),
                                 ),
                                 rightSideWidget: IconButton(
                                   onPressed: () {
-                                    showModifyDialog(
-                                      context,
-                                      DatabaseProduct(
-                                        idProduct: products[index]['idProduct'],
-                                        name: products[index]['product'],
-                                        type: products[index]['type'],
-                                        location: products[index]['location'],
-                                        quantity: int.parse(
-                                          products[index]['quantity'],
-                                        ),
-                                      ),
-                                    );
+                                    context
+                                        .read<AdministrationscreenViewmodel>()
+                                        .showModifyDialog(
+                                          context,
+                                          DatabaseProduct(
+                                            idProduct:
+                                                products[index]['idProduct'],
+                                            name: products[index]['product'],
+                                            type: products[index]['type'],
+                                            location:
+                                                products[index]['location'],
+                                            quantity: int.parse(
+                                              products[index]['quantity'],
+                                            ),
+                                          ),
+                                        );
                                   },
                                   icon: Icon(Icons.app_registration_sharp),
                                 ),
@@ -110,28 +122,5 @@ class _ModifyInventoryState extends State<ModifyInventory> {
         ],
       ),
     );
-  }
-
-  void showModifyDialog(BuildContext context, DatabaseProduct product) async {
-    final bool? modified = await showDialog(
-      context: context,
-      builder: (context) {
-        return Dialog(
-          child: SingleChildScrollView(
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 2,
-              child: ModifyProductScreen(product: product),
-            ),
-          ),
-        );
-      },
-    );
-
-    if (modified == true) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("Modificado")));
-    }
   }
 }

@@ -25,60 +25,38 @@ class ProductViewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(border: Border.all(width: 1)),
-      child: Column(
+      child: Row(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text("Nombre: $name"),
-              Text("Ubicación: $location"),
-              Text("Cantidad: $quantity"),
-            ],
+          Container(
+            width: MediaQuery.of(context).size.width / 2,
+            margin: EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Nombre: $name"),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Ubicación: $location"),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Cantidad: $quantity"),
+                ),
+              ],
+            ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              leftSideWidget,
-              rightSideWidget,
-            ],
+          SizedBox(
+            width: MediaQuery.of(context).size.width / 3,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [leftSideWidget, rightSideWidget],
+            ),
           ),
         ],
       ),
     );
-  }
-
-  void showModifyDialog(BuildContext context, DatabaseProduct product) async {
-    final bool? modified = await showDialog(
-      context: context,
-      builder: (context) {
-        return Dialog(
-          child: SingleChildScrollView(
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 2,
-              child: ModifyProductScreen(
-                product: DatabaseProduct(
-                  idProduct: idProduct,
-                  name: name,
-                  type: type,
-                  location: location,
-                  quantity: quantity,
-                ),
-              ),
-            ),
-          ),
-        );
-      },
-    );
-
-    if (modified == true) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("Modificado")));
-    } else {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("No se ha modificado")));
-    }
   }
 }

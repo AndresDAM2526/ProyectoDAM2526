@@ -32,37 +32,35 @@ class _ModifyUserScreenState extends State<ModifyUserScreen> {
               },
             ),
           ),
-          search!.isEmpty
-              ? Text("")
-              : Expanded(
-                  child: FutureBuilder(
-                    future: context
-                        .read<DatabaseService>()
-                        .getUserByNameOrUsername(search),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return Text("No se han encontrado resultados");
-                      }
-                      final foundUsers = snapshot.data;
-                      return ListView.builder(
-                        itemCount: foundUsers!.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: EdgeInsets.all(5),
-                            child: UserInformationWidget(
-                              user: UserDatabase(
-                                idUser: foundUsers[index]['idUser'],
-                                name: foundUsers[index]['name'],
-                                username: foundUsers[index]['username'],
-                                role: foundUsers[index]['role'],
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ),
+          Expanded(
+            child: FutureBuilder(
+              future: context.watch<DatabaseService>().getUserByNameOrUsername(
+                search,
+              ),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Text("No se han encontrado resultados");
+                }
+                final foundUsers = snapshot.data;
+                return ListView.builder(
+                  itemCount: foundUsers!.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.all(5),
+                      child: UserInformationWidget(
+                        user: UserDatabase(
+                          idUser: foundUsers[index]['idUser'],
+                          name: foundUsers[index]['name'],
+                          username: foundUsers[index]['username'],
+                          role: foundUsers[index]['role'],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
         ],
       ),
     );

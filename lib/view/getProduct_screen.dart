@@ -31,7 +31,7 @@ class _GetProductScreenState extends State<GetProductScreen> {
           ),
           Expanded(
             child: FutureBuilder(
-              future: context.read<DatabaseService>().getProductsFromName(
+              future: context.watch<DatabaseService>().getProductsFromName(
                 name!,
               ),
               builder: (context, snapshot) {

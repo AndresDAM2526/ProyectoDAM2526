@@ -49,27 +49,30 @@ class _TransactionsState extends State<Transactions> {
               ],
             ),
           ),
-
-          Row(
-            children: [
-              Checkbox(
-                value: readOnlyTextForm,
-                onChanged: (value) {
-                  setState(() {
-                    readOnlyTextForm = value!;
-                  });
-                },
-              ),
-              Text("Introducir cantidad manualmente"),
-            ],
-          ),
+          ?(widget.typeRequest.compareTo("Coger") == 0)
+              ? Row(
+                  children: [
+                    Checkbox(
+                      value: readOnlyTextForm,
+                      onChanged: (value) {
+                        setState(() {
+                          readOnlyTextForm = value!;
+                        });
+                      },
+                    ),
+                    Text("Introducir cantidad manualmente"),
+                  ],
+                )
+              : null,
 
           Form(
             key: checkForm,
             child: Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
-                readOnly: !readOnlyTextForm!,
+                readOnly: (widget.typeRequest.compareTo("Coger") == 0)
+                    ? !readOnlyTextForm!
+                    : false,
                 controller: context
                     .read<GetProductViewmodel>()
                     .quantityController,
@@ -79,22 +82,29 @@ class _TransactionsState extends State<Transactions> {
                   label: (widget.typeRequest.compareTo("Coger") == 0)
                       ? Text("Unidades disponibles: ${widget.maxQuantity}")
                       : Text("Unidades a devolver"),
-                  prefixIcon: IconButton(
-                    onPressed: () {
-                      context.read<GetProductViewmodel>().subtractUnity();
-                    },
-                    icon: Icon(Icons.remove),
-                  ),
-                  suffixIcon: IconButton(
-                    onPressed: () async {
-                      context.read<GetProductViewmodel>().addUnity(
-                        await context
-                            .read<DatabaseService>()
-                            .getQuantityFromProduct(widget.product.idProduct),
-                      );
-                    },
-                    icon: Icon(Icons.add),
-                  ),
+                  prefixIcon: (widget.typeRequest.compareTo("Coger") == 0)
+                      ? IconButton(
+                          onPressed: () {
+                            context.read<GetProductViewmodel>().subtractUnity();
+                          },
+                          icon: Icon(Icons.remove),
+                        )
+                      : null,
+
+                  suffixIcon: (widget.typeRequest.compareTo("Coger") == 0)
+                      ? IconButton(
+                          onPressed: () async {
+                            context.read<GetProductViewmodel>().addUnity(
+                              await context
+                                  .read<DatabaseService>()
+                                  .getQuantityFromProduct(
+                                    widget.product.idProduct,
+                                  ),
+                            );
+                          },
+                          icon: Icon(Icons.add),
+                        )
+                      : null,
                 ),
               ),
             ),
@@ -118,12 +128,7 @@ class _TransactionsState extends State<Transactions> {
                               .text,
                         ),
                       );
-                      context.read<MessagesViewmodel>().showInformationDialog(
-                        context,
-                        MediaQuery.of(context).size.width / 4,
-                        MediaQuery.of(context).size.height / 4,
-                        "Se ha ejecutado correctamente su petición",
-                      );
+                      context.read<GetProductViewmodel>().clearForm();
                     } else {
                       context.read<DatabaseService>().newRegister(
                         widget.product.idProduct,
@@ -137,13 +142,9 @@ class _TransactionsState extends State<Transactions> {
                               .text,
                         ),
                       );
-                      context.read<MessagesViewmodel>().showInformationDialog(
-                        context,
-                        MediaQuery.of(context).size.width / 4,
-                        MediaQuery.of(context).size.height / 4,
-                        "Se ha ejecutado correctamente su petición",
-                      );
+                      context.read<GetProductViewmodel>().clearForm();
                     }
+                    Navigator.pop(context, true);
                   }
                 },
                 child: (widget.typeRequest.compareTo("Coger") == 0)

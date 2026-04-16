@@ -28,8 +28,8 @@ class MessagesViewmodel extends ChangeNotifier {
     double width,
     double height,
     String message,
-  ) {
-    showDialog(
+  ) async {
+    bool? result = await showDialog(
       context: context,
       builder: (context) {
         return Dialog(

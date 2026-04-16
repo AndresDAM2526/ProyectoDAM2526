@@ -37,7 +37,7 @@ class InformationMessageWidget extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text("Volver"),
+                child: Text("Aceptar"),
               ),
             ),
           ],

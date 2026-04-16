@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/model/databaseProduct.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/view/addLocation_screen.dart';
 import 'package:proyecto_dam_2526/view/addTypeProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/changePassword_screen.dart';
+import 'package:proyecto_dam_2526/view/modifyProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/modifyUserPropierties_screen.dart';
+import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 
 class AdministrationscreenViewmodel extends ChangeNotifier {
-
   TextEditingController userController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController locationController = TextEditingController();
@@ -110,6 +113,32 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text("Se ha modificado el usuario")));
+    }
+  }
+
+  void showModifyDialog(BuildContext context, DatabaseProduct product) async {
+    final bool? modified = await showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          child: SingleChildScrollView(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 2,
+              child: ModifyProductScreen(product: product),
+            ),
+          ),
+        );
+      },
+    );
+
+    if (modified == true) {
+      context.read<MessagesViewmodel>().showInformationDialog(
+        context,
+        MediaQuery.of(context).size.width / 2,
+        MediaQuery.of(context).size.height / 4,
+        "Se ha modificado el producto",
+      );
     }
   }
 }

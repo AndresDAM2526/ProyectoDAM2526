@@ -21,6 +21,4 @@ class InventoryScreenViewmodel extends ChangeNotifier {
       context.read<DatabaseService>().getFilteredProducts(dialog[0], dialog[1]);
     }
   }
-
-  
 }

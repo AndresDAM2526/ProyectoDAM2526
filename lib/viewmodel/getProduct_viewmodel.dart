@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/requestProduct.dart';
+import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 import 'package:proyecto_dam_2526/widgets/transactions_widget.dart';
 
 class GetProductViewmodel extends ChangeNotifier {
@@ -30,23 +32,40 @@ class GetProductViewmodel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void clearForm() {
+    quantityController.clear();
+    notifyListeners();
+  }
+
   void showGetProductWidgetDialog(
     BuildContext context,
     RequestProduct product,
     int maxQuantity,
-    String typeRequest
+    String typeRequest,
   ) async {
-    int? result = await showDialog(
+    bool? result = await showDialog(
       context: context,
       builder: (context) {
         return Dialog(
           child: SizedBox(
             height: MediaQuery.of(context).size.height / 2,
             width: MediaQuery.of(context).size.height / 2,
-            child: Transactions(product: product, maxQuantity: maxQuantity,typeRequest: typeRequest,),
+            child: Transactions(
+              product: product,
+              maxQuantity: maxQuantity,
+              typeRequest: typeRequest,
+            ),
           ),
         );
       },
     );
+    if (result == true) {
+      context.read<MessagesViewmodel>().showInformationDialog(
+        context,
+        MediaQuery.of(context).size.width / 2,
+        MediaQuery.of(context).size.height / 4,
+        "Se ha ejecutado correctamente su petición",
+      );
+    }
   }
 }
