@@ -16,70 +16,140 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Perfil")),
-      body: Column(
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 3.5,
-            child: Container(
-              margin: EdgeInsets.all(10),
-              child: Card(
-                elevation: 5,
-                child: Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      child: TextField(
-                        enabled: false,
-                        decoration: InputDecoration(
-                          label: Text(
-                            "Usuario:\t${widget.user!.username}",
-                            style: TextStyle(color: Colors.black),
+      body: (MediaQuery.of(context).orientation == Orientation.portrait)
+          ? Column(
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height / 3.5,
+                  child: Container(
+                    margin: EdgeInsets.all(10),
+                    child: Card(
+                      elevation: 5,
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(10),
+                            child: TextField(
+                              enabled: false,
+                              decoration: InputDecoration(
+                                label: Text(
+                                  "Usuario:\t${widget.user!.username}",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                          Container(
+                            margin: EdgeInsets.all(10),
+                            child: TextField(
+                              enabled: false,
+                              decoration: InputDecoration(
+                                label: Text(
+                                  "Nombre:\t${widget.user!.name}",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.all(10),
+                            child: TextField(
+                              enabled: false,
+                              decoration: InputDecoration(
+                                label: Text(
+                                  "Rol:\t${widget.user!.role}",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      child: TextField(
-                        enabled: false,
-                        decoration: InputDecoration(
-                          label: Text(
-                            "Nombre:\t${widget.user!.name}",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      child: TextField(
-                        enabled: false,
-                        decoration: InputDecoration(
-                          label: Text(
-                            "Rol:\t${widget.user!.role}",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
+                ElevatedButton(
+                  onPressed: () {
+                    context
+                        .read<ProfileFormViewmodel>()
+                        .showModifyPasswordDialog(
+                          context,
+                          widget.user!,
+                          (ProfileScreen).toString(),
+                        );
+                  },
+                  child: Text("Cambiar contraseña"),
+                ),
+              ],
+            )
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      child: Card(
+                        elevation: 5,
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.all(10),
+                              child: TextField(
+                                enabled: false,
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "Usuario:\t${widget.user!.username}",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.all(10),
+                              child: TextField(
+                                enabled: false,
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "Nombre:\t${widget.user!.name}",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.all(10),
+                              child: TextField(
+                                enabled: false,
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "Rol:\t${widget.user!.role}",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      context
+                          .read<ProfileFormViewmodel>()
+                          .showModifyPasswordDialog(
+                            context,
+                            widget.user!,
+                            (ProfileScreen).toString(),
+                          );
+                    },
+                    child: Text("Cambiar contraseña"),
+                  ),
+                ],
               ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              context.read<ProfileFormViewmodel>().showModifyPasswordDialog(
-                context,
-                widget.user!,
-                (ProfileScreen).toString(),
-              );
-            },
-            child: Text("Cambiar contraseña"),
-          ),
-        ],
-      ),
     );
   }
 }

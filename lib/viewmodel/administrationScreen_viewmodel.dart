@@ -37,8 +37,12 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
       builder: (context) {
         return Dialog(
           child: SizedBox(
-            width: MediaQuery.of(context).size.width / 2,
-            height: MediaQuery.of(context).size.height / 4,
+            width: (MediaQuery.of(context).orientation == Orientation.portrait)
+                ? MediaQuery.of(context).size.width / 2
+                : MediaQuery.of(context).size.width,
+            height: (MediaQuery.of(context).orientation == Orientation.portrait)
+                ? MediaQuery.of(context).size.height / 4
+                : MediaQuery.of(context).size.height / 2,
             child: AddlocationScreen(),
           ),
         );
@@ -58,8 +62,12 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
       builder: (context) {
         return Dialog(
           child: SizedBox(
-            width: MediaQuery.of(context).size.width / 2,
-            height: MediaQuery.of(context).size.height / 4,
+            width: (MediaQuery.of(context).orientation == Orientation.portrait)
+                ? MediaQuery.of(context).size.width / 2
+                : MediaQuery.of(context).size.width,
+            height: (MediaQuery.of(context).orientation == Orientation.portrait)
+                ? MediaQuery.of(context).size.height / 4
+                : MediaQuery.of(context).size.height / 2,
             child: AddTypeProduct(),
           ),
         );
@@ -83,17 +91,24 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
       builder: (context) {
         return Dialog(
           child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 5,
+            width: (MediaQuery.of(context).orientation == Orientation.portrait)
+                ? MediaQuery.of(context).size.width
+                : MediaQuery.of(context).size.width / 2,
+            height: (MediaQuery.of(context).orientation == Orientation.portrait)
+                ? MediaQuery.of(context).size.height / 5
+                : MediaQuery.of(context).size.height / 2,
             child: ChangePasswordScreen(user: user, sourceScreen: sourceScreen),
           ),
         );
       },
     );
     if (result == true) {
-      ScaffoldMessenger.of(
+      context.read<MessagesViewmodel>().showInformationDialog(
         context,
-      ).showSnackBar(SnackBar(content: Text("Se ha modificado la contraseña")));
+        MediaQuery.of(context).size.width,
+        MediaQuery.of(context).size.height,
+        "Se ha modificado la contraaseña",
+      );
     }
   }
 
@@ -105,18 +120,32 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
       context: context,
       builder: (context) {
         return Dialog(
-          child: SizedBox(child: ModifyUserPropiertiesScreen(user: user)),
+          child: SizedBox(
+            width: (MediaQuery.of(context).orientation == Orientation.portrait)
+                ? MediaQuery.of(context).size.width / 2
+                : MediaQuery.of(context).size.width,
+            height: (MediaQuery.of(context).orientation == Orientation.portrait)
+                ? MediaQuery.of(context).size.height / 2
+                : MediaQuery.of(context).size.height,
+            child: ModifyUserPropiertiesScreen(user: user),
+          ),
         );
       },
     );
     if (result == true) {
-      ScaffoldMessenger.of(
+      context.read<MessagesViewmodel>().showInformationDialog(
         context,
-      ).showSnackBar(SnackBar(content: Text("Se ha modificado el usuario")));
+        MediaQuery.of(context).size.width / 2,
+        MediaQuery.of(context).size.height / 4,
+        "Se ha modificado el usuario",
+      );
     }
   }
 
-  void showModifyDialog(BuildContext context, DatabaseProduct product) async {
+  void showModifyProductDialog(
+    BuildContext context,
+    DatabaseProduct product,
+  ) async {
     final bool? modified = await showDialog(
       context: context,
       builder: (context) {

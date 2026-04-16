@@ -148,13 +148,15 @@ class DatabaseService extends ChangeNotifier {
     String? value,
   ) async {
     final db = await database;
-    return await db.rawQuery(
+    List<Map<String, dynamic>> result = await db.rawQuery(
       '''SELECT u.idUser,u.username,u.name,r.role as role FROM user u
                           INNER JOIN role r on u.idRole=r.idRole
                           WHERE u.username LIKE ? OR u.name LIKE ?
                     ''',
       ['%$value%', '%$value%'],
     );
+    notifyListeners();
+    return result;
   }
 
   Future<void> addUser(User user) async {

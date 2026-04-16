@@ -94,7 +94,7 @@ class _ModifyInventoryState extends State<ModifyInventory> {
                                   onPressed: () {
                                     context
                                         .read<AdministrationscreenViewmodel>()
-                                        .showModifyDialog(
+                                        .showModifyProductDialog(
                                           context,
                                           DatabaseProduct(
                                             idProduct:

@@ -48,7 +48,9 @@ class GetProductViewmodel extends ChangeNotifier {
       builder: (context) {
         return Dialog(
           child: SizedBox(
-            height: MediaQuery.of(context).size.height / 2,
+            height: (typeRequest.compareTo("Coger") == 0)
+                ? MediaQuery.of(context).size.height / 2
+                : MediaQuery.of(context).size.height / 3,
             width: MediaQuery.of(context).size.height / 2,
             child: Transactions(
               product: product,
