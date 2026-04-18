@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/requestProduct.dart';
+import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/view/administration_screen.dart';
 import 'package:proyecto_dam_2526/view/getProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/inventory_screen.dart';
@@ -19,10 +20,14 @@ import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyUserForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/profileForm_viewmodel.dart';
-import 'package:proyecto_dam_2526/widgets/errorMessage_widget.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+    url: 'https://eaqorymjfnwydgfxkikc.supabase.co',
+    anonKey: 'sb_publishable_V7nv-Abe7PosATw_yowgRw_2jn0KD_0',
+  );
   runApp(
     MultiProvider(
       providers: [
@@ -40,7 +45,8 @@ void main() {
         ChangeNotifierProvider(create: (context) => ModifyUserFormViewmodel()),
         ChangeNotifierProvider(create: (context) => InventoryScreenViewmodel()),
         ChangeNotifierProvider(create: (context) => GetProductViewmodel()),
-        ChangeNotifierProvider(create: (context) => MessagesViewmodel(),)
+        ChangeNotifierProvider(create: (context) => MessagesViewmodel()),
+        ChangeNotifierProvider(create: (context) => SupabaseService()),
       ],
       child: MyApp(),
     ),

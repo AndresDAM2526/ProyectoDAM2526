@@ -1,0 +1,47 @@
+create table if not exists type(
+  idType serial primary key,
+  type text
+);
+
+create table if not exists location(
+  idLocation serial primary key,
+  location text
+);
+
+create table if not exists product(
+  idProduct serial primary key,
+  product text,
+  quantity integer,
+  idType integer references type(idType),
+  idLocation integer references location(idLocation)
+);
+
+create table if not exists role(
+  idRole serial primary key,
+  role text
+);
+
+create table if not exists users(
+  idUser serial primary key,
+  username text,
+  name text,
+  password text,
+  idRole integer references role(idRole)
+);
+
+create table if not exists typeRegister(
+  idTypeRegister serial primary key,
+  typeRegister text
+);
+
+create table if not exists register(
+  idRegister serial primary key,
+  idTypeRegister integer references typeRegister(idTypeRegister),
+  idProduct integer references product(idProduct),
+  idUser integer references users(idUser),
+  date timestamp,
+  quantity integer
+);
+
+insert into role(role) values ('Administrador'),('Profesor'),('Alumno');
+insert into users(username,name,password,idRole) values ('andres','Andres Correa García','andres',1),('juan','Juan Peréz Dominguez','juan',2);
