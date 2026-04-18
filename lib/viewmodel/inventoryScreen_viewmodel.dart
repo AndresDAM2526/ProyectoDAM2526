@@ -10,8 +10,12 @@ class InventoryScreenViewmodel extends ChangeNotifier {
       builder: (context) {
         return Dialog(
           child: SizedBox(
-            height: MediaQuery.of(context).size.height / 2,
-            width: MediaQuery.of(context).size.height / 2,
+            height: (MediaQuery.of(context).orientation == Orientation.portrait)
+                ? MediaQuery.of(context).size.height / 2
+                : MediaQuery.of(context).size.height,
+            width: (MediaQuery.of(context).orientation == Orientation.portrait)
+                ? MediaQuery.of(context).size.width / 2
+                : MediaQuery.of(context).size.width / 2,
             child: FilterWidget(),
           ),
         );

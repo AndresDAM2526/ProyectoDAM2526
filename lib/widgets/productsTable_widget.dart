@@ -40,8 +40,16 @@ class _ProductsTableWidgetState extends State<ProductsTableWidget> {
                       builder: (context) {
                         return Dialog(
                           child: SizedBox(
-                            width: MediaQuery.of(context).size.width / 3,
-                            height: MediaQuery.of(context).size.height / 2,
+                            width:
+                                (MediaQuery.of(context).orientation ==
+                                    Orientation.portrait)
+                                ? MediaQuery.of(context).size.width / 3
+                                : MediaQuery.of(context).size.width,
+                            height:
+                                (MediaQuery.of(context).orientation ==
+                                    Orientation.portrait)
+                                ? MediaQuery.of(context).size.height / 2
+                                : MediaQuery.of(context).size.height,
                             child: ProductInformation(
                               product: Product(
                                 name: product['product'],

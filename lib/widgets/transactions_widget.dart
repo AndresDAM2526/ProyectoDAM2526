@@ -35,125 +35,127 @@ class _TransactionsState extends State<Transactions> {
               : Text("Devolver producto"),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: EdgeInsets.only(top: 30, left: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text("Producto : ${widget.product.name}"),
-                Text("Tipo : ${widget.product.type}"),
-                Text("Ubicación : ${widget.product.location}"),
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: 30, left: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text("Producto : ${widget.product.name}"),
+                  Text("Tipo : ${widget.product.type}"),
+                  Text("Ubicación : ${widget.product.location}"),
+                ],
+              ),
             ),
-          ),
-          ?(widget.typeRequest.compareTo("Coger") == 0)
-              ? Row(
-                  children: [
-                    Checkbox(
-                      value: readOnlyTextForm,
-                      onChanged: (value) {
-                        setState(() {
-                          readOnlyTextForm = value!;
-                        });
-                      },
-                    ),
-                    Text("Introducir cantidad manualmente"),
-                  ],
-                )
-              : null,
-
-          Form(
-            key: checkForm,
-            child: Container(
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                readOnly: (widget.typeRequest.compareTo("Coger") == 0)
-                    ? !readOnlyTextForm!
-                    : false,
-                controller: context
-                    .read<GetProductViewmodel>()
-                    .quantityController,
-                validator: (value) =>
-                    context.read<GetProductViewmodel>().checkQuantity(value),
-                decoration: InputDecoration(
-                  label: (widget.typeRequest.compareTo("Coger") == 0)
-                      ? Text("Unidades disponibles: ${widget.maxQuantity}")
-                      : Text("Unidades a devolver"),
-                  prefixIcon: (widget.typeRequest.compareTo("Coger") == 0)
-                      ? IconButton(
-                          onPressed: () {
-                            context.read<GetProductViewmodel>().subtractUnity();
-                          },
-                          icon: Icon(Icons.remove),
-                        )
-                      : null,
-
-                  suffixIcon: (widget.typeRequest.compareTo("Coger") == 0)
-                      ? IconButton(
-                          onPressed: () async {
-                            context.read<GetProductViewmodel>().addUnity(
-                              await context
-                                  .read<DatabaseService>()
-                                  .getQuantityFromProduct(
-                                    widget.product.idProduct,
-                                  ),
-                            );
-                          },
-                          icon: Icon(Icons.add),
-                        )
-                      : null,
+            ?(widget.typeRequest.compareTo("Coger") == 0)
+                ? Row(
+                    children: [
+                      Checkbox(
+                        value: readOnlyTextForm,
+                        onChanged: (value) {
+                          setState(() {
+                            readOnlyTextForm = value!;
+                          });
+                        },
+                      ),
+                      Text("Introducir cantidad manualmente"),
+                    ],
+                  )
+                : null,
+        
+            Form(
+              key: checkForm,
+              child: Container(
+                margin: EdgeInsets.all(10),
+                child: TextFormField(
+                  readOnly: (widget.typeRequest.compareTo("Coger") == 0)
+                      ? !readOnlyTextForm!
+                      : false,
+                  controller: context
+                      .read<GetProductViewmodel>()
+                      .quantityController,
+                  validator: (value) =>
+                      context.read<GetProductViewmodel>().checkQuantity(value),
+                  decoration: InputDecoration(
+                    label: (widget.typeRequest.compareTo("Coger") == 0)
+                        ? Text("Unidades disponibles: ${widget.maxQuantity}")
+                        : Text("Unidades a devolver"),
+                    prefixIcon: (widget.typeRequest.compareTo("Coger") == 0)
+                        ? IconButton(
+                            onPressed: () {
+                              context.read<GetProductViewmodel>().subtractUnity();
+                            },
+                            icon: Icon(Icons.remove),
+                          )
+                        : null,
+        
+                    suffixIcon: (widget.typeRequest.compareTo("Coger") == 0)
+                        ? IconButton(
+                            onPressed: () async {
+                              context.read<GetProductViewmodel>().addUnity(
+                                await context
+                                    .read<DatabaseService>()
+                                    .getQuantityFromProduct(
+                                      widget.product.idProduct,
+                                    ),
+                              );
+                            },
+                            icon: Icon(Icons.add),
+                          )
+                        : null,
+                  ),
                 ),
               ),
             ),
-          ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  if (checkForm.currentState!.validate()) {
-                    if (widget.typeRequest.compareTo("Coger") == 0) {
-                      context.read<DatabaseService>().newRegister(
-                        widget.product.idProduct,
-                        context.read<DatabaseService>().userDatabase!.idUser,
-                        "Coger",
-                        DateFormat.yMd().add_jm().format(DateTime.now()),
-                        int.parse(
-                          context
-                              .read<GetProductViewmodel>()
-                              .quantityController
-                              .text,
-                        ),
-                      );
-                      context.read<GetProductViewmodel>().clearForm();
-                    } else {
-                      context.read<DatabaseService>().newRegister(
-                        widget.product.idProduct,
-                        context.read<DatabaseService>().userDatabase!.idUser,
-                        "Devolver",
-                        DateFormat.yMd().add_jm().format(DateTime.now()),
-                        int.parse(
-                          context
-                              .read<GetProductViewmodel>()
-                              .quantityController
-                              .text,
-                        ),
-                      );
-                      context.read<GetProductViewmodel>().clearForm();
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (checkForm.currentState!.validate()) {
+                      if (widget.typeRequest.compareTo("Coger") == 0) {
+                        context.read<DatabaseService>().newRegister(
+                          widget.product.idProduct,
+                          context.read<DatabaseService>().userDatabase!.idUser,
+                          "Coger",
+                          DateFormat.yMd().add_jm().format(DateTime.now()),
+                          int.parse(
+                            context
+                                .read<GetProductViewmodel>()
+                                .quantityController
+                                .text,
+                          ),
+                        );
+                        context.read<GetProductViewmodel>().clearForm();
+                      } else {
+                        context.read<DatabaseService>().newRegister(
+                          widget.product.idProduct,
+                          context.read<DatabaseService>().userDatabase!.idUser,
+                          "Devolver",
+                          DateFormat.yMd().add_jm().format(DateTime.now()),
+                          int.parse(
+                            context
+                                .read<GetProductViewmodel>()
+                                .quantityController
+                                .text,
+                          ),
+                        );
+                        context.read<GetProductViewmodel>().clearForm();
+                      }
+                      Navigator.pop(context, true);
                     }
-                    Navigator.pop(context, true);
-                  }
-                },
-                child: (widget.typeRequest.compareTo("Coger") == 0)
-                    ? Text("Coger")
-                    : Text("Devolver"),
+                  },
+                  child: (widget.typeRequest.compareTo("Coger") == 0)
+                      ? Text("Coger")
+                      : Text("Devolver"),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

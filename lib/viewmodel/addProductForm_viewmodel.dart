@@ -23,22 +23,21 @@ class AddProductFormViewModel extends ChangeNotifier {
       return "Campo vacío";
     } else if (int.tryParse(value) == null) {
       return "El formato de la cantidad no es correcto";
+    } else if (int.parse(value) == 0) {
+      return "Cantidad incorrecta";
     }
-    
   }
 
   String? checkType(String? value) {
     if (value == null) {
       return "Campo vacío";
     }
-    
   }
 
   String? checkLocation(String? value) {
     if (value == null) {
       return "Campo vacío";
     }
-    
   }
 
   void clearForm() {
