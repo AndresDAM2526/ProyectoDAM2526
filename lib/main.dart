@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/requestProduct.dart';
+import 'package:proyecto_dam_2526/service/auth_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/view/administration_screen.dart';
 import 'package:proyecto_dam_2526/view/getProduct_screen.dart';
@@ -47,6 +48,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => GetProductViewmodel()),
         ChangeNotifierProvider(create: (context) => MessagesViewmodel()),
         ChangeNotifierProvider(create: (context) => SupabaseService()),
+        ChangeNotifierProvider(create: (context) => AuthService()),
       ],
       child: MyApp(),
     ),

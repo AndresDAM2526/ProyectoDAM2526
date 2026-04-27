@@ -1,47 +1,49 @@
 create table if not exists type(
-  idType serial primary key,
+  id_type serial primary key,
   type text
 );
 
 create table if not exists location(
-  idLocation serial primary key,
+  id_location serial primary key,
   location text
 );
 
 create table if not exists product(
-  idProduct serial primary key,
+  id_product serial primary key,
   product text,
   quantity integer,
-  idType integer references type(idType),
-  idLocation integer references location(idLocation)
+  id_type integer references type(id_type),
+  id_location integer references location(id_location)
 );
 
 create table if not exists role(
-  idRole serial primary key,
+  id_role serial primary key,
   role text
 );
 
 create table if not exists users(
-  idUser serial primary key,
+  id_user serial primary key,
+  email text,
   username text,
   name text,
-  password text,
-  idRole integer references role(idRole)
+  id_role integer references role(id_role),
+  first_sign_in boolean
 );
 
-create table if not exists typeRegister(
-  idTypeRegister serial primary key,
-  typeRegister text
+create table if not exists type_register(
+  id_type_register serial primary key,
+  type_register text
 );
 
 create table if not exists register(
-  idRegister serial primary key,
-  idTypeRegister integer references typeRegister(idTypeRegister),
-  idProduct integer references product(idProduct),
-  idUser integer references users(idUser),
+  id_register serial primary key,
+  id_type_register integer references type_register(id_type_register),
+  id_product integer references product(id_product),
+  id_user integer references users(id_user),
   date timestamp,
   quantity integer
 );
 
 insert into role(role) values ('Administrador'),('Profesor'),('Alumno');
-insert into users(username,name,password,idRole) values ('andres','Andres Correa García','andres',1),('juan','Juan Peréz Dominguez','juan',2);
+insert into users(email,username,name,id_role) values ('andres@gmail.com','andres','Andres Correa García',1),('juan@gmail.com','juan','Juan Peréz Dominguez',2);
+insert into type_register(type_register) values ('Coger'),('Devolver');
