@@ -403,7 +403,7 @@ class DatabaseService extends ChangeNotifier {
   }
 
   void updateSession(
-    int idUser,
+    String idUser,
     String name,
     String username,
     String role,
@@ -438,7 +438,7 @@ class DatabaseService extends ChangeNotifier {
 
   Future<void> newRegister(
     int idProduct,
-    int idUser,
+    String idUser,
     String registerType,
     String date,
     int quantity,
@@ -466,7 +466,7 @@ class DatabaseService extends ChangeNotifier {
   }
 
   Future<List<Map<String, dynamic>>> getHistoryRegisterByIdUser(
-    int idUser,
+    String idUser,
   ) async {
     final db = await database;
     return await db.rawQuery(
@@ -506,13 +506,13 @@ class DatabaseService extends ChangeNotifier {
     return resul.first['idRole'];
   }
 
-  Future<void> deleteUser(int idUser) async {
+  Future<void> deleteUser(String idUser) async {
     final db = await database;
     await db.delete('user', where: 'idUser=?', whereArgs: [idUser]);
     notifyListeners();
   }
 
-  Future<void> changePassword(int idUser, String password) async {
+  Future<void> changePassword(String idUser, String password) async {
     final db = await database;
     await db.update(
       'user',
@@ -561,7 +561,7 @@ class DatabaseService extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<String> getPasswordFromUser(int idUser) async {
+  Future<String> getPasswordFromUser(String idUser) async {
     final db = await database;
     List<Map<String, dynamic>> result = await db.query(
       'user',
@@ -623,7 +623,7 @@ class DatabaseService extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> changePasswordNewUser(int idUser, String password) async {
+  Future<void> changePasswordNewUser(String idUser, String password) async {
     final db = await database;
     await db.update(
       'user',

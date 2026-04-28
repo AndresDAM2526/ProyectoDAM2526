@@ -38,6 +38,18 @@ class SupabaseService extends ChangeNotifier {
     }
   }
 
+  Future<List<Map<String, dynamic>>> getUserData(String email) async {
+    try {
+      return await supabase
+          .from('users')
+          .select('id_user,email,username,name,role:role(role),first_sign_in')
+          .eq('email', email);
+    } catch (e) {
+      print(e);
+      return [];
+    }
+  }
+
   Future<void> getFilteredProducts(String? location, String? type) async {
     if (location == null && type != null) {
       try {
@@ -120,7 +132,7 @@ class SupabaseService extends ChangeNotifier {
     try {
       final resultQuery = await supabase
           .from('type')
-          .select('idtype')
+          .select('id_type')
           .eq('type', type)
           .maybeSingle();
       if (resultQuery != null) {
@@ -137,7 +149,7 @@ class SupabaseService extends ChangeNotifier {
     try {
       final resultQuery = await supabase
           .from('location')
-          .select('idlocation')
+          .select('id:_location')
           .eq('location', location)
           .maybeSingle();
       if (resultQuery != null) {
@@ -151,12 +163,12 @@ class SupabaseService extends ChangeNotifier {
   Future<int?> getIdTypeRegisterFromNameType(String type) async {
     try {
       final resultQuery = await supabase
-          .from('typeregister')
-          .select('idtyperegister')
-          .eq('typeregister', type)
+          .from('type_register')
+          .select('id_type_register')
+          .eq('type_register', type)
           .maybeSingle();
       if (resultQuery != null) {
-        return int.parse(resultQuery['idtyperegister']);
+        return int.parse(resultQuery['id_type_register']);
       } else {
         return null;
       }
@@ -177,8 +189,8 @@ class SupabaseService extends ChangeNotifier {
         await supabase.from('product').insert({
           'product': product.name,
           'quantity': product.quantity,
-          'idtype': idType,
-          'idlocation': idLocation,
+          'id_type': idType,
+          'id_location': idLocation,
         });
         getAllProducts();
         notifyListeners();
@@ -192,7 +204,7 @@ class SupabaseService extends ChangeNotifier {
 
   Future<bool> deleteProduct(int idProduct) async {
     try {
-      await supabase.from('product').delete().eq('idproduct', idProduct);
+      await supabase.from('product').delete().eq('id_product', idProduct);
       return true;
     } catch (e) {
       print("Error al borrar el producto");
@@ -204,7 +216,7 @@ class SupabaseService extends ChangeNotifier {
     try {
       final products = await supabase
           .from('product')
-          .select('idproduct,product,quantity,type(type),location(location)')
+          .select('id_product,product,quantity,type(type),location(location)')
           .like('product', '%$name%');
       return List<Map<String, dynamic>>.from(products);
     } catch (e) {
@@ -226,8 +238,8 @@ class SupabaseService extends ChangeNotifier {
         await supabase.from('product').update({
           'product': product.name,
           'quantity': product.quantity,
-          'idtype': idType,
-          'idlocation': idLocation,
+          'id_type': idType,
+          'id_location': idLocation,
         });
         return true;
       }
@@ -251,9 +263,9 @@ class SupabaseService extends ChangeNotifier {
         return false;
       } else {
         await supabase.from('register').insert({
-          'idtyperegister': idRegisterType,
-          'idproduct': idProduct,
-          'idUser': idUser,
+          'id_type_register': idRegisterType,
+          'id_product': idProduct,
+          'id_user': idUser,
           'date': DateTime.now().toLocal(),
           'quantity': quantity,
         });
@@ -273,7 +285,7 @@ class SupabaseService extends ChangeNotifier {
     try {
       final registers = await supabase
           .from('register')
-          .select('product(product),type(type),typeregister(type),quantity')
+          .select('product(product),type(type),type_register(type),quantity')
           .eq('iduser', idUser);
       return List<Map<String, dynamic>>.from(registers);
     } catch (e) {

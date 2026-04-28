@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/viewmodel/newUserPasswordForm_viewmodel.dart';
 
 class NewUserPassword extends StatelessWidget {
-  int idUser;
+  String idUser;
   NewUserPassword({super.key, required this.idUser});
   @override
   Widget build(BuildContext context) {

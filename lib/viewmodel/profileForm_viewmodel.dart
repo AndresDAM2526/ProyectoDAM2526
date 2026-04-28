@@ -46,7 +46,7 @@ class ProfileFormViewmodel extends ChangeNotifier {
   Future<bool> checkDatabasePassword(
     BuildContext context,
     String password,
-    int idUser,
+    String idUser,
   ) async {
     String oldPassword = await context
         .read<DatabaseService>()

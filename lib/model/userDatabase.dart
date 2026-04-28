@@ -1,5 +1,5 @@
 class UserDatabase {
-  int idUser;
+  String idUser;
   String username;
   String name;
   String role;

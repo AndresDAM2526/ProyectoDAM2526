@@ -24,7 +24,7 @@ class NewUserPasswordFormViewModel extends ChangeNotifier {
 
   void updatePassword(
     BuildContext context,
-    int idUser,
+    String idUser,
     String oldPassword,
     String newPassword,
   ) async {

@@ -84,7 +84,7 @@ class _MyAppState extends State<MyApp> {
             builder: (context) {
               return Scaffold(
                 bottomNavigationBar:
-                    context.read<DatabaseService>().userDatabase == null
+                    context.read<AuthService>().userDatabase == null
                     ? null
                     : BottomNavigationBar(
                         currentIndex: selectedScreen,
@@ -112,7 +112,7 @@ class _MyAppState extends State<MyApp> {
                   title: Center(child: Text("Gestión del inventario")),
                   backgroundColor: Colors.grey,
                 ),
-                drawer: context.read<DatabaseService>().userDatabase == null
+                drawer: context.read<AuthService>().userDatabase == null
                     ? null
                     : Drawer(
                         child: ListView(
@@ -123,7 +123,7 @@ class _MyAppState extends State<MyApp> {
                                 children: [
                                   Text("Gestión del inventario"),
                                   Text(
-                                    "Usuario : ${context.read<DatabaseService>().userDatabase!.username}",
+                                    "Usuario : ${context.read<AuthService>().userDatabase!.username}",
                                   ),
                                 ],
                               ),
@@ -136,7 +136,7 @@ class _MyAppState extends State<MyApp> {
                                   MaterialPageRoute(
                                     builder: (context) => ProfileScreen(
                                       user: context
-                                          .read<DatabaseService>()
+                                          .read<AuthService>()
                                           .userDatabase,
                                     ),
                                   ),
@@ -156,13 +156,13 @@ class _MyAppState extends State<MyApp> {
                               },
                             ),
 
-                            ?(context.read<DatabaseService>().userDatabase !=
+                            ?(context.read<AuthService>().userDatabase !=
                                         null &&
                                     context
-                                            .read<DatabaseService>()
+                                            .read<AuthService>()
                                             .userDatabase!
                                             .role ==
-                                        "Admin")
+                                        "Administrador")
                                 ? ListTile(
                                     title: Text("Adminstración"),
                                     onTap: () {
@@ -180,7 +180,8 @@ class _MyAppState extends State<MyApp> {
                             ListTile(
                               title: IconButton(
                                 onPressed: () {
-                                  context.read<DatabaseService>().logout();
+                                  selectedScreen = 0;
+                                  context.read<AuthService>().logOut();
                                 },
                                 icon: Icon(Icons.logout),
                               ),
@@ -188,7 +189,7 @@ class _MyAppState extends State<MyApp> {
                           ],
                         ),
                       ),
-                body: context.read<DatabaseService>().userDatabase == null
+                body: context.watch<AuthService>().userDatabase == null
                     ? LoginScreen()
                     : screens[selectedScreen],
               );

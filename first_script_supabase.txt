@@ -21,8 +21,9 @@ create table if not exists role(
   role text
 );
 
+--el tipo uuid se utiliza para que sea el mismo tipo de la tabla auth.users
 create table if not exists users(
-  id_user serial primary key,
+  id_user uuid primary key references auth.users (id) on DELETE CASCADE,
   email text,
   username text,
   name text,
@@ -39,11 +40,10 @@ create table if not exists register(
   id_register serial primary key,
   id_type_register integer references type_register(id_type_register),
   id_product integer references product(id_product),
-  id_user integer references users(id_user),
+  id_user uuid references users(id_user),
   date timestamp,
   quantity integer
 );
 
 insert into role(role) values ('Administrador'),('Profesor'),('Alumno');
-insert into users(email,username,name,id_role) values ('andres@gmail.com','andres','Andres Correa García',1),('juan@gmail.com','juan','Juan Peréz Dominguez',2);
 insert into type_register(type_register) values ('Coger'),('Devolver');

@@ -18,7 +18,7 @@ class LoginFormViewmodel extends ChangeNotifier {
     passController.clear();
   }
 
-  void checkLogin(
+  /*void checkLogin(
     String username,
     String password,
     BuildContext context,
@@ -49,5 +49,6 @@ class LoginFormViewmodel extends ChangeNotifier {
         user.first['firstSignin'],
       );
     }
-  }
+  }*/
+  
 }
