@@ -79,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ElevatedButton(
                     onPressed: () async {
                       if (checkForm.currentState!.validate()) {
-                        if (await context.read<DatabaseService>().checkLogin(
+                        context.read<LoginFormViewmodel>().checkLogin(
                           context
                               .read<LoginFormViewmodel>()
                               .userController
@@ -88,14 +88,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               .read<LoginFormViewmodel>()
                               .passController
                               .text,
-                        )) {
-                          
-                          context.read<LoginFormViewmodel>().clearForm();
-                        } else {
-                          ScaffoldMessenger.of(
-                            context,
-                          ).showSnackBar(SnackBar(content: Text("Usuario y/o contraseña incorrectos")));
-                        }
+                          context,
+                        );
                       }
                     },
                     child: Text("Iniciar sesión"),

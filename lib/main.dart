@@ -7,6 +7,7 @@ import 'package:proyecto_dam_2526/view/administration_screen.dart';
 import 'package:proyecto_dam_2526/view/getProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/inventory_screen.dart';
 import 'package:proyecto_dam_2526/view/login_screen.dart';
+import 'package:proyecto_dam_2526/view/newUserPassword.dart';
 import 'package:proyecto_dam_2526/view/profile_screen.dart';
 import 'package:proyecto_dam_2526/view/settings_screen.dart';
 import 'package:proyecto_dam_2526/view/userHistory_screen.dart';
@@ -20,6 +21,7 @@ import 'package:proyecto_dam_2526/viewmodel/loginForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyUserForm_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/newUserPasswordForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/profileForm_viewmodel.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -49,6 +51,9 @@ void main() async {
         ChangeNotifierProvider(create: (context) => MessagesViewmodel()),
         ChangeNotifierProvider(create: (context) => SupabaseService()),
         ChangeNotifierProvider(create: (context) => AuthService()),
+        ChangeNotifierProvider(
+          create: (context) => NewUserPasswordFormViewModel(),
+        ),
       ],
       child: MyApp(),
     ),

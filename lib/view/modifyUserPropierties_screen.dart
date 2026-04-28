@@ -107,7 +107,7 @@ class _ModifyUserPropiertiesScreenState
                                 .usernameProperty!,
                             role: context
                                 .read<ModifyUserFormViewmodel>()
-                                .roleProperty!,
+                                .roleProperty!,firstLogin: 0
                           ),
                         );
                         context.read<ModifyUserFormViewmodel>().clearForm();
@@ -203,7 +203,7 @@ class _ModifyUserPropiertiesScreenState
                                   .usernameProperty!,
                               role: context
                                   .read<ModifyUserFormViewmodel>()
-                                  .roleProperty!,
+                                  .roleProperty!,firstLogin: 0
                             ),
                           );
                           context.read<ModifyUserFormViewmodel>().clearForm();

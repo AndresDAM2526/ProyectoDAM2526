@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:proyecto_dam_2526/model/DatabaseProduct.dart';
@@ -80,6 +82,7 @@ class DatabaseService extends ChangeNotifier {
                             password TEXT NOT NULL,
                             name TEXT NOT NULL,
                             idRole INTEGER NOT NULL,
+                            firstSignin INTEGER, 
 
                             FOREIGN KEY (idRole) REFERENCES rol(idRole) ON DELETE CASCADE ON UPDATE CASCADE
                           )''');
@@ -110,6 +113,7 @@ class DatabaseService extends ChangeNotifier {
             'password': 'andres',
             'name': 'Andres Correa Garcia',
             'idRole': '1',
+            'firstSignin': '0',
           });
 
           await db.insert('user', {
@@ -117,6 +121,7 @@ class DatabaseService extends ChangeNotifier {
             'password': 'juan',
             'name': 'Juan Perez Dominguez',
             'idRole': '3',
+            'firstSignin': '1',
           });
 
           await db.insert('type', {'type': 'Memoria'});
@@ -366,26 +371,52 @@ class DatabaseService extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> checkLogin(String username, String password) async {
+  Future<bool> checkFirstLogin(String username, String password) async {
     final db = await database;
-    List<Map<String, dynamic>> users = await db.rawQuery(
-      '''SELECT u.idUser,u.username,u.name,r.role as role FROM user u
-                                                            INNER JOIN role r ON r.idRole=u.idRole
-                                                            WHERE u.username=? AND u.password=?''',
-      [username, password],
+    List<Map<String, dynamic>> result = await db.query(
+      'users',
+      columns: ['firstSignin'],
+      where: 'username=? AND password=?',
+      whereArgs: [username, password],
     );
-    if (users.length == 1) {
-      _userDatabase = UserDatabase(
-        idUser: users.first['idUser'],
-        name: users.first['name'],
-        username: users.first['username'],
-        role: users.first['role'],
-      );
-      notifyListeners();
+
+    if (result.first['firstSignin'] == 1) {
       return true;
     } else {
       return false;
     }
+  }
+
+  Future<List<Map<String, dynamic>>> checkLogin(
+    String username,
+    String password,
+  ) async {
+    final db = await database;
+    List<Map<String, dynamic>> user = await db.rawQuery(
+      '''SELECT u.idUser,u.username,u.name,r.role as role,u.firstSignin FROM user u
+                                                            INNER JOIN role r ON r.idRole=u.idRole
+                                                            WHERE u.username=? AND u.password=?''',
+      [username, password],
+    );
+
+    return user;
+  }
+
+  void updateSession(
+    int idUser,
+    String name,
+    String username,
+    String role,
+    int firstLogin,
+  ) {
+    _userDatabase = UserDatabase(
+      idUser: idUser,
+      name: name,
+      username: username,
+      role: role,
+      firstLogin: firstLogin,
+    );
+    notifyListeners();
   }
 
   void logout() {
@@ -589,6 +620,17 @@ class DatabaseService extends ChangeNotifier {
 
   void clearFilter() {
     _filteredProducts = null;
+    notifyListeners();
+  }
+
+  Future<void> changePasswordNewUser(int idUser, String password) async {
+    final db = await database;
+    await db.update(
+      'user',
+      {'password': password, 'firstSignin': 0},
+      where: 'idUser=?',
+      whereArgs: [idUser],
+    );
     notifyListeners();
   }
 }

@@ -50,6 +50,18 @@ class _AddUserScreenState extends State<AddUserScreen> {
                     child: TextFormField(
                       controller: context
                           .read<AdduserFormViewmodel>()
+                          .emailController,
+                      validator: (value) => context
+                          .read<AdduserFormViewmodel>()
+                          .checkEmail(value),
+                      decoration: InputDecoration(label: Text("Email")),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    child: TextFormField(
+                      controller: context
+                          .read<AdduserFormViewmodel>()
                           .passwordController,
                       validator: (value) => context
                           .read<AdduserFormViewmodel>()
@@ -90,6 +102,10 @@ class _AddUserScreenState extends State<AddUserScreen> {
                       if (checkForm.currentState!.validate()) {
                         context.read<DatabaseService>().addUser(
                           User(
+                            email: context
+                                .read<AdduserFormViewmodel>()
+                                .emailController
+                                .text,
                             name: context
                                 .read<AdduserFormViewmodel>()
                                 .nameController
@@ -147,6 +163,18 @@ class _AddUserScreenState extends State<AddUserScreen> {
                       child: TextFormField(
                         controller: context
                             .read<AdduserFormViewmodel>()
+                            .emailController,
+                        validator: (value) => context
+                            .read<AdduserFormViewmodel>()
+                            .checkEmail(value),
+                        decoration: InputDecoration(label: Text("Email")),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: TextFormField(
+                        controller: context
+                            .read<AdduserFormViewmodel>()
                             .passwordController,
                         validator: (value) => context
                             .read<AdduserFormViewmodel>()
@@ -188,6 +216,10 @@ class _AddUserScreenState extends State<AddUserScreen> {
                         if (checkForm.currentState!.validate()) {
                           context.read<DatabaseService>().addUser(
                             User(
+                              email: context
+                                  .read<AdduserFormViewmodel>()
+                                  .emailController
+                                  .text,
                               name: context
                                   .read<AdduserFormViewmodel>()
                                   .nameController

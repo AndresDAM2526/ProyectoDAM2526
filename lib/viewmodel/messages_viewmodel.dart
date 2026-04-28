@@ -23,7 +23,7 @@ class MessagesViewmodel extends ChangeNotifier {
     );
   }
 
-  void showInformationDialog(
+  Future<void> showInformationDialog(
     BuildContext context,
     double width,
     double height,

@@ -52,7 +52,7 @@ class _ModifyUserScreenState extends State<ModifyUserScreen> {
                           idUser: foundUsers[index]['idUser'],
                           name: foundUsers[index]['name'],
                           username: foundUsers[index]['username'],
-                          role: foundUsers[index]['role'],
+                          role: foundUsers[index]['role'],firstLogin: foundUsers[index]['firstSignin']
                         ),
                       ),
                     );

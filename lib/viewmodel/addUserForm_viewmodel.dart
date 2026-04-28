@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AdduserFormViewmodel extends ChangeNotifier {
-  TextEditingController nameController = TextEditingController();
   TextEditingController userController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
   String? role;
 
@@ -14,10 +16,13 @@ class AdduserFormViewmodel extends ChangeNotifier {
       (value == null || value.isEmpty) ? "Campo vacio" : null;
   String? checkRole(String? value) =>
       (value == null || value.isEmpty) ? "Campo vacio" : null;
+  String? checkEmail(String? value) =>
+      (value == null || value.isEmpty) ? "Campo vacio" : null;
 
   void clearForm() {
-    nameController.clear();
     userController.clear();
+    emailController.clear();
+    nameController.clear();
     passwordController.clear();
     role = null;
   }
