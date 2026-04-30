@@ -1,14 +1,16 @@
 class UserDatabase {
   String idUser;
   String username;
+  String email;
   String name;
   String role;
-  int firstLogin;
+  bool firstLogin;
 
   UserDatabase({
     required this.idUser,
-    required this.name,
     required this.username,
+    required this.email,
+    required this.name,
     required this.role,
     required this.firstLogin,
   });

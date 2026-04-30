@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/product.dart';
+import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/view/product_information.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/inventoryScreen_viewmodel.dart';
@@ -36,7 +37,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      context.read<DatabaseService>().clearFilter();
+                      context.read<SupabaseService>().clearFilter();
                     },
                     child: Text("Quitar filtro"),
                   ),
@@ -46,15 +47,15 @@ class _InventoryScreenState extends State<InventoryScreen> {
             Container(
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.all(15),
-              child: context.watch<DatabaseService>().filteredProducts == null
+              child: context.watch<SupabaseService>().filteredProducts == null
                   ? ProductsTableWidget(
-                      productList: context.read<DatabaseService>().products,
+                      productList: context.read<SupabaseService>().products,
                     )
-                  : context.read<DatabaseService>().filteredProducts!.isEmpty
+                  : context.read<SupabaseService>().filteredProducts!.isEmpty
                   ? Text("No se han encontrado productos")
                   : ProductsTableWidget(
                       productList: context
-                          .read<DatabaseService>()
+                          .read<SupabaseService>()
                           .filteredProducts!,
                     ),
             ),

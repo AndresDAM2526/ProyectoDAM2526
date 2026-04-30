@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/addProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 
-class AddlocationScreen extends StatelessWidget {
+class AddlocationScreen extends StatefulWidget {
   AddlocationScreen({super.key});
+
+  @override
+  State<AddlocationScreen> createState() => _AddlocationScreenState();
+}
+
+class _AddlocationScreenState extends State<AddlocationScreen> {
   final checkForm = GlobalKey<FormState>();
 
   @override
@@ -31,15 +38,22 @@ class AddlocationScreen extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 if (checkForm.currentState!.validate()) {
-                  context.read<DatabaseService>().addLocation(
+                  bool added = await context
+                      .read<SupabaseService>()
+                      .addLocation(
+                        context
+                            .read<AdministrationscreenViewmodel>()
+                            .locationController
+                            .text,
+                      );
+                  if (added == true) {
                     context
                         .read<AdministrationscreenViewmodel>()
-                        .locationController
-                        .text,
-                  );
-                  Navigator.pop(context, true);
+                        .clearLocation();
+                    Navigator.pop(context, true);
+                  }
                 }
               },
               child: Text("Añadir ubicación"),

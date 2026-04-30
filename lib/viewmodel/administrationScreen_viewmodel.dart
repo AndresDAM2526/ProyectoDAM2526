@@ -31,6 +31,11 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
   String? checkRole(String? value) =>
       (value == null || value.isEmpty) ? "Campo vacio" : null;
 
+  void clearLocation(){
+    locationController.clear();
+    notifyListeners();
+  }
+
   void showAddLocationDialog(BuildContext context) async {
     bool? result = await showDialog(
       context: context,

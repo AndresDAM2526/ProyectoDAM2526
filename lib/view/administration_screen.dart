@@ -5,6 +5,7 @@ import 'package:proyecto_dam_2526/view/addUser_screen.dart';
 import 'package:proyecto_dam_2526/view/modifyInventory_screen.dart';
 import 'package:proyecto_dam_2526/view/modifyUser_screen.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 
 class AdministrationScreen extends StatelessWidget {
   const AdministrationScreen({super.key});
@@ -25,9 +26,7 @@ class AdministrationScreen extends StatelessWidget {
                   onPressed: () async {
                     bool? result = await Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => AddUserScreen(),
-                      ),
+                      MaterialPageRoute(builder: (context) => AddUserScreen()),
                     );
                     if (result == true) {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -42,9 +41,7 @@ class AdministrationScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => ModifyUserScreen(),
-                    ),
+                    MaterialPageRoute(builder: (context) => ModifyUserScreen()),
                   );
                 },
                 child: Text("Modificar usuario"),
@@ -67,15 +64,20 @@ class AdministrationScreen extends StatelessWidget {
                       ),
                     );
                     if (result == true) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Se ha añadido el producto")),
-                      );
+                      await context
+                          .read<MessagesViewmodel>()
+                          .showInformationDialog(
+                            context,
+                            MediaQuery.of(context).size.width / 2,
+                            MediaQuery.of(context).size.height / 3,
+                            "Se ha añadido el producto correctamente",
+                          );
                     }
                   },
                   child: Text("Añadir producto"),
                 ),
               ),
-          
+
               ElevatedButton(
                 onPressed: () {
                   context
@@ -100,14 +102,12 @@ class AdministrationScreen extends StatelessWidget {
                   child: Text("Añadir tipo"),
                 ),
               ),
-          
+
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => ModifyInventory(),
-                    ),
+                    MaterialPageRoute(builder: (context) => ModifyInventory()),
                   );
                 },
                 child: Text("Modificar inventario"),

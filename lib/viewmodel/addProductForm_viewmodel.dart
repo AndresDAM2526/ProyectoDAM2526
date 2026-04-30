@@ -43,8 +43,6 @@ class AddProductFormViewModel extends ChangeNotifier {
   void clearForm() {
     nameController.clear();
     quantityController.clear();
-    typeDropDown.currentState!.reset();
-    locationDropDown.currentState!.reset();
     notifyListeners();
   }
 }

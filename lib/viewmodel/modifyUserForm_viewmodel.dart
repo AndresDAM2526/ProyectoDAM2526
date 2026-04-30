@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class ModifyUserFormViewmodel extends ChangeNotifier {
+  String? emailProperty;
   String? usernameProperty;
   String? nameProperty;
   String? roleProperty;
 
+  String? checkEmail(String? value) =>
+      (value == null || value.isEmpty) ? "Campo vacio" : null;
   String? checkUsername(String? value) =>
       (value == null || value.isEmpty) ? "Campo vacio" : null;
   String? checkName(String? value) =>
@@ -16,5 +19,6 @@ class ModifyUserFormViewmodel extends ChangeNotifier {
     usernameProperty = null;
     nameProperty = null;
     roleProperty = null;
+    emailProperty = null;
   }
 }

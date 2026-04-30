@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:proyecto_dam_2526/model/databaseProduct.dart';
 import 'package:proyecto_dam_2526/model/product.dart';
 import 'package:proyecto_dam_2526/view/addTypeProduct_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -25,6 +28,13 @@ class SupabaseService extends ChangeNotifier {
 
   List<Map<String, dynamic>> _historyRegister = [];
   List<Map<String, dynamic>> get historyRegister => _historyRegister;
+
+  SupabaseService() {
+    getAllProducts();
+    getTypes();
+    getLocations();
+    getRoles();
+  }
 
   Future<void> getAllProducts() async {
     try {
@@ -86,13 +96,13 @@ class SupabaseService extends ChangeNotifier {
     }
   }
 
-  Future<void> getType() async {
+  Future<void> getTypes() async {
     try {
       final types = await supabase.from('type').select('type');
       _types = List<Map<String, dynamic>>.from(types);
       notifyListeners();
     } catch (e) {
-      print("object");
+      print(e);
     }
   }
 
@@ -102,11 +112,11 @@ class SupabaseService extends ChangeNotifier {
 
   Future<void> getLocations() async {
     try {
-      final locations = supabase.from('location').select('location');
-      _locations = List<Map<String, dynamic>>.from(products);
+      final locations = await supabase.from('location').select('location');
+      _locations = List<Map<String, dynamic>>.from(locations);
       notifyListeners();
     } catch (e) {
-      print("object");
+      print(e);
     }
   }
 
@@ -125,7 +135,7 @@ class SupabaseService extends ChangeNotifier {
   }
 
   Future<List<String>> showRoles() async {
-    return roles.map((rol) => rol.toString()).toList();
+    return roles.map((rol) => rol['role'].toString()).toList();
   }
 
   Future<int?> getIdTypeFromNameType(String type) async {
@@ -136,12 +146,29 @@ class SupabaseService extends ChangeNotifier {
           .eq('type', type)
           .maybeSingle();
       if (resultQuery != null) {
-        return int.parse(resultQuery['idtype']);
+        return resultQuery['id_type'];
       } else {
         return null;
       }
     } catch (e) {
-      print("object");
+      print(e);
+    }
+  }
+
+  Future<int?> getIdRoleFromNameRole(String role) async {
+    try {
+      final resultQuery = await supabase
+          .from('role')
+          .select('id_role')
+          .eq('role', role)
+          .maybeSingle();
+      if (resultQuery != null) {
+        return resultQuery['id_role'];
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -149,11 +176,11 @@ class SupabaseService extends ChangeNotifier {
     try {
       final resultQuery = await supabase
           .from('location')
-          .select('id:_location')
+          .select('id_location')
           .eq('location', location)
           .maybeSingle();
       if (resultQuery != null) {
-        return int.parse(resultQuery['idlocation']);
+        return resultQuery['id_location'];
       } else {
         return null;
       }
@@ -205,6 +232,8 @@ class SupabaseService extends ChangeNotifier {
   Future<bool> deleteProduct(int idProduct) async {
     try {
       await supabase.from('product').delete().eq('id_product', idProduct);
+      await getAllProducts();
+      notifyListeners();
       return true;
     } catch (e) {
       print("Error al borrar el producto");
@@ -224,7 +253,7 @@ class SupabaseService extends ChangeNotifier {
     }
   }
 
-  Future<bool> modifyProduct(Product product) async {
+  Future<bool> modifyProduct(DatabaseProduct product) async {
     try {
       int? idType = await getIdTypeFromNameType(product.type);
       int? idLocation = await getIdLocationFromNameLocation(product.location);
@@ -235,12 +264,17 @@ class SupabaseService extends ChangeNotifier {
         print("Error al obtener el identificador de la ubicación");
         return false;
       } else {
-        await supabase.from('product').update({
-          'product': product.name,
-          'quantity': product.quantity,
-          'id_type': idType,
-          'id_location': idLocation,
-        });
+        await supabase
+            .from('product')
+            .update({
+              'product': product.name,
+              'quantity': product.quantity,
+              'id_type': idType,
+              'id_location': idLocation,
+            })
+            .eq('id_product', product.idProduct);
+        await getAllProducts();
+        notifyListeners();
         return true;
       }
     } catch (e) {
@@ -280,22 +314,25 @@ class SupabaseService extends ChangeNotifier {
   }
 
   Future<List<Map<String, dynamic>>?> getHistoryRegisterByIdUser(
-    int idUser,
+    String idUser,
   ) async {
     try {
       final registers = await supabase
           .from('register')
-          .select('product(product),type(type),type_register(type),quantity')
-          .eq('iduser', idUser);
+          .select('product(product),type_register(type_register),quantity,date')
+          .eq('id_user', idUser);
       return List<Map<String, dynamic>>.from(registers);
     } catch (e) {
       print("Error al obtener los registros");
+      print(e);
     }
   }
 
   Future<bool> addLocation(String location) async {
     try {
       await supabase.from('location').insert({'location': location});
+      await getLocations();
+      notifyListeners();
       return true;
     } catch (e) {
       print("Error al añadir la localización");
@@ -306,10 +343,48 @@ class SupabaseService extends ChangeNotifier {
   Future<bool> addTypeProduct(String type) async {
     try {
       await supabase.from('type').insert({'type': type});
+      await getTypes();
+      notifyListeners();
       return true;
     } catch (e) {
       print("Error al añadir el tipo de producto");
       return false;
     }
+  }
+
+  Future<List<Map<String, dynamic>>?> getUserByNameOrUsername(
+    String value,
+  ) async {
+    try {
+      final users = await supabase
+          .from('users')
+          .select('*,role(role)')
+          .like('username', '%$value%');
+      return List<Map<String, dynamic>>.from(users);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<List<Map<String, dynamic>>?> getAllUsers() async {
+    try {
+      final users = await supabase.from('users').select('*,role(role)');
+      return List<Map<String, dynamic>>.from(users);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  bool parseBoolean(String value) {
+    if (value.compareTo("TRUE") == 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void clearFilter() {
+    _filteredProducts = null;
+    notifyListeners();
   }
 }

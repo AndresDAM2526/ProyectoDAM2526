@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/addProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class AddTypeProduct extends StatelessWidget {
+class AddTypeProduct extends StatefulWidget {
   AddTypeProduct({super.key});
+
+  @override
+  State<AddTypeProduct> createState() => _AddTypeProductState();
+}
+
+class _AddTypeProductState extends State<AddTypeProduct> {
   final checkForm = GlobalKey<FormState>();
 
   @override
@@ -29,18 +37,24 @@ class AddTypeProduct extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 if (checkForm.currentState!.validate()) {
-                  context.read<DatabaseService>().addTypeProduct(
-                    context
-                        .read<AdministrationscreenViewmodel>()
-                        .typeController
-                        .text,
-                  );
-                  Navigator.pop(context, true);
+                  bool added = await context
+                      .read<SupabaseService>()
+                      .addTypeProduct(
+                        context
+                            .read<AdministrationscreenViewmodel>()
+                            .typeController
+                            .text,
+                      );
+                  if (added == true) {
+                    Navigator.pop(context, true);
+                  } else {
+                    print("Error al añadir el tipo");
+                  }
                 }
               },
-              child: Text("Añadir ubicación"),
+              child: Text("Añadir tipo"),
             ),
           ],
         ),

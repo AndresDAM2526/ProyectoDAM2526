@@ -21,7 +21,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 3.5,
+                  height: MediaQuery.of(context).size.height / 3,
                   child: Container(
                     margin: EdgeInsets.all(10),
                     child: Card(

@@ -3,7 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class FilterWidget extends StatefulWidget {
   FilterWidget({super.key});
@@ -43,7 +45,7 @@ class _FilterWidgetState extends State<FilterWidget> {
           selectedIndex == 0
               ? Expanded(
                   child: FutureBuilder(
-                    future: context.read<DatabaseService>().showLocations(),
+                    future: context.read<SupabaseService>().showLocations(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
                         return Text("Error al cargar los datos");
@@ -73,7 +75,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                 )
               : Expanded(
                   child: FutureBuilder(
-                    future: context.read<DatabaseService>().showTypes(),
+                    future: context.read<SupabaseService>().showTypes(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
                         return Text("Error al cargar los datos");

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyUserForm_viewmodel.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ModifyUserPropiertiesScreen extends StatefulWidget {
   UserDatabase user;
@@ -45,6 +47,21 @@ class _ModifyUserPropiertiesScreenState
                   Container(
                     margin: EdgeInsets.all(10),
                     child: TextFormField(
+                      initialValue: widget.user.email,
+                      validator: (value) => context
+                          .read<ModifyUserFormViewmodel>()
+                          .checkEmail(value),
+                      decoration: InputDecoration(label: Text("Email")),
+                      onSaved: (value) =>
+                          context
+                                  .read<ModifyUserFormViewmodel>()
+                                  .emailProperty =
+                              value,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    child: TextFormField(
                       initialValue: widget.user.name,
                       validator: (value) => context
                           .read<ModifyUserFormViewmodel>()
@@ -57,14 +74,10 @@ class _ModifyUserPropiertiesScreenState
                   ),
                   Container(
                     margin: EdgeInsets.all(10),
-                    child: FutureBuilder(
-                      future: context.read<DatabaseService>().showRoles(),
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData) {
-                          return Text("Error al obtener los roles");
-                        }
-                        final roles = snapshot.data ?? [];
-                        return DropdownButtonFormField(
+                    child: Consumer<SupabaseService>(
+                      builder: (context, values, child) {
+                        final roles = values.roles;
+                        return DropdownButtonFormField<String>(
                           initialValue: widget.user.role,
                           decoration: InputDecoration(label: Text("Rol")),
                           validator: (value) => context
@@ -72,9 +85,9 @@ class _ModifyUserPropiertiesScreenState
                               .checkRole(value),
                           items: roles
                               .map(
-                                (role) => DropdownMenuItem(
-                                  value: role,
-                                  child: Text(role),
+                                (role) => DropdownMenuItem<String>(
+                                  value: role['role'],
+                                  child: Text(role['role']),
                                 ),
                               )
                               .toList(),
@@ -99,6 +112,9 @@ class _ModifyUserPropiertiesScreenState
                         context.read<DatabaseService>().updateUser(
                           UserDatabase(
                             idUser: widget.user.idUser,
+                            email: context
+                                .read<ModifyUserFormViewmodel>()
+                                .emailProperty!,
                             name: context
                                 .read<ModifyUserFormViewmodel>()
                                 .nameProperty!,
@@ -107,7 +123,8 @@ class _ModifyUserPropiertiesScreenState
                                 .usernameProperty!,
                             role: context
                                 .read<ModifyUserFormViewmodel>()
-                                .roleProperty!,firstLogin: 0
+                                .roleProperty!,
+                            firstLogin: false,
                           ),
                         );
                         context.read<ModifyUserFormViewmodel>().clearForm();
@@ -195,6 +212,9 @@ class _ModifyUserPropiertiesScreenState
                           context.read<DatabaseService>().updateUser(
                             UserDatabase(
                               idUser: widget.user.idUser,
+                              email: context
+                                  .read<ModifyUserFormViewmodel>()
+                                  .emailProperty!,
                               name: context
                                   .read<ModifyUserFormViewmodel>()
                                   .nameProperty!,
@@ -203,7 +223,8 @@ class _ModifyUserPropiertiesScreenState
                                   .usernameProperty!,
                               role: context
                                   .read<ModifyUserFormViewmodel>()
-                                  .roleProperty!,firstLogin: 0
+                                  .roleProperty!,
+                              firstLogin: false,
                             ),
                           );
                           context.read<ModifyUserFormViewmodel>().clearForm();

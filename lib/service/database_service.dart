@@ -405,13 +405,15 @@ class DatabaseService extends ChangeNotifier {
   void updateSession(
     String idUser,
     String name,
+    String email,
     String username,
     String role,
-    int firstLogin,
+    bool firstLogin,
   ) {
     _userDatabase = UserDatabase(
       idUser: idUser,
       name: name,
+      email: email,
       username: username,
       role: role,
       firstLogin: firstLogin,

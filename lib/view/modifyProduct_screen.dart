@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/databaseProduct.dart';
 import 'package:proyecto_dam_2526/model/product.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyProductForm_viewmodel.dart';
 
 class ModifyProductScreen extends StatefulWidget {
@@ -48,11 +49,13 @@ class _ModifyProductScreenState extends State<ModifyProductScreen> {
                   ),
                   Container(
                     margin: EdgeInsets.all(10),
-                    child: FutureBuilder(
-                      future: context.read<DatabaseService>().showTypes(),
-                      builder: (context, snapshot) {
-                        final types = snapshot.data ?? [];
-                        return DropdownButtonFormField(
+                    child: Consumer<SupabaseService>(
+                      builder: (context, value, child) {
+                        final types = value.types;
+                        if (types.isEmpty) {
+                          return CircularProgressIndicator();
+                        }
+                        return DropdownButtonFormField<String>(
                           initialValue: widget.product.type,
                           hint: Text("Seleccione el tipo"),
                           validator: (value) => context
@@ -60,9 +63,9 @@ class _ModifyProductScreenState extends State<ModifyProductScreen> {
                               .checkType(value),
                           items: types
                               .map(
-                                (type) => DropdownMenuItem(
-                                  value: type,
-                                  child: Text(type),
+                                (type) => DropdownMenuItem<String>(
+                                  value: type['type'],
+                                  child: Text(type['type']),
                                 ),
                               )
                               .toList(),
@@ -82,21 +85,23 @@ class _ModifyProductScreenState extends State<ModifyProductScreen> {
                   ),
                   Container(
                     margin: EdgeInsets.all(10),
-                    child: FutureBuilder(
-                      future: context.read<DatabaseService>().showLocations(),
-                      builder: (context, snapshot) {
-                        final locations = snapshot.data ?? [];
-                        return DropdownButtonFormField(
+                    child: Consumer<SupabaseService>(
+                      builder: (context, value, child) {
+                        final locations = value.locations;
+                        if (locations.isEmpty) {
+                          return CircularProgressIndicator();
+                        }
+                        return DropdownButtonFormField<String>(
                           initialValue: widget.product.location,
-                          hint: Text("Seleccione la ubicación"),
+                          hint: Text("Seleccione el tipo"),
                           validator: (value) => context
                               .read<ModifyProductFormViewmodel>()
-                              .checkLocation(value),
+                              .checkType(value),
                           items: locations
                               .map(
-                                (location) => DropdownMenuItem(
-                                  value: location,
-                                  child: Text(location),
+                                (location) => DropdownMenuItem<String>(
+                                  value: location['location'],
+                                  child: Text(location['location']),
                                 ),
                               )
                               .toList(),
@@ -117,6 +122,7 @@ class _ModifyProductScreenState extends State<ModifyProductScreen> {
                   Container(
                     margin: EdgeInsets.all(10),
                     child: TextFormField(
+                      keyboardType: TextInputType.numberWithOptions(),
                       validator: (value) => context
                           .read<ModifyProductFormViewmodel>()
                           .checkQuantity(value),
@@ -133,29 +139,34 @@ class _ModifyProductScreenState extends State<ModifyProductScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (checkForm.currentState!.validate()) {
                             checkForm.currentState!.save();
-                            context.read<DatabaseService>().modifyProduct(
-                              Product(
-                                name: context
-                                    .read<ModifyProductFormViewmodel>()
-                                    .nameProperty!,
-                                type: context
-                                    .read<ModifyProductFormViewmodel>()
-                                    .typeProperty!,
-                                location: context
-                                    .read<ModifyProductFormViewmodel>()
-                                    .locationProperty!,
-                                quantity: int.parse(
-                                  context
-                                      .read<ModifyProductFormViewmodel>()
-                                      .quantity!,
-                                ),
-                              ),
-                              widget.product.idProduct,
-                            );
-                            Navigator.pop(context, true);
+
+                            bool updated = await context
+                                .read<SupabaseService>()
+                                .modifyProduct(
+                                  DatabaseProduct(
+                                    idProduct: widget.product.idProduct,
+                                    name: context
+                                        .read<ModifyProductFormViewmodel>()
+                                        .nameProperty!,
+                                    type: context
+                                        .read<ModifyProductFormViewmodel>()
+                                        .typeProperty!,
+                                    location: context
+                                        .read<ModifyProductFormViewmodel>()
+                                        .locationProperty!,
+                                    quantity: int.parse(
+                                      context
+                                          .read<ModifyProductFormViewmodel>()
+                                          .quantity!,
+                                    ),
+                                  ),
+                                );
+                            if (updated == true) {
+                              Navigator.pop(context, true);
+                            }
                           }
                         },
                         child: Text("Enviar"),

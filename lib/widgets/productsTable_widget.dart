@@ -53,9 +53,9 @@ class _ProductsTableWidgetState extends State<ProductsTableWidget> {
                             child: ProductInformation(
                               product: Product(
                                 name: product['product'],
-                                type: product['type'],
-                                location: product['location'],
-                                quantity: int.parse(product['quantity']),
+                                type: product['type']['type'],
+                                location: product['location']['location'],
+                                quantity: product['quantity'],
                               ),
                             ),
                           ),
@@ -82,7 +82,7 @@ class _ProductsTableWidgetState extends State<ProductsTableWidget> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Text(product['type']),
+                      child: Text(product['type']['type']),
                     ),
                   ),
                 ),
@@ -94,7 +94,7 @@ class _ProductsTableWidgetState extends State<ProductsTableWidget> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Text(product['location']),
+                      child: Text(product['location']['location']),
                     ),
                   ),
                 ),
