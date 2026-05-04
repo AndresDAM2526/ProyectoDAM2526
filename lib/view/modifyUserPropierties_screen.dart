@@ -106,29 +106,35 @@ class _ModifyUserPropiertiesScreenState
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (checkForm.currentState!.validate()) {
                         checkForm.currentState!.save();
-                        context.read<DatabaseService>().updateUser(
-                          UserDatabase(
-                            idUser: widget.user.idUser,
-                            email: context
-                                .read<ModifyUserFormViewmodel>()
-                                .emailProperty!,
-                            name: context
-                                .read<ModifyUserFormViewmodel>()
-                                .nameProperty!,
-                            username: context
-                                .read<ModifyUserFormViewmodel>()
-                                .usernameProperty!,
-                            role: context
-                                .read<ModifyUserFormViewmodel>()
-                                .roleProperty!,
-                            firstLogin: false,
-                          ),
-                        );
-                        context.read<ModifyUserFormViewmodel>().clearForm();
-                        Navigator.pop(context, true);
+                        bool? modified = await context
+                            .read<SupabaseService>()
+                            .updateUser(
+                              UserDatabase(
+                                idUser: widget.user.idUser,
+                                username: context
+                                    .read<ModifyUserFormViewmodel>()
+                                    .usernameProperty!,
+                                email: context
+                                    .read<ModifyUserFormViewmodel>()
+                                    .emailProperty!,
+                                name: context
+                                    .read<ModifyUserFormViewmodel>()
+                                    .nameProperty!,
+                                role: context
+                                    .read<ModifyUserFormViewmodel>()
+                                    .roleProperty!,
+                                firstLogin: false,
+                              ),
+                              context,
+                            );
+                        if (modified == true) {
+                          Navigator.pop(context, true);
+                        } else {
+                          Navigator.pop(context, false);
+                        }
                       }
                     },
                     child: Text("Enviar"),

@@ -71,6 +71,7 @@ class _TransactionsState extends State<Transactions> {
               child: Container(
                 margin: EdgeInsets.all(10),
                 child: TextFormField(
+                  keyboardType: TextInputType.numberWithOptions(),
                   readOnly: (widget.typeRequest.compareTo("Coger") == 0)
                       ? !readOnlyTextForm!
                       : false,

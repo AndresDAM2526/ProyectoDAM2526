@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/requestProduct.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/getProduct_viewmodel.dart';
 import 'package:proyecto_dam_2526/widgets/productView_widget.dart';
 import 'package:proyecto_dam_2526/widgets/transactions_widget.dart';
@@ -31,7 +32,7 @@ class _GetProductScreenState extends State<GetProductScreen> {
           ),
           Expanded(
             child: FutureBuilder(
-              future: context.watch<DatabaseService>().getProductsFromName(
+              future: context.watch<SupabaseService>().getProductsFromName(
                 name!,
               ),
               builder: (context, snapshot) {
@@ -44,11 +45,12 @@ class _GetProductScreenState extends State<GetProductScreen> {
                       return Container(
                         margin: EdgeInsets.all(10),
                         child: ProductViewWidget(
-                          idProduct: foundProducts[index]['idProduct'],
+                          idProduct: foundProducts[index]['id_product'],
                           name: foundProducts[index]['product'],
-                          location: foundProducts[index]['location'],
-                          type: foundProducts[index]['type'],
-                          quantity: int.parse(foundProducts[index]['quantity']),
+                          location:
+                              foundProducts[index]['location']['location'],
+                          type: foundProducts[index]['type']['type'],
+                          quantity: foundProducts[index]['quantity'],
                           leftSideWidget: IconButton(
                             onPressed: () {
                               context
@@ -57,13 +59,14 @@ class _GetProductScreenState extends State<GetProductScreen> {
                                     context,
                                     RequestProduct(
                                       idProduct:
-                                          foundProducts[index]['idProduct'],
+                                          foundProducts[index]['id_product'],
                                       name: foundProducts[index]['product'],
-                                      type: foundProducts[index]['type'],
+                                      type:
+                                          foundProducts[index]['type']['type'],
                                       location:
-                                          foundProducts[index]['location'],
+                                          foundProducts[index]['location']['location'],
                                     ),
-                                    int.parse(foundProducts[index]['quantity']),
+                                    foundProducts[index]['quantity'],
                                     "Coger",
                                   );
                             },
@@ -77,13 +80,13 @@ class _GetProductScreenState extends State<GetProductScreen> {
                                     context,
                                     RequestProduct(
                                       idProduct:
-                                          foundProducts[index]['idProduct'],
+                                          foundProducts[index]['id_product'],
                                       name: foundProducts[index]['product'],
-                                      type: foundProducts[index]['type'],
+                                      type: foundProducts[index]['type']['type'],
                                       location:
-                                          foundProducts[index]['location'],
+                                          foundProducts[index]['location']['location'],
                                     ),
-                                    int.parse(foundProducts[index]['quantity']),
+                                    foundProducts[index]['quantity'],
                                     "Devolver",
                                   );
                             },

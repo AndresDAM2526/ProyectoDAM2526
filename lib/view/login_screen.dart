@@ -92,6 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               .text,
                           context,
                         );
+                        context.read<LoginFormViewmodel>().clearForm();
                       }
                     },
                     child: Text("Iniciar sesión"),

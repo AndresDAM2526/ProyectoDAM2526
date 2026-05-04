@@ -3,7 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/user.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class UserInformationWidget extends StatefulWidget {
   UserDatabase user;
@@ -61,10 +64,30 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
                   icon: Icon(Icons.password),
                 ),
                 IconButton(
-                  onPressed: () {
-                    context.read<DatabaseService>().deleteUser(
-                      widget.user.idUser,
-                    );
+                  onPressed: () async {
+                    bool result = await context
+                        .read<MessagesViewmodel>()
+                        .showConfirmDialog(
+                          context,
+                          MediaQuery.of(context).size.width / 2,
+                          MediaQuery.of(context).size.height / 2,
+                          "¿Desea borrar el usuario?",
+                        );
+                    if (result) {
+                      bool? deleteUser = await context
+                          .read<SupabaseService>()
+                          .deleteUser(widget.user.idUser);
+                      if (deleteUser == true) {
+                        await context
+                            .read<MessagesViewmodel>()
+                            .showInformationDialog(
+                              context,
+                              MediaQuery.of(context).size.width / 2,
+                              MediaQuery.of(context).size.height / 3,
+                              "usuario eliminado",
+                            );
+                      }
+                    }
                   },
                   icon: Icon(Icons.delete),
                 ),

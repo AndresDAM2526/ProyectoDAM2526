@@ -100,7 +100,7 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
                 ? MediaQuery.of(context).size.width
                 : MediaQuery.of(context).size.width / 2,
             height: (MediaQuery.of(context).orientation == Orientation.portrait)
-                ? MediaQuery.of(context).size.height / 5
+                ? MediaQuery.of(context).size.height / 3
                 : MediaQuery.of(context).size.height / 2,
             child: ChangePasswordScreen(user: user, sourceScreen: sourceScreen),
           ),

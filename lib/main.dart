@@ -23,6 +23,7 @@ import 'package:proyecto_dam_2526/viewmodel/modifyProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyUserForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/newUserPasswordForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/profileForm_viewmodel.dart';
+import 'package:proyecto_dam_2526/widgets/confirmMessage_widget.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {

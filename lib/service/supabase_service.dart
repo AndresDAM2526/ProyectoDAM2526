@@ -1,8 +1,10 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:proyecto_dam_2526/model/databaseProduct.dart';
 import 'package:proyecto_dam_2526/model/product.dart';
+import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/view/addTypeProduct_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -65,9 +67,12 @@ class SupabaseService extends ChangeNotifier {
       try {
         final products = await supabase
             .from('product')
-            .select('product,quantity,type(type),location(location)')
+            .select(
+              'product,quantity,type!inner(type),location!inner(location)',
+            )
             .eq('type.type', type);
         _filteredProducts = List<Map<String, dynamic>>.from(products);
+        notifyListeners();
       } catch (e) {
         print("object");
       }
@@ -75,9 +80,12 @@ class SupabaseService extends ChangeNotifier {
       try {
         final products = await supabase
             .from('product')
-            .select('product,quantity,type(type),location(location)')
+            .select(
+              'product,quantity,type!inner(type),location!inner(location)',
+            )
             .eq('location.location', location);
         _filteredProducts = List<Map<String, dynamic>>.from(products);
+        notifyListeners();
       } catch (e) {
         print("object");
       }
@@ -85,9 +93,11 @@ class SupabaseService extends ChangeNotifier {
       try {
         final products = await supabase
             .from('product')
-            .select('product,quantity,type(type),location(location)')
-            .eq('type.type.', type!)
-            .eq('location.location.', location!);
+            .select(
+              'product,quantity,type!inner(type),location!inner(location)',
+            )
+            .eq('type.type', type!)
+            .eq('location.location', location!);
         _filteredProducts = List<Map<String, dynamic>>.from(products);
         notifyListeners();
       } catch (e) {
@@ -107,7 +117,7 @@ class SupabaseService extends ChangeNotifier {
   }
 
   Future<List<String>> showTypes() async {
-    return types.map((type) => type.toString()).toList();
+    return types.map((type) => type['type'].toString()).toList();
   }
 
   Future<void> getLocations() async {
@@ -121,7 +131,9 @@ class SupabaseService extends ChangeNotifier {
   }
 
   Future<List<String>> showLocations() async {
-    return locations.map((location) => location.toString()).toList();
+    return locations
+        .map((location) => location['location'].toString())
+        .toList();
   }
 
   Future<void> getRoles() async {
@@ -348,6 +360,69 @@ class SupabaseService extends ChangeNotifier {
       return true;
     } catch (e) {
       print("Error al añadir el tipo de producto");
+      return false;
+    }
+  }
+
+  Future<bool?> deleteUser(String uuid) async {
+    try {
+      final deletedUser = await supabase.functions.invoke(
+        'delete-user',
+        body: {'uuid': uuid},
+      );
+
+      if (deletedUser.status == 200) {
+        getAllUsers();
+        notifyListeners();
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  Future<bool?> changePassword(String uuid, String newPassword) async {
+    try {
+      final changePassword = await supabase.functions.invoke(
+        'change-password',
+        body: {'uuid': uuid, 'new_password': newPassword},
+      );
+      if (changePassword.status == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<bool?> updateUser(UserDatabase user, BuildContext context) async {
+    try {
+      int? idRole = await getIdRoleFromNameRole(user.role);
+      final modifiedUser = await supabase.functions.invoke(
+        'update-user',
+        body: {
+          'uuid': user.idUser,
+          'email': user.email,
+          'username': user.username,
+          'name': user.name,
+          'idRole': idRole,
+        },
+      );
+      if (context.mounted) {
+        if (modifiedUser.status == 200) {
+          notifyListeners();
+          return true;
+        } else {
+          return false;
+        }
+      }
+    } catch (e) {
+      print(e);
       return false;
     }
   }

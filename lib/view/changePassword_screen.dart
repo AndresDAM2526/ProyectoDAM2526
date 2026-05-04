@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/profileForm_viewmodel.dart';
@@ -52,20 +53,24 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (checkForm.currentState!.validate()) {
-                        context.read<DatabaseService>().changePassword(
-                          widget.user!.idUser,
+                        bool? result = await context
+                            .read<SupabaseService>()
+                            .changePassword(
+                              widget.user!.idUser,
+                              context
+                                  .read<AdministrationscreenViewmodel>()
+                                  .passwordController
+                                  .text,
+                            );
+                        if (result == true) {
                           context
                               .read<AdministrationscreenViewmodel>()
                               .passwordController
-                              .text,
-                        );
-                        context
-                            .read<AdministrationscreenViewmodel>()
-                            .passwordController
-                            .clear();
-                        Navigator.pop(context, true);
+                              .clear();
+                          Navigator.pop(context, true);
+                        }
                       } else {
                         Navigator.pop(context, false);
                       }
