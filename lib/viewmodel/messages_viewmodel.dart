@@ -4,13 +4,13 @@ import 'package:proyecto_dam_2526/widgets/errorMessage_widget.dart';
 import 'package:proyecto_dam_2526/widgets/informationMessage_widget.dart';
 
 class MessagesViewmodel extends ChangeNotifier {
-  void showErrorDialog(
+  Future<void> showErrorDialog(
     BuildContext context,
     double width,
     double height,
     String message,
-  ) {
-    showDialog(
+  ) async {
+    bool? result = await showDialog(
       context: context,
       builder: (context) {
         return Dialog(

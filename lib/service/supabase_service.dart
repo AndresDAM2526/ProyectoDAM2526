@@ -450,6 +450,16 @@ class SupabaseService extends ChangeNotifier {
     }
   }
 
+  Future<String?> getUuidFromEmail(String email) async {
+    try {
+      final user = await supabase.from('users').select('id_user');
+      return user.first['id_user'];
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
   bool parseBoolean(String value) {
     if (value.compareTo("TRUE") == 0) {
       return true;

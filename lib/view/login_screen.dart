@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/service/auth_service.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
+import 'package:proyecto_dam_2526/view/newUserPassword.dart';
 import 'package:proyecto_dam_2526/viewmodel/loginForm_viewmodel.dart';
 
 class LoginScreen extends StatefulWidget {

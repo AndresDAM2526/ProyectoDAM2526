@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/service/auth_service.dart';
+import 'package:proyecto_dam_2526/view/login_screen.dart';
 import 'package:proyecto_dam_2526/viewmodel/newUserPasswordForm_viewmodel.dart';
 
 class NewUserPassword extends StatelessWidget {
   String idUser;
-  NewUserPassword({super.key, required this.idUser});
+  String email;
+  NewUserPassword({super.key, required this.idUser, required this.email});
   @override
   Widget build(BuildContext context) {
     final checkForm = GlobalKey<FormState>();
     return Scaffold(
-      appBar: AppBar(title: Text("Cambiar contraseña")),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Center(child: Text("Cambiar contraseña")),
+      ),
       body: Column(
         children: [
           Text("Nuevo usuario"),
@@ -75,14 +81,32 @@ class NewUserPassword extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               if (checkForm.currentState!.validate()) {
-                context.read<NewUserPasswordFormViewModel>().updatePassword(
-                  context,
-                  idUser,
-                  context.read<NewUserPasswordFormViewModel>().oldPassword.text,
-                  context.read<NewUserPasswordFormViewModel>().newPassword.text,
-                );
+                bool changedPassword = await context
+                    .read<NewUserPasswordFormViewModel>()
+                    .updatePassword(
+                      idUser,
+                      email,
+                      context
+                          .read<NewUserPasswordFormViewModel>()
+                          .oldPassword
+                          .text,
+                      context
+                          .read<NewUserPasswordFormViewModel>()
+                          .newPassword
+                          .text,
+                      context,
+                    );
+                if (changedPassword) {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                    (route) => false,
+                  );
+                }else{
+                  print("error");
+                }
               }
             },
             child: Text("Enviar"),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/service/auth_service.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 import 'package:sqflite/sqflite.dart';
@@ -22,34 +23,29 @@ class NewUserPasswordFormViewModel extends ChangeNotifier {
     return null;
   }
 
-  void updatePassword(
-    BuildContext context,
+  Future<bool> updatePassword(
     String idUser,
+    String email,
     String oldPassword,
     String newPassword,
+    BuildContext context,
   ) async {
-    String currentPass = await context
-        .read<DatabaseService>()
-        .getPasswordFromUser(idUser);
-    if ((currentPass.compareTo(oldPassword) != 0)) {
-      context.read<MessagesViewmodel>().showErrorDialog(
-        context,
-        MediaQuery.of(context).size.width / 2,
-        MediaQuery.of(context).size.height / 2,
-        "La contraseña actual no es correcta",
-      );
-    } else {
-      context.read<DatabaseService>().changePasswordNewUser(
-        idUser,
-        newPassword,
-      );
+    bool changedPassword = await context.read<AuthService>().updatePassword(
+      idUser,
+      email,
+      oldPassword,
+      newPassword,
+      context,
+    );
+    if (changedPassword == true) {
       await context.read<MessagesViewmodel>().showInformationDialog(
         context,
         MediaQuery.of(context).size.width / 2,
         MediaQuery.of(context).size.height / 2,
         "Se ha actualizado la contraseña",
       );
-      Navigator.pop(context);
+      return true;
     }
+    return false;
   }
 }

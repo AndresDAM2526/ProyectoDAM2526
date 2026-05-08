@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/NewUser.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
+import 'package:proyecto_dam_2526/view/newUserPassword.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide User;
 import 'package:proyecto_dam_2526/model/user.dart';
@@ -71,27 +72,36 @@ class AuthService extends ChangeNotifier {
         email: email,
         password: password,
       );
-      bool? firstSignin;
+      bool firstSignin = false;
       List<Map<String, dynamic>> dataUser = await context
           .read<SupabaseService>()
           .getUserData(email);
       if (dataUser.isNotEmpty) {
-        if (dataUser.first['first_sign_in'] == "TRUE") {
-          firstSignin = true;
+        if (dataUser.first['first_sign_in'].toString().compareTo("true") == 0) {
+          String? idUser = await context
+              .read<SupabaseService>()
+              .getUuidFromEmail(email);
+          if (idUser != null) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    NewUserPassword(idUser: idUser, email: email),
+              ),
+            );
+          }
         } else {
-          firstSignin = false;
+          updateSession(
+            UserDatabase(
+              idUser: dataUser.first['id_user'],
+              email: dataUser.first['email'],
+              name: dataUser.first['name'],
+              username: dataUser.first['username'],
+              role: dataUser.first['role']['role'],
+              firstLogin: firstSignin,
+            ),
+          );
         }
-        updateSession(
-          UserDatabase(
-            idUser: dataUser.first['id_user'],
-            email: dataUser.first['email'],
-            name: dataUser.first['name'],
-            username: dataUser.first['username'],
-            role: dataUser.first['role']['role'],
-            firstLogin: firstSignin,
-          ),
-        );
-        print(_userDatabase!.role);
       }
       notifyListeners();
     } on AuthException catch (e) {
@@ -103,6 +113,41 @@ class AuthService extends ChangeNotifier {
           "Usuario y/o contraseña incorrectos",
         );
       }
+    }
+  }
+
+  Future<bool> updatePassword(
+    String idUser,
+    String email,
+    String password,
+    String newPassword,
+    BuildContext context,
+  ) async {
+    try {
+      final updatedPassword = await supabase.functions.invoke(
+        'new-user-change-password',
+        body: {
+          'email': email,
+          'current_password': password,
+          'new_password': newPassword,
+          'user_id': idUser,
+        },
+      );
+      if (updatedPassword.status == 200) {
+        return true;
+      }
+      return false;
+    } on FunctionException catch (e) {
+      if (e.status == 401) {
+        context.read<MessagesViewmodel>().showErrorDialog(
+          context,
+          MediaQuery.of(context).size.width / 2,
+          MediaQuery.of(context).size.height / 4,
+          "La contraseña actual no es correcta",
+        );
+        return false;
+      }
+      return false;
     }
   }
 }

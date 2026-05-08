@@ -83,6 +83,15 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           home: Builder(
             builder: (context) {
+              if (context.watch<AuthService>().userDatabase == null) {
+                return Scaffold(
+                  appBar: AppBar(
+                    title: Center(child: Text("Gestión del inventario")),
+                    backgroundColor: Colors.grey,
+                  ),
+                  body: LoginScreen(),
+                );
+              }
               return Scaffold(
                 bottomNavigationBar:
                     context.read<AuthService>().userDatabase == null
@@ -125,6 +134,9 @@ class _MyAppState extends State<MyApp> {
                                   Text("Gestión del inventario"),
                                   Text(
                                     "Usuario : ${context.read<AuthService>().userDatabase!.username}",
+                                  ),
+                                  Text(
+                                    "Primer inicio  : ${context.read<AuthService>().userDatabase!.firstLogin}",
                                   ),
                                 ],
                               ),
@@ -190,9 +202,7 @@ class _MyAppState extends State<MyApp> {
                           ],
                         ),
                       ),
-                body: context.watch<AuthService>().userDatabase == null
-                    ? LoginScreen()
-                    : screens[selectedScreen],
+                body: screens[selectedScreen],
               );
             },
           ),
