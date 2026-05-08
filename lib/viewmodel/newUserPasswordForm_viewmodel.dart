@@ -44,6 +44,7 @@ class NewUserPasswordFormViewModel extends ChangeNotifier {
         MediaQuery.of(context).size.height / 2,
         "Se ha actualizado la contraseña",
       );
+      notifyListeners();
       return true;
     }
     return false;

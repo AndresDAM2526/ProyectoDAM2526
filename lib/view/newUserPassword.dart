@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/main.dart';
 import 'package:proyecto_dam_2526/service/auth_service.dart';
 import 'package:proyecto_dam_2526/view/login_screen.dart';
 import 'package:proyecto_dam_2526/viewmodel/newUserPasswordForm_viewmodel.dart';
@@ -101,7 +102,7 @@ class NewUserPassword extends StatelessWidget {
                 if (changedPassword) {
                   Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                    MaterialPageRoute(builder: (context) => MyApp()),
                     (route) => false,
                   );
                 }else{

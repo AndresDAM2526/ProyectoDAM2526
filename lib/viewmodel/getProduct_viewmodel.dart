@@ -33,6 +33,7 @@ class GetProductViewmodel extends ChangeNotifier {
   }
 
   void clearForm() {
+    userQuantity=0;
     quantityController.clear();
     notifyListeners();
   }
@@ -70,6 +71,8 @@ class GetProductViewmodel extends ChangeNotifier {
         MediaQuery.of(context).size.height / 4,
         "Se ha ejecutado correctamente su petición",
       );
+    } else {
+      context.read<GetProductViewmodel>().clearForm();
     }
   }
 }

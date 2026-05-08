@@ -85,10 +85,6 @@ class _MyAppState extends State<MyApp> {
             builder: (context) {
               if (context.watch<AuthService>().userDatabase == null) {
                 return Scaffold(
-                  appBar: AppBar(
-                    title: Center(child: Text("Gestión del inventario")),
-                    backgroundColor: Colors.grey,
-                  ),
                   body: LoginScreen(),
                 );
               }

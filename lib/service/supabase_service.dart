@@ -2,10 +2,12 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/databaseProduct.dart';
 import 'package:proyecto_dam_2526/model/product.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/view/addTypeProduct_screen.dart';
+import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseService extends ChangeNotifier {
@@ -207,11 +209,13 @@ class SupabaseService extends ChangeNotifier {
           .eq('type_register', type)
           .maybeSingle();
       if (resultQuery != null) {
-        return int.parse(resultQuery['id_type_register']);
+        return resultQuery['id_type_register'];
       } else {
         return null;
       }
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<bool> addProduct(Product product) async {
@@ -297,7 +301,7 @@ class SupabaseService extends ChangeNotifier {
 
   Future<bool> newRegister(
     int idProduct,
-    int idUser,
+    String idUser,
     String registerType,
     String date,
     int quantity,
@@ -312,7 +316,7 @@ class SupabaseService extends ChangeNotifier {
           'id_type_register': idRegisterType,
           'id_product': idProduct,
           'id_user': idUser,
-          'date': DateTime.now().toLocal(),
+          'date': DateTime.now().toLocal().toString(),
           'quantity': quantity,
         });
         getAllProducts();
@@ -320,7 +324,7 @@ class SupabaseService extends ChangeNotifier {
         return true;
       }
     } catch (e) {
-      print("Error al crear un nuevo registro");
+      print(e);
       return false;
     }
   }
@@ -331,7 +335,9 @@ class SupabaseService extends ChangeNotifier {
     try {
       final registers = await supabase
           .from('register')
-          .select('product(product),type_register(type_register),quantity,date')
+          .select('''
+          quantity,date,product:id_product ( product,type:id_type(type),location:id_location(location) ), type:id_type_register ( type_register )
+        ''')
           .eq('id_user', idUser);
       return List<Map<String, dynamic>>.from(registers);
     } catch (e) {
@@ -384,7 +390,11 @@ class SupabaseService extends ChangeNotifier {
     }
   }
 
-  Future<bool?> changePassword(String uuid, String newPassword) async {
+  Future<bool?> changePassword(
+    String uuid,
+    String newPassword,
+    BuildContext context,
+  ) async {
     try {
       final changePassword = await supabase.functions.invoke(
         'change-password',
@@ -394,6 +404,18 @@ class SupabaseService extends ChangeNotifier {
         return true;
       } else {
         return false;
+      }
+    } on FunctionException catch (e) {
+      if (e.status == 400 &&
+          e.details.toString().contains(
+            "Password should be at least 6 characters",
+          )) {
+        context.read<MessagesViewmodel>().showErrorDialog(
+          context,
+          MediaQuery.of(context).size.width / 2,
+          MediaQuery.of(context).size.height / 3,
+          "La contraseña debe tener al menos 6 caracteres",
+        );
       }
     } catch (e) {
       print(e);
@@ -452,11 +474,32 @@ class SupabaseService extends ChangeNotifier {
 
   Future<String?> getUuidFromEmail(String email) async {
     try {
-      final user = await supabase.from('users').select('id_user');
+      final user = await supabase
+          .from('users')
+          .select('id_user')
+          .eq('email', email);
       return user.first['id_user'];
     } catch (e) {
       print(e);
       return null;
+    }
+  }
+
+  Future<int> getQuantityFromIdProduct(int idProduct) async {
+    try {
+      final result = await supabase
+          .from('product')
+          .select('quantity')
+          .eq('id_product', idProduct)
+          .maybeSingle();
+      if (result != null) {
+        return result['quantity'];
+      } else {
+        return 0;
+      }
+    } catch (e) {
+      print(e);
+      return 0;
     }
   }
 

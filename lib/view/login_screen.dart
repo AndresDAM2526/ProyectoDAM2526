@@ -19,89 +19,95 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SizedBox(
-        child: Column(
-          children: [
-            Center(
-              child: Image.asset(
-                'assets/ribera.png',
-                width: MediaQuery.of(context).size.width / 2,
-                height: MediaQuery.of(context).size.height / 5,
+      appBar: AppBar(
+        title: Center(child: Text("Gestión del inventario")),
+        backgroundColor: Colors.grey,
+      ),
+      body: SingleChildScrollView(
+        child: SizedBox(
+          child: Column(
+            children: [
+              Center(
+                child: Image.asset(
+                  'assets/ribera.png',
+                  width: MediaQuery.of(context).size.width / 2,
+                  height: MediaQuery.of(context).size.height / 5,
+                ),
               ),
-            ),
-            Form(
-              key: checkForm,
-              child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(
-                      top: 10,
-                      left: 40,
-                      right: 40,
-                      bottom: 10,
+              Form(
+                key: checkForm,
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                        top: 10,
+                        left: 40,
+                        right: 40,
+                        bottom: 10,
+                      ),
+                      child: TextFormField(
+                        validator: (value) =>
+                            context.read<LoginFormViewmodel>().checkUser(value),
+                        controller: context
+                            .read<LoginFormViewmodel>()
+                            .userController,
+                        decoration: InputDecoration(label: Text("Usuario")),
+                      ),
                     ),
-                    child: TextFormField(
-                      validator: (value) =>
-                          context.read<LoginFormViewmodel>().checkUser(value),
-                      controller: context
-                          .read<LoginFormViewmodel>()
-                          .userController,
-                      decoration: InputDecoration(label: Text("Usuario")),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(
-                      top: 10,
-                      left: 40,
-                      right: 40,
-                      bottom: 30,
-                    ),
-                    child: TextFormField(
-                      validator: (value) =>
-                          context.read<LoginFormViewmodel>().checkPass(value),
-                      controller: context
-                          .read<LoginFormViewmodel>()
-                          .passController,
-                      obscureText: _obscureText,
-                      decoration: InputDecoration(
-                        label: Text("Contraseña"),
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _obscureText = !_obscureText;
-                            });
-                          },
-                          icon: Icon(
-                            Icons.remove_red_eye,
-                            semanticLabel: "Mostrar contraseña",
+                    Container(
+                      margin: EdgeInsets.only(
+                        top: 10,
+                        left: 40,
+                        right: 40,
+                        bottom: 30,
+                      ),
+                      child: TextFormField(
+                        validator: (value) =>
+                            context.read<LoginFormViewmodel>().checkPass(value),
+                        controller: context
+                            .read<LoginFormViewmodel>()
+                            .passController,
+                        obscureText: _obscureText,
+                        decoration: InputDecoration(
+                          label: Text("Contraseña"),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                _obscureText = !_obscureText;
+                              });
+                            },
+                            icon: Icon(
+                              Icons.remove_red_eye,
+                              semanticLabel: "Mostrar contraseña",
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      if (checkForm.currentState!.validate()) {
-                        await context.read<AuthService>().checkLogin(
-                          context
-                              .read<LoginFormViewmodel>()
-                              .userController
-                              .text,
-                          context
-                              .read<LoginFormViewmodel>()
-                              .passController
-                              .text,
-                          context,
-                        );
-                        context.read<LoginFormViewmodel>().clearForm();
-                      }
-                    },
-                    child: Text("Iniciar sesión"),
-                  ),
-                ],
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (checkForm.currentState!.validate()) {
+                          await context.read<AuthService>().checkLogin(
+                            context
+                                .read<LoginFormViewmodel>()
+                                .userController
+                                .text,
+                            context
+                                .read<LoginFormViewmodel>()
+                                .passController
+                                .text,
+                            context,
+                          );
+                          //context.read<LoginFormViewmodel>().clearForm();
+                        }
+                      },
+                      child: Text("Iniciar sesión"),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

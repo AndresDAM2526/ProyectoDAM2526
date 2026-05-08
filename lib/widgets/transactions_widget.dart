@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/model/requestProduct.dart';
+import 'package:proyecto_dam_2526/service/auth_service.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/getProduct_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Transactions extends StatefulWidget {
   RequestProduct product;
@@ -65,7 +68,7 @@ class _TransactionsState extends State<Transactions> {
                     ],
                   )
                 : null,
-        
+
             Form(
               key: checkForm,
               child: Container(
@@ -87,19 +90,21 @@ class _TransactionsState extends State<Transactions> {
                     prefixIcon: (widget.typeRequest.compareTo("Coger") == 0)
                         ? IconButton(
                             onPressed: () {
-                              context.read<GetProductViewmodel>().subtractUnity();
+                              context
+                                  .read<GetProductViewmodel>()
+                                  .subtractUnity();
                             },
                             icon: Icon(Icons.remove),
                           )
                         : null,
-        
+
                     suffixIcon: (widget.typeRequest.compareTo("Coger") == 0)
                         ? IconButton(
                             onPressed: () async {
                               context.read<GetProductViewmodel>().addUnity(
                                 await context
-                                    .read<DatabaseService>()
-                                    .getQuantityFromProduct(
+                                    .read<SupabaseService>()
+                                    .getQuantityFromIdProduct(
                                       widget.product.idProduct,
                                     ),
                               );
@@ -118,9 +123,9 @@ class _TransactionsState extends State<Transactions> {
                   onPressed: () {
                     if (checkForm.currentState!.validate()) {
                       if (widget.typeRequest.compareTo("Coger") == 0) {
-                        context.read<DatabaseService>().newRegister(
+                        context.read<SupabaseService>().newRegister(
                           widget.product.idProduct,
-                          context.read<DatabaseService>().userDatabase!.idUser,
+                          context.read<AuthService>().userDatabase!.idUser,
                           "Coger",
                           DateFormat.yMd().add_jm().format(DateTime.now()),
                           int.parse(
@@ -132,9 +137,9 @@ class _TransactionsState extends State<Transactions> {
                         );
                         context.read<GetProductViewmodel>().clearForm();
                       } else {
-                        context.read<DatabaseService>().newRegister(
+                        context.read<SupabaseService>().newRegister(
                           widget.product.idProduct,
-                          context.read<DatabaseService>().userDatabase!.idUser,
+                          context.read<AuthService>().userDatabase!.idUser,
                           "Devolver",
                           DateFormat.yMd().add_jm().format(DateTime.now()),
                           int.parse(
@@ -147,6 +152,8 @@ class _TransactionsState extends State<Transactions> {
                         context.read<GetProductViewmodel>().clearForm();
                       }
                       Navigator.pop(context, true);
+                    } else {
+                      Navigator.pop(context, false);
                     }
                   },
                   child: (widget.typeRequest.compareTo("Coger") == 0)

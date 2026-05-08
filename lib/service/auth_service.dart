@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/main.dart';
 import 'package:proyecto_dam_2526/model/NewUser.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
@@ -68,10 +69,12 @@ class AuthService extends ChangeNotifier {
     BuildContext context,
   ) async {
     try {
+      print("Llega aqui");
       final res = await supabase.auth.signInWithPassword(
         email: email,
         password: password,
       );
+      print("LLega aqui 2");
       bool firstSignin = false;
       List<Map<String, dynamic>> dataUser = await context
           .read<SupabaseService>()
@@ -100,6 +103,11 @@ class AuthService extends ChangeNotifier {
               role: dataUser.first['role']['role'],
               firstLogin: firstSignin,
             ),
+          );
+          print("Entra aqui");
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MyApp()),
           );
         }
       }
@@ -130,10 +138,12 @@ class AuthService extends ChangeNotifier {
           'email': email,
           'current_password': password,
           'new_password': newPassword,
-          'user_id': idUser,
+          'id_user': idUser,
         },
       );
       if (updatedPassword.status == 200) {
+        await supabase.auth.signOut();
+        notifyListeners();
         return true;
       }
       return false;
@@ -147,6 +157,14 @@ class AuthService extends ChangeNotifier {
         );
         return false;
       }
+      if (e.status == 400) {
+        print("Entra aqui error 400");
+        print(e.details);
+        return false;
+      }
+      return false;
+    } catch (e) {
+      print(e);
       return false;
     }
   }
