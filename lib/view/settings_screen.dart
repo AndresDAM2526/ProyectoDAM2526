@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/viewmodel/theme_viewmodel.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -11,7 +12,6 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _darkMode = false;
   String? _idioma;
   double sliderValue = 0;
   @override
@@ -29,10 +29,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ListTile(
                         leading: Text("Modo oscuro"),
                         title: Switch(
-                          value: _darkMode,
+                          value: context.watch<ThemeViewmodel>().darkMode,
                           onChanged: (value) {
                             setState(() {
-                              _darkMode = !_darkMode;
+                              context.read<ThemeViewmodel>().changeTheme();
                             });
                           },
                         ),
@@ -104,10 +104,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ListTile(
                           leading: Text("Modo oscuro"),
                           title: Switch(
-                            value: _darkMode,
+                            value: context.watch<ThemeViewmodel>().darkMode,
                             onChanged: (value) {
                               setState(() {
-                                _darkMode = !_darkMode;
+                                context.read<ThemeViewmodel>().changeTheme();
                               });
                             },
                           ),

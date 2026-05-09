@@ -23,6 +23,7 @@ import 'package:proyecto_dam_2526/viewmodel/modifyProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/modifyUserForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/newUserPasswordForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/profileForm_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/theme_viewmodel.dart';
 import 'package:proyecto_dam_2526/widgets/confirmMessage_widget.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -55,6 +56,7 @@ void main() async {
         ChangeNotifierProvider(
           create: (context) => NewUserPasswordFormViewModel(),
         ),
+        ChangeNotifierProvider(create: (context) => ThemeViewmodel()),
       ],
       child: MyApp(),
     ),
@@ -77,133 +79,129 @@ class _MyAppState extends State<MyApp> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Consumer<DatabaseService>(
-      builder: (context, value, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: Builder(
-            builder: (context) {
-              if (context.watch<AuthService>().userDatabase == null) {
-                return Scaffold(
-                  body: LoginScreen(),
-                );
-              }
-              return Scaffold(
-                bottomNavigationBar:
-                    context.read<AuthService>().userDatabase == null
-                    ? null
-                    : BottomNavigationBar(
-                        currentIndex: selectedScreen,
-                        onTap: (value) {
-                          setState(() {
-                            selectedScreen = value;
-                          });
-                        },
-                        items: [
-                          BottomNavigationBarItem(
-                            icon: Icon(Icons.note),
-                            label: "Obtener",
-                          ),
-                          BottomNavigationBarItem(
-                            icon: Icon(Icons.inventory),
-                            label: "Inventario",
-                          ),
-                          BottomNavigationBarItem(
-                            icon: Icon(Icons.settings),
-                            label: "Ajustes",
-                          ),
-                        ],
+    return MaterialApp(
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: context.watch<ThemeViewmodel>().theme,
+      debugShowCheckedModeBanner: false,
+      home: Builder(
+        builder: (context) {
+          if (context.watch<AuthService>().userDatabase == null) {
+            return Scaffold(body: LoginScreen());
+          }
+          return Scaffold(
+            bottomNavigationBar:
+                context.read<AuthService>().userDatabase == null
+                ? null
+                : BottomNavigationBar(
+                    currentIndex: selectedScreen,
+                    onTap: (value) {
+                      setState(() {
+                        selectedScreen = value;
+                      });
+                    },
+                    items: [
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.note),
+                        label: "Obtener",
                       ),
-                appBar: AppBar(
-                  title: Center(child: Text("Gestión del inventario")),
-                  backgroundColor: Colors.grey,
-                ),
-                drawer: context.read<AuthService>().userDatabase == null
-                    ? null
-                    : Drawer(
-                        child: ListView(
-                          children: [
-                            DrawerHeader(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("Gestión del inventario"),
-                                  Text(
-                                    "Usuario : ${context.read<AuthService>().userDatabase!.username}",
-                                  ),
-                                  Text(
-                                    "Primer inicio  : ${context.read<AuthService>().userDatabase!.firstLogin}",
-                                  ),
-                                ],
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.inventory),
+                        label: "Inventario",
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.settings),
+                        label: "Ajustes",
+                      ),
+                    ],
+                  ),
+            appBar: AppBar(
+              title: Center(child: Text("Gestión del inventario")),
+              backgroundColor: Colors.grey,
+            ),
+            drawer: context.read<AuthService>().userDatabase == null
+                ? null
+                : Drawer(
+                    child: ListView(
+                      children: [
+                        DrawerHeader(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Gestión del inventario"),
+                              Text(
+                                "Usuario : ${context.read<AuthService>().userDatabase!.username}",
                               ),
-                            ),
-                            ListTile(
-                              title: Text("Mi perfil"),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ProfileScreen(
-                                      user: context
-                                          .read<AuthService>()
-                                          .userDatabase,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-
-                            ListTile(
-                              title: Text("Historial"),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => UserHistoryScreen(),
-                                  ),
-                                );
-                              },
-                            ),
-
-                            ?(context.read<AuthService>().userDatabase !=
-                                        null &&
-                                    context
-                                            .read<AuthService>()
-                                            .userDatabase!
-                                            .role ==
-                                        "Administrador")
-                                ? ListTile(
-                                    title: Text("Adminstración"),
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              AdministrationScreen(),
-                                        ),
-                                      );
-                                    },
-                                  )
-                                : null,
-
-                            ListTile(
-                              title: IconButton(
-                                onPressed: () {
-                                  selectedScreen = 0;
-                                  context.read<AuthService>().logOut();
-                                },
-                                icon: Icon(Icons.logout),
+                              Text(
+                                "Primer inicio  : ${context.read<AuthService>().userDatabase!.firstLogin}",
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                body: screens[selectedScreen],
-              );
-            },
-          ),
-        );
-      },
+                        ListTile(
+                          title: Text("Mi perfil"),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProfileScreen(
+                                  user: context
+                                      .read<AuthService>()
+                                      .userDatabase,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+
+                        ListTile(
+                          title: Text("Historial"),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => UserHistoryScreen(),
+                              ),
+                            );
+                          },
+                        ),
+
+                        ?(context.read<AuthService>().userDatabase != null &&
+                                context
+                                        .read<AuthService>()
+                                        .userDatabase!
+                                        .role ==
+                                    "Administrador")
+                            ? ListTile(
+                                title: Text("Adminstración"),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          AdministrationScreen(),
+                                    ),
+                                  );
+                                },
+                              )
+                            : null,
+
+                        ListTile(
+                          title: IconButton(
+                            onPressed: () {
+                              selectedScreen = 0;
+                              context.read<AuthService>().logOut();
+                            },
+                            icon: Icon(Icons.logout),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+            body: screens[selectedScreen],
+          );
+        },
+      ),
     );
   }
 }

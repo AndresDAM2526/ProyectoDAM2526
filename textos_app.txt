@@ -1,0 +1,25 @@
+addLocation_screen.dart
+    Añadir ubicación
+    Introduzca la ubicación
+    Añadir ubicación
+addProduct_screen
+    Añadir producto
+    Nombre
+    Seleccione un tipo
+    Seleccione una ubicación
+    Cantidad
+    Añadir
+    Vaciar
+addTypeProduct_screen.dart
+    Añadir Tipo
+    Introduzca el tipo
+    Añadir tipo
+addUser_screen.dart
+    Añadir usuario
+    Nombre
+    Usuario
+    Email
+    Contraseña
+    Rol
+    Enviar
+
