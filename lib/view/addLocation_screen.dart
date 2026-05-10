@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/addProductForm_viewmodel.dart';
@@ -17,8 +18,9 @@ class _AddlocationScreenState extends State<AddlocationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n=AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text("Añadir ubicación")),
+      appBar: AppBar(title: Text(l10n.anadirUbicacion)),
       body: Form(
         key: checkForm,
         child: Column(
@@ -30,11 +32,11 @@ class _AddlocationScreenState extends State<AddlocationScreen> {
                     .read<AdministrationscreenViewmodel>()
                     .locationController,
                 decoration: InputDecoration(
-                  label: Text("Introduzca la ubicación"),
+                  label: Text(l10n.nuevaUbicacion),
                 ),
                 validator: (value) => context
                     .read<AdministrationscreenViewmodel>()
-                    .checkLocation(value!),
+                    .checkLocation(value,l10n),
               ),
             ),
             ElevatedButton(
@@ -56,7 +58,7 @@ class _AddlocationScreenState extends State<AddlocationScreen> {
                   }
                 }
               },
-              child: Text("Añadir ubicación"),
+              child: Text(l10n.anadirUbicacion),
             ),
           ],
         ),

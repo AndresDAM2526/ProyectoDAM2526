@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 
 class ModifyUserFormViewmodel extends ChangeNotifier {
   String? emailProperty;
@@ -6,14 +7,14 @@ class ModifyUserFormViewmodel extends ChangeNotifier {
   String? nameProperty;
   String? roleProperty;
 
-  String? checkEmail(String? value) =>
-      (value == null || value.isEmpty) ? "Campo vacio" : null;
-  String? checkUsername(String? value) =>
-      (value == null || value.isEmpty) ? "Campo vacio" : null;
-  String? checkName(String? value) =>
-      (value == null || value.isEmpty) ? "Campo vacio" : null;
-  String? checkRole(String? value) =>
-      (value == null || value.isEmpty) ? "Campo vacio" : null;
+  String? checkEmail(String? value,AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
+  String? checkUsername(String? value,AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
+  String? checkName(String? value,AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
+  String? checkRole(String? value,AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
 
   void clearForm() {
     usernameProperty = null;

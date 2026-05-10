@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/user.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
@@ -19,6 +22,7 @@ class UserInformationWidget extends StatefulWidget {
 class _UserInformationWidgetState extends State<UserInformationWidget> {
   @override
   Widget build(BuildContext context) {
+    final l10n=AppLocalizations.of(context)!;
     return Container(
       decoration: BoxDecoration(
         border: Border.all(width: 1),
@@ -32,9 +36,9 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Usuario: ${widget.user.username}"),
-                  Text("Nombre: ${widget.user.name}"),
-                  Text("Rol: ${widget.user.role}"),
+                  Text("${l10n.usuario}: ${widget.user.username}"),
+                  Text("${l10n.nombre}: ${widget.user.name}"),
+                  Text("${l10n.rol}: ${widget.user.role}"),
                 ],
               ),
             ),
@@ -47,7 +51,7 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
                   onPressed: () {
                     context
                         .read<AdministrationscreenViewmodel>()
-                        .showModifyPropertiesUserDialog(context, widget.user);
+                        .showModifyPropertiesUserDialog(context,l10n, widget.user);
                   },
                   icon: Icon(Icons.update),
                 ),
@@ -57,6 +61,7 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
                         .read<AdministrationscreenViewmodel>()
                         .showChangePasswordDialog(
                           context,
+                          l10n,
                           widget.user,
                           (UserInformationWidget).toString(),
                         );
@@ -71,7 +76,7 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
                           context,
                           MediaQuery.of(context).size.width / 2,
                           MediaQuery.of(context).size.height / 2,
-                          "¿Desea borrar el usuario?",
+                          l10n.confirmarBorradoUsuario,
                         );
                     if (result) {
                       bool? deleteUser = await context
@@ -84,7 +89,7 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
                               context,
                               MediaQuery.of(context).size.width / 2,
                               MediaQuery.of(context).size.height / 3,
-                              "usuario eliminado",
+                              l10n.usuarioEliminado,
                             );
                       }
                     }

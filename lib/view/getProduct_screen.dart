@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/requestProduct.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
@@ -19,11 +20,12 @@ class _GetProductScreenState extends State<GetProductScreen> {
   String? name = "";
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       body: Column(
         children: [
           TextField(
-            decoration: InputDecoration(label: Text("Introduzca el nombre")),
+            decoration: InputDecoration(label: Text(l10n.introducirNombre)),
             onSubmitted: (value) {
               setState(() {
                 name = value;
@@ -57,6 +59,7 @@ class _GetProductScreenState extends State<GetProductScreen> {
                                   .read<GetProductViewmodel>()
                                   .showGetProductWidgetDialog(
                                     context,
+                                    l10n,
                                     RequestProduct(
                                       idProduct:
                                           foundProducts[index]['id_product'],
@@ -78,11 +81,13 @@ class _GetProductScreenState extends State<GetProductScreen> {
                                   .read<GetProductViewmodel>()
                                   .showGetProductWidgetDialog(
                                     context,
+                                    l10n,
                                     RequestProduct(
                                       idProduct:
                                           foundProducts[index]['id_product'],
                                       name: foundProducts[index]['product'],
-                                      type: foundProducts[index]['type']['type'],
+                                      type:
+                                          foundProducts[index]['type']['type'],
                                       location:
                                           foundProducts[index]['location']['location'],
                                     ),

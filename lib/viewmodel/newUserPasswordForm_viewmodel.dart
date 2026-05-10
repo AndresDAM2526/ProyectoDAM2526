@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/service/auth_service.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
@@ -10,15 +11,20 @@ class NewUserPasswordFormViewModel extends ChangeNotifier {
   TextEditingController newPassword = TextEditingController();
   TextEditingController secondPassword = TextEditingController();
 
-  String? checkOldPassword(String? value) =>
-      (value == null || value.isEmpty) ? "Campo vacio" : null;
-  String? checkNewPassword(String? value) =>
-      (value == null || value.isEmpty) ? "Campo vacio" : null;
-  String? checkBothPasswords(String? passOne, String? passTwo) {
+  String? checkOldPassword(String? value, AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
+  String? checkNewPassword(String? value, AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
+  String? checkBothPasswords(
+    BuildContext context,
+    AppLocalizations l10n,
+    String? passOne,
+    String? passTwo,
+  ) {
     if (passOne == null || passOne.isEmpty) {
-      return "Campo vacío";
+      return l10n.campoVacio;
     } else if ((passOne.compareTo(passTwo!) != 0)) {
-      return "Las contraseñas no coinciden";
+      return l10n.contrasenaNoCoincide;
     }
     return null;
   }
@@ -29,6 +35,7 @@ class NewUserPasswordFormViewModel extends ChangeNotifier {
     String oldPassword,
     String newPassword,
     BuildContext context,
+    AppLocalizations l10n,
   ) async {
     bool changedPassword = await context.read<AuthService>().updatePassword(
       idUser,
@@ -42,7 +49,7 @@ class NewUserPasswordFormViewModel extends ChangeNotifier {
         context,
         MediaQuery.of(context).size.width / 2,
         MediaQuery.of(context).size.height / 2,
-        "Se ha actualizado la contraseña",
+        l10n.contrasenaActualizada,
       );
       notifyListeners();
       return true;

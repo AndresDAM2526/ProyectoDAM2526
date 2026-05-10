@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
@@ -22,8 +23,9 @@ class _ModifyUserPropiertiesScreenState
   String? selectedRole;
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text("Modificar usuario")),
+      appBar: AppBar(title: Text(l10n.modificarUsuario)),
       body: Form(
         key: checkForm,
         child: (MediaQuery.of(context).orientation == Orientation.portrait)
@@ -35,8 +37,8 @@ class _ModifyUserPropiertiesScreenState
                       initialValue: widget.user.username,
                       validator: (value) => context
                           .read<ModifyUserFormViewmodel>()
-                          .checkUsername(value),
-                      decoration: InputDecoration(label: Text("Usuario")),
+                          .checkUsername(value, l10n),
+                      decoration: InputDecoration(label: Text(l10n.usuario)),
                       onSaved: (value) =>
                           context
                                   .read<ModifyUserFormViewmodel>()
@@ -50,8 +52,8 @@ class _ModifyUserPropiertiesScreenState
                       initialValue: widget.user.email,
                       validator: (value) => context
                           .read<ModifyUserFormViewmodel>()
-                          .checkEmail(value),
-                      decoration: InputDecoration(label: Text("Email")),
+                          .checkEmail(value, l10n),
+                      decoration: InputDecoration(label: Text(l10n.email)),
                       onSaved: (value) =>
                           context
                                   .read<ModifyUserFormViewmodel>()
@@ -65,8 +67,8 @@ class _ModifyUserPropiertiesScreenState
                       initialValue: widget.user.name,
                       validator: (value) => context
                           .read<ModifyUserFormViewmodel>()
-                          .checkName(value),
-                      decoration: InputDecoration(label: Text("Nombre")),
+                          .checkName(value, l10n),
+                      decoration: InputDecoration(label: Text(l10n.nombre)),
                       onSaved: (value) =>
                           context.read<ModifyUserFormViewmodel>().nameProperty =
                               value,
@@ -79,10 +81,10 @@ class _ModifyUserPropiertiesScreenState
                         final roles = values.roles;
                         return DropdownButtonFormField<String>(
                           initialValue: widget.user.role,
-                          decoration: InputDecoration(label: Text("Rol")),
+                          decoration: InputDecoration(label: Text(l10n.rol)),
                           validator: (value) => context
                               .read<ModifyUserFormViewmodel>()
-                              .checkRole(value),
+                              .checkRole(value, l10n),
                           items: roles
                               .map(
                                 (role) => DropdownMenuItem<String>(
@@ -137,7 +139,7 @@ class _ModifyUserPropiertiesScreenState
                         }
                       }
                     },
-                    child: Text("Enviar"),
+                    child: Text(l10n.enviar),
                   ),
                 ],
               )
@@ -150,8 +152,8 @@ class _ModifyUserPropiertiesScreenState
                         initialValue: widget.user.username,
                         validator: (value) => context
                             .read<ModifyUserFormViewmodel>()
-                            .checkUsername(value),
-                        decoration: InputDecoration(label: Text("Usuario")),
+                            .checkUsername(value, l10n),
+                        decoration: InputDecoration(label: Text(l10n.usuario)),
                         onSaved: (value) =>
                             context
                                     .read<ModifyUserFormViewmodel>()
@@ -165,8 +167,8 @@ class _ModifyUserPropiertiesScreenState
                         initialValue: widget.user.name,
                         validator: (value) => context
                             .read<ModifyUserFormViewmodel>()
-                            .checkName(value),
-                        decoration: InputDecoration(label: Text("Nombre")),
+                            .checkName(value, l10n),
+                        decoration: InputDecoration(label: Text(l10n.nombre)),
                         onSaved: (value) =>
                             context
                                     .read<ModifyUserFormViewmodel>()
@@ -180,15 +182,15 @@ class _ModifyUserPropiertiesScreenState
                         future: context.read<DatabaseService>().showRoles(),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData) {
-                            return Text("Error al obtener los roles");
+                            return Text(l10n.errorCargaDatos);
                           }
                           final roles = snapshot.data ?? [];
                           return DropdownButtonFormField(
                             initialValue: widget.user.role,
-                            decoration: InputDecoration(label: Text("Rol")),
+                            decoration: InputDecoration(label: Text(l10n.rol)),
                             validator: (value) => context
                                 .read<ModifyUserFormViewmodel>()
-                                .checkRole(value),
+                                .checkRole(value, l10n),
                             items: roles
                                 .map(
                                   (role) => DropdownMenuItem(
@@ -237,7 +239,7 @@ class _ModifyUserPropiertiesScreenState
                           Navigator.pop(context, true);
                         }
                       },
-                      child: Text("Enviar"),
+                      child: Text(l10n.enviar),
                     ),
                   ],
                 ),

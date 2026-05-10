@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/requestProduct.dart';
 import 'package:proyecto_dam_2526/service/auth_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
@@ -24,7 +26,6 @@ import 'package:proyecto_dam_2526/viewmodel/modifyUserForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/newUserPasswordForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/profileForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/theme_viewmodel.dart';
-import 'package:proyecto_dam_2526/widgets/confirmMessage_widget.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
@@ -84,8 +85,17 @@ class _MyAppState extends State<MyApp> {
       darkTheme: ThemeData.dark(),
       themeMode: context.watch<ThemeViewmodel>().theme,
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [Locale('en'), Locale('es')],
+      locale: context.watch<ThemeViewmodel>().currentLang,
       home: Builder(
         builder: (context) {
+          final l10n = AppLocalizations.of(context)!;
           if (context.watch<AuthService>().userDatabase == null) {
             return Scaffold(body: LoginScreen());
           }
@@ -103,20 +113,20 @@ class _MyAppState extends State<MyApp> {
                     items: [
                       BottomNavigationBarItem(
                         icon: Icon(Icons.note),
-                        label: "Obtener",
+                        label: l10n.obtener,
                       ),
                       BottomNavigationBarItem(
                         icon: Icon(Icons.inventory),
-                        label: "Inventario",
+                        label: l10n.inventario,
                       ),
                       BottomNavigationBarItem(
                         icon: Icon(Icons.settings),
-                        label: "Ajustes",
+                        label: l10n.ajustes,
                       ),
                     ],
                   ),
             appBar: AppBar(
-              title: Center(child: Text("Gestión del inventario")),
+              title: Center(child: Text(l10n.nombreApp)),
               backgroundColor: Colors.grey,
             ),
             drawer: context.read<AuthService>().userDatabase == null
@@ -128,18 +138,15 @@ class _MyAppState extends State<MyApp> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Gestión del inventario"),
+                              Text(l10n.nombreApp),
                               Text(
-                                "Usuario : ${context.read<AuthService>().userDatabase!.username}",
-                              ),
-                              Text(
-                                "Primer inicio  : ${context.read<AuthService>().userDatabase!.firstLogin}",
+                                "${l10n.usuario} : ${context.read<AuthService>().userDatabase!.username}",
                               ),
                             ],
                           ),
                         ),
                         ListTile(
-                          title: Text("Mi perfil"),
+                          title: Text(l10n.miPerfil),
                           onTap: () {
                             Navigator.push(
                               context,
@@ -155,7 +162,7 @@ class _MyAppState extends State<MyApp> {
                         ),
 
                         ListTile(
-                          title: Text("Historial"),
+                          title: Text(l10n.historial),
                           onTap: () {
                             Navigator.push(
                               context,
@@ -173,7 +180,7 @@ class _MyAppState extends State<MyApp> {
                                         .role ==
                                     "Administrador")
                             ? ListTile(
-                                title: Text("Adminstración"),
+                                title: Text(l10n.administracion),
                                 onTap: () {
                                   Navigator.push(
                                     context,

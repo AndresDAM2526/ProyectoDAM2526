@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/product.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/view/product_information.dart';
@@ -18,6 +19,7 @@ class InventoryScreen extends StatefulWidget {
 class _InventoryScreenState extends State<InventoryScreen> {
   @override
   Widget build(BuildContext context) {
+    final l10n=AppLocalizations.of(context)!;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -33,13 +35,13 @@ class _InventoryScreenState extends State<InventoryScreen> {
                         context,
                       );
                     },
-                    child: Text("Filtro"),
+                    child: Text(l10n.filtro),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       context.read<SupabaseService>().clearFilter();
                     },
-                    child: Text("Quitar filtro"),
+                    child: Text(l10n.quitarFiltro),
                   ),
                 ],
               ),
@@ -52,7 +54,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                       productList: context.read<SupabaseService>().products,
                     )
                   : context.read<SupabaseService>().filteredProducts!.isEmpty
-                  ? Text("No se han encontrado productos")
+                  ? Text(l10n.sinResultados)
                   : ProductsTableWidget(
                       productList: context
                           .read<SupabaseService>()

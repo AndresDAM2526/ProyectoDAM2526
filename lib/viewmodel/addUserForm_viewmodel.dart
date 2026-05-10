@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 
 class AdduserFormViewmodel extends ChangeNotifier {
   TextEditingController userController = TextEditingController();
@@ -8,16 +9,16 @@ class AdduserFormViewmodel extends ChangeNotifier {
   TextEditingController passwordController = TextEditingController();
   String? role;
 
-  String? checkName(String? value) =>
-      (value == null || value.isEmpty) ? "Campo vacio" : null;
-  String? checkUser(String? value) =>
-      (value == null || value.isEmpty) ? "Campo vacio" : null;
-  String? checkPassword(String? value) =>
-      (value == null || value.isEmpty) ? "Campo vacio" : null;
-  String? checkRole(String? value) =>
-      (value == null || value.isEmpty) ? "Campo vacio" : null;
-  String? checkEmail(String? value) =>
-      (value == null || value.isEmpty) ? "Campo vacio" : null;
+  String? checkName(String? value,AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
+  String? checkUser(String? value,AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
+  String? checkPassword(String? value,AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
+  String? checkRole(String? value,AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
+  String? checkEmail(String? value,AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
 
   void clearForm() {
     userController.clear();

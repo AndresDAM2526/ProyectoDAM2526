@@ -8,6 +8,11 @@ class ThemeViewmodel extends ChangeNotifier {
 
   ThemeMode get theme => _darkMode ? ThemeMode.dark : ThemeMode.light;
 
+  String _lang = "es";
+  String get lang => _lang;
+
+  Locale get currentLang => Locale(_lang);
+
   ThemeViewmodel() {
     loadPrefs();
   }
@@ -15,6 +20,7 @@ class ThemeViewmodel extends ChangeNotifier {
   void loadPrefs() async {
     final prefs = await SharedPreferences.getInstance();
     _darkMode = prefs.getBool('darkMode') ?? false;
+    _lang = prefs.getString('lang') ?? "es";
     notifyListeners();
   }
 
@@ -23,5 +29,12 @@ class ThemeViewmodel extends ChangeNotifier {
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('darkMode', _darkMode);
+  }
+
+  void changeLang(String lang) async {
+    _lang = lang;
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('lang', _lang);
   }
 }

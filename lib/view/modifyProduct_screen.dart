@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/databaseProduct.dart';
 import 'package:proyecto_dam_2526/model/product.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
@@ -21,8 +22,9 @@ class _ModifyProductScreenState extends State<ModifyProductScreen> {
   String? selectedLocation = "";
   @override
   Widget build(BuildContext context) {
+    final l10n=AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text("Modificar producto"))),
+      appBar: AppBar(title: Center(child: Text(l10n.modificarProducto))),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -35,10 +37,10 @@ class _ModifyProductScreenState extends State<ModifyProductScreen> {
                     child: TextFormField(
                       validator: (value) => context
                           .read<ModifyProductFormViewmodel>()
-                          .checkName(value),
+                          .checkName(value,l10n),
                       initialValue: widget.product.name,
                       decoration: InputDecoration(
-                        label: Text("Introduzca el nombre"),
+                        label: Text(l10n.introducirNombre),
                       ),
                       onSaved: (newValue) =>
                           context
@@ -57,10 +59,10 @@ class _ModifyProductScreenState extends State<ModifyProductScreen> {
                         }
                         return DropdownButtonFormField<String>(
                           initialValue: widget.product.type,
-                          hint: Text("Seleccione el tipo"),
+                          hint: Text(l10n.seleccionarTipo),
                           validator: (value) => context
                               .read<ModifyProductFormViewmodel>()
-                              .checkType(value),
+                              .checkType(value,l10n),
                           items: types
                               .map(
                                 (type) => DropdownMenuItem<String>(
@@ -93,10 +95,10 @@ class _ModifyProductScreenState extends State<ModifyProductScreen> {
                         }
                         return DropdownButtonFormField<String>(
                           initialValue: widget.product.location,
-                          hint: Text("Seleccione el tipo"),
+                          hint: Text(l10n.seleccionarUbicacion),
                           validator: (value) => context
                               .read<ModifyProductFormViewmodel>()
-                              .checkType(value),
+                              .checkType(value,l10n),
                           items: locations
                               .map(
                                 (location) => DropdownMenuItem<String>(
@@ -125,10 +127,10 @@ class _ModifyProductScreenState extends State<ModifyProductScreen> {
                       keyboardType: TextInputType.numberWithOptions(),
                       validator: (value) => context
                           .read<ModifyProductFormViewmodel>()
-                          .checkQuantity(value),
+                          .checkQuantity(value,l10n),
                       initialValue: widget.product.quantity.toString(),
                       decoration: InputDecoration(
-                        label: Text("Introduzca la cantidad"),
+                        label: Text(l10n.introducirCantidad),
                       ),
                       onSaved: (newValue) =>
                           context.read<ModifyProductFormViewmodel>().quantity =
@@ -169,7 +171,7 @@ class _ModifyProductScreenState extends State<ModifyProductScreen> {
                             }
                           }
                         },
-                        child: Text("Enviar"),
+                        child: Text(l10n.enviar),
                       ),
                     ],
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
@@ -26,8 +27,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final checkForm = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final l10n=AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text("Cambiar contraseña")),
+      appBar: AppBar(title: Text(l10n.cambiarContrasena)),
       body:
           ((widget.sourceScreen?.compareTo(
                 (UserInformationWidget).toString(),
@@ -46,9 +48,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           .passwordController,
                       validator: (value) => context
                           .read<AdministrationscreenViewmodel>()
-                          .checkPassword(value),
+                          .checkPassword(value,l10n),
                       decoration: InputDecoration(
-                        label: Text("Introduzca la nueva contraseña"),
+                        label: Text(l10n.nuevaContrasena),
                       ),
                     ),
                   ),
@@ -76,7 +78,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         Navigator.pop(context, false);
                       }
                     },
-                    child: Text("Enviar"),
+                    child: Text(l10n.enviar),
                   ),
                 ],
               ),
@@ -92,9 +94,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         .oldPasswordController,
                     validator: (value) => context
                         .read<ProfileFormViewmodel>()
-                        .checkOldPassword(value),
+                        .checkOldPassword(value,l10n),
                     decoration: InputDecoration(
-                      label: Text("Introduzca la contraseña actual"),
+                      label: Text(l10n.contrasenaActual),
                     ),
                   ),
                   TextFormField(
@@ -103,9 +105,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         .newPasswordController,
                     validator: (value) => context
                         .read<ProfileFormViewmodel>()
-                        .checkNewPassword(value),
+                        .checkNewPassword(value,l10n),
                     decoration: InputDecoration(
-                      label: Text("Introduzca la nueva contraseña"),
+                      label: Text(l10n.nuevaContrasena),
                     ),
                   ),
                   TextFormField(
@@ -114,6 +116,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         .secondPasswordController,
                     validator: (value) =>
                         context.read<ProfileFormViewmodel>().checkBothPasswords(
+                          context,
+                          l10n,
                           value,
                           context
                               .read<ProfileFormViewmodel>()
@@ -121,7 +125,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               .text,
                         ),
                     decoration: InputDecoration(
-                      label: Text("Introduzca la nueva contraseña"),
+                      label: Text(l10n.nuevaContrasena),
                     ),
                   ),
                   ElevatedButton(
@@ -142,12 +146,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             context,
                             MediaQuery.of(context).size.width / 4,
                             MediaQuery.of(context).size.height / 4,
-                            "La contraseña actual no es correcta, inténtelo de nuevo",
+                            l10n.contrasenaActualIncorrecta,
                           );
                         }
                       }
                     },
-                    child: Text("Enviar"),
+                    child: Text(l10n.enviar),
                   ),
                 ],
               ),

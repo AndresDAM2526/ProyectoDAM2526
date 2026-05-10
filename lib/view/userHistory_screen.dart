@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/service/auth_service.dart';
-import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/widgets/historyRegister_widget.dart';
-import 'package:sqflite/sqlite_api.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class UserHistoryScreen extends StatefulWidget {
   const UserHistoryScreen({super.key});
@@ -17,8 +15,9 @@ class UserHistoryScreen extends StatefulWidget {
 class _UserHistoryScreenState extends State<UserHistoryScreen> {
   @override
   Widget build(BuildContext context) {
+    final l10n=AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text("Historial")),
+      appBar: AppBar(title: Text(l10n.historial)),
       body: FutureBuilder(
         future: context.watch<SupabaseService>().getHistoryRegisterByIdUser(
           context.watch<AuthService>().userDatabase!.idUser,
@@ -26,7 +25,7 @@ class _UserHistoryScreenState extends State<UserHistoryScreen> {
         builder: (context, snapshot) {
           final history = snapshot.data ?? [];
           if (history.isEmpty) {
-            return Center(child: Text("No hay datos aún"));
+            return Center(child: Text(l10n.sinResultados));
           }
           return ListView.builder(
             itemCount: history.length,

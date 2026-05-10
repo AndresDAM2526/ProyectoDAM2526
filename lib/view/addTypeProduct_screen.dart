@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/addProductForm_viewmodel.dart';
@@ -18,8 +19,9 @@ class _AddTypeProductState extends State<AddTypeProduct> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n=AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text("Añadir Tipo")),
+      appBar: AppBar(title: Text(l10n.anadirTipo)),
       body: Form(
         key: checkForm,
         child: Column(
@@ -30,10 +32,10 @@ class _AddTypeProductState extends State<AddTypeProduct> {
                 controller: context
                     .read<AdministrationscreenViewmodel>()
                     .typeController,
-                decoration: InputDecoration(label: Text("Introduzca el tipo")),
+                decoration: InputDecoration(label: Text(l10n.introducirTipo)),
                 validator: (value) => context
                     .read<AdministrationscreenViewmodel>()
-                    .checkTypeProduct(value),
+                    .checkTypeProduct(value,l10n),
               ),
             ),
             ElevatedButton(
@@ -49,12 +51,10 @@ class _AddTypeProductState extends State<AddTypeProduct> {
                       );
                   if (added == true) {
                     Navigator.pop(context, true);
-                  } else {
-                    print("Error al añadir el tipo");
-                  }
+                  } 
                 }
               },
-              child: Text("Añadir tipo"),
+              child: Text(l10n.anadirTipo),
             ),
           ],
         ),

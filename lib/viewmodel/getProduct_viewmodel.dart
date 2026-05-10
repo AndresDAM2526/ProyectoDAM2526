@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/requestProduct.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 import 'package:proyecto_dam_2526/widgets/transactions_widget.dart';
@@ -8,12 +9,13 @@ class GetProductViewmodel extends ChangeNotifier {
   int userQuantity = 0;
   TextEditingController quantityController = TextEditingController();
 
-  String? checkQuantity(String? value) => (value == null || value.isEmpty)
-      ? "Campo vacio"
+  String? checkQuantity(String? value, AppLocalizations l10n) =>
+      (value == null || value.isEmpty)
+      ? l10n.campoVacio
       : (int.tryParse(value) == null)
-      ? "Formato incorrecto"
+      ? l10n.formatoIncorrecto
       : (int.parse(value) == 0)
-      ? "Introduzca una cantidad correcta"
+      ? l10n.cantidadCorrecta
       : null;
 
   void addUnity(int maxQuantity) {
@@ -33,13 +35,14 @@ class GetProductViewmodel extends ChangeNotifier {
   }
 
   void clearForm() {
-    userQuantity=0;
+    userQuantity = 0;
     quantityController.clear();
     notifyListeners();
   }
 
   void showGetProductWidgetDialog(
     BuildContext context,
+    AppLocalizations l10n,
     RequestProduct product,
     int maxQuantity,
     String typeRequest,
@@ -69,7 +72,7 @@ class GetProductViewmodel extends ChangeNotifier {
         context,
         MediaQuery.of(context).size.width / 2,
         MediaQuery.of(context).size.height / 4,
-        "Se ha ejecutado correctamente su petición",
+        l10n.peticionCorrecta,
       );
     } else {
       context.read<GetProductViewmodel>().clearForm();

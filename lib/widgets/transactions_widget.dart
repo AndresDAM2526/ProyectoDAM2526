@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/requestProduct.dart';
 import 'package:proyecto_dam_2526/service/auth_service.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
@@ -30,12 +31,13 @@ class _TransactionsState extends State<Transactions> {
   final checkForm = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         title: Center(
           child: (widget.typeRequest.compareTo("Coger") == 0)
-              ? Text("Obtener producto")
-              : Text("Devolver producto"),
+              ? Text(l10n.obtenerProducto)
+              : Text(l10n.devolverProducto),
         ),
       ),
       body: SingleChildScrollView(
@@ -47,9 +49,9 @@ class _TransactionsState extends State<Transactions> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text("Producto : ${widget.product.name}"),
-                  Text("Tipo : ${widget.product.type}"),
-                  Text("Ubicación : ${widget.product.location}"),
+                  Text("${l10n.nombre} : ${widget.product.name}"),
+                  Text("${l10n.tipo} : ${widget.product.type}"),
+                  Text("${l10n.ubicacion} : ${widget.product.location}"),
                 ],
               ),
             ),
@@ -64,7 +66,7 @@ class _TransactionsState extends State<Transactions> {
                           });
                         },
                       ),
-                      Text("Introducir cantidad manualmente"),
+                      Text(l10n.cantidadManual),
                     ],
                   )
                 : null,
@@ -81,12 +83,13 @@ class _TransactionsState extends State<Transactions> {
                   controller: context
                       .read<GetProductViewmodel>()
                       .quantityController,
-                  validator: (value) =>
-                      context.read<GetProductViewmodel>().checkQuantity(value),
+                  validator: (value) => context
+                      .read<GetProductViewmodel>()
+                      .checkQuantity(value, l10n),
                   decoration: InputDecoration(
                     label: (widget.typeRequest.compareTo("Coger") == 0)
-                        ? Text("Unidades disponibles: ${widget.maxQuantity}")
-                        : Text("Unidades a devolver"),
+                        ? Text("${l10n.unidadesDisponibles}: ${widget.maxQuantity}")
+                        : Text(l10n.unidadesDevolver),
                     prefixIcon: (widget.typeRequest.compareTo("Coger") == 0)
                         ? IconButton(
                             onPressed: () {
@@ -157,8 +160,8 @@ class _TransactionsState extends State<Transactions> {
                     }
                   },
                   child: (widget.typeRequest.compareTo("Coger") == 0)
-                      ? Text("Coger")
-                      : Text("Devolver"),
+                      ? Text(l10n.obtener)
+                      : Text(l10n.devolverProducto),
                 ),
               ),
             ),

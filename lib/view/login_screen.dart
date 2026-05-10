@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/service/auth_service.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
@@ -18,9 +19,10 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _obscureText = true;
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("Gestión del inventario")),
+        title: Center(child: Text(l10n.nombreApp)),
         backgroundColor: Colors.grey,
       ),
       body: SingleChildScrollView(
@@ -46,12 +48,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         bottom: 10,
                       ),
                       child: TextFormField(
-                        validator: (value) =>
-                            context.read<LoginFormViewmodel>().checkUser(value),
+                        validator: (value) => context
+                            .read<LoginFormViewmodel>()
+                            .checkUser(value, l10n),
                         controller: context
                             .read<LoginFormViewmodel>()
                             .userController,
-                        decoration: InputDecoration(label: Text("Usuario")),
+                        decoration: InputDecoration(label: Text(l10n.usuario)),
                       ),
                     ),
                     Container(
@@ -62,14 +65,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         bottom: 30,
                       ),
                       child: TextFormField(
-                        validator: (value) =>
-                            context.read<LoginFormViewmodel>().checkPass(value),
+                        validator: (value) => context
+                            .read<LoginFormViewmodel>()
+                            .checkPass(value, l10n),
                         controller: context
                             .read<LoginFormViewmodel>()
                             .passController,
                         obscureText: _obscureText,
                         decoration: InputDecoration(
-                          label: Text("Contraseña"),
+                          label: Text(l10n.contrasena),
                           suffixIcon: IconButton(
                             onPressed: () {
                               setState(() {
@@ -78,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             icon: Icon(
                               Icons.remove_red_eye,
-                              semanticLabel: "Mostrar contraseña",
+                              semanticLabel: l10n.mostrarContrasena,
                             ),
                           ),
                         ),
@@ -98,10 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 .text,
                             context,
                           );
-                          //context.read<LoginFormViewmodel>().clearForm();
                         }
                       },
-                      child: Text("Iniciar sesión"),
+                      child: Text(l10n.iniciarSesion),
                     ),
                   ],
                 ),

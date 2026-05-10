@@ -22,4 +22,131 @@ addUser_screen.dart
     Contraseña
     Rol
     Enviar
+adminstration_screen.dart  
+    Administración
+    Usuarios
+    Añadir usuario
+    Modificar usuario
+    Inventario
+    Añadir producto
+    Añadir ubicación
+    Añadir tipo
+    Modificar inventario
+    Se ha añadido el usuario correctamente
+    Se ha añadido el producto correctamente
+changePassword_screen.dart
+    Cambiar contraseña
+    Introduzca la nueva contraseña
+    Enviar
+    Introduzca la contraseña actual
+    Introduzca la nueva contraseña
+    Introduzca la nueva contraseña
+    La contraseña actual no es correcta, inténtelo de nuevo
+    Enviar
+getProduct_screen.dart
+    Introduzca el nombre
+inventory_screen.dart
+    Filtro
+    Quitar filtro
+    No se han encontrado productos
+login_screen.dart
+    Gestión del inventario
+    Usuario
+    Contraseña
+    Mostrar contraseña
+    Iniciar sesión
+modifyInventory_screen.dart
+    Modificar inventario
+    Introduzca el nombre
+    No se han encontrado resultados
+    Se ha procedido con el borrado del producto
+product_information_screen.dart
+    Nombre
+    Tipo
+    Ubicación
+    Cantidad
+profile_screen.dart
+    Perfil
+    Usuario
+    Nombre
+    Rol
+    Cambiar contraseña
+settings_screen.dart
+    Modo oscuro
+    Idioma
+    Tamaño de la fuente
+userHistory_screen.dart
+    Historial
+    No hay datos aún
+confirmMessage_widget.dart
+    Información
+    Cancelar
+    Aceptar
+errorMessage_widget.dart
+    Error
+    Volver
+filter_widget.dart
+    Filtrar por:
+    Error al cargar los datos
+    Filtrar
+historyRegister_widget.dart
+    Nombre
+    Tipo de producto
+    Tipo de registro
+    Cantidad
+    Fecha
+informationMessage_widget.dart
+    Información
+    Aceptar
+productsTable_widget.dart
+    Nombre
+    Tipo
+    Ubicación
+productView_widget.dart
+    Nombre
+    Ubicación
+    Cantidad
+transactions_widget.dart
+    Obtener producto
+    Devolver producto
+    Producto
+    Tipo
+    Ubicación
+    Introducir cantidad manualmente
+    Unidades disponibles
+    Unidades a devolver
+    Coger
+    Devolver
+userInformation_widget.dart
+    Usuario
+    Nombre
+    Rol
+    ¿Desea borrar el usuario?
+    usuario eliminado
+addProductForm_viewmodel.dart,addUserForm_viewmodel.dart,loginForm_viewmodel.dart
+    Campo vacío
+    El formato de la cantidad no es correcto
+    Cantidad incorrecta
+administrationScreen_viewmodel.dart
+    Se ha añadido la nueva ubicacion
+    Se ha añadido el nuevo tipo
+    Se ha modificado la contraaseña
+    Se ha modificado el usuario
+    Se ha modificado el producto
+getProduct_viewmodel.dart
+    Formato incorrecto
+    Introduzca una cantidad correcta
+modifyProductForm_viewmodel.dart
+    El formato no es correcto
+modifyUser_viewmodel.dart
+    Modificar usuario
+    Introduzca el usuario o nombre
+    No se han encontrado resultados
+    No se han encontrado resultados
+modifyUserPasswordForm_viewmodel.dart
+    Las contraseñas no coinciden
+    Se ha actualizado la contraseña
+profileForm_viewmodel.dart
+    Las contraseñas no coinciden
+
 

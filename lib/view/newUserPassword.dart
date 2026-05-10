@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/main.dart';
 import 'package:proyecto_dam_2526/service/auth_service.dart';
 import 'package:proyecto_dam_2526/view/login_screen.dart';
@@ -11,20 +12,19 @@ class NewUserPassword extends StatelessWidget {
   NewUserPassword({super.key, required this.idUser, required this.email});
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final checkForm = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Center(child: Text("Cambiar contraseña")),
+        title: Center(child: Text(l10n.cambiarContrasena)),
       ),
       body: Column(
         children: [
-          Text("Nuevo usuario"),
+          Text(l10n.nuevoUsuario),
           Container(
             margin: EdgeInsets.all(10),
-            child: Text(
-              "Esta cuenta ha sido creada recientemente, debe cambiar la contraseña para poder acceder por primera vez",
-            ),
+            child: Text(l10n.nuevoUsuarioPantalla),
           ),
           Form(
             key: checkForm,
@@ -34,35 +34,35 @@ class NewUserPassword extends StatelessWidget {
                   child: TextFormField(
                     obscureText: true,
                     decoration: InputDecoration(
-                      label: Text("Contraseña actual"),
+                      label: Text(l10n.contrasenaActual),
                     ),
                     controller: context
                         .read<NewUserPasswordFormViewModel>()
                         .oldPassword,
                     validator: (value) => context
                         .read<NewUserPasswordFormViewModel>()
-                        .checkOldPassword(value),
+                        .checkOldPassword(value, l10n),
                   ),
                 ),
                 SizedBox(
                   child: TextFormField(
                     obscureText: true,
                     decoration: InputDecoration(
-                      label: Text("Nueva contraseña"),
+                      label: Text(l10n.nuevaContrasena),
                     ),
                     controller: context
                         .read<NewUserPasswordFormViewModel>()
                         .newPassword,
                     validator: (value) => context
                         .read<NewUserPasswordFormViewModel>()
-                        .checkNewPassword(value),
+                        .checkNewPassword(value, l10n),
                   ),
                 ),
                 SizedBox(
                   child: TextFormField(
                     obscureText: true,
                     decoration: InputDecoration(
-                      label: Text("Confirmar contraseña"),
+                      label: Text(l10n.confirmarContrasena),
                     ),
                     controller: context
                         .read<NewUserPasswordFormViewModel>()
@@ -70,6 +70,8 @@ class NewUserPassword extends StatelessWidget {
                     validator: (value) => context
                         .read<NewUserPasswordFormViewModel>()
                         .checkBothPasswords(
+                          context,
+                          l10n,
                           value,
                           context
                               .read<NewUserPasswordFormViewModel>()
@@ -98,6 +100,7 @@ class NewUserPassword extends StatelessWidget {
                           .newPassword
                           .text,
                       context,
+                      l10n,
                     );
                 if (changedPassword) {
                   Navigator.pushAndRemoveUntil(
@@ -105,12 +108,10 @@ class NewUserPassword extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => MyApp()),
                     (route) => false,
                   );
-                }else{
-                  print("error");
                 }
               }
             },
-            child: Text("Enviar"),
+            child: Text(l10n.enviar),
           ),
         ],
       ),

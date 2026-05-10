@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/databaseProduct.dart';
 import 'package:proyecto_dam_2526/view/modifyProduct_screen.dart';
 
@@ -23,6 +24,7 @@ class ProductViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n=AppLocalizations.of(context)!;
     return Container(
       decoration: BoxDecoration(border: Border.all(width: 1)),
       child: Row(
@@ -35,15 +37,15 @@ class ProductViewWidget extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Nombre: $name"),
+                  child: Text("${l10n.nombre}: $name"),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Ubicación: $location"),
+                  child: Text("${l10n.ubicacion}: $location"),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Cantidad: $quantity"),
+                  child: Text("${l10n.cantidad}: $quantity"),
                 ),
               ],
             ),

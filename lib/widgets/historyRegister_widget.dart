@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 
 class HistoryRegisterWidget extends StatelessWidget {
   String name;
@@ -19,6 +20,7 @@ class HistoryRegisterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n=AppLocalizations.of(context)!;
     return Row(
       children: [
         Container(
@@ -26,8 +28,8 @@ class HistoryRegisterWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Nombre: $name"),
-              Text("Tipo de producto: $typeProduct"),
+              Text("${l10n.nombre}: $name"),
+              Text("${l10n.tipoProducto}: $typeProduct"),
             ],
           ),
         ),
@@ -36,9 +38,9 @@ class HistoryRegisterWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Tipo de registro: $typeRegister"),
-              Text("Cantidad: $quantity"),
-              Text("Fecha: $date"),
+              Text("${l10n.tipoRegistro}: $typeRegister"),
+              Text("${l10n.cantidad}: $quantity"),
+              Text("${l10n.fecha}: $date"),
             ],
           ),
         ),

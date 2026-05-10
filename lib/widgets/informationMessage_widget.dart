@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 
 class InformationMessageWidget extends StatelessWidget {
   String message;
@@ -6,12 +7,13 @@ class InformationMessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n=AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text("Información"),
+          child: Text(l10n.informacion),
         ),
         Container(width: double.infinity, height: 2, color: Colors.black),
         Padding(
@@ -37,7 +39,7 @@ class InformationMessageWidget extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text("Aceptar"),
+                child: Text(l10n.aceptar),
               ),
             ),
           ],

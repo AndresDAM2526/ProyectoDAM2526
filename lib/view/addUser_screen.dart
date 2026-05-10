@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/NewUser.dart';
 import 'package:proyecto_dam_2526/model/user.dart';
 import 'package:proyecto_dam_2526/service/auth_service.dart';
@@ -19,8 +20,9 @@ class _AddUserScreenState extends State<AddUserScreen> {
   final checkForm = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text("Añadir usuario")),
+      appBar: AppBar(title: Text(l10n.anadirUsuario)),
       body: Form(
         key: checkForm,
         child: (MediaQuery.of(context).orientation == Orientation.portrait)
@@ -35,8 +37,8 @@ class _AddUserScreenState extends State<AddUserScreen> {
                             .nameController,
                         validator: (value) => context
                             .read<AdduserFormViewmodel>()
-                            .checkName(value),
-                        decoration: InputDecoration(label: Text("Nombre")),
+                            .checkName(value, l10n),
+                        decoration: InputDecoration(label: Text(l10n.nombre)),
                       ),
                     ),
                     Container(
@@ -47,8 +49,8 @@ class _AddUserScreenState extends State<AddUserScreen> {
                             .userController,
                         validator: (value) => context
                             .read<AdduserFormViewmodel>()
-                            .checkUser(value),
-                        decoration: InputDecoration(label: Text("Usuario")),
+                            .checkUser(value, l10n),
+                        decoration: InputDecoration(label: Text(l10n.usuario)),
                       ),
                     ),
                     Container(
@@ -59,8 +61,8 @@ class _AddUserScreenState extends State<AddUserScreen> {
                             .emailController,
                         validator: (value) => context
                             .read<AdduserFormViewmodel>()
-                            .checkEmail(value),
-                        decoration: InputDecoration(label: Text("Email")),
+                            .checkEmail(value, l10n),
+                        decoration: InputDecoration(label: Text(l10n.email)),
                       ),
                     ),
                     Container(
@@ -71,8 +73,10 @@ class _AddUserScreenState extends State<AddUserScreen> {
                             .passwordController,
                         validator: (value) => context
                             .read<AdduserFormViewmodel>()
-                            .checkPassword(value),
-                        decoration: InputDecoration(label: Text("Contraseña")),
+                            .checkPassword(value, l10n),
+                        decoration: InputDecoration(
+                          label: Text(l10n.contrasena),
+                        ),
                       ),
                     ),
                     Container(
@@ -83,8 +87,8 @@ class _AddUserScreenState extends State<AddUserScreen> {
                           return DropdownButtonFormField<String>(
                             validator: (value) => context
                                 .read<AdduserFormViewmodel>()
-                                .checkRole(value),
-                            decoration: InputDecoration(label: Text("Rol")),
+                                .checkRole(value, l10n),
+                            decoration: InputDecoration(label: Text(l10n.rol)),
                             items: roles
                                 .map(
                                   (role) => DropdownMenuItem<String>(
@@ -145,7 +149,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
                           Navigator.pop(context, false);
                         }
                       },
-                      child: Text("Enviar"),
+                      child: Text(l10n.enviar),
                     ),
                   ],
                 ),
@@ -161,8 +165,8 @@ class _AddUserScreenState extends State<AddUserScreen> {
                             .nameController,
                         validator: (value) => context
                             .read<AdduserFormViewmodel>()
-                            .checkName(value),
-                        decoration: InputDecoration(label: Text("Nombre")),
+                            .checkName(value, l10n),
+                        decoration: InputDecoration(label: Text(l10n.nombre)),
                       ),
                     ),
                     Container(
@@ -173,8 +177,8 @@ class _AddUserScreenState extends State<AddUserScreen> {
                             .userController,
                         validator: (value) => context
                             .read<AdduserFormViewmodel>()
-                            .checkUser(value),
-                        decoration: InputDecoration(label: Text("Usuario")),
+                            .checkUser(value, l10n),
+                        decoration: InputDecoration(label: Text(l10n.usuario)),
                       ),
                     ),
                     Container(
@@ -185,8 +189,8 @@ class _AddUserScreenState extends State<AddUserScreen> {
                             .emailController,
                         validator: (value) => context
                             .read<AdduserFormViewmodel>()
-                            .checkEmail(value),
-                        decoration: InputDecoration(label: Text("Email")),
+                            .checkEmail(value, l10n),
+                        decoration: InputDecoration(label: Text(l10n.email)),
                       ),
                     ),
                     Container(
@@ -197,8 +201,10 @@ class _AddUserScreenState extends State<AddUserScreen> {
                             .passwordController,
                         validator: (value) => context
                             .read<AdduserFormViewmodel>()
-                            .checkPassword(value),
-                        decoration: InputDecoration(label: Text("Contraseña")),
+                            .checkPassword(value, l10n),
+                        decoration: InputDecoration(
+                          label: Text(l10n.contrasena),
+                        ),
                       ),
                     ),
                     Container(
@@ -210,8 +216,8 @@ class _AddUserScreenState extends State<AddUserScreen> {
                           return DropdownButtonFormField(
                             validator: (value) => context
                                 .read<AdduserFormViewmodel>()
-                                .checkRole(value),
-                            decoration: InputDecoration(label: Text("Rol")),
+                                .checkRole(value, l10n),
+                            decoration: InputDecoration(label: Text(l10n.rol)),
                             items: roles
                                 .map(
                                   (rol) => DropdownMenuItem(
@@ -260,7 +266,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
                           Navigator.pop(context, false);
                         }
                       },
-                      child: Text("Enviar"),
+                      child: Text(l10n.enviar),
                     ),
                   ],
                 ),

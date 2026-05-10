@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/databaseProduct.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/view/addLocation_screen.dart';
@@ -17,26 +18,29 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
   TextEditingController passwordController = TextEditingController();
   String? selectedRole;
 
-  String? checkName(String? value) =>
-      (value == null || value.isEmpty) ? "Campo vacio" : null;
-  String? checkLocation(String? value) =>
-      (value == null || value.isEmpty) ? "Campo vacio" : null;
+  String? checkName(String? value, AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
+  String? checkLocation(String? value, AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
 
-  String? checkTypeProduct(String? value) =>
-      (value == null || value.isEmpty) ? "Campo vacio" : null;
+  String? checkTypeProduct(String? value, AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
 
-  String? checkPassword(String? value) =>
-      (value == null || value.isEmpty) ? "Campo vacio" : null;
+  String? checkPassword(String? value, AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
 
-  String? checkRole(String? value) =>
-      (value == null || value.isEmpty) ? "Campo vacio" : null;
+  String? checkRole(String? value, AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
 
-  void clearLocation(){
+  void clearLocation() {
     locationController.clear();
     notifyListeners();
   }
 
-  void showAddLocationDialog(BuildContext context) async {
+  void showAddLocationDialog(
+    BuildContext context,
+    AppLocalizations l10n,
+  ) async {
     bool? result = await showDialog(
       context: context,
       builder: (context) {
@@ -55,13 +59,16 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
     );
 
     if (result == true) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Se ha añadido la nueva ubicacion")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.nuevaUbicacionMensaje)));
     }
   }
 
-  void showAddTypeProductDialog(BuildContext context) async {
+  void showAddTypeProductDialog(
+    BuildContext context,
+    AppLocalizations l10n,
+  ) async {
     bool? result = await showDialog(
       context: context,
       builder: (context) {
@@ -82,12 +89,13 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
     if (result == true) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text("Se ha añadido el nuevo tipo")));
+      ).showSnackBar(SnackBar(content: Text(l10n.nuevoTipoMensaje)));
     }
   }
 
   void showChangePasswordDialog(
     BuildContext context,
+    AppLocalizations l10n,
     UserDatabase user,
     String sourceScreen,
   ) async {
@@ -112,13 +120,14 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
         context,
         MediaQuery.of(context).size.width,
         MediaQuery.of(context).size.height,
-        "Se ha modificado la contraaseña",
+        l10n.modificarContrasenaMensaje,
       );
     }
   }
 
   void showModifyPropertiesUserDialog(
     BuildContext context,
+    AppLocalizations l10n,
     UserDatabase user,
   ) async {
     bool? result = await showDialog(
@@ -142,13 +151,14 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
         context,
         MediaQuery.of(context).size.width / 2,
         MediaQuery.of(context).size.height / 4,
-        "Se ha modificado el usuario",
+        l10n.modificarUsuarioMensaje,
       );
     }
   }
 
   void showModifyProductDialog(
     BuildContext context,
+    AppLocalizations l10n,
     DatabaseProduct product,
   ) async {
     final bool? modified = await showDialog(
@@ -171,7 +181,7 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
         context,
         MediaQuery.of(context).size.width / 2,
         MediaQuery.of(context).size.height / 4,
-        "Se ha modificado el producto",
+        l10n.modificarProductoMensaje,
       );
     }
   }

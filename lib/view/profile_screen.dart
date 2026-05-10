@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/viewmodel/profileForm_viewmodel.dart';
 
@@ -14,8 +17,9 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text("Perfil")),
+      appBar: AppBar(title: Text(l10n.perfil)),
       body: (MediaQuery.of(context).orientation == Orientation.portrait)
           ? Column(
               children: [
@@ -34,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               enabled: false,
                               decoration: InputDecoration(
                                 label: Text(
-                                  "Usuario:\t${widget.user!.username}",
+                                  "${l10n.usuario}:\t${widget.user!.username}",
                                   style: TextStyle(color: Colors.black),
                                 ),
                               ),
@@ -46,7 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               enabled: false,
                               decoration: InputDecoration(
                                 label: Text(
-                                  "Nombre:\t${widget.user!.name}",
+                                  "${l10n.nombre}:\t${widget.user!.name}",
                                   style: TextStyle(color: Colors.black),
                                 ),
                               ),
@@ -58,7 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               enabled: false,
                               decoration: InputDecoration(
                                 label: Text(
-                                  "Rol:\t${widget.user!.role}",
+                                  "${l10n.rol}:\t${widget.user!.role}",
                                   style: TextStyle(color: Colors.black),
                                 ),
                               ),
@@ -79,7 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           (ProfileScreen).toString(),
                         );
                   },
-                  child: Text("Cambiar contraseña"),
+                  child: Text(l10n.cambiarContrasena),
                 ),
               ],
             )
@@ -100,7 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 enabled: false,
                                 decoration: InputDecoration(
                                   label: Text(
-                                    "Usuario:\t${widget.user!.username}",
+                                    "${l10n.usuario}:\t${widget.user!.username}",
                                     style: TextStyle(color: Colors.black),
                                   ),
                                 ),
@@ -112,7 +116,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 enabled: false,
                                 decoration: InputDecoration(
                                   label: Text(
-                                    "Nombre:\t${widget.user!.name}",
+                                    "${l10n.nombre}:\t${widget.user!.name}",
                                     style: TextStyle(color: Colors.black),
                                   ),
                                 ),
@@ -124,7 +128,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 enabled: false,
                                 decoration: InputDecoration(
                                   label: Text(
-                                    "Rol:\t${widget.user!.role}",
+                                    "${l10n.rol}:\t${widget.user!.role}",
                                     style: TextStyle(color: Colors.black),
                                   ),
                                 ),
@@ -145,7 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             (ProfileScreen).toString(),
                           );
                     },
-                    child: Text("Cambiar contraseña"),
+                    child: Text(l10n.cambiarContrasena),
                   ),
                 ],
               ),

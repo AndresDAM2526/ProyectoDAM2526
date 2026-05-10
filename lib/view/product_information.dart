@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/product.dart';
 
 class ProductInformation extends StatelessWidget {
@@ -7,6 +8,7 @@ class ProductInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n=AppLocalizations.of(context)!;
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -21,7 +23,7 @@ class ProductInformation extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    Text("Nombre"),
+                    Text(l10n.nombre),
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -76,7 +78,7 @@ class ProductInformation extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    Text("Ubicación"),
+                    Text(l10n.ubicacion),
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -104,7 +106,7 @@ class ProductInformation extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    Text("Cantidad"),
+                    Text(l10n.cantidad),
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(

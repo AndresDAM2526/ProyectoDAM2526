@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/view/addProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/addUser_screen.dart';
 import 'package:proyecto_dam_2526/view/modifyInventory_screen.dart';
@@ -12,11 +13,12 @@ class AdministrationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n=AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text("Administración"))),
+      appBar: AppBar(title: Center(child: Text(l10n.administracion))),
       body: Column(
         children: [
-          Text("Usuarios"),
+          Text(l10n.usuarios),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -29,12 +31,17 @@ class AdministrationScreen extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => AddUserScreen()),
                     );
                     if (result == true) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Se ha añadido el usuario")),
-                      );
+                      await context
+                          .read<MessagesViewmodel>()
+                          .showInformationDialog(
+                            context,
+                            MediaQuery.of(context).size.width / 2,
+                            MediaQuery.of(context).size.height / 3,
+                            l10n.nuevoUsuarioMensaje,
+                          );
                     }
                   },
-                  child: Text("Añadir usuario"),
+                  child: Text(l10n.anadirUsuario),
                 ),
               ),
               ElevatedButton(
@@ -44,12 +51,12 @@ class AdministrationScreen extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => ModifyUserScreen()),
                   );
                 },
-                child: Text("Modificar usuario"),
+                child: Text(l10n.modificarUsuario),
               ),
             ],
           ),
 
-          Text("Inventario"),
+          Text(l10n.inventario),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -70,11 +77,11 @@ class AdministrationScreen extends StatelessWidget {
                             context,
                             MediaQuery.of(context).size.width / 2,
                             MediaQuery.of(context).size.height / 3,
-                            "Se ha añadido el producto correctamente",
+                            l10n.nuevoProductoMensaje,
                           );
                     }
                   },
-                  child: Text("Añadir producto"),
+                  child: Text(l10n.anadirProducto),
                 ),
               ),
 
@@ -82,9 +89,9 @@ class AdministrationScreen extends StatelessWidget {
                 onPressed: () {
                   context
                       .read<AdministrationscreenViewmodel>()
-                      .showAddLocationDialog(context);
+                      .showAddLocationDialog(context,l10n);
                 },
-                child: Text("Añadir ubicación"),
+                child: Text(l10n.anadirUbicacion),
               ),
             ],
           ),
@@ -97,9 +104,9 @@ class AdministrationScreen extends StatelessWidget {
                   onPressed: () {
                     context
                         .read<AdministrationscreenViewmodel>()
-                        .showAddTypeProductDialog(context);
+                        .showAddTypeProductDialog(context,l10n);
                   },
-                  child: Text("Añadir tipo"),
+                  child: Text(l10n.anadirTipo),
                 ),
               ),
 
@@ -110,7 +117,7 @@ class AdministrationScreen extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => ModifyInventory()),
                   );
                 },
-                child: Text("Modificar inventario"),
+                child: Text(l10n.modificarInventario),
               ),
             ],
           ),

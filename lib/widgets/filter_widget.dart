@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:sqflite/sqflite.dart';
@@ -20,8 +21,9 @@ class _FilterWidgetState extends State<FilterWidget> {
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
+    final l10n=AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text("Filtrar por:")),
+      appBar: AppBar(title: Text(l10n.filtrarPor)),
       body: Row(
         children: [
           NavigationRail(
@@ -48,7 +50,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                     future: context.read<SupabaseService>().showLocations(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
-                        return Text("Error al cargar los datos");
+                        return Text(l10n.errorCargaDatos);
                       }
                       final elementList = snapshot.data;
                       return RadioGroup<String>(
@@ -78,7 +80,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                     future: context.read<SupabaseService>().showTypes(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
-                        return Text("Error al cargar los datos");
+                        return Text(l10n.errorCargaDatos);
                       }
                       final elementList = snapshot.data;
                       return RadioGroup<String>(
@@ -112,7 +114,7 @@ class _FilterWidgetState extends State<FilterWidget> {
             selectedTypeRadio,
           ]);
         },
-        child: Text("Filtrar"),
+        child: Text(l10n.filtrar),
       ),
     );
   }

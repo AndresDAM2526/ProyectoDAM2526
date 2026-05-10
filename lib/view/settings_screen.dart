@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/theme_viewmodel.dart';
 
@@ -12,11 +13,12 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  String? _idioma;
   double sliderValue = 0;
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
+      appBar: AppBar(title: Center(child: Text(l10n.ajustes))),
       body: (MediaQuery.of(context).orientation == Orientation.portrait)
           ? Column(
               children: [
@@ -24,10 +26,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   color: Colors.amber,
                   margin: EdgeInsets.all(10),
                   child: ExpansionTile(
-                    title: Text("Modo oscuro"),
+                    title: Text(l10n.modoOscuro),
                     children: [
                       ListTile(
-                        leading: Text("Modo oscuro"),
+                        leading: Text(l10n.modoOscuro),
                         title: Switch(
                           value: context.watch<ThemeViewmodel>().darkMode,
                           onChanged: (value) {
@@ -47,26 +49,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     expansionAnimationStyle: AnimationStyle(
                       curve: Curves.bounceIn,
                     ),
-                    title: Text("Idioma"),
+                    title: Text(l10n.idioma),
                     children: [
                       ListTile(
-                        leading: Text("Idioma"),
+                        leading: Text(l10n.idioma),
                         title: DropdownButtonFormField(
-                          initialValue: "Español",
+                          initialValue: context.read<ThemeViewmodel>().lang,
                           items: [
                             DropdownMenuItem(
-                              value: "Español",
+                              value: "es",
                               child: Text("Español"),
                             ),
                             DropdownMenuItem(
-                              value: "Ingles",
+                              value: "en",
                               child: Text("Ingles"),
                             ),
                           ],
                           onChanged: (value) {
-                            setState(() {
-                              _idioma = value;
-                            });
+                            context.read<ThemeViewmodel>().changeLang(value!);
                           },
                         ),
                       ),
@@ -77,7 +77,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   color: Colors.amber,
                   margin: EdgeInsets.all(10),
                   child: ExpansionTile(
-                    title: Text("Tamaño de la fuente"),
+                    title: Text(l10n.tamanioFuente),
                     children: [
                       Slider(
                         value: sliderValue,
@@ -99,10 +99,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     color: Colors.amber,
                     margin: EdgeInsets.all(10),
                     child: ExpansionTile(
-                      title: Text("Modo oscuro"),
+                      title: Text(l10n.modoOscuro),
                       children: [
                         ListTile(
-                          leading: Text("Modo oscuro"),
+                          leading: Text(l10n.modoOscuro),
                           title: Switch(
                             value: context.watch<ThemeViewmodel>().darkMode,
                             onChanged: (value) {
@@ -122,26 +122,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       expansionAnimationStyle: AnimationStyle(
                         curve: Curves.bounceIn,
                       ),
-                      title: Text("Idioma"),
+                      title: Text(l10n.idioma),
                       children: [
                         ListTile(
-                          leading: Text("Idioma"),
+                          leading: Text(l10n.idioma),
                           title: DropdownButtonFormField(
-                            initialValue: "Español",
+                            initialValue: context.read<ThemeViewmodel>().lang,
                             items: [
                               DropdownMenuItem(
-                                value: "Español",
+                                value: "es",
                                 child: Text("Español"),
                               ),
                               DropdownMenuItem(
-                                value: "Ingles",
+                                value: "en",
                                 child: Text("Ingles"),
                               ),
                             ],
                             onChanged: (value) {
-                              setState(() {
-                                _idioma = value;
-                              });
+                              print("object");
+                              context.read<ThemeViewmodel>().changeLang(value!);
                             },
                           ),
                         ),
@@ -152,7 +151,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     color: Colors.amber,
                     margin: EdgeInsets.all(10),
                     child: ExpansionTile(
-                      title: Text("Tamaño de la fuente"),
+                      title: Text(l10n.tamanioFuente),
                       children: [
                         Slider(
                           value: sliderValue,

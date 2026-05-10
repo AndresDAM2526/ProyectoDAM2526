@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/databaseProduct.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
@@ -19,8 +20,9 @@ class _ModifyInventoryState extends State<ModifyInventory> {
   String? name = "";
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text("Modificar inventario"))),
+      appBar: AppBar(title: Center(child: Text(l10n.modificarInventario))),
       body: Column(
         children: [
           Container(
@@ -30,7 +32,7 @@ class _ModifyInventoryState extends State<ModifyInventory> {
               padding: EdgeInsets.all(8.0),
               child: TextField(
                 decoration: InputDecoration(
-                  label: Center(child: Text("Introduzca el nombre")),
+                  label: Center(child: Text(l10n.introducirNombre)),
                 ),
                 onSubmitted: (value) {
                   setState(() {
@@ -50,7 +52,7 @@ class _ModifyInventoryState extends State<ModifyInventory> {
                   return CircularProgressIndicator();
                 }
                 if (!snapshot.hasData) {
-                  return Center(child: Text("No se han encontrado resultados"));
+                  return Center(child: Text(l10n.sinResultados));
                 }
                 final products = snapshot.data ?? [];
                 return Container(
@@ -78,7 +80,7 @@ class _ModifyInventoryState extends State<ModifyInventory> {
                                     context,
                                     MediaQuery.of(context).size.width / 2,
                                     MediaQuery.of(context).size.height / 3,
-                                    "Se ha procedido con el borrado del producto",
+                                    l10n.productoBorrado,
                                   );
                             },
                             icon: Icon(Icons.delete),
@@ -89,6 +91,7 @@ class _ModifyInventoryState extends State<ModifyInventory> {
                                   .read<AdministrationscreenViewmodel>()
                                   .showModifyProductDialog(
                                     context,
+                                    l10n,
                                     DatabaseProduct(
                                       idProduct: products[index]['id_product'],
                                       name: products[index]['product'],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
@@ -16,15 +17,16 @@ class _ModifyUserScreenState extends State<ModifyUserScreen> {
   String? search = "";
   @override
   Widget build(BuildContext context) {
+    final l10n=AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text("Modificar usuario")),
+      appBar: AppBar(title: Text(l10n.modificarUsuario)),
       body: Column(
         children: [
           Container(
             margin: EdgeInsets.all(10),
             child: TextField(
               decoration: InputDecoration(
-                label: Text("Introduzca el usuario o nombre"),
+                label: Text(l10n.introducirUsuarioONombre),
               ),
               onSubmitted: (value) {
                 setState(() {
@@ -39,7 +41,7 @@ class _ModifyUserScreenState extends State<ModifyUserScreen> {
                     future: context.watch<SupabaseService>().getAllUsers(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
-                        return Text("No se han encontrado resultados");
+                        return Text(l10n.sinResultados);
                       }
                       final foundUsers = snapshot.data;
                       return ListView.builder(
@@ -70,7 +72,7 @@ class _ModifyUserScreenState extends State<ModifyUserScreen> {
                         .getUserByNameOrUsername(search!),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
-                        return Text("No se han encontrado resultados");
+                        return Text(l10n.sinResultados);
                       }
                       final foundUsers = snapshot.data;
                       return ListView.builder(

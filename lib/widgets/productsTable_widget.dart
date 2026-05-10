@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/product.dart';
 import 'package:proyecto_dam_2526/view/product_information.dart';
 
@@ -13,6 +14,7 @@ class ProductsTableWidget extends StatefulWidget {
 class _ProductsTableWidgetState extends State<ProductsTableWidget> {
   @override
   Widget build(BuildContext context) {
+    final l10n=AppLocalizations.of(context)!;
     return DataTable(
       horizontalMargin: 5,
       dataRowMinHeight: 0,
@@ -20,13 +22,13 @@ class _ProductsTableWidgetState extends State<ProductsTableWidget> {
       border: TableBorder.all(width: 1),
       columns: [
         DataColumn(
-          label: Expanded(child: Center(child: Text("Nombre"))),
+          label: Expanded(child: Center(child: Text(l10n.nombre))),
         ),
         DataColumn(
-          label: Expanded(child: Center(child: Text("Tipo"))),
+          label: Expanded(child: Center(child: Text(l10n.tipo))),
         ),
         DataColumn(
-          label: Expanded(child: Center(child: Text("Ubicación"))),
+          label: Expanded(child: Center(child: Text(l10n.ubicacion))),
         ),
       ],
       rows: widget.productList
