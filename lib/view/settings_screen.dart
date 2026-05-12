@@ -13,7 +13,6 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  double sliderValue = 0;
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -62,7 +61,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                             DropdownMenuItem(
                               value: "en",
-                              child: Text("Ingles"),
+                              child: Text("English"),
                             ),
                           ],
                           onChanged: (value) {
@@ -80,10 +79,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     title: Text(l10n.tamanioFuente),
                     children: [
                       Slider(
-                        value: sliderValue,
+                        divisions: 5,
+                        min: 1,
+                        max: 5,
+                        value: context.read<ThemeViewmodel>().fontSize,
                         onChanged: (value) {
                           setState(() {
-                            sliderValue = value;
+                            context.read<ThemeViewmodel>().changeFontSize(
+                              value,
+                            );
                           });
                         },
                       ),
@@ -154,10 +158,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       title: Text(l10n.tamanioFuente),
                       children: [
                         Slider(
-                          value: sliderValue,
+                          divisions: 4,
+                          min: 1,
+                          max: 5,
+                          value: context.read<ThemeViewmodel>().fontSize,
                           onChanged: (value) {
                             setState(() {
-                              sliderValue = value;
+                              print(context.read<ThemeViewmodel>().fontSize);
+                              context.read<ThemeViewmodel>().changeFontSize(
+                                value,
+                              );
                             });
                           },
                         ),

@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
-import 'package:proyecto_dam_2526/model/requestProduct.dart';
 import 'package:proyecto_dam_2526/service/auth_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/view/administration_screen.dart';
 import 'package:proyecto_dam_2526/view/getProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/inventory_screen.dart';
 import 'package:proyecto_dam_2526/view/login_screen.dart';
-import 'package:proyecto_dam_2526/view/newUserPassword.dart';
 import 'package:proyecto_dam_2526/view/profile_screen.dart';
 import 'package:proyecto_dam_2526/view/settings_screen.dart';
 import 'package:proyecto_dam_2526/view/userHistory_screen.dart';
@@ -81,7 +79,34 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.light(),
+      theme: ThemeData(
+        textTheme: TextTheme(
+          titleLarge: TextStyle(
+            fontSize: context.watch<ThemeViewmodel>().fontSize * 6,
+          ),
+          bodyLarge: TextStyle(
+            fontSize: context.watch<ThemeViewmodel>().fontSize * 6,
+          ),
+          labelLarge: TextStyle(
+            fontSize: context.watch<ThemeViewmodel>().fontSize * 6,
+          ),
+          bodyMedium: TextStyle(
+            fontSize: context.watch<ThemeViewmodel>().fontSize * 6,
+          ),
+          bodySmall: TextStyle(
+            fontSize: context.watch<ThemeViewmodel>().fontSize * 6,
+          ),
+          displayLarge: TextStyle(
+            fontSize: context.watch<ThemeViewmodel>().fontSize * 6,
+          ),
+          labelSmall: TextStyle(
+            fontSize: context.watch<ThemeViewmodel>().fontSize * 6,
+          ),
+          labelMedium: TextStyle(
+            fontSize: context.watch<ThemeViewmodel>().fontSize * 6,
+          ),
+        ),
+      ),
       darkTheme: ThemeData.dark(),
       themeMode: context.watch<ThemeViewmodel>().theme,
       debugShowCheckedModeBanner: false,
