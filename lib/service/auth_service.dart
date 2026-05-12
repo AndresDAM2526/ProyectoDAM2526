@@ -69,12 +69,10 @@ class AuthService extends ChangeNotifier {
     BuildContext context,
   ) async {
     try {
-      print("Llega aqui");
       final res = await supabase.auth.signInWithPassword(
         email: email,
         password: password,
       );
-      print("LLega aqui 2");
       bool firstSignin = false;
       List<Map<String, dynamic>> dataUser = await context
           .read<SupabaseService>()

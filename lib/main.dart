@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/service/auth_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
+import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/view/administration_screen.dart';
 import 'package:proyecto_dam_2526/view/getProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/inventory_screen.dart';
@@ -152,25 +153,22 @@ class _MyAppState extends State<MyApp> {
                   ),
             appBar: AppBar(
               title: Center(child: Text(l10n.nombreApp)),
-              backgroundColor: Colors.grey,
+              backgroundColor: AppColors.primary,
             ),
             drawer: context.read<AuthService>().userDatabase == null
                 ? null
                 : Drawer(
                     child: ListView(
                       children: [
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height/3,
-                          child: DrawerHeader(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(l10n.nombreApp),
-                                Text(
-                                  "${l10n.usuario} : ${context.read<AuthService>().userDatabase!.username}",
-                                ),
-                              ],
-                            ),
+                        DrawerHeader(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(l10n.nombreApp),
+                              Text(
+                                "${l10n.usuario} : ${context.read<AuthService>().userDatabase!.username}",
+                              ),
+                            ],
                           ),
                         ),
                         ListTile(

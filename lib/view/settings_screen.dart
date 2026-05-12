@@ -17,7 +17,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text(l10n.ajustes))),
       body: (MediaQuery.of(context).orientation == Orientation.portrait)
           ? SingleChildScrollView(
               child: Column(

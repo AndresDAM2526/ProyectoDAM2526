@@ -24,13 +24,16 @@ class _GetProductScreenState extends State<GetProductScreen> {
     return Scaffold(
       body: Column(
         children: [
-          TextField(
-            decoration: InputDecoration(label: Text(l10n.introducirNombre)),
-            onSubmitted: (value) {
-              setState(() {
-                name = value;
-              });
-            },
+          Container(
+            margin: EdgeInsets.all(2),
+            child: TextField(
+              decoration: InputDecoration(label: Text(l10n.introducirNombre)),
+              onSubmitted: (value) {
+                setState(() {
+                  name = value;
+                });
+              },
+            ),
           ),
           Expanded(
             child: FutureBuilder(
@@ -38,7 +41,23 @@ class _GetProductScreenState extends State<GetProductScreen> {
                 name!,
               ),
               builder: (context, snapshot) {
-                final foundProducts = snapshot.data ?? [];
+                if (!snapshot.hasData) {
+                  return CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text(l10n.errorCargaDatos);
+                }
+                final foundProducts = snapshot.data!;
+                if (foundProducts.isEmpty) {
+                  return Container(
+                    margin: EdgeInsets.all(10),
+                    child: Center(
+                      child: Text(
+                        l10n.sinResultados,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  );
+                }
                 return Container(
                   margin: EdgeInsets.all(10),
                   child: ListView.builder(
