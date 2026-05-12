@@ -42,7 +42,13 @@ class _GetProductScreenState extends State<GetProductScreen> {
               ),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return CircularProgressIndicator();
+                  return Container(
+
+                    width: MediaQuery.of(context).size.width/2,
+                    height: MediaQuery.of(context).size.height/10,
+                    color: Colors.amber,
+                    child: CircularProgressIndicator(),
+                  );
                 } else if (snapshot.hasError) {
                   return Text(l10n.errorCargaDatos);
                 }
