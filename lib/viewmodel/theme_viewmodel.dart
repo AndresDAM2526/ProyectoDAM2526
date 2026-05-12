@@ -3,12 +3,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeViewmodel extends ChangeNotifier {
   bool _darkMode = false;
-  double _fontSize = 1;
+  double _fontSize = 18.0;
   String _lang = "es";
-
+  double multiplier = 1.0;
 
   bool get darkMode => _darkMode;
-  double get fontSize => _fontSize;
+  double get fontSize => _fontSize * multiplier;
   ThemeMode get theme => _darkMode ? ThemeMode.dark : ThemeMode.light;
   String get lang => _lang;
   Locale get currentLang => Locale(_lang);
@@ -21,7 +21,7 @@ class ThemeViewmodel extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     _darkMode = prefs.getBool('darkMode') ?? false;
     _lang = prefs.getString('lang') ?? "es";
-    _fontSize = prefs.getDouble('fontSize') ?? 1;
+    multiplier = prefs.getDouble('multiplier') ?? 1;
     notifyListeners();
   }
 
@@ -40,9 +40,9 @@ class ThemeViewmodel extends ChangeNotifier {
   }
 
   void changeFontSize(double size) async {
-    _fontSize = size;
+    multiplier = size;
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
-    prefs.setDouble('fontSize', _fontSize);
+    prefs.setDouble('multiplier', multiplier);
   }
 }

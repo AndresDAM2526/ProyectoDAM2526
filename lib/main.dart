@@ -82,28 +82,28 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         textTheme: TextTheme(
           titleLarge: TextStyle(
-            fontSize: context.watch<ThemeViewmodel>().fontSize * 6,
+            fontSize: context.watch<ThemeViewmodel>().fontSize ,
           ),
           bodyLarge: TextStyle(
-            fontSize: context.watch<ThemeViewmodel>().fontSize * 6,
+            fontSize: context.watch<ThemeViewmodel>().fontSize ,
           ),
           labelLarge: TextStyle(
-            fontSize: context.watch<ThemeViewmodel>().fontSize * 6,
+            fontSize: context.watch<ThemeViewmodel>().fontSize ,
           ),
           bodyMedium: TextStyle(
-            fontSize: context.watch<ThemeViewmodel>().fontSize * 6,
+            fontSize: context.watch<ThemeViewmodel>().fontSize ,
           ),
           bodySmall: TextStyle(
-            fontSize: context.watch<ThemeViewmodel>().fontSize * 6,
+            fontSize: context.watch<ThemeViewmodel>().fontSize ,
           ),
           displayLarge: TextStyle(
-            fontSize: context.watch<ThemeViewmodel>().fontSize * 6,
+            fontSize: context.watch<ThemeViewmodel>().fontSize ,
           ),
           labelSmall: TextStyle(
-            fontSize: context.watch<ThemeViewmodel>().fontSize * 6,
+            fontSize: context.watch<ThemeViewmodel>().fontSize ,
           ),
           labelMedium: TextStyle(
-            fontSize: context.watch<ThemeViewmodel>().fontSize * 6,
+            fontSize: context.watch<ThemeViewmodel>().fontSize ,
           ),
         ),
       ),
@@ -159,15 +159,18 @@ class _MyAppState extends State<MyApp> {
                 : Drawer(
                     child: ListView(
                       children: [
-                        DrawerHeader(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(l10n.nombreApp),
-                              Text(
-                                "${l10n.usuario} : ${context.read<AuthService>().userDatabase!.username}",
-                              ),
-                            ],
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height/3,
+                          child: DrawerHeader(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(l10n.nombreApp),
+                                Text(
+                                  "${l10n.usuario} : ${context.read<AuthService>().userDatabase!.username}",
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         ListTile(

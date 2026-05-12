@@ -46,11 +46,9 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
       builder: (context) {
         return Dialog(
           child: SizedBox(
-            width: (MediaQuery.of(context).orientation == Orientation.portrait)
-                ? MediaQuery.of(context).size.width / 2
-                : MediaQuery.of(context).size.width,
+            width:  MediaQuery.of(context).size.width,
             height: (MediaQuery.of(context).orientation == Orientation.portrait)
-                ? MediaQuery.of(context).size.height / 4
+                ? MediaQuery.of(context).size.height / 3
                 : MediaQuery.of(context).size.height / 2,
             child: AddlocationScreen(),
           ),
@@ -74,11 +72,9 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
       builder: (context) {
         return Dialog(
           child: SizedBox(
-            width: (MediaQuery.of(context).orientation == Orientation.portrait)
-                ? MediaQuery.of(context).size.width / 2
-                : MediaQuery.of(context).size.width,
+            width: MediaQuery.of(context).size.width,
             height: (MediaQuery.of(context).orientation == Orientation.portrait)
-                ? MediaQuery.of(context).size.height / 4
+                ? MediaQuery.of(context).size.height / 3
                 : MediaQuery.of(context).size.height / 2,
             child: AddTypeProduct(),
           ),
@@ -168,7 +164,10 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
           child: SingleChildScrollView(
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 2,
+              height:
+                  (MediaQuery.of(context).orientation == Orientation.portrait)
+                  ? MediaQuery.of(context).size.height / 2
+                  : MediaQuery.of(context).size.height,
               child: ModifyProductScreen(product: product),
             ),
           ),

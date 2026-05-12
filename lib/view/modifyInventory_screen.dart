@@ -42,20 +42,20 @@ class _ModifyInventoryState extends State<ModifyInventory> {
               ),
             ),
           ),
-          Expanded(
-            child: FutureBuilder(
-              future: context.watch<SupabaseService>().getProductsFromName(
-                name!,
-              ),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                }
-                if (!snapshot.hasData) {
-                  return Center(child: Text(l10n.sinResultados));
-                }
-                final products = snapshot.data ?? [];
-                return Container(
+          FutureBuilder(
+            future: context.watch<SupabaseService>().getProductsFromName(
+              name!,
+            ),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              }
+              if (!snapshot.hasData) {
+                return Center(child: Text(l10n.sinResultados));
+              }
+              final products = snapshot.data ?? [];
+              return Expanded(
+                child: Container(
                   margin: EdgeInsets.all(10),
                   child: ListView.builder(
                     itemCount: products.length,
@@ -108,9 +108,9 @@ class _ModifyInventoryState extends State<ModifyInventory> {
                       );
                     },
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ],
       ),

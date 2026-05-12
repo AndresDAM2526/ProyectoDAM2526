@@ -13,9 +13,7 @@ class InventoryScreenViewmodel extends ChangeNotifier {
             height: (MediaQuery.of(context).orientation == Orientation.portrait)
                 ? MediaQuery.of(context).size.height / 2
                 : MediaQuery.of(context).size.height,
-            width: (MediaQuery.of(context).orientation == Orientation.portrait)
-                ? MediaQuery.of(context).size.width / 2
-                : MediaQuery.of(context).size.width / 2,
+            width: MediaQuery.of(context).size.width,
             child: FilterWidget(),
           ),
         );

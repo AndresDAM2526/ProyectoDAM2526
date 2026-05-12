@@ -66,7 +66,13 @@ class _TransactionsState extends State<Transactions> {
                           });
                         },
                       ),
-                      Text(l10n.cantidadManual),
+                      Expanded(
+                        child: Text(
+                          l10n.cantidadManual,
+                          style: TextStyle(overflow: TextOverflow.ellipsis),
+                          maxLines: 2,
+                        ),
+                      ),
                     ],
                   )
                 : null,
@@ -88,7 +94,9 @@ class _TransactionsState extends State<Transactions> {
                       .checkQuantity(value, l10n),
                   decoration: InputDecoration(
                     label: (widget.typeRequest.compareTo("Coger") == 0)
-                        ? Text("${l10n.unidadesDisponibles}: ${widget.maxQuantity}")
+                        ? Text(
+                            "${l10n.unidadesDisponibles}: ${widget.maxQuantity}",
+                          )
                         : Text(l10n.unidadesDevolver),
                     prefixIcon: (widget.typeRequest.compareTo("Coger") == 0)
                         ? IconButton(

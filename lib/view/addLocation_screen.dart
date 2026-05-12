@@ -18,9 +18,15 @@ class _AddlocationScreenState extends State<AddlocationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n=AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.anadirUbicacion)),
+      appBar: AppBar(
+        title: Text(
+          l10n.anadirUbicacion,
+          style: TextStyle(overflow: TextOverflow.ellipsis),
+          maxLines: 2,
+        ),
+      ),
       body: Form(
         key: checkForm,
         child: Column(
@@ -31,12 +37,10 @@ class _AddlocationScreenState extends State<AddlocationScreen> {
                 controller: context
                     .read<AdministrationscreenViewmodel>()
                     .locationController,
-                decoration: InputDecoration(
-                  label: Text(l10n.nuevaUbicacion),
-                ),
+                decoration: InputDecoration(label: Text(l10n.nuevaUbicacion)),
                 validator: (value) => context
                     .read<AdministrationscreenViewmodel>()
-                    .checkLocation(value,l10n),
+                    .checkLocation(value, l10n),
               ),
             ),
             ElevatedButton(

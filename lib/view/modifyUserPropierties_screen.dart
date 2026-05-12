@@ -29,119 +29,123 @@ class _ModifyUserPropiertiesScreenState
       body: Form(
         key: checkForm,
         child: (MediaQuery.of(context).orientation == Orientation.portrait)
-            ? Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: TextFormField(
-                      initialValue: widget.user.username,
-                      validator: (value) => context
-                          .read<ModifyUserFormViewmodel>()
-                          .checkUsername(value, l10n),
-                      decoration: InputDecoration(label: Text(l10n.usuario)),
-                      onSaved: (value) =>
-                          context
-                                  .read<ModifyUserFormViewmodel>()
-                                  .usernameProperty =
-                              value,
+            ? SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: TextFormField(
+                        initialValue: widget.user.username,
+                        validator: (value) => context
+                            .read<ModifyUserFormViewmodel>()
+                            .checkUsername(value, l10n),
+                        decoration: InputDecoration(label: Text(l10n.usuario)),
+                        onSaved: (value) =>
+                            context
+                                    .read<ModifyUserFormViewmodel>()
+                                    .usernameProperty =
+                                value,
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: TextFormField(
-                      initialValue: widget.user.email,
-                      validator: (value) => context
-                          .read<ModifyUserFormViewmodel>()
-                          .checkEmail(value, l10n),
-                      decoration: InputDecoration(label: Text(l10n.email)),
-                      onSaved: (value) =>
-                          context
-                                  .read<ModifyUserFormViewmodel>()
-                                  .emailProperty =
-                              value,
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: TextFormField(
+                        initialValue: widget.user.email,
+                        validator: (value) => context
+                            .read<ModifyUserFormViewmodel>()
+                            .checkEmail(value, l10n),
+                        decoration: InputDecoration(label: Text(l10n.email)),
+                        onSaved: (value) =>
+                            context
+                                    .read<ModifyUserFormViewmodel>()
+                                    .emailProperty =
+                                value,
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: TextFormField(
-                      initialValue: widget.user.name,
-                      validator: (value) => context
-                          .read<ModifyUserFormViewmodel>()
-                          .checkName(value, l10n),
-                      decoration: InputDecoration(label: Text(l10n.nombre)),
-                      onSaved: (value) =>
-                          context.read<ModifyUserFormViewmodel>().nameProperty =
-                              value,
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: TextFormField(
+                        initialValue: widget.user.name,
+                        validator: (value) => context
+                            .read<ModifyUserFormViewmodel>()
+                            .checkName(value, l10n),
+                        decoration: InputDecoration(label: Text(l10n.nombre)),
+                        onSaved: (value) =>
+                            context
+                                    .read<ModifyUserFormViewmodel>()
+                                    .nameProperty =
+                                value,
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: Consumer<SupabaseService>(
-                      builder: (context, values, child) {
-                        final roles = values.roles;
-                        return DropdownButtonFormField<String>(
-                          initialValue: widget.user.role,
-                          decoration: InputDecoration(label: Text(l10n.rol)),
-                          validator: (value) => context
-                              .read<ModifyUserFormViewmodel>()
-                              .checkRole(value, l10n),
-                          items: roles
-                              .map(
-                                (role) => DropdownMenuItem<String>(
-                                  value: role['role'],
-                                  child: Text(role['role']),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: Consumer<SupabaseService>(
+                        builder: (context, values, child) {
+                          final roles = values.roles;
+                          return DropdownButtonFormField<String>(
+                            initialValue: widget.user.role,
+                            decoration: InputDecoration(label: Text(l10n.rol)),
+                            validator: (value) => context
+                                .read<ModifyUserFormViewmodel>()
+                                .checkRole(value, l10n),
+                            items: roles
+                                .map(
+                                  (role) => DropdownMenuItem<String>(
+                                    value: role['role'],
+                                    child: Text(role['role']),
+                                  ),
+                                )
+                                .toList(),
+                            onSaved: (value) =>
+                                context
+                                        .read<ModifyUserFormViewmodel>()
+                                        .roleProperty =
+                                    value,
+                            onChanged: (value) =>
+                                context
+                                        .read<ModifyUserFormViewmodel>()
+                                        .roleProperty =
+                                    value,
+                          );
+                        },
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (checkForm.currentState!.validate()) {
+                          checkForm.currentState!.save();
+                          bool? modified = await context
+                              .read<SupabaseService>()
+                              .updateUser(
+                                UserDatabase(
+                                  idUser: widget.user.idUser,
+                                  username: context
+                                      .read<ModifyUserFormViewmodel>()
+                                      .usernameProperty!,
+                                  email: context
+                                      .read<ModifyUserFormViewmodel>()
+                                      .emailProperty!,
+                                  name: context
+                                      .read<ModifyUserFormViewmodel>()
+                                      .nameProperty!,
+                                  role: context
+                                      .read<ModifyUserFormViewmodel>()
+                                      .roleProperty!,
+                                  firstLogin: false,
                                 ),
-                              )
-                              .toList(),
-                          onSaved: (value) =>
-                              context
-                                      .read<ModifyUserFormViewmodel>()
-                                      .roleProperty =
-                                  value,
-                          onChanged: (value) =>
-                              context
-                                      .read<ModifyUserFormViewmodel>()
-                                      .roleProperty =
-                                  value,
-                        );
-                      },
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      if (checkForm.currentState!.validate()) {
-                        checkForm.currentState!.save();
-                        bool? modified = await context
-                            .read<SupabaseService>()
-                            .updateUser(
-                              UserDatabase(
-                                idUser: widget.user.idUser,
-                                username: context
-                                    .read<ModifyUserFormViewmodel>()
-                                    .usernameProperty!,
-                                email: context
-                                    .read<ModifyUserFormViewmodel>()
-                                    .emailProperty!,
-                                name: context
-                                    .read<ModifyUserFormViewmodel>()
-                                    .nameProperty!,
-                                role: context
-                                    .read<ModifyUserFormViewmodel>()
-                                    .roleProperty!,
-                                firstLogin: false,
-                              ),
-                              context,
-                            );
-                        if (modified == true) {
-                          Navigator.pop(context, true);
-                        } else {
-                          Navigator.pop(context, false);
+                                context,
+                              );
+                          if (modified == true) {
+                            Navigator.pop(context, true);
+                          } else {
+                            Navigator.pop(context, false);
+                          }
                         }
-                      }
-                    },
-                    child: Text(l10n.enviar),
-                  ),
-                ],
+                      },
+                      child: Text(l10n.enviar),
+                    ),
+                  ],
+                ),
               )
             : SingleChildScrollView(
                 child: Column(

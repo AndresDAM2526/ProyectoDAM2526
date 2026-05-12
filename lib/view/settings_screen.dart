@@ -19,82 +19,83 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       appBar: AppBar(title: Center(child: Text(l10n.ajustes))),
       body: (MediaQuery.of(context).orientation == Orientation.portrait)
-          ? Column(
-              children: [
-                Container(
-                  color: Colors.amber,
-                  margin: EdgeInsets.all(10),
-                  child: ExpansionTile(
-                    title: Text(l10n.modoOscuro),
-                    children: [
-                      ListTile(
-                        leading: Text(l10n.modoOscuro),
-                        title: Switch(
-                          value: context.watch<ThemeViewmodel>().darkMode,
-                          onChanged: (value) {
-                            setState(() {
-                              context.read<ThemeViewmodel>().changeTheme();
-                            });
-                          },
+          ? SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    color: Colors.amber,
+                    margin: EdgeInsets.all(10),
+                    child: ExpansionTile(
+                      title: Text(l10n.modoOscuro),
+                      children: [
+                        ListTile(
+                          leading: Text(l10n.modoOscuro),
+                          title: Switch(
+                            value: context.watch<ThemeViewmodel>().darkMode,
+                            onChanged: (value) {
+                              setState(() {
+                                context.read<ThemeViewmodel>().changeTheme();
+                              });
+                            },
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.all(10),
-                  color: Colors.amber,
-                  child: ExpansionTile(
-                    expansionAnimationStyle: AnimationStyle(
-                      curve: Curves.bounceIn,
+                      ],
                     ),
-                    title: Text(l10n.idioma),
-                    children: [
-                      ListTile(
-                        leading: Text(l10n.idioma),
-                        title: DropdownButtonFormField(
-                          initialValue: context.read<ThemeViewmodel>().lang,
-                          items: [
-                            DropdownMenuItem(
-                              value: "es",
-                              child: Text("Español"),
-                            ),
-                            DropdownMenuItem(
-                              value: "en",
-                              child: Text("English"),
-                            ),
-                          ],
-                          onChanged: (value) {
-                            context.read<ThemeViewmodel>().changeLang(value!);
-                          },
-                        ),
-                      ),
-                    ],
                   ),
-                ),
-                Container(
-                  color: Colors.amber,
-                  margin: EdgeInsets.all(10),
-                  child: ExpansionTile(
-                    title: Text(l10n.tamanioFuente),
-                    children: [
-                      Slider(
-                        divisions: 5,
-                        min: 1,
-                        max: 5,
-                        value: context.read<ThemeViewmodel>().fontSize,
-                        onChanged: (value) {
-                          setState(() {
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    color: Colors.amber,
+                    child: ExpansionTile(
+                      expansionAnimationStyle: AnimationStyle(
+                        curve: Curves.bounceIn,
+                      ),
+                      title: Text(l10n.idioma),
+                      children: [
+                        ListTile(
+                          leading: Text(l10n.idioma),
+                          title: DropdownButtonFormField(
+                            initialValue: context.read<ThemeViewmodel>().lang,
+                            items: [
+                              DropdownMenuItem(
+                                value: "es",
+                                child: Text("Español"),
+                              ),
+                              DropdownMenuItem(
+                                value: "en",
+                                child: Text("English"),
+                              ),
+                            ],
+                            onChanged: (value) {
+                              context.read<ThemeViewmodel>().changeLang(value!);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    color: Colors.amber,
+                    margin: EdgeInsets.all(10),
+                    child: ExpansionTile(
+                      title: Text(l10n.tamanioFuente),
+                      children: [
+                        Slider(
+                          divisions: 4,
+                          min: 1,
+                          max: 1.5,
+                          value: context.watch<ThemeViewmodel>().multiplier,
+                          onChanged: (value) {
+                            print(context.read<ThemeViewmodel>().fontSize);
                             context.read<ThemeViewmodel>().changeFontSize(
                               value,
                             );
-                          });
-                        },
-                      ),
-                    ],
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             )
           : SingleChildScrollView(
               child: Column(
@@ -143,7 +144,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ),
                             ],
                             onChanged: (value) {
-                              print("object");
                               context.read<ThemeViewmodel>().changeLang(value!);
                             },
                           ),
@@ -160,15 +160,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Slider(
                           divisions: 4,
                           min: 1,
-                          max: 5,
-                          value: context.read<ThemeViewmodel>().fontSize,
+                          max: 1.5,
+                          value: context.watch<ThemeViewmodel>().multiplier,
                           onChanged: (value) {
-                            setState(() {
-                              print(context.read<ThemeViewmodel>().fontSize);
-                              context.read<ThemeViewmodel>().changeFontSize(
-                                value,
-                              );
-                            });
+                            print(context.read<ThemeViewmodel>().fontSize);
+                            context.read<ThemeViewmodel>().changeFontSize(
+                              value,
+                            );
                           },
                         ),
                       ],
