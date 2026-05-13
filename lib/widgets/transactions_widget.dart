@@ -6,6 +6,7 @@ import 'package:proyecto_dam_2526/model/requestProduct.dart';
 import 'package:proyecto_dam_2526/service/auth_service.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
+import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/viewmodel/getProduct_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -33,7 +34,9 @@ class _TransactionsState extends State<Transactions> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
+        backgroundColor: AppColors.primary,
         title: Center(
           child: (widget.typeRequest.compareTo("Coger") == 0)
               ? Text(l10n.obtenerProducto)
@@ -45,13 +48,42 @@ class _TransactionsState extends State<Transactions> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(top: 30, left: 10),
+              margin: EdgeInsets.only(top: 30, left: 10, bottom: 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text("${l10n.nombre} : ${widget.product.name}"),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${l10n.nombre}: ",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(widget.product.name),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "${l10n.tipo}: ",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(widget.product.type),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "${l10n.ubicacion}: ",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(widget.product.location),
+                    ],
+                  ),
+
+                  /*Text("${l10n.nombre} : ${widget.product.name}"),
                   Text("${l10n.tipo} : ${widget.product.type}"),
-                  Text("${l10n.ubicacion} : ${widget.product.location}"),
+                  Text("${l10n.ubicacion} : ${widget.product.location}\n"),*/
                 ],
               ),
             ),
@@ -63,6 +95,7 @@ class _TransactionsState extends State<Transactions> {
                         onChanged: (value) {
                           setState(() {
                             readOnlyTextForm = value!;
+                            context.read<GetProductViewmodel>().clearForm();
                           });
                         },
                       ),
@@ -80,7 +113,12 @@ class _TransactionsState extends State<Transactions> {
             Form(
               key: checkForm,
               child: Container(
-                margin: EdgeInsets.all(10),
+                margin: EdgeInsets.only(
+                  top: 20,
+                  left: 40,
+                  right: 40,
+                  bottom: 25,
+                ),
                 child: TextFormField(
                   keyboardType: TextInputType.numberWithOptions(),
                   readOnly: (widget.typeRequest.compareTo("Coger") == 0)
@@ -91,14 +129,18 @@ class _TransactionsState extends State<Transactions> {
                       .quantityController,
                   validator: (value) => context
                       .read<GetProductViewmodel>()
-                      .checkQuantity(value, l10n),
+                      .checkQuantity(value, l10n, widget.maxQuantity!),
                   decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    errorMaxLines: 2,
                     label: (widget.typeRequest.compareTo("Coger") == 0)
                         ? Text(
                             "${l10n.unidadesDisponibles}: ${widget.maxQuantity}",
                           )
                         : Text(l10n.unidadesDevolver),
-                    prefixIcon: (widget.typeRequest.compareTo("Coger") == 0)
+                    prefixIcon:
+                        (widget.typeRequest.compareTo("Coger") == 0 &&
+                            readOnlyTextForm != true)
                         ? IconButton(
                             onPressed: () {
                               context
@@ -109,7 +151,9 @@ class _TransactionsState extends State<Transactions> {
                           )
                         : null,
 
-                    suffixIcon: (widget.typeRequest.compareTo("Coger") == 0)
+                    suffixIcon:
+                        (widget.typeRequest.compareTo("Coger") == 0 &&
+                            readOnlyTextForm != true)
                         ? IconButton(
                             onPressed: () async {
                               context.read<GetProductViewmodel>().addUnity(
@@ -131,6 +175,10 @@ class _TransactionsState extends State<Transactions> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: Colors.black,
+                  ),
                   onPressed: () {
                     if (checkForm.currentState!.validate()) {
                       if (widget.typeRequest.compareTo("Coger") == 0) {
@@ -163,8 +211,6 @@ class _TransactionsState extends State<Transactions> {
                         context.read<GetProductViewmodel>().clearForm();
                       }
                       Navigator.pop(context, true);
-                    } else {
-                      Navigator.pop(context, false);
                     }
                   },
                   child: (widget.typeRequest.compareTo("Coger") == 0)

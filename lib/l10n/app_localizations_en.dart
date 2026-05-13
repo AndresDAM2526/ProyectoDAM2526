@@ -54,6 +54,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cantidadManual => 'Enter quantity manually';
 
   @override
+  String get cantidadNegativa => 'Negative quantity';
+
+  @override
+  String get cantidadSuperior => 'Exceeds available quantity';
+
+  @override
   String get confirmarBorradoUsuario => 'Do you want to delete the user?';
 
   @override

@@ -7,13 +7,16 @@ class InformationMessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n=AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(l10n.informacion),
+          padding: const EdgeInsets.all(10.0),
+          child: Text(
+            l10n.informacion,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
         ),
         Container(width: double.infinity, height: 2, color: Colors.black),
         Padding(

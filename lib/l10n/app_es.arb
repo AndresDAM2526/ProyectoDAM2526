@@ -14,6 +14,8 @@
     "cantidadCorrecta": "Introduzca una cantidad correcta",
     "cantidadIncorrecta": "Cantidad incorrecta",
     "cantidadManual": "Introducir la cantidad manualmente",
+    "cantidadNegativa": "Cantidad negativa",
+    "cantidadSuperior": "La cantidad introducida es superior a la disponible",
     "coger": "Get",
     "confirmarBorradoUsuario": "¿Desea borrar el usuario?",
     "confirmarContrasena": "Confirmar contraseña",

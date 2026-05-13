@@ -54,6 +54,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get cantidadManual => 'Introducir la cantidad manualmente';
 
   @override
+  String get cantidadNegativa => 'Cantidad negativa';
+
+  @override
+  String get cantidadSuperior => 'La cantidad introducida es superior a la disponible';
+
+  @override
   String get confirmarBorradoUsuario => '¿Desea borrar el usuario?';
 
   @override

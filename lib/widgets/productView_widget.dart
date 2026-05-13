@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/databaseProduct.dart';
+import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/view/modifyProduct_screen.dart';
 
 class ProductViewWidget extends StatelessWidget {
@@ -10,7 +11,7 @@ class ProductViewWidget extends StatelessWidget {
   String type;
   int quantity;
   Widget rightSideWidget;
-  Widget leftSideWidget;
+  Widget? leftSideWidget;
   ProductViewWidget({
     super.key,
     required this.idProduct,
@@ -24,9 +25,12 @@ class ProductViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n=AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Container(
-      decoration: BoxDecoration(border: Border.all(width: 1)),
+      decoration: BoxDecoration(
+        color: quantity != 0 ? AppColors.backgroundColor : AppColors.notStock,
+        border: Border.all(width: 1),
+      ),
       child: Row(
         children: [
           Container(
@@ -35,17 +39,53 @@ class ProductViewWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("${l10n.nombre}: $name"),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${l10n.nombre}: ",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Expanded(
+                      child: Text(
+                        name,
+                        style: TextStyle(overflow: TextOverflow.ellipsis),
+                        maxLines: 20,
+                      ),
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("${l10n.ubicacion}: $location"),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${l10n.tipo}: ",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Expanded(
+                      child: Text(
+                        type,
+                        style: TextStyle(overflow: TextOverflow.ellipsis),
+                        maxLines: 20,
+                      ),
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("${l10n.cantidad}: $quantity"),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${l10n.ubicacion}: ",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Expanded(
+                      child: Text(
+                        location,
+                        style: TextStyle(overflow: TextOverflow.ellipsis),
+                        maxLines: 20,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -54,7 +94,7 @@ class ProductViewWidget extends StatelessWidget {
             width: MediaQuery.of(context).size.width / 3,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [leftSideWidget, rightSideWidget],
+              children: [?leftSideWidget, rightSideWidget],
             ),
           ),
         ],

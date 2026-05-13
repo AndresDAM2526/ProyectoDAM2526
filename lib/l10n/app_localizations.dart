@@ -185,6 +185,18 @@ abstract class AppLocalizations {
   /// **'Enter quantity manually'**
   String get cantidadManual;
 
+  /// No description provided for @cantidadNegativa.
+  ///
+  /// In en, this message translates to:
+  /// **'Negative quantity'**
+  String get cantidadNegativa;
+
+  /// No description provided for @cantidadSuperior.
+  ///
+  /// In en, this message translates to:
+  /// **'Exceeds available quantity'**
+  String get cantidadSuperior;
+
   /// No description provided for @confirmarBorradoUsuario.
   ///
   /// In en, this message translates to:

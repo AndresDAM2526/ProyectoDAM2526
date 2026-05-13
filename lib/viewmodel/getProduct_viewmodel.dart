@@ -9,14 +9,23 @@ class GetProductViewmodel extends ChangeNotifier {
   int userQuantity = 0;
   TextEditingController quantityController = TextEditingController();
 
-  String? checkQuantity(String? value, AppLocalizations l10n) =>
-      (value == null || value.isEmpty)
-      ? l10n.campoVacio
-      : (int.tryParse(value) == null)
-      ? l10n.formatoIncorrecto
-      : (int.parse(value) == 0)
-      ? l10n.cantidadCorrecta
-      : null;
+  String? checkQuantity(String? value, AppLocalizations l10n, int maxQuantity) {
+    if (value == null || value.isEmpty) {
+      return l10n.campoVacio;
+    } else if (int.tryParse(value) == null) {
+      return l10n.formatoIncorrecto;
+    }
+    int quantity = int.parse(value);
+    if (quantity == 0) {
+      return l10n.cantidadCorrecta;
+    } else if (quantity < 0) {
+      return l10n.cantidadNegativa;
+    } else if (quantity > maxQuantity) {
+      return l10n.cantidadSuperior;
+    }
+    return null;
+
+  }
 
   void addUnity(int maxQuantity) {
     if (userQuantity < maxQuantity) {
@@ -69,7 +78,7 @@ class GetProductViewmodel extends ChangeNotifier {
       context.read<MessagesViewmodel>().showInformationDialog(
         context,
         MediaQuery.of(context).size.width / 2,
-        MediaQuery.of(context).size.height / 4,
+        MediaQuery.of(context).size.height / 3,
         l10n.peticionCorrecta,
       );
     } else {
