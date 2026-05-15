@@ -4,7 +4,7 @@ import 'package:proyecto_dam_2526/model/product.dart';
 import 'package:proyecto_dam_2526/view/product_information.dart';
 
 class ProductsTableWidget extends StatefulWidget {
-  List<Map<String, dynamic>> productList;
+  List<Map<String, dynamic>?> productList;
   ProductsTableWidget({super.key, required this.productList});
 
   @override
@@ -54,7 +54,7 @@ class _ProductsTableWidgetState extends State<ProductsTableWidget> {
                                 : MediaQuery.of(context).size.height,
                             child: ProductInformation(
                               product: Product(
-                                name: product['product'],
+                                name: product!['product'],
                                 type: product['type']['type'],
                                 location: product['location']['location'],
                                 quantity: product['quantity'],
@@ -72,7 +72,7 @@ class _ProductsTableWidgetState extends State<ProductsTableWidget> {
                     ),
                     child: Padding(
                       padding: EdgeInsets.all(15.0),
-                      child: Text(product['product']),
+                      child: Text(product!['product']),
                     ),
                   ),
                 ),

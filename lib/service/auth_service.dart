@@ -1,23 +1,25 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/main.dart';
 import 'package:proyecto_dam_2526/model/NewUser.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/view/newUserPassword.dart';
+import 'package:proyecto_dam_2526/viewmodel/loginForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide User;
-import 'package:proyecto_dam_2526/model/user.dart';
 
 class AuthService extends ChangeNotifier {
   final supabase = Supabase.instance.client;
   UserDatabase? _userDatabase;
   UserDatabase? get userDatabase => _userDatabase;
 
-  Future<bool?> createNewUser(NewUser user, BuildContext context) async {
+  Future<bool?> createNewUser(
+    NewUser user,
+    BuildContext context,
+    AppLocalizations l10n,
+  ) async {
     try {
       final userAdded = await supabase.functions.invoke(
         'create-user',
@@ -45,7 +47,7 @@ class AuthService extends ChangeNotifier {
           context,
           MediaQuery.of(context).size.width / 2,
           MediaQuery.of(context).size.height / 3,
-          "El email indicado ya ha sido utilizado",
+          l10n.emailUsado,
         );
         return false;
       }
@@ -67,6 +69,7 @@ class AuthService extends ChangeNotifier {
     String email,
     String password,
     BuildContext context,
+    AppLocalizations l10n,
   ) async {
     try {
       final res = await supabase.auth.signInWithPassword(
@@ -90,6 +93,7 @@ class AuthService extends ChangeNotifier {
                     NewUserPassword(idUser: idUser, email: email),
               ),
             );
+            context.read<LoginFormViewmodel>().clearForm();
           }
         } else {
           updateSession(
@@ -102,7 +106,7 @@ class AuthService extends ChangeNotifier {
               firstLogin: firstSignin,
             ),
           );
-          print("Entra aqui");
+          context.read<LoginFormViewmodel>().clearForm();
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => MyApp()),
@@ -115,10 +119,12 @@ class AuthService extends ChangeNotifier {
         context.read<MessagesViewmodel>().showErrorDialog(
           context,
           MediaQuery.of(context).size.width / 2,
-          MediaQuery.of(context).size.height / 4,
-          "Usuario y/o contraseña incorrectos",
+          MediaQuery.of(context).size.height / 3,
+          l10n.inicioSesionIncorrecto,
         );
       }
+    } catch (e) {
+      print(e);
     }
   }
 

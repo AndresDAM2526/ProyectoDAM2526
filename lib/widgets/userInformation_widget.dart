@@ -7,6 +7,7 @@ import 'package:proyecto_dam_2526/model/user.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
+import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -22,84 +23,162 @@ class UserInformationWidget extends StatefulWidget {
 class _UserInformationWidgetState extends State<UserInformationWidget> {
   @override
   Widget build(BuildContext context) {
-    final l10n=AppLocalizations.of(context)!;
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(width: 1),
-        color: Colors.greenAccent,
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("${l10n.usuario}: ${widget.user.username}"),
-                  Text("${l10n.nombre}: ${widget.user.name}"),
-                  Text("${l10n.rol}: ${widget.user.role}"),
-                ],
+    final l10n = AppLocalizations.of(context)!;
+    return GestureDetector(
+      onLongPress: () async {
+        bool result = await context.read<MessagesViewmodel>().showConfirmDialog(
+          context,
+          MediaQuery.of(context).size.width,
+          (MediaQuery.of(context).orientation == Orientation.portrait)
+              ? MediaQuery.of(context).size.height / 3
+              : MediaQuery.of(context).size.height / 1.5,
+          l10n.confirmarBorradoUsuario,
+        );
+        if (result) {
+          bool? deleteUser = await context.read<SupabaseService>().deleteUser(
+            widget.user.idUser,
+          );
+          if (deleteUser == true) {
+            await context.read<MessagesViewmodel>().showInformationDialog(
+              context,
+              MediaQuery.of(context).size.width / 2,
+              (MediaQuery.of(context).orientation == Orientation.portrait)
+                  ? MediaQuery.of(context).size.height / 3
+                  : MediaQuery.of(context).size.height,
+              l10n.usuarioEliminado,
+            );
+          }
+        }
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(width: 1),
+          color: AppColors.backgroundColor,
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.all(5),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          "${l10n.nombre}: ",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          maxLines: 2,
+                        ),
+                        Text(widget.user.name),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "${l10n.usuario}: ",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          maxLines: 2,
+                        ),
+                        Text(widget.user.username),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "${l10n.email}: ",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(widget.user.email),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "${l10n.rol}: ",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(widget.user.role),
+                      ],
+                    ),
+                    ExpansionTile(
+                      title: Text("Opciones"),
+                      children: [
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                context
+                                    .read<AdministrationscreenViewmodel>()
+                                    .showModifyPropertiesUserDialog(
+                                      context,
+                                      l10n,
+                                      widget.user,
+                                    );
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                  left: 8,
+                                  top: 8,
+                                  bottom: 8,
+                                  right: 4,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: AppColors.secondary,
+                                  border: Border.all(width: 1),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(l10n.modificarUsuario),
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                context
+                                    .read<AdministrationscreenViewmodel>()
+                                    .showChangePasswordDialog(
+                                      context,
+                                      l10n,
+                                      widget.user,
+                                      (UserInformationWidget).toString(),
+                                    );
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                  left: 4,
+                                  top: 8,
+                                  bottom: 8,
+                                  right: 4,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: AppColors.secondary,
+                                  border: Border.all(width: 1),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(l10n.cambiarContrasena),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.all(10),
-            child: Row(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    context
-                        .read<AdministrationscreenViewmodel>()
-                        .showModifyPropertiesUserDialog(context,l10n, widget.user);
-                  },
-                  icon: Icon(Icons.update),
-                ),
-                IconButton(
-                  onPressed: () {
-                    context
-                        .read<AdministrationscreenViewmodel>()
-                        .showChangePasswordDialog(
-                          context,
-                          l10n,
-                          widget.user,
-                          (UserInformationWidget).toString(),
-                        );
-                  },
-                  icon: Icon(Icons.password),
-                ),
-                IconButton(
-                  onPressed: () async {
-                    bool result = await context
-                        .read<MessagesViewmodel>()
-                        .showConfirmDialog(
-                          context,
-                          MediaQuery.of(context).size.width / 2,
-                          MediaQuery.of(context).size.height / 2,
-                          l10n.confirmarBorradoUsuario,
-                        );
-                    if (result) {
-                      bool? deleteUser = await context
-                          .read<SupabaseService>()
-                          .deleteUser(widget.user.idUser);
-                      if (deleteUser == true) {
-                        await context
-                            .read<MessagesViewmodel>()
-                            .showInformationDialog(
-                              context,
-                              MediaQuery.of(context).size.width / 2,
-                              MediaQuery.of(context).size.height / 3,
-                              l10n.usuarioEliminado,
-                            );
-                      }
-                    }
-                  },
-                  icon: Icon(Icons.delete),
-                ),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

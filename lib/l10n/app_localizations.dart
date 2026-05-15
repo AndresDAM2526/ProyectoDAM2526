@@ -143,6 +143,18 @@ abstract class AppLocalizations {
   /// **'Add user'**
   String get anadirUsuario;
 
+  /// No description provided for @borrarUbicacion.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete location'**
+  String get borrarUbicacion;
+
+  /// No description provided for @borrarTipo.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete type'**
+  String get borrarTipo;
+
   /// No description provided for @cambiarContrasena.
   ///
   /// In en, this message translates to:
@@ -239,11 +251,23 @@ abstract class AppLocalizations {
   /// **'Password has been updated'**
   String get contrasenaActualizada;
 
+  /// No description provided for @contrasenaCorta.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is too short (min. 6 characters)'**
+  String get contrasenaCorta;
+
   /// No description provided for @contrasenaNoCoincide.
   ///
   /// In en, this message translates to:
   /// **'Passwords do not match'**
   String get contrasenaNoCoincide;
+
+  /// No description provided for @correoIncorrecto.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid email format'**
+  String get correoIncorrecto;
 
   /// No description provided for @devolverProducto.
   ///
@@ -257,6 +281,12 @@ abstract class AppLocalizations {
   /// **'Email'**
   String get email;
 
+  /// No description provided for @emailUsado.
+  ///
+  /// In en, this message translates to:
+  /// **'Email already exists'**
+  String get emailUsado;
+
   /// No description provided for @enviar.
   ///
   /// In en, this message translates to:
@@ -268,6 +298,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error'**
   String get error;
+
+  /// No description provided for @errorBorrado.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot delete this record, foreign key constraint violation'**
+  String get errorBorrado;
 
   /// No description provided for @errorCargaDatos.
   ///
@@ -311,6 +347,12 @@ abstract class AppLocalizations {
   /// **'Incorrect format'**
   String get formatoIncorrecto;
 
+  /// No description provided for @formatoNombreIncorrecto.
+  ///
+  /// In en, this message translates to:
+  /// **'Only letters are allowed'**
+  String get formatoNombreIncorrecto;
+
   /// No description provided for @historial.
   ///
   /// In en, this message translates to:
@@ -334,6 +376,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Log in'**
   String get iniciarSesion;
+
+  /// No description provided for @inicioSesionIncorrecto.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect username or password'**
+  String get inicioSesionIncorrecto;
 
   /// No description provided for @introducirCantidad.
   ///
@@ -556,6 +604,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Type'**
   String get tipo;
+
+  /// No description provided for @tipoEliminado.
+  ///
+  /// In en, this message translates to:
+  /// **'Type deleted successfully'**
+  String get tipoEliminado;
 
   /// No description provided for @tipoProducto.
   ///

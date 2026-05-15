@@ -33,6 +33,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get anadirUsuario => 'Add user';
 
   @override
+  String get borrarUbicacion => 'Delete location';
+
+  @override
+  String get borrarTipo => 'Delete type';
+
+  @override
   String get cambiarContrasena => 'Change password';
 
   @override
@@ -81,7 +87,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get contrasenaActualizada => 'Password has been updated';
 
   @override
+  String get contrasenaCorta => 'Password is too short (min. 6 characters)';
+
+  @override
   String get contrasenaNoCoincide => 'Passwords do not match';
+
+  @override
+  String get correoIncorrecto => 'Invalid email format';
 
   @override
   String get devolverProducto => 'Return product';
@@ -90,10 +102,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get email => 'Email';
 
   @override
+  String get emailUsado => 'Email already exists';
+
+  @override
   String get enviar => 'Send';
 
   @override
   String get error => 'Error';
+
+  @override
+  String get errorBorrado => 'Cannot delete this record, foreign key constraint violation';
 
   @override
   String get errorCargaDatos => 'Error loading data';
@@ -117,6 +135,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get formatoIncorrecto => 'Incorrect format';
 
   @override
+  String get formatoNombreIncorrecto => 'Only letters are allowed';
+
+  @override
   String get historial => 'History';
 
   @override
@@ -127,6 +148,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get iniciarSesion => 'Log in';
+
+  @override
+  String get inicioSesionIncorrecto => 'Incorrect username or password';
 
   @override
   String get introducirCantidad => 'Introducir the quantity';
@@ -238,6 +262,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tipo => 'Type';
+
+  @override
+  String get tipoEliminado => 'Type deleted successfully';
 
   @override
   String get tipoProducto => 'Product type';

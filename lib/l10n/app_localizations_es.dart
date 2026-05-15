@@ -33,6 +33,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get anadirUsuario => 'Añadir usuario';
 
   @override
+  String get borrarUbicacion => 'Borrar ubicación';
+
+  @override
+  String get borrarTipo => 'Borrar tipo';
+
+  @override
   String get cambiarContrasena => 'Cambiar contraseña';
 
   @override
@@ -81,7 +87,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get contrasenaActualizada => 'Se ha actualizado la contraseña';
 
   @override
+  String get contrasenaCorta => 'La contraseña debe tener al menos 6 caracteres';
+
+  @override
   String get contrasenaNoCoincide => 'Las contraseñas no coinciden';
+
+  @override
+  String get correoIncorrecto => 'Formato de correo incorrecto';
 
   @override
   String get devolverProducto => 'Devolver producto';
@@ -90,10 +102,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get email => 'Email';
 
   @override
+  String get emailUsado => 'El email indicado ya ha sido utilizado';
+
+  @override
   String get enviar => 'Enviar';
 
   @override
   String get error => 'Error';
+
+  @override
+  String get errorBorrado => 'No se puede borrar este registro,restricción de clave foránea';
 
   @override
   String get errorCargaDatos => 'Error al cargar los datos';
@@ -117,6 +135,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get formatoIncorrecto => 'Formato incorrecto';
 
   @override
+  String get formatoNombreIncorrecto => 'El nombre no puede contener números';
+
+  @override
   String get historial => 'Historial';
 
   @override
@@ -127,6 +148,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get iniciarSesion => 'Iniciar sesión';
+
+  @override
+  String get inicioSesionIncorrecto => 'Usuario y/o contraseña incorrectos';
 
   @override
   String get introducirCantidad => 'Introducir cantidad';
@@ -238,6 +262,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get tipo => 'Tipo';
+
+  @override
+  String get tipoEliminado => 'Tipo eliminado correctamente';
 
   @override
   String get tipoProducto => 'Tipo de producto';

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
+import 'package:proyecto_dam_2526/viewmodel/historyRegister_viewmodel.dart';
 
 class HistoryRegisterWidget extends StatelessWidget {
   String name;
@@ -20,7 +22,7 @@ class HistoryRegisterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n=AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Row(
       children: [
         Container(
@@ -28,19 +30,44 @@ class HistoryRegisterWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("${l10n.nombre}: $name"),
-              Text("${l10n.tipoProducto}: $typeProduct"),
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 10, right: 10, left: 15, bottom: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("${l10n.tipoRegistro}: $typeRegister"),
-              Text("${l10n.cantidad}: $quantity"),
-              Text("${l10n.fecha}: $date"),
+              Row(
+                children: [
+                  Text(
+                    "${l10n.nombre}: ",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(name),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    "${l10n.tipoRegistro}: ",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(typeRegister),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    "${l10n.fecha}: ",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    context.read<HistoryRegisterViewmodel>().parseDate(date),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    "${l10n.cantidad}: ",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text("$quantity"),
+                ],
+              ),
             ],
           ),
         ),

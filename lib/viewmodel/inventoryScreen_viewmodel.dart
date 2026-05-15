@@ -4,7 +4,7 @@ import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/widgets/filter_widget.dart';
 
 class InventoryScreenViewmodel extends ChangeNotifier {
-  void showFilterDialog(BuildContext context) async {
+  Future<List<String>?> showFilterDialog(BuildContext context) async {
     List<String?>? dialog = await showDialog<List<String?>?>(
       context: context,
       builder: (context) {
@@ -21,6 +21,7 @@ class InventoryScreenViewmodel extends ChangeNotifier {
     );
     if (dialog != null) {
       context.read<SupabaseService>().getFilteredProducts(dialog[0], dialog[1]);
+      return dialog.map((element) => element ?? "").toList();
     }
   }
 }

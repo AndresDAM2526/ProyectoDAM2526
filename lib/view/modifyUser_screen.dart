@@ -4,6 +4,7 @@ import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
+import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/widgets/userInformation_widget.dart';
 
 class ModifyUserScreen extends StatefulWidget {
@@ -17,9 +18,13 @@ class _ModifyUserScreenState extends State<ModifyUserScreen> {
   String? search = "";
   @override
   Widget build(BuildContext context) {
-    final l10n=AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.modificarUsuario)),
+      backgroundColor: AppColors.backgroundColor,
+      appBar: AppBar(
+        title: Text(l10n.modificarUsuario),
+        backgroundColor: AppColors.primary,
+      ),
       body: Column(
         children: [
           Container(

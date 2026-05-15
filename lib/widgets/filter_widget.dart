@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
+import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -21,12 +22,18 @@ class _FilterWidgetState extends State<FilterWidget> {
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    final l10n=AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.filtrarPor)),
+      backgroundColor: AppColors.backgroundColor,
+      appBar: AppBar(
+        title: Text(l10n.filtrarPor),
+        backgroundColor: AppColors.primary,
+      ),
       body: Row(
         children: [
           NavigationRail(
+            backgroundColor: AppColors.backgroundColor,
+            indicatorColor: AppColors.secondary,
             destinations: [
               NavigationRailDestination(
                 icon: Icon(Icons.location_on_sharp),
@@ -108,13 +115,14 @@ class _FilterWidgetState extends State<FilterWidget> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.primary,
         onPressed: () {
           Navigator.pop<List<String?>?>(context, [
             selectedLocationRadio,
             selectedTypeRadio,
           ]);
         },
-        child: Text(l10n.filtrar),
+        child: Text(l10n.filtrar, style: TextStyle(color: Colors.black)),
       ),
     );
   }

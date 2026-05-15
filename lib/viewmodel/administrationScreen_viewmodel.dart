@@ -27,7 +27,11 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
       (value == null || value.isEmpty) ? l10n.campoVacio : null;
 
   String? checkPassword(String? value, AppLocalizations l10n) =>
-      (value == null || value.isEmpty) ? l10n.campoVacio : null;
+      (value == null || value.isEmpty)
+      ? l10n.campoVacio
+      : (value.length < 6)
+      ? l10n.contrasenaCorta
+      : null;
 
   String? checkRole(String? value, AppLocalizations l10n) =>
       (value == null || value.isEmpty) ? l10n.campoVacio : null;
@@ -46,10 +50,10 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
       builder: (context) {
         return Dialog(
           child: SizedBox(
-            width:  MediaQuery.of(context).size.width,
+            width: MediaQuery.of(context).size.width,
             height: (MediaQuery.of(context).orientation == Orientation.portrait)
                 ? MediaQuery.of(context).size.height / 3
-                : MediaQuery.of(context).size.height / 2,
+                : MediaQuery.of(context).size.height,
             child: AddlocationScreen(),
           ),
         );
@@ -57,9 +61,14 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
     );
 
     if (result == true) {
-      ScaffoldMessenger.of(
+      context.read<MessagesViewmodel>().showInformationDialog(
         context,
-      ).showSnackBar(SnackBar(content: Text(l10n.nuevaUbicacionMensaje)));
+        MediaQuery.of(context).size.width,
+        (MediaQuery.of(context).orientation == Orientation.portrait)
+            ? MediaQuery.of(context).size.height / 3
+            : MediaQuery.of(context).size.height,
+        l10n.nuevaUbicacionMensaje,
+      );
     }
   }
 
@@ -83,9 +92,14 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
     );
 
     if (result == true) {
-      ScaffoldMessenger.of(
+      context.read<MessagesViewmodel>().showInformationDialog(
         context,
-      ).showSnackBar(SnackBar(content: Text(l10n.nuevoTipoMensaje)));
+        MediaQuery.of(context).size.width,
+        (MediaQuery.of(context).orientation == Orientation.portrait)
+            ? MediaQuery.of(context).size.height / 3
+            : MediaQuery.of(context).size.height,
+        l10n.nuevoTipoMensaje,
+      );
     }
   }
 
@@ -100,9 +114,7 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
       builder: (context) {
         return Dialog(
           child: SizedBox(
-            width: (MediaQuery.of(context).orientation == Orientation.portrait)
-                ? MediaQuery.of(context).size.width
-                : MediaQuery.of(context).size.width / 2,
+            width: MediaQuery.of(context).size.width,
             height: (MediaQuery.of(context).orientation == Orientation.portrait)
                 ? MediaQuery.of(context).size.height / 3
                 : MediaQuery.of(context).size.height / 2,

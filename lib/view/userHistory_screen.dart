@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/service/auth_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
+import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/widgets/historyRegister_widget.dart';
 
 class UserHistoryScreen extends StatefulWidget {
@@ -17,7 +18,8 @@ class _UserHistoryScreenState extends State<UserHistoryScreen> {
   Widget build(BuildContext context) {
     final l10n=AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.historial)),
+      backgroundColor: AppColors.backgroundColor,
+      appBar: AppBar(title: Text(l10n.historial),backgroundColor: AppColors.primary,),
       body: FutureBuilder(
         future: context.watch<SupabaseService>().getHistoryRegisterByIdUser(
           context.watch<AuthService>().userDatabase!.idUser,
@@ -31,7 +33,7 @@ class _UserHistoryScreenState extends State<UserHistoryScreen> {
             itemCount: history.length,
             itemBuilder: (context, index) {
               return Container(
-                margin: EdgeInsets.all(1),
+                margin: EdgeInsets.all(5),
                 decoration: BoxDecoration(border: Border.all(width: 1)),
                 child: HistoryRegisterWidget(
                   name: history[index]['product']['product'],

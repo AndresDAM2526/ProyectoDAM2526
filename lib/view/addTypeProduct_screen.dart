@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
+import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/viewmodel/addProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -16,18 +18,38 @@ class AddTypeProduct extends StatefulWidget {
 
 class _AddTypeProductState extends State<AddTypeProduct> {
   final checkForm = GlobalKey<FormState>();
+  @override
+  void initState() {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final l10n=AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.anadirTipo)),
+      appBar: AppBar(
+        title: Text(l10n.anadirTipo),
+        backgroundColor: AppColors.primary,
+      ),
+      backgroundColor: AppColors.backgroundColor,
       body: Form(
         key: checkForm,
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(20),
               child: TextFormField(
                 controller: context
                     .read<AdministrationscreenViewmodel>()
@@ -35,10 +57,14 @@ class _AddTypeProductState extends State<AddTypeProduct> {
                 decoration: InputDecoration(label: Text(l10n.introducirTipo)),
                 validator: (value) => context
                     .read<AdministrationscreenViewmodel>()
-                    .checkTypeProduct(value,l10n),
+                    .checkTypeProduct(value, l10n),
               ),
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.black,
+              ),
               onPressed: () async {
                 if (checkForm.currentState!.validate()) {
                   bool added = await context
@@ -50,8 +76,9 @@ class _AddTypeProductState extends State<AddTypeProduct> {
                             .text,
                       );
                   if (added == true) {
+                    context.read<AdministrationscreenViewmodel>().typeController.clear();
                     Navigator.pop(context, true);
-                  } 
+                  }
                 }
               },
               child: Text(l10n.anadirTipo),

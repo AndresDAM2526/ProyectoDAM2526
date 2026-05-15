@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/databaseProduct.dart';
 import 'package:proyecto_dam_2526/model/product.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
@@ -15,7 +16,7 @@ class SupabaseService extends ChangeNotifier {
   List<Map<String, dynamic>> _products = [];
   List<Map<String, dynamic>> get products => _products;
 
-  List<Map<String, dynamic>>? _filteredProducts = null;
+  List<Map<String, dynamic>>? _filteredProducts;
   List<Map<String, dynamic>>? get filteredProducts => _filteredProducts;
 
   List<Map<String, dynamic>> _types = [];
@@ -110,11 +111,38 @@ class SupabaseService extends ChangeNotifier {
 
   Future<void> getTypes() async {
     try {
-      final types = await supabase.from('type').select('type');
+      final types = await supabase.from('type').select('id_type,type');
       _types = List<Map<String, dynamic>>.from(types);
       notifyListeners();
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<bool> deleteType(
+    BuildContext context,
+    int idType,
+    AppLocalizations l10n,
+  ) async {
+    try {
+      await supabase.from('type').delete().eq('id_type', idType);
+      await getTypes();
+      notifyListeners();
+      return true;
+    } on PostgrestException catch (e) {
+      if (e.code == '23503') {
+        await context.read<MessagesViewmodel>().showErrorDialog(
+          context,
+          MediaQuery.of(context).size.width,
+          MediaQuery.of(context).size.height / 3,
+          l10n.errorBorrado,
+        );
+        return false;
+      }
+      return false;
+    } catch (e) {
+      print(e);
+      return false;
     }
   }
 
@@ -124,7 +152,10 @@ class SupabaseService extends ChangeNotifier {
 
   Future<void> getLocations() async {
     try {
-      final locations = await supabase.from('location').select('location');
+      final locations = await supabase
+          .from('location')
+          .select('id_location,location')
+          .order('location', ascending: true);
       _locations = List<Map<String, dynamic>>.from(locations);
       notifyListeners();
     } catch (e) {
@@ -338,7 +369,8 @@ class SupabaseService extends ChangeNotifier {
           .select('''
           quantity,date,product:id_product ( product,type:id_type(type),location:id_location(location) ), type:id_type_register ( type_register )
         ''')
-          .eq('id_user', idUser);
+          .eq('id_user', idUser)
+          .order('date', ascending: false);
       return List<Map<String, dynamic>>.from(registers);
     } catch (e) {
       print("Error al obtener los registros");
@@ -384,6 +416,18 @@ class SupabaseService extends ChangeNotifier {
       } else {
         return false;
       }
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  Future<bool> deleteLocation(int idLocation) async {
+    try {
+      await supabase.from('location').delete().eq('id_location', idLocation);
+      await getLocations();
+      notifyListeners();
+      return true;
     } catch (e) {
       print(e);
       return false;
@@ -500,6 +544,20 @@ class SupabaseService extends ChangeNotifier {
     } catch (e) {
       print(e);
       return 0;
+    }
+  }
+
+  Future<List<Map<String, dynamic>>> getHistorial() async {
+    try {
+      final result = await supabase
+          .from('register')
+          .select(
+            'type_register(type_register),product(product),users(username),date',
+          );
+      return List<Map<String, dynamic>>.from(result);
+    } catch (e) {
+      print(e);
+      return [];
     }
   }
 

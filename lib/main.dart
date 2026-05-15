@@ -17,6 +17,7 @@ import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/addUserForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/getProduct_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/historyRegister_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/inventoryScreen_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/loginForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
@@ -57,6 +58,7 @@ void main() async {
           create: (context) => NewUserPasswordFormViewModel(),
         ),
         ChangeNotifierProvider(create: (context) => ThemeViewmodel()),
+        ChangeNotifierProvider(create: (context) => HistoryRegisterViewmodel(),)
       ],
       child: MyApp(),
     ),
@@ -130,6 +132,8 @@ class _MyAppState extends State<MyApp> {
                 context.read<AuthService>().userDatabase == null
                 ? null
                 : BottomNavigationBar(
+                  backgroundColor: AppColors.primary,
+                  selectedItemColor: AppColors.secondary,
                     currentIndex: selectedScreen,
                     onTap: (value) {
                       setState(() {

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/viewmodel/theme_viewmodel.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -17,18 +18,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       body: (MediaQuery.of(context).orientation == Orientation.portrait)
           ? SingleChildScrollView(
               child: Column(
                 children: [
                   Container(
-                    color: Colors.amber,
+                    decoration: BoxDecoration(border: Border.all(width: 1)),
                     margin: EdgeInsets.all(10),
                     child: ExpansionTile(
                       title: Text(l10n.modoOscuro),
                       children: [
                         ListTile(
-                          leading: Text(l10n.modoOscuro),
                           title: Switch(
                             value: context.watch<ThemeViewmodel>().darkMode,
                             onChanged: (value) {
@@ -42,8 +43,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   Container(
+                    decoration: BoxDecoration(border: Border.all(width: 1)),
                     margin: EdgeInsets.all(10),
-                    color: Colors.amber,
                     child: ExpansionTile(
                       expansionAnimationStyle: AnimationStyle(
                         curve: Curves.bounceIn,
@@ -51,7 +52,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       title: Text(l10n.idioma),
                       children: [
                         ListTile(
-                          leading: Text(l10n.idioma),
                           title: DropdownButtonFormField(
                             initialValue: context.read<ThemeViewmodel>().lang,
                             items: [
@@ -73,7 +73,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   Container(
-                    color: Colors.amber,
+                    decoration: BoxDecoration(border: Border.all(width: 1)),
                     margin: EdgeInsets.all(10),
                     child: ExpansionTile(
                       title: Text(l10n.tamanioFuente),

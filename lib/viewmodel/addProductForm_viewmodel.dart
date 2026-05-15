@@ -13,37 +13,34 @@ class AddProductFormViewModel extends ChangeNotifier {
   GlobalKey<FormFieldState> typeDropDown = GlobalKey();
   GlobalKey<FormFieldState> locationDropDown = GlobalKey();
 
-  String? checkName(String? value,AppLocalizations l10n) {
-    if (value!.isEmpty || value == null) {
-      return l10n.campoVacio;
-    }
-  }
+  String? checkName(String? value, AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
+  String? checkType(String? value, AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
+  String? checkLocation(String? value, AppLocalizations l10n) =>
+      (value == null || value.isEmpty) ? l10n.campoVacio : null;
 
-  String? checkQuantity(String? value,AppLocalizations l10n) {
+  String? checkQuantity(String? value, AppLocalizations l10n) {
     if (value!.isEmpty || value == null) {
       return l10n.campoVacio;
     } else if (int.tryParse(value) == null) {
       return l10n.formatoCantidadIncorrecto;
-    } else if (int.parse(value) == 0) {
+    }
+    int quantity = int.parse(value);
+    if (quantity == 0) {
       return l10n.cantidadIncorrecta;
-    }
-  }
-
-  String? checkType(String? value,AppLocalizations l10n) {
-    if (value == null) {
-      return l10n.campoVacio;
-    }
-  }
-
-  String? checkLocation(String? value,AppLocalizations l10n) {
-    if (value == null) {
-      return l10n.campoVacio;
+    } else if (quantity < 0) {
+      return l10n.cantidadNegativa;
     }
   }
 
   void clearForm() {
     nameController.clear();
     quantityController.clear();
+    typeDropDown.currentState!.reset();
+    locationDropDown.currentState!.reset();
+    type = null;
+    location = null;
     notifyListeners();
   }
 }
