@@ -549,14 +549,20 @@ class SupabaseService extends ChangeNotifier {
     }
   }
 
-  Future<List<Map<String, dynamic>>> getHistorial() async {
+  Future<List<Map<String, dynamic>>> getHistorialByNameProduct(
+    String product,
+  ) async {
     try {
       final result = await supabase
           .from('register')
           .select(
-            'type_register(type_register),users(name,username),product:id_product( product,type:id_type(type),location:id_location(location)),quantity,date',
+            'type_register(type_register),users(name,username),product:id_product(product,type:id_type(type),location:id_location(location)),quantity,date',
           );
-      return List<Map<String, dynamic>>.from(result);
+      final filtered = result.where((element) {
+        String name = element['product']['product'];
+        return name.contains(product);
+      }).toList();
+      return List<Map<String, dynamic>>.from(filtered);
     } catch (e) {
       print(e);
       return [];

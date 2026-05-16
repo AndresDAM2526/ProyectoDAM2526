@@ -38,13 +38,8 @@ class _AddTypeProductState extends State<AddTypeProduct> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.anadirTipo),
-        backgroundColor: AppColors.primary,
-      ),
-      backgroundColor: AppColors.backgroundColor,
-      body: Form(
+    return SingleChildScrollView(
+      child: Form(
         key: checkForm,
         child: Column(
           children: [
@@ -75,9 +70,15 @@ class _AddTypeProductState extends State<AddTypeProduct> {
                             .typeController
                             .text,
                       );
-                  if (added == true) {
-                    context.read<AdministrationscreenViewmodel>().typeController.clear();
-                    Navigator.pop(context, true);
+                  if (added == true && mounted) {
+                    context
+                        .read<AdministrationscreenViewmodel>()
+                        .typeController
+                        .clear();
+                    await Future.delayed(Duration(milliseconds: 100));
+                    if (mounted) {
+                      Navigator.pop(context, true);
+                    }
                   }
                 }
               },

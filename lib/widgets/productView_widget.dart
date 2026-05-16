@@ -75,6 +75,22 @@ class ProductViewWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
+                      "${l10n.cantidad}: ",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Expanded(
+                      child: Text(
+                        "$quantity",
+                        style: TextStyle(overflow: TextOverflow.ellipsis),
+                        maxLines: 20,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
                       "${l10n.ubicacion}: ",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),

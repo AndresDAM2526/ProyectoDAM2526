@@ -9,7 +9,11 @@ class GetProductViewmodel extends ChangeNotifier {
   int userQuantity = 0;
   TextEditingController quantityController = TextEditingController();
 
-  String? checkQuantity(String? value, AppLocalizations l10n, int maxQuantity) {
+  String? checkQuantityGetProduct(
+    String? value,
+    AppLocalizations l10n,
+    int maxQuantity,
+  ) {
     if (value == null || value.isEmpty) {
       return l10n.campoVacio;
     } else if (int.tryParse(value) == null) {
@@ -24,7 +28,21 @@ class GetProductViewmodel extends ChangeNotifier {
       return l10n.cantidadSuperior;
     }
     return null;
+  }
 
+  String? checkQuantityReturnProduct(String? value, AppLocalizations l10n) {
+    if (value == null || value.isEmpty) {
+      return l10n.campoVacio;
+    } else if (int.tryParse(value) == null) {
+      return l10n.formatoIncorrecto;
+    }
+    int quantity = int.parse(value);
+    if (quantity == 0) {
+      return l10n.cantidadCorrecta;
+    } else if (quantity < 0) {
+      return l10n.cantidadNegativa;
+    }
+    return null;
   }
 
   void addUnity(int maxQuantity) {

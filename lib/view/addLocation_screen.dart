@@ -37,34 +37,27 @@ class _AddlocationScreenState extends State<AddlocationScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      appBar: AppBar(
-        title: Text(
-          l10n.anadirUbicacion,
-          style: TextStyle(overflow: TextOverflow.ellipsis),
-          maxLines: 2,
-        ),
-        backgroundColor: AppColors.primary,
-      ),
-      body: SingleChildScrollView(
-        child: Form(
-          key: checkForm,
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.all(20),
-                child: TextFormField(
-                  controller: context
-                      .read<AdministrationscreenViewmodel>()
-                      .locationController,
-                  decoration: InputDecoration(label: Text(l10n.nuevaUbicacion)),
-                  validator: (value) => context
-                      .read<AdministrationscreenViewmodel>()
-                      .checkLocation(value, l10n),
-                ),
+    return SingleChildScrollView(
+      child: Form(
+        key: checkForm,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              margin: EdgeInsets.all(20),
+              child: TextFormField(
+                controller: context
+                    .read<AdministrationscreenViewmodel>()
+                    .locationController,
+                decoration: InputDecoration(label: Text(l10n.nuevaUbicacion)),
+                validator: (value) => context
+                    .read<AdministrationscreenViewmodel>()
+                    .checkLocation(value, l10n),
               ),
-              ElevatedButton(
+            ),
+            Container(
+              margin: EdgeInsets.all(20),
+              child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   foregroundColor: Colors.black,
@@ -83,14 +76,17 @@ class _AddlocationScreenState extends State<AddlocationScreen> {
                       context
                           .read<AdministrationscreenViewmodel>()
                           .clearLocation();
-                      Navigator.pop(context, true);
+                      await Future.delayed(Duration(milliseconds: 100));
+                      if (mounted) {
+                        Navigator.pop(context, true);
+                      }
                     }
                   }
                 },
                 child: Text(l10n.anadirUbicacion),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

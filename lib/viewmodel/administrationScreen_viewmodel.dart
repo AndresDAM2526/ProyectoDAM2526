@@ -45,17 +45,15 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
     BuildContext context,
     AppLocalizations l10n,
   ) async {
-    bool? result = await showDialog(
+    bool? result = await showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (context) {
-        return Dialog(
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: (MediaQuery.of(context).orientation == Orientation.portrait)
-                ? MediaQuery.of(context).size.height / 3
-                : MediaQuery.of(context).size.height,
-            child: AddlocationScreen(),
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
+          child: AddlocationScreen(),
         );
       },
     );
@@ -76,17 +74,15 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
     BuildContext context,
     AppLocalizations l10n,
   ) async {
-    bool? result = await showDialog(
+    bool? result = await showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (context) {
-        return Dialog(
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: (MediaQuery.of(context).orientation == Orientation.portrait)
-                ? MediaQuery.of(context).size.height / 3
-                : MediaQuery.of(context).size.height / 2,
-            child: AddTypeProduct(),
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
+          child: AddTypeProduct(),
         );
       },
     );

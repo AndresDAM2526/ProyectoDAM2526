@@ -22,181 +22,189 @@ class _AddProductScreenState extends State<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      appBar: AppBar(
-        title: Text(l10n.anadirProducto),
-        backgroundColor: AppColors.primary,
-      ),
-      body: SingleChildScrollView(
-        child: Form(
-          key: checkForm,
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.all(10),
-                child: TextFormField(
-                  controller: context
-                      .read<AddProductFormViewModel>()
-                      .nameController,
-                  validator: (value) => context
-                      .read<AddProductFormViewModel>()
-                      .checkName(value, l10n),
-                  decoration: InputDecoration(
-                    label: Text(l10n.nombre),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(width: 1),
+    return PopScope(
+      onPopInvokedWithResult: (didPop, result) {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: AppColors.backgroundColor,
+        appBar: AppBar(
+          title: Text(l10n.anadirProducto),
+          backgroundColor: AppColors.primary,
+        ),
+        body: SingleChildScrollView(
+          child: Form(
+            key: checkForm,
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: TextFormField(
+                    controller: context
+                        .read<AddProductFormViewModel>()
+                        .nameController,
+                    validator: (value) => context
+                        .read<AddProductFormViewModel>()
+                        .checkName(value, l10n),
+                    decoration: InputDecoration(
+                      label: Text(l10n.nombre),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(width: 1),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Consumer<SupabaseService>(
-                builder: (context, values, child) {
-                  final types = values.types;
-                  if (types.isEmpty) {
-                    return CircularProgressIndicator();
-                  }
-                  return Container(
-                    margin: EdgeInsets.all(10),
-                    child: DropdownButtonFormField<String>(
-                      validator: (value) => context
-                          .read<AddProductFormViewModel>()
-                          .checkType(value, l10n),
-                      key: context.read<AddProductFormViewModel>().typeDropDown,
-                      initialValue: context
-                          .read<AddProductFormViewModel>()
-                          .type,
-                      decoration: InputDecoration(
-                        label: Text(l10n.tipo),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(width: 1),
-                        ),
-                      ),
-                      hint: Text(l10n.seleccionarTipo),
-                      items: types
-                          .map(
-                            (type) => DropdownMenuItem<String>(
-                              value: type['type'],
-                              child: Text(type['type']),
-                            ),
-                          )
-                          .toList(),
-                      onChanged: (value) {
-                        context.read<AddProductFormViewModel>().type = value;
-                      },
-                    ),
-                  );
-                },
-              ),
-              Consumer<SupabaseService>(
-                builder: (context, values, child) {
-                  final locations = values.locations;
-                  if (locations.isEmpty) {
-                    return CircularProgressIndicator();
-                  }
-                  return Container(
-                    margin: EdgeInsets.all(10),
-                    child: DropdownButtonFormField<String>(
-                      validator: (value) => context
-                          .read<AddProductFormViewModel>()
-                          .checkLocation(value, l10n),
-                      initialValue: context
-                          .read<AddProductFormViewModel>()
-                          .location,
-                      key: context
-                          .read<AddProductFormViewModel>()
-                          .locationDropDown,
-                      decoration: InputDecoration(
-                        label: Text(l10n.ubicacion),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(width: 1),
-                        ),
-                      ),
-                      hint: Text(l10n.seleccionarUbicacion),
-                      items: locations
-                          .map(
-                            (location) => DropdownMenuItem<String>(
-                              value: location['location'],
-                              child: Text(location['location']),
-                            ),
-                          )
-                          .toList(),
-                      onChanged: (value) {
-                        context.read<AddProductFormViewModel>().location =
-                            value;
-                      },
-                    ),
-                  );
-                },
-              ),
-              Container(
-                margin: EdgeInsets.all(10),
-                child: TextFormField(
-                  keyboardType: TextInputType.numberWithOptions(),
-                  controller: context
-                      .read<AddProductFormViewModel>()
-                      .quantityController,
-                  validator: (value) => context
-                      .read<AddProductFormViewModel>()
-                      .checkQuantity(value, l10n),
-                  decoration: InputDecoration(
-                    label: Text(l10n.cantidad),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(width: 1),
-                    ),
-                  ),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      foregroundColor: Colors.black,
-                    ),
-                    onPressed: () async {
-                      if (checkForm.currentState!.validate()) {
-                        Product newProduct = Product(
-                          name: context
-                              .read<AddProductFormViewModel>()
-                              .nameController
-                              .text,
-                          type: context.read<AddProductFormViewModel>().type!,
-                          location: context
-                              .read<AddProductFormViewModel>()
-                              .location!,
-                          quantity: int.parse(
-                            context
-                                .read<AddProductFormViewModel>()
-                                .quantityController
-                                .text,
+                Consumer<SupabaseService>(
+                  builder: (context, values, child) {
+                    final types = values.types;
+                    if (types.isEmpty) {
+                      return CircularProgressIndicator();
+                    }
+                    return Container(
+                      margin: EdgeInsets.all(10),
+                      child: DropdownButtonFormField<String>(
+                        validator: (value) => context
+                            .read<AddProductFormViewModel>()
+                            .checkType(value, l10n),
+                        key: context
+                            .read<AddProductFormViewModel>()
+                            .typeDropDown,
+                        initialValue: context
+                            .read<AddProductFormViewModel>()
+                            .type,
+                        decoration: InputDecoration(
+                          label: Text(l10n.tipo),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(width: 1),
                           ),
-                        );
-                        bool added = await context
-                            .read<SupabaseService>()
-                            .addProduct(newProduct);
-                        print(added);
-                        if (added == true) {
-                          context.read<AddProductFormViewModel>().clearForm();
-                          Navigator.pop(context, true);
-                        }
-                      }
-                    },
-                    child: Text(l10n.anadir),
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      foregroundColor: Colors.black,
+                        ),
+                        hint: Text(l10n.seleccionarTipo),
+                        items: types
+                            .map(
+                              (type) => DropdownMenuItem<String>(
+                                value: type['type'],
+                                child: Text(type['type']),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (value) {
+                          context.read<AddProductFormViewModel>().type = value;
+                        },
+                      ),
+                    );
+                  },
+                ),
+                Consumer<SupabaseService>(
+                  builder: (context, values, child) {
+                    final locations = values.locations;
+                    if (locations.isEmpty) {
+                      return CircularProgressIndicator();
+                    }
+                    return Container(
+                      margin: EdgeInsets.all(10),
+                      child: DropdownButtonFormField<String>(
+                        validator: (value) => context
+                            .read<AddProductFormViewModel>()
+                            .checkLocation(value, l10n),
+                        initialValue: context
+                            .read<AddProductFormViewModel>()
+                            .location,
+                        key: context
+                            .read<AddProductFormViewModel>()
+                            .locationDropDown,
+                        decoration: InputDecoration(
+                          label: Text(l10n.ubicacion),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(width: 1),
+                          ),
+                        ),
+                        hint: Text(l10n.seleccionarUbicacion),
+                        items: locations
+                            .map(
+                              (location) => DropdownMenuItem<String>(
+                                value: location['location'],
+                                child: Text(location['location']),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (value) {
+                          context.read<AddProductFormViewModel>().location =
+                              value;
+                        },
+                      ),
+                    );
+                  },
+                ),
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: TextFormField(
+                    keyboardType: TextInputType.numberWithOptions(),
+                    controller: context
+                        .read<AddProductFormViewModel>()
+                        .quantityController,
+                    validator: (value) => context
+                        .read<AddProductFormViewModel>()
+                        .checkQuantity(value, l10n),
+                    decoration: InputDecoration(
+                      label: Text(l10n.cantidad),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(width: 1),
+                      ),
                     ),
-                    onPressed: () =>
-                        context.read<AddProductFormViewModel>().clearForm(),
-                    child: Text(l10n.vaciar),
                   ),
-                ],
-              ),
-            ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        foregroundColor: Colors.black,
+                      ),
+                      onPressed: () async {
+                        if (checkForm.currentState!.validate()) {
+                          Product newProduct = Product(
+                            name: context
+                                .read<AddProductFormViewModel>()
+                                .nameController
+                                .text,
+                            type: context.read<AddProductFormViewModel>().type!,
+                            location: context
+                                .read<AddProductFormViewModel>()
+                                .location!,
+                            quantity: int.parse(
+                              context
+                                  .read<AddProductFormViewModel>()
+                                  .quantityController
+                                  .text,
+                            ),
+                          );
+                          bool added = await context
+                              .read<SupabaseService>()
+                              .addProduct(newProduct);
+                          print(added);
+                          if (added == true) {
+                            context.read<AddProductFormViewModel>().clearForm();
+                            Navigator.pop(context, true);
+                          }
+                        }
+                      },
+                      child: Text(l10n.anadir),
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        foregroundColor: Colors.black,
+                      ),
+                      onPressed: () =>
+                          context.read<AddProductFormViewModel>().clearForm(),
+                      child: Text(l10n.vaciar),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

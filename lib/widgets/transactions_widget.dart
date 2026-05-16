@@ -48,7 +48,7 @@ class _TransactionsState extends State<Transactions> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(top: 30, left: 10, bottom: 15,right: 10),
+              margin: EdgeInsets.only(top: 30, left: 10, bottom: 15, right: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -133,9 +133,18 @@ class _TransactionsState extends State<Transactions> {
                   controller: context
                       .read<GetProductViewmodel>()
                       .quantityController,
-                  validator: (value) => context
-                      .read<GetProductViewmodel>()
-                      .checkQuantity(value, l10n, widget.maxQuantity!),
+                  validator: (value) =>
+                      (widget.typeRequest.compareTo("Coger") == 0)
+                      ? context
+                            .read<GetProductViewmodel>()
+                            .checkQuantityGetProduct(
+                              value,
+                              l10n,
+                              widget.maxQuantity!,
+                            )
+                      : context
+                            .read<GetProductViewmodel>()
+                            .checkQuantityReturnProduct(value, l10n),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     errorMaxLines: 2,
