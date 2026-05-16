@@ -240,6 +240,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get peticionCorrecta => 'Se ha ejecutado correctamente su petición';
 
   @override
+  String get producto => 'Producto';
+
+  @override
   String get productoBorrado => 'Se ha procedido con el borrado del producto';
 
   @override

@@ -336,17 +336,19 @@ class SupabaseService extends ChangeNotifier {
     String registerType,
     String date,
     int quantity,
+    String location,
   ) async {
     try {
       int? idRegisterType = await getIdTypeRegisterFromNameType(registerType);
-      if (idRegisterType == null) {
-        print("Error al obtener el identificador del tipo de registro");
+      int? idLocation = await getIdLocationFromNameLocation(location);
+      if (idRegisterType == null || idLocation == null) {
         return false;
       } else {
         await supabase.from('register').insert({
           'id_type_register': idRegisterType,
           'id_product': idProduct,
           'id_user': idUser,
+          'id_location': idLocation,
           'date': DateTime.now().toLocal().toString(),
           'quantity': quantity,
         });
@@ -552,7 +554,7 @@ class SupabaseService extends ChangeNotifier {
       final result = await supabase
           .from('register')
           .select(
-            'type_register(type_register),product(product),users(username),date',
+            'type_register(type_register),users(name,username),product:id_product( product,type:id_type(type),location:id_location(location)),quantity,date',
           );
       return List<Map<String, dynamic>>.from(result);
     } catch (e) {

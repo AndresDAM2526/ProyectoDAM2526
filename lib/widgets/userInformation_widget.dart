@@ -67,13 +67,15 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
                       children: [
                         Text(
                           "${l10n.nombre}: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          maxLines: 2,
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        Text(widget.user.name),
+                        Expanded(
+                          child: Text(
+                            widget.user.name,
+                            style: TextStyle(overflow: TextOverflow.ellipsis),
+                            maxLines: 2,
+                          ),
+                        ),
                       ],
                     ),
                     Row(

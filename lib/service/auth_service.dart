@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/main.dart';
-import 'package:proyecto_dam_2526/model/NewUser.dart';
+import 'package:proyecto_dam_2526/model/newUser.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/view/newUserPassword.dart';

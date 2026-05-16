@@ -23,55 +23,59 @@ class HistoryRegisterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    return Row(
-      children: [
-        Container(
-          margin: EdgeInsets.only(top: 10, right: 15, left: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+      margin: EdgeInsets.only(top: 10, right: 15, left: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
             children: [
-              Row(
-                children: [
-                  Text(
-                    "${l10n.nombre}: ",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Text(name),
-                ],
+              Text(
+                "${l10n.nombre}: ",
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              Row(
-                children: [
-                  Text(
-                    "${l10n.tipoRegistro}: ",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Text(typeRegister),
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    "${l10n.fecha}: ",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    context.read<HistoryRegisterViewmodel>().parseDate(date),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    "${l10n.cantidad}: ",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Text("$quantity"),
-                ],
+              Expanded(
+                child: Text(
+                  name,
+                  style: TextStyle(overflow: TextOverflow.ellipsis),
+                  maxLines: 20,
+                ),
               ),
             ],
           ),
-        ),
-      ],
+          Row(
+            children: [
+              Text(
+                "${l10n.tipoRegistro}: ",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(typeRegister),
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                "${l10n.fecha}: ",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                context.read<HistoryRegisterViewmodel>().parseDateToString(
+                  date,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                "${l10n.cantidad}: ",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text("$quantity"),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

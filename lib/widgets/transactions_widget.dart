@@ -48,7 +48,7 @@ class _TransactionsState extends State<Transactions> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(top: 30, left: 10, bottom: 15),
+              margin: EdgeInsets.only(top: 30, left: 10, bottom: 15,right: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -59,7 +59,13 @@ class _TransactionsState extends State<Transactions> {
                         "${l10n.nombre}: ",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      Text(widget.product.name),
+                      Expanded(
+                        child: Text(
+                          widget.product.name,
+                          style: TextStyle(overflow: TextOverflow.ellipsis),
+                          maxLines: 20,
+                        ),
+                      ),
                     ],
                   ),
                   Row(
@@ -193,6 +199,7 @@ class _TransactionsState extends State<Transactions> {
                                 .quantityController
                                 .text,
                           ),
+                          widget.product.location,
                         );
                         context.read<GetProductViewmodel>().clearForm();
                       } else {
@@ -207,6 +214,7 @@ class _TransactionsState extends State<Transactions> {
                                 .quantityController
                                 .text,
                           ),
+                          widget.product.location,
                         );
                         context.read<GetProductViewmodel>().clearForm();
                       }

@@ -45,6 +45,9 @@ class _ModifyUserScreenState extends State<ModifyUserScreen> {
                   child: FutureBuilder(
                     future: context.watch<SupabaseService>().getAllUsers(),
                     builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(child: CircularProgressIndicator());
+                      }
                       if (!snapshot.hasData) {
                         return Text(l10n.sinResultados);
                       }

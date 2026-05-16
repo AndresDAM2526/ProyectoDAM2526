@@ -557,6 +557,12 @@ abstract class AppLocalizations {
   /// **'Request completed successfully'**
   String get peticionCorrecta;
 
+  /// No description provided for @producto.
+  ///
+  /// In en, this message translates to:
+  /// **'Product'**
+  String get producto;
+
   /// No description provided for @productoBorrado.
   ///
   /// In en, this message translates to:

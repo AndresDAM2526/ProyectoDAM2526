@@ -76,6 +76,7 @@
     "obtenerProducto": "Get product",
     "perfil": "Profile",
     "peticionCorrecta": "Request completed successfully",
+    "producto": "Product",
     "productoBorrado": "Product deleted successfully",
     "quitarFiltro": "Remove filter",
     "rol": "Role",

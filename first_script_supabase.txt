@@ -41,6 +41,7 @@ create table if not exists register(
   id_type_register integer references type_register(id_type_register),
   id_product integer references product(id_product),
   id_user uuid references users(id_user),
+  id_location integer referes location(id_location),
   date timestamp,
   quantity integer
 );
