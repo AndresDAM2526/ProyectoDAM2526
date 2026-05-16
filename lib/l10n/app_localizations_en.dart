@@ -153,7 +153,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get inicioSesionIncorrecto => 'Incorrect username or password';
 
   @override
-  String get introducirCantidad => 'Introducir the quantity';
+  String get introducirCantidad => 'Enter the quantity';
 
   @override
   String get introducirNombre => 'Enter the name';

@@ -70,13 +70,13 @@ class _InventoryScreenState extends State<InventoryScreen> {
                   ),
             Container(
               width: MediaQuery.of(context).size.width,
-              margin: EdgeInsets.all(15),
+              margin: EdgeInsets.only(top: 5,left: 10,right: 10,bottom: 20),
               child: context.watch<SupabaseService>().filteredProducts == null
                   ? ProductsTableWidget(
                       productList: context.read<SupabaseService>().products,
                     )
                   : context.read<SupabaseService>().filteredProducts!.isEmpty
-                  ? Text(l10n.sinResultados)
+                  ? Center(child: Text(l10n.sinResultados))
                   : ProductsTableWidget(
                       productList: context
                           .read<SupabaseService>()

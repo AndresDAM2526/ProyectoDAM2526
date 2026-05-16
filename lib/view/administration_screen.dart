@@ -24,82 +24,13 @@ class AdministrationScreen extends StatelessWidget {
         title: Center(child: Text(l10n.administracion)),
         backgroundColor: AppColors.primary,
       ),
-      body: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.all(5),
-            child: ExpansionTile(
-              title: Text(l10n.usuarios),
-              children: [
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () async {
-                        bool? result = await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AddUserScreen(),
-                          ),
-                        );
-                        if (result == true) {
-                          await context
-                              .read<MessagesViewmodel>()
-                              .showInformationDialog(
-                                context,
-                                MediaQuery.of(context).size.width / 2,
-                                MediaQuery.of(context).size.height / 3,
-                                l10n.nuevoUsuarioMensaje,
-                              );
-                        }
-                      },
-                      child: Container(
-                        margin: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 2),
-                          borderRadius: BorderRadius.circular(10),
-                          color: AppColors.secondary,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            l10n.anadirUsuario,
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ModifyUserScreen(),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        margin: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 2),
-                          borderRadius: BorderRadius.circular(10),
-                          color: AppColors.secondary,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(l10n.modificarUsuario),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          ExpansionTile(
-            title: Text(l10n.inventario),
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.all(10),
+              child: ExpansionTile(
+                title: Text(l10n.usuarios),
                 children: [
                   Row(
                     children: [
@@ -108,7 +39,7 @@ class AdministrationScreen extends StatelessWidget {
                           bool? result = await Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AddProductScreen(),
+                              builder: (context) => AddUserScreen(),
                             ),
                           );
                           if (result == true) {
@@ -118,7 +49,7 @@ class AdministrationScreen extends StatelessWidget {
                                   context,
                                   MediaQuery.of(context).size.width / 2,
                                   MediaQuery.of(context).size.height / 3,
-                                  l10n.nuevoProductoMensaje,
+                                  l10n.nuevoUsuarioMensaje,
                                 );
                           }
                         },
@@ -132,7 +63,7 @@ class AdministrationScreen extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              l10n.anadirProducto,
+                              l10n.anadirUsuario,
                               style: TextStyle(color: Colors.black),
                             ),
                           ),
@@ -143,7 +74,106 @@ class AdministrationScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ModifyInventory(),
+                              builder: (context) => ModifyUserScreen(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 2),
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppColors.secondary,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(l10n.modificarUsuario),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ExpansionTile(
+                title: Text(l10n.inventario),
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              bool? result = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AddProductScreen(),
+                                ),
+                              );
+                              if (result == true) {
+                                await context
+                                    .read<MessagesViewmodel>()
+                                    .showInformationDialog(
+                                      context,
+                                      MediaQuery.of(context).size.width / 2,
+                                      MediaQuery.of(context).size.height / 3,
+                                      l10n.nuevoProductoMensaje,
+                                    );
+                              }
+                            },
+                            child: Container(
+                              margin: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                border: Border.all(width: 2),
+                                borderRadius: BorderRadius.circular(10),
+                                color: AppColors.secondary,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  l10n.anadirProducto,
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ModifyInventory(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              margin: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                border: Border.all(width: 2),
+                                borderRadius: BorderRadius.circular(10),
+                                color: AppColors.secondary,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  l10n.modificarInventario,
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HistorialScreen(),
                             ),
                           );
                         },
@@ -157,7 +187,7 @@ class AdministrationScreen extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              l10n.modificarInventario,
+                              l10n.historial,
                               style: TextStyle(color: Colors.black),
                             ),
                           ),
@@ -165,146 +195,127 @@ class AdministrationScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HistorialScreen(),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 2),
-                        borderRadius: BorderRadius.circular(10),
-                        color: AppColors.secondary,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          l10n.historial,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
-            ],
-          ),
-          ExpansionTile(
-            title: Text(l10n.ubicacion),
-            children: [
-              Row(
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ExpansionTile(
+                title: Text(l10n.ubicacion),
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      context
-                          .read<AdministrationscreenViewmodel>()
-                          .showAddLocationDialog(context, l10n);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 2),
-                        borderRadius: BorderRadius.circular(10),
-                        color: AppColors.secondary,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          l10n.anadirUbicacion,
-                          style: TextStyle(color: Colors.black),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          context
+                              .read<AdministrationscreenViewmodel>()
+                              .showAddLocationDialog(context, l10n);
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 2),
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppColors.secondary,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              l10n.anadirUbicacion,
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LocationsScreen(),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LocationsScreen(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 2),
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppColors.secondary,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              l10n.borrarUbicacion,
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
                         ),
-                      );
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 2),
-                        borderRadius: BorderRadius.circular(10),
-                        color: AppColors.secondary,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          l10n.borrarUbicacion,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
-                    ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
-          ExpansionTile(
-            title: Text(l10n.tipo),
-            children: [
-              Row(
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ExpansionTile(
+                title: Text(l10n.tipo),
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      context
-                          .read<AdministrationscreenViewmodel>()
-                          .showAddTypeProductDialog(context, l10n);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 2),
-                        borderRadius: BorderRadius.circular(10),
-                        color: AppColors.secondary,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          l10n.anadirTipo,
-                          style: TextStyle(color: Colors.black),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          context
+                              .read<AdministrationscreenViewmodel>()
+                              .showAddTypeProductDialog(context, l10n);
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 2),
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppColors.secondary,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              l10n.anadirTipo,
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => TypesScreen()),
-                      );
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 2),
-                        borderRadius: BorderRadius.circular(10),
-                        color: AppColors.secondary,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          l10n.borrarTipo,
-                          style: TextStyle(color: Colors.black),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => TypesScreen()),
+                          );
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 2),
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppColors.secondary,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              l10n.borrarTipo,
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -114,7 +114,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               });
                             },
                             icon: Icon(
-                              Icons.remove_red_eye,
+                              _obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
                               semanticLabel: l10n.mostrarContrasena,
                             ),
                           ),
@@ -142,7 +144,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               context,
                               l10n,
                             );
-                            
                           }
                         },
                         child: Text(l10n.iniciarSesion),

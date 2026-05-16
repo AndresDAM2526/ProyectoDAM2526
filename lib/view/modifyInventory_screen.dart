@@ -4,6 +4,7 @@ import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/databaseProduct.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
+import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 import 'package:proyecto_dam_2526/widgets/productView_widget.dart';
@@ -22,12 +23,13 @@ class _ModifyInventoryState extends State<ModifyInventory> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text(l10n.modificarInventario))),
+      backgroundColor: AppColors.backgroundColor,
+      appBar: AppBar(title: Center(child: Text(l10n.modificarInventario)),backgroundColor: AppColors.primary,),
       body: Column(
         children: [
           Container(
             decoration: BoxDecoration(border: Border.all(width: 1)),
-            margin: EdgeInsets.all(10),
+            margin: EdgeInsets.all(5),
             child: Padding(
               padding: EdgeInsets.all(8.0),
               child: TextField(
@@ -56,7 +58,7 @@ class _ModifyInventoryState extends State<ModifyInventory> {
               final products = snapshot.data ?? [];
               return Expanded(
                 child: Container(
-                  margin: EdgeInsets.all(10),
+                  margin: EdgeInsets.all(5),
                   child: ListView.builder(
                     itemCount: products.length,
                     itemBuilder: (context, index) {

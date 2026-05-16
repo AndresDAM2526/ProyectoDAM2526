@@ -62,4 +62,10 @@ class ProfileFormViewmodel extends ChangeNotifier {
     }
     return true;
   }
+
+  void clearForm() {
+    oldPasswordController.clear();
+    newPasswordController.clear();
+    secondPasswordController.clear();
+  }
 }

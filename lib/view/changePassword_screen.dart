@@ -27,7 +27,9 @@ class ChangePasswordScreen extends StatefulWidget {
 
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final checkForm = GlobalKey<FormState>();
-
+  bool showCurrentPass = true;
+  bool showNewPass = true;
+  bool showConfirmPass = true;
   @override
   void initState() {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -68,6 +70,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     Container(
                       margin: EdgeInsets.all(20),
                       child: TextFormField(
+                        obscureText: showNewPass,
                         controller: context
                             .read<AdministrationscreenViewmodel>()
                             .passwordController,
@@ -75,6 +78,18 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             .read<AdministrationscreenViewmodel>()
                             .checkPassword(value, l10n),
                         decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                showNewPass = !showNewPass;
+                              });
+                            },
+                            icon: Icon(
+                              showNewPass
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                          ),
                           errorStyle: TextStyle(
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -124,6 +139,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     Container(
                       margin: EdgeInsets.all(10),
                       child: TextFormField(
+                        obscureText: showCurrentPass,
                         controller: context
                             .read<ProfileFormViewmodel>()
                             .oldPasswordController,
@@ -131,6 +147,19 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             .read<ProfileFormViewmodel>()
                             .checkOldPassword(value, l10n),
                         decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                showCurrentPass = !showCurrentPass;
+                              });
+                            },
+                            icon: Icon(
+                              showCurrentPass
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                          ),
+
                           label: Text(l10n.contrasenaActual),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(width: 1),
@@ -141,6 +170,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     Container(
                       margin: EdgeInsets.all(10),
                       child: TextFormField(
+                        obscureText: showNewPass,
                         controller: context
                             .read<ProfileFormViewmodel>()
                             .newPasswordController,
@@ -148,6 +178,18 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             .read<ProfileFormViewmodel>()
                             .checkNewPassword(value, l10n),
                         decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                showNewPass = !showNewPass;
+                              });
+                            },
+                            icon: Icon(
+                              showNewPass
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                          ),
                           label: Text(l10n.nuevaContrasena),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(width: 1),
@@ -158,6 +200,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     Container(
                       margin: EdgeInsets.all(10),
                       child: TextFormField(
+                        obscureText: showConfirmPass,
                         controller: context
                             .read<ProfileFormViewmodel>()
                             .secondPasswordController,
@@ -173,6 +216,18 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                   .text,
                             ),
                         decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                showConfirmPass = !showConfirmPass;
+                              });
+                            },
+                            icon: Icon(
+                              showConfirmPass
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                          ),
                           label: Text(l10n.nuevaContrasena),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(width: 1),

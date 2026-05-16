@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/product.dart';
+import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/view/product_information.dart';
 
 class ProductsTableWidget extends StatefulWidget {
@@ -14,7 +15,7 @@ class ProductsTableWidget extends StatefulWidget {
 class _ProductsTableWidgetState extends State<ProductsTableWidget> {
   @override
   Widget build(BuildContext context) {
-    final l10n=AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return DataTable(
       horizontalMargin: 5,
       dataRowMinHeight: 0,
@@ -71,8 +72,15 @@ class _ProductsTableWidgetState extends State<ProductsTableWidget> {
                       maxWidth: MediaQuery.of(context).size.width / 4,
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(15.0),
-                      child: Text(product!['product']),
+                      padding: EdgeInsets.only(top: 5,left: 2,right: 2,bottom: 5),
+                      child: Text(
+                        product!['product'],
+                        style: TextStyle(
+                          color: product['quantity'] == 0
+                              ? AppColors.notStockFontColor
+                              : Colors.black,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -82,9 +90,13 @@ class _ProductsTableWidgetState extends State<ProductsTableWidget> {
                       maxHeight: double.infinity,
                       maxWidth: MediaQuery.of(context).size.width / 5,
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(product['type']['type']),
+                    child: Text(
+                      product['type']['type'],
+                      style: TextStyle(
+                        color: product['quantity'] == 0
+                            ? AppColors.notStockFontColor
+                            : Colors.black,
+                      ),
                     ),
                   ),
                 ),
@@ -94,9 +106,13 @@ class _ProductsTableWidgetState extends State<ProductsTableWidget> {
                       maxHeight: double.infinity,
                       maxWidth: MediaQuery.of(context).size.width / 5,
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(product['location']['location']),
+                    child: Text(
+                      product['location']['location'],
+                      style: TextStyle(
+                        color: product['quantity'] == 0
+                            ? AppColors.notStockFontColor
+                            : Colors.black,
+                      ),
                     ),
                   ),
                 ),

@@ -386,7 +386,7 @@ abstract class AppLocalizations {
   /// No description provided for @introducirCantidad.
   ///
   /// In en, this message translates to:
-  /// **'Introducir the quantity'**
+  /// **'Enter the quantity'**
   String get introducirCantidad;
 
   /// No description provided for @introducirNombre.

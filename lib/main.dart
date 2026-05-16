@@ -58,7 +58,7 @@ void main() async {
           create: (context) => NewUserPasswordFormViewModel(),
         ),
         ChangeNotifierProvider(create: (context) => ThemeViewmodel()),
-        ChangeNotifierProvider(create: (context) => HistoryRegisterViewmodel(),)
+        ChangeNotifierProvider(create: (context) => HistoryRegisterViewmodel()),
       ],
       child: MyApp(),
     ),
@@ -85,28 +85,28 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         textTheme: TextTheme(
           titleLarge: TextStyle(
-            fontSize: context.watch<ThemeViewmodel>().fontSize ,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
           ),
           bodyLarge: TextStyle(
-            fontSize: context.watch<ThemeViewmodel>().fontSize ,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
           ),
           labelLarge: TextStyle(
-            fontSize: context.watch<ThemeViewmodel>().fontSize ,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
           ),
           bodyMedium: TextStyle(
-            fontSize: context.watch<ThemeViewmodel>().fontSize ,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
           ),
           bodySmall: TextStyle(
-            fontSize: context.watch<ThemeViewmodel>().fontSize ,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
           ),
           displayLarge: TextStyle(
-            fontSize: context.watch<ThemeViewmodel>().fontSize ,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
           ),
           labelSmall: TextStyle(
-            fontSize: context.watch<ThemeViewmodel>().fontSize ,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
           ),
           labelMedium: TextStyle(
-            fontSize: context.watch<ThemeViewmodel>().fontSize ,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
           ),
         ),
       ),
@@ -121,123 +121,127 @@ class _MyAppState extends State<MyApp> {
       ],
       supportedLocales: [Locale('en'), Locale('es')],
       locale: context.watch<ThemeViewmodel>().currentLang,
-      home: Builder(
-        builder: (context) {
-          final l10n = AppLocalizations.of(context)!;
-          if (context.watch<AuthService>().userDatabase == null) {
-            return Scaffold(body: LoginScreen());
-          }
-          return Scaffold(
-            bottomNavigationBar:
-                context.read<AuthService>().userDatabase == null
-                ? null
-                : BottomNavigationBar(
-                  backgroundColor: AppColors.primary,
-                  selectedItemColor: AppColors.secondary,
-                    currentIndex: selectedScreen,
-                    onTap: (value) {
-                      setState(() {
-                        selectedScreen = value;
-                      });
-                    },
-                    items: [
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.note),
-                        label: l10n.obtener,
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.inventory),
-                        label: l10n.inventario,
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.settings),
-                        label: l10n.ajustes,
-                      ),
-                    ],
-                  ),
-            appBar: AppBar(
-              title: Center(child: Text(l10n.nombreApp)),
-              backgroundColor: AppColors.primary,
-            ),
-            drawer: context.read<AuthService>().userDatabase == null
-                ? null
-                : Drawer(
-                    child: ListView(
-                      children: [
-                        DrawerHeader(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(l10n.nombreApp),
-                              Text(
-                                "${l10n.usuario} : ${context.read<AuthService>().userDatabase!.username}",
-                              ),
-                            ],
-                          ),
+      home: PopScope(
+        canPop: true,
+        child: Builder(
+          builder: (context) {
+            final l10n = AppLocalizations.of(context)!;
+            if (context.watch<AuthService>().userDatabase == null) {
+              return Scaffold(body: LoginScreen());
+            }
+            return Scaffold(
+              bottomNavigationBar:
+                  context.read<AuthService>().userDatabase == null
+                  ? null
+                  : BottomNavigationBar(
+                      backgroundColor: AppColors.primary,
+                      selectedItemColor: AppColors.secondary,
+                      currentIndex: selectedScreen,
+                      onTap: (value) {
+                        setState(() {
+                          selectedScreen = value;
+                        });
+                      },
+                      items: [
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.note),
+                          label: l10n.obtener,
                         ),
-                        ListTile(
-                          title: Text(l10n.miPerfil),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ProfileScreen(
-                                  user: context
-                                      .read<AuthService>()
-                                      .userDatabase,
-                                ),
-                              ),
-                            );
-                          },
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.inventory),
+                          label: l10n.inventario,
                         ),
-
-                        ListTile(
-                          title: Text(l10n.historial),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => UserHistoryScreen(),
-                              ),
-                            );
-                          },
-                        ),
-
-                        ?(context.read<AuthService>().userDatabase != null &&
-                                context
-                                        .read<AuthService>()
-                                        .userDatabase!
-                                        .role ==
-                                    "Administrador")
-                            ? ListTile(
-                                title: Text(l10n.administracion),
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          AdministrationScreen(),
-                                    ),
-                                  );
-                                },
-                              )
-                            : null,
-
-                        ListTile(
-                          title: IconButton(
-                            onPressed: () {
-                              selectedScreen = 0;
-                              context.read<AuthService>().logOut();
-                            },
-                            icon: Icon(Icons.logout),
-                          ),
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.settings),
+                          label: l10n.ajustes,
                         ),
                       ],
                     ),
-                  ),
-            body: screens[selectedScreen],
-          );
-        },
+              appBar: AppBar(
+                title: Center(child: Text(l10n.nombreApp)),
+                backgroundColor: AppColors.primary,
+              ),
+              drawer: context.read<AuthService>().userDatabase == null
+                  ? null
+                  : Drawer(
+                      child: ListView(
+                        children: [
+                          DrawerHeader(
+                            decoration: BoxDecoration(color: AppColors.primary),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(l10n.nombreApp),
+                                Text(
+                                  "${l10n.usuario} : ${context.read<AuthService>().userDatabase!.username}",
+                                ),
+                              ],
+                            ),
+                          ),
+                          ListTile(
+                            title: Text(l10n.miPerfil),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProfileScreen(
+                                    user: context
+                                        .read<AuthService>()
+                                        .userDatabase,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+
+                          ListTile(
+                            title: Text(l10n.historial),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => UserHistoryScreen(),
+                                ),
+                              );
+                            },
+                          ),
+
+                          ?(context.read<AuthService>().userDatabase != null &&
+                                  context
+                                          .read<AuthService>()
+                                          .userDatabase!
+                                          .role ==
+                                      "Administrador")
+                              ? ListTile(
+                                  title: Text(l10n.administracion),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            AdministrationScreen(),
+                                      ),
+                                    );
+                                  },
+                                )
+                              : null,
+
+                          ListTile(
+                            title: IconButton(
+                              onPressed: () {
+                                selectedScreen = 0;
+                                context.read<AuthService>().logOut();
+                              },
+                              icon: Icon(Icons.logout),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+              body: screens[selectedScreen],
+            );
+          },
+        ),
       ),
     );
   }

@@ -30,7 +30,7 @@ class _GetProductScreenState extends State<GetProductScreen> {
             margin: EdgeInsets.all(2),
             child: TextField(
               decoration: InputDecoration(label: Text(l10n.introducirNombre)),
-              onSubmitted: (value) {
+              onChanged: (value) {
                 setState(() {
                   name = value;
                 });
