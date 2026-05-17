@@ -23,7 +23,6 @@ class _GetProductScreenState extends State<GetProductScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
       body: Column(
         children: [
           Container(

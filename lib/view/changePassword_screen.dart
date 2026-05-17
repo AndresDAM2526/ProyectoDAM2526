@@ -51,10 +51,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         title: Text(l10n.cambiarContrasena),
-        backgroundColor: AppColors.primary,
       ),
       body:
           ((widget.sourceScreen?.compareTo(
@@ -99,10 +97,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       ),
                     ),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        foregroundColor: Colors.black,
-                      ),
+                     
                       onPressed: () async {
                         if (checkForm.currentState!.validate()) {
                           bool? result = await context
@@ -137,7 +132,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      margin: EdgeInsets.all(10),
+                      margin: EdgeInsets.only(
+                        top: 30,
+                        left: 10,
+                        right: 10,
+                        bottom: 10,
+                      ),
                       child: TextFormField(
                         obscureText: showCurrentPass,
                         controller: context
@@ -228,37 +228,37 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                   : Icons.visibility_off,
                             ),
                           ),
-                          label: Text(l10n.nuevaContrasena),
+                          label: Text(l10n.confirmarContrasena),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(width: 1),
                           ),
                         ),
                       ),
                     ),
+                    SizedBox(width: 20),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        foregroundColor: Colors.black,
-                      ),
+                    
                       onPressed: () async {
                         if (checkForm.currentState!.validate()) {
-                          if (context
-                                  .read<ProfileFormViewmodel>()
-                                  .checkDatabasePassword(
-                                    context,
-                                    context
-                                        .read<ProfileFormViewmodel>()
-                                        .oldPasswordController
-                                        .text,
-                                    widget.user!.idUser,
-                                  ) !=
-                              true) {
-                            context.read<MessagesViewmodel>().showErrorDialog(
-                              context,
-                              MediaQuery.of(context).size.width,
-                              MediaQuery.of(context).size.height / 3,
-                              l10n.contrasenaActualIncorrecta,
-                            );
+                          if (mounted) {
+                            if (context
+                                    .read<ProfileFormViewmodel>()
+                                    .checkDatabasePassword(
+                                      context,
+                                      context
+                                          .read<ProfileFormViewmodel>()
+                                          .oldPasswordController
+                                          .text,
+                                      widget.user!.idUser,
+                                    ) !=
+                                true) {
+                              context.read<MessagesViewmodel>().showErrorDialog(
+                                context,
+                                MediaQuery.of(context).size.width,
+                                MediaQuery.of(context).size.height / 3,
+                                l10n.contrasenaActualIncorrecta,
+                              );
+                            }
                           }
                         }
                       },

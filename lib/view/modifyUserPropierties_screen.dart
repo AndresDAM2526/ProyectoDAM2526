@@ -26,10 +26,8 @@ class _ModifyUserPropiertiesScreenState
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         title: Text(l10n.modificarUsuario),
-        backgroundColor: AppColors.primary,
       ),
       body: Form(
         key: checkForm,

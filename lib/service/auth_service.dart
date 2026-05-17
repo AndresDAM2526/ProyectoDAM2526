@@ -5,12 +5,13 @@ import 'package:proyecto_dam_2526/main.dart';
 import 'package:proyecto_dam_2526/model/newUser.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
-import 'package:proyecto_dam_2526/view/newUserPassword.dart';
+import 'package:proyecto_dam_2526/view/newUserPassword_screen.dart';
 import 'package:proyecto_dam_2526/viewmodel/loginForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide User;
 
 class AuthService extends ChangeNotifier {
+  int selectedScreen = 0;
   final supabase = Supabase.instance.client;
   UserDatabase? _userDatabase;
   UserDatabase? get userDatabase => _userDatabase;
@@ -62,6 +63,7 @@ class AuthService extends ChangeNotifier {
   Future<void> logOut() async {
     await supabase.auth.signOut();
     _userDatabase = null;
+    selectedScreen = 0;
     notifyListeners();
   }
 
@@ -134,6 +136,7 @@ class AuthService extends ChangeNotifier {
     String password,
     String newPassword,
     BuildContext context,
+    AppLocalizations l10n
   ) async {
     try {
       final updatedPassword = await supabase.functions.invoke(
@@ -156,8 +159,8 @@ class AuthService extends ChangeNotifier {
         context.read<MessagesViewmodel>().showErrorDialog(
           context,
           MediaQuery.of(context).size.width / 2,
-          MediaQuery.of(context).size.height / 4,
-          "La contraseña actual no es correcta",
+          MediaQuery.of(context).size.height /3,
+          l10n.contrasenaActualIncorrecta,
         );
         return false;
       }

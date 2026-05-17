@@ -18,13 +18,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
       body: (MediaQuery.of(context).orientation == Orientation.portrait)
           ? SingleChildScrollView(
               child: Column(
                 children: [
                   Container(
-                    decoration: BoxDecoration(border: Border.all(width: 1)),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 1,
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                      ),
+                    ),
                     margin: EdgeInsets.all(10),
                     child: ExpansionTile(
                       title: Text(l10n.modoOscuro),
@@ -43,7 +47,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   Container(
-                    decoration: BoxDecoration(border: Border.all(width: 1)),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 1,
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                      ),
+                    ),
                     margin: EdgeInsets.all(10),
                     child: ExpansionTile(
                       expansionAnimationStyle: AnimationStyle(
@@ -73,7 +82,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   Container(
-                    decoration: BoxDecoration(border: Border.all(width: 1)),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 1,
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                      ),
+                    ),
                     margin: EdgeInsets.all(10),
                     child: ExpansionTile(
                       title: Text(l10n.tamanioFuente),
@@ -100,13 +114,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: Column(
                 children: [
                   Container(
-                    color: Colors.amber,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 1,
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                      ),
+                    ),
                     margin: EdgeInsets.all(10),
                     child: ExpansionTile(
                       title: Text(l10n.modoOscuro),
                       children: [
                         ListTile(
-                          leading: Text(l10n.modoOscuro),
                           title: Switch(
                             value: context.watch<ThemeViewmodel>().darkMode,
                             onChanged: (value) {
@@ -120,8 +138,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 1,
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                      ),
+                    ),
                     margin: EdgeInsets.all(10),
-                    color: Colors.amber,
                     child: ExpansionTile(
                       expansionAnimationStyle: AnimationStyle(
                         curve: Curves.bounceIn,
@@ -129,7 +152,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       title: Text(l10n.idioma),
                       children: [
                         ListTile(
-                          leading: Text(l10n.idioma),
                           title: DropdownButtonFormField(
                             initialValue: context.read<ThemeViewmodel>().lang,
                             items: [
@@ -139,7 +161,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ),
                               DropdownMenuItem(
                                 value: "en",
-                                child: Text("Ingles"),
+                                child: Text("English"),
                               ),
                             ],
                             onChanged: (value) {
@@ -151,7 +173,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   Container(
-                    color: Colors.amber,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 1,
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                      ),
+                    ),
                     margin: EdgeInsets.all(10),
                     child: ExpansionTile(
                       title: Text(l10n.tamanioFuente),
@@ -162,7 +189,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           max: 1.5,
                           value: context.watch<ThemeViewmodel>().multiplier,
                           onChanged: (value) {
-                            print(context.read<ThemeViewmodel>().fontSize);
                             context.read<ThemeViewmodel>().changeFontSize(
                               value,
                             );

@@ -28,10 +28,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: AppColors.backgroundColor,
         appBar: AppBar(
           title: Text(l10n.anadirProducto),
-          backgroundColor: AppColors.primary,
         ),
         body: SingleChildScrollView(
           child: Form(
@@ -158,10 +156,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        foregroundColor: Colors.black,
-                      ),
+                    
                       onPressed: () async {
                         if (checkForm.currentState!.validate()) {
                           Product newProduct = Product(
@@ -193,10 +188,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       child: Text(l10n.anadir),
                     ),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        foregroundColor: Colors.black,
-                      ),
+                    
                       onPressed: () =>
                           context.read<AddProductFormViewModel>().clearForm(),
                       child: Text(l10n.vaciar),

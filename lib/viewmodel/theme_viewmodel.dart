@@ -8,6 +8,7 @@ class ThemeViewmodel extends ChangeNotifier {
   double multiplier = 1.0;
 
   bool get darkMode => _darkMode;
+  double get originalFontSize => _fontSize;
   double get fontSize => _fontSize * multiplier;
   ThemeMode get theme => _darkMode ? ThemeMode.dark : ThemeMode.light;
   String get lang => _lang;

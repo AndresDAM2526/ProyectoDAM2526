@@ -20,10 +20,8 @@ class _ModifyUserScreenState extends State<ModifyUserScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         title: Text(l10n.modificarUsuario),
-        backgroundColor: AppColors.primary,
       ),
       body: Column(
         children: [
@@ -87,6 +85,7 @@ class _ModifyUserScreenState extends State<ModifyUserScreen> {
                         itemCount: foundUsers!.length,
                         itemBuilder: (context, index) {
                           return Container(
+                            decoration: BoxDecoration(color: AppColors.darkScaffold),
                             margin: EdgeInsets.all(5),
                             child: UserInformationWidget(
                               user: UserDatabase(

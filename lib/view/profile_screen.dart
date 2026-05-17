@@ -20,11 +20,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.perfil),
-        backgroundColor: AppColors.primary,
-      ),
-      backgroundColor: AppColors.backgroundColor,
+      appBar: AppBar(title: Text(l10n.perfil)),
       body: (MediaQuery.of(context).orientation == Orientation.portrait)
           ? Column(
               children: [
@@ -35,7 +31,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     decoration: InputDecoration(
                       label: Text(
                         "${l10n.usuario}:\t${widget.user!.username}",
-                        style: TextStyle(color: Colors.black),
                       ),
                     ),
                   ),
@@ -47,7 +42,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     decoration: InputDecoration(
                       label: Text(
                         "${l10n.email}:\t${widget.user!.email}",
-                        style: TextStyle(color: Colors.black),
                       ),
                     ),
                   ),
@@ -59,7 +53,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     decoration: InputDecoration(
                       label: Text(
                         "${l10n.nombre}:\t${widget.user!.name}",
-                        style: TextStyle(color: Colors.black),
                       ),
                     ),
                   ),
@@ -71,16 +64,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     decoration: InputDecoration(
                       label: Text(
                         "${l10n.rol}:\t${widget.user!.role}",
-                        style: TextStyle(color: Colors.black),
                       ),
                     ),
                   ),
                 ),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.black,
-                  ),
+                  
                   onPressed: () {
                     context
                         .read<ProfileFormViewmodel>()
@@ -106,7 +95,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           decoration: InputDecoration(
                             label: Text(
                               "${l10n.usuario}:\t${widget.user!.username}",
-                              style: TextStyle(color: Colors.black),
                             ),
                           ),
                         ),
@@ -118,7 +106,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           decoration: InputDecoration(
                             label: Text(
                               "${l10n.email}:\t${widget.user!.email}",
-                              style: TextStyle(color: Colors.black),
                             ),
                           ),
                         ),
@@ -130,7 +117,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           decoration: InputDecoration(
                             label: Text(
                               "${l10n.nombre}:\t${widget.user!.name}",
-                              style: TextStyle(color: Colors.black),
                             ),
                           ),
                         ),
@@ -142,7 +128,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           decoration: InputDecoration(
                             label: Text(
                               "${l10n.rol}:\t${widget.user!.role}",
-                              style: TextStyle(color: Colors.black),
                             ),
                           ),
                         ),
@@ -150,10 +135,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ],
                   ),
                   ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      foregroundColor: Colors.black,
-                    ),
                     onPressed: () {
                       context
                           .read<ProfileFormViewmodel>()

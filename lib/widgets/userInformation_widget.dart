@@ -52,8 +52,11 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
       },
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(width: 1),
-          color: AppColors.backgroundColor,
+          border: Border.all(
+            width: 1,
+            color: Theme.of(context).colorScheme.inversePrimary,
+          ),
+          color: Theme.of(context).colorScheme.surface,
         ),
         child: Row(
           children: [
@@ -73,7 +76,7 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
                           child: Text(
                             widget.user.name,
                             style: TextStyle(overflow: TextOverflow.ellipsis),
-                            maxLines: 2,
+                            maxLines: 3,
                           ),
                         ),
                       ],
@@ -97,7 +100,13 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
                           "${l10n.email}: ",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        Text(widget.user.email),
+                        Expanded(
+                          child: Text(
+                            widget.user.email,
+                            style: TextStyle(overflow: TextOverflow.ellipsis),
+                            maxLines: 2,
+                          ),
+                        ),
                       ],
                     ),
                     Row(

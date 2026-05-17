@@ -242,7 +242,7 @@ abstract class AppLocalizations {
   /// No description provided for @contrasenaActualIncorrecta.
   ///
   /// In en, this message translates to:
-  /// **'Current password is incorrect,please try again'**
+  /// **'Current password is incorrect, please try again'**
   String get contrasenaActualIncorrecta;
 
   /// No description provided for @contrasenaActualizada.

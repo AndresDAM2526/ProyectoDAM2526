@@ -26,6 +26,7 @@ import 'package:proyecto_dam_2526/viewmodel/modifyUserForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/newUserPasswordForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/profileForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/theme_viewmodel.dart';
+import 'package:proyecto_dam_2526/widgets/drawer_widget.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
@@ -73,7 +74,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int selectedScreen = 0;
   List<Widget> screens = [
     GetProductScreen(),
     InventoryScreen(),
@@ -83,34 +83,223 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        colorScheme: ColorScheme.light(
+          primary: AppColors.primary,
+          secondary: AppColors.secondary,
+          surface: AppColors.backgroundColor,
+          onPrimary: AppColors.fontColorLight,
+          inversePrimary: AppColors.fontColorDarkElevatedButton,
+        ),
+        primaryColor: AppColors.primary,
+        scaffoldBackgroundColor: AppColors.backgroundColor,
+        appBarTheme: AppBarTheme(backgroundColor: AppColors.primary),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: AppColors.primary,
+          selectedItemColor: AppColors.secondary,
+        ),
+        sliderTheme: SliderThemeData(
+          activeTrackColor: AppColors.secondary,
+          inactiveTrackColor: AppColors.primary,
+          thumbColor: AppColors.secondary,
+          overlayColor: AppColors.secondary,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: AppColors.fontColorLight,
+            backgroundColor: AppColors.primary,
+          ),
+        ),
+        bottomSheetTheme: BottomSheetThemeData(
+          backgroundColor: AppColors.backgroundColor,
+        ),
+        drawerTheme: DrawerThemeData(
+          backgroundColor: AppColors.backgroundColor,
+        ),
+        navigationRailTheme: NavigationRailThemeData(
+          backgroundColor: AppColors.backgroundColor,
+          indicatorColor: AppColors.secondary,
+        ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: AppColors.primary,
+        ),
         textTheme: TextTheme(
           titleLarge: TextStyle(
+            color: AppColors.fontColorLight,
             fontSize: context.watch<ThemeViewmodel>().fontSize,
           ),
           bodyLarge: TextStyle(
+            color: AppColors.fontColorLight,
             fontSize: context.watch<ThemeViewmodel>().fontSize,
           ),
           labelLarge: TextStyle(
+            color: AppColors.fontColorLight,
             fontSize: context.watch<ThemeViewmodel>().fontSize,
           ),
           bodyMedium: TextStyle(
+            color: AppColors.fontColorLight,
             fontSize: context.watch<ThemeViewmodel>().fontSize,
           ),
           bodySmall: TextStyle(
+            color: AppColors.fontColorLight,
             fontSize: context.watch<ThemeViewmodel>().fontSize,
           ),
           displayLarge: TextStyle(
+            color: AppColors.fontColorLight,
             fontSize: context.watch<ThemeViewmodel>().fontSize,
           ),
           labelSmall: TextStyle(
+            color: AppColors.fontColorLight,
             fontSize: context.watch<ThemeViewmodel>().fontSize,
           ),
           labelMedium: TextStyle(
+            color: AppColors.fontColorLight,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          displayMedium: TextStyle(
+            color: AppColors.fontColorLight,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          displaySmall: TextStyle(
+            color: AppColors.fontColorLight,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          headlineLarge: TextStyle(
+            color: AppColors.fontColorLight,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          headlineMedium: TextStyle(
+            color: AppColors.fontColorLight,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          headlineSmall: TextStyle(
+            color: AppColors.fontColorLight,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          titleMedium: TextStyle(
+            color: AppColors.fontColorLight,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          titleSmall: TextStyle(
+            color: AppColors.fontColorLight,
             fontSize: context.watch<ThemeViewmodel>().fontSize,
           ),
         ),
       ),
-      darkTheme: ThemeData.dark(),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.dark(
+          primary: AppColors.primaryDark,
+          secondary: AppColors.secondaryDark,
+          surface: AppColors.darkScaffold,
+          onPrimary: AppColors.fontColorDarkElevatedButton,
+          inversePrimary: AppColors.fontColorDark,
+        ),
+        primaryColor: AppColors.primaryDark,
+        scaffoldBackgroundColor: AppColors.darkScaffold,
+
+        bottomSheetTheme: BottomSheetThemeData(
+          backgroundColor: AppColors.primaryDark,
+        ),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: AppColors.primaryDark,
+          selectedItemColor: AppColors.secondaryDark,
+        ),
+        appBarTheme: AppBarTheme(backgroundColor: AppColors.primaryDark),
+        drawerTheme: DrawerThemeData(backgroundColor: AppColors.primaryDark),
+        navigationRailTheme: NavigationRailThemeData(
+          backgroundColor: AppColors.primaryDark,
+        ),
+        iconButtonTheme: IconButtonThemeData(
+          style: IconButton.styleFrom(foregroundColor: AppColors.secondaryDark),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: AppColors.fontColorDarkElevatedButton,
+            backgroundColor: AppColors.secondaryDark,
+          ),
+        ),
+        sliderTheme: SliderThemeData(
+          activeTrackColor: AppColors.secondaryDark,
+          inactiveTrackColor: AppColors.primaryDark,
+          thumbColor: AppColors.secondaryDark,
+          overlayColor: AppColors.secondary,
+        ),
+        dropdownMenuTheme: DropdownMenuThemeData(
+          menuStyle: MenuStyle(
+            backgroundColor: WidgetStatePropertyAll(AppColors.primaryDark),
+          ),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          floatingLabelStyle: TextStyle(color: AppColors.secondaryDark),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.secondaryDark),
+          ),
+        ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: AppColors.primaryDark,
+        ),
+        textTheme: TextTheme(
+          titleLarge: TextStyle(
+            color: AppColors.fontColorDark,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          bodyLarge: TextStyle(
+            color: AppColors.fontColorDark,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          labelLarge: TextStyle(
+            color: AppColors.fontColorDark,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          bodyMedium: TextStyle(
+            color: AppColors.fontColorDark,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          bodySmall: TextStyle(
+            color: AppColors.fontColorDark,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          displayLarge: TextStyle(
+            color: AppColors.fontColorDark,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          labelSmall: TextStyle(
+            color: AppColors.fontColorDark,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          labelMedium: TextStyle(
+            color: AppColors.fontColorDark,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          displayMedium: TextStyle(
+            color: AppColors.fontColorDark,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          displaySmall: TextStyle(
+            color: AppColors.fontColorDark,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          headlineLarge: TextStyle(
+            color: AppColors.fontColorDark,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          headlineMedium: TextStyle(
+            color: AppColors.fontColorDark,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          headlineSmall: TextStyle(
+            color: AppColors.fontColorDark,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          titleMedium: TextStyle(
+            color: AppColors.fontColorDark,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+          titleSmall: TextStyle(
+            color: AppColors.fontColorDark,
+            fontSize: context.watch<ThemeViewmodel>().fontSize,
+          ),
+        ),
+      ),
       themeMode: context.watch<ThemeViewmodel>().theme,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
@@ -134,12 +323,10 @@ class _MyAppState extends State<MyApp> {
                   context.read<AuthService>().userDatabase == null
                   ? null
                   : BottomNavigationBar(
-                      backgroundColor: AppColors.primary,
-                      selectedItemColor: AppColors.secondary,
-                      currentIndex: selectedScreen,
+                      currentIndex: context.watch<AuthService>().selectedScreen,
                       onTap: (value) {
                         setState(() {
-                          selectedScreen = value;
+                          context.read<AuthService>().selectedScreen = value;
                         });
                       },
                       items: [
@@ -157,88 +344,11 @@ class _MyAppState extends State<MyApp> {
                         ),
                       ],
                     ),
-              appBar: AppBar(
-                title: Center(child: Text(l10n.nombreApp)),
-                backgroundColor: AppColors.primary,
-              ),
+              appBar: AppBar(title: Center(child: Text(l10n.nombreApp))),
               drawer: context.read<AuthService>().userDatabase == null
                   ? null
-                  : Drawer(
-                      child: ListView(
-                        children: [
-                          DrawerHeader(
-                            decoration: BoxDecoration(color: AppColors.primary),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(l10n.nombreApp),
-                                Text(
-                                  "${l10n.usuario} : ${context.read<AuthService>().userDatabase!.username}",
-                                ),
-                              ],
-                            ),
-                          ),
-                          ListTile(
-                            title: Text(l10n.miPerfil),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ProfileScreen(
-                                    user: context
-                                        .read<AuthService>()
-                                        .userDatabase,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-
-                          ListTile(
-                            title: Text(l10n.historial),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => UserHistoryScreen(),
-                                ),
-                              );
-                            },
-                          ),
-
-                          ?(context.read<AuthService>().userDatabase != null &&
-                                  context
-                                          .read<AuthService>()
-                                          .userDatabase!
-                                          .role ==
-                                      "Administrador")
-                              ? ListTile(
-                                  title: Text(l10n.administracion),
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            AdministrationScreen(),
-                                      ),
-                                    );
-                                  },
-                                )
-                              : null,
-
-                          ListTile(
-                            title: IconButton(
-                              onPressed: () {
-                                selectedScreen = 0;
-                                context.read<AuthService>().logOut();
-                              },
-                              icon: Icon(Icons.logout),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-              body: screens[selectedScreen],
+                  : DrawerWidget(l10n: l10n),
+              body: screens[context.watch<AuthService>().selectedScreen],
             );
           },
         ),

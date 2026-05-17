@@ -23,7 +23,7 @@
     "contrasena": "Password",
     "contrasenaActual": "Current password",
     "contrasenaActualMensaje": "Enter current password",
-    "contrasenaActualIncorrecta": "Current password is incorrect,please try again",
+    "contrasenaActualIncorrecta": "Current password is incorrect, please try again",
     "contrasenaActualizada": "Password has been updated",
     "contrasenaCorta": "Password is too short (min. 6 characters)",
     "contrasenaNoCoincide": "Passwords do not match",

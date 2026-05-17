@@ -24,16 +24,10 @@ class _FilterWidgetState extends State<FilterWidget> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      appBar: AppBar(
-        title: Text(l10n.filtrarPor),
-        backgroundColor: AppColors.primary,
-      ),
+      appBar: AppBar(title: Text(l10n.filtrarPor)),
       body: Row(
         children: [
           NavigationRail(
-            backgroundColor: AppColors.backgroundColor,
-            indicatorColor: AppColors.secondary,
             destinations: [
               NavigationRailDestination(
                 icon: Icon(Icons.location_on_sharp),
@@ -115,7 +109,6 @@ class _FilterWidgetState extends State<FilterWidget> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.primary,
         onPressed: () {
           Navigator.pop<List<String?>?>(context, [
             selectedLocationRadio,

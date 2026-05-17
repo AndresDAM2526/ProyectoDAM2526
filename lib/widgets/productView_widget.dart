@@ -28,8 +28,10 @@ class ProductViewWidget extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     return Container(
       decoration: BoxDecoration(
-        color: quantity != 0 ? AppColors.backgroundColor : AppColors.notStock,
-        border: Border.all(width: 1),
+        color: quantity != 0
+            ? Theme.of(context).colorScheme.surface
+            : AppColors.notStock,
+        border: Border.all(width: 1,color: Theme.of(context).colorScheme.inversePrimary),
       ),
       child: Row(
         children: [

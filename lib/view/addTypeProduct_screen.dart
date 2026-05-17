@@ -56,10 +56,7 @@ class _AddTypeProductState extends State<AddTypeProduct> {
               ),
             ),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                foregroundColor: Colors.black,
-              ),
+          
               onPressed: () async {
                 if (checkForm.currentState!.validate()) {
                   bool added = await context

@@ -28,10 +28,8 @@ class _HistorialScreenState extends State<HistorialScreen> {
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: AppColors.backgroundColor,
         appBar: AppBar(
           title: Text(l10n.historial),
-          backgroundColor: AppColors.primary,
         ),
         body: Column(
           children: [

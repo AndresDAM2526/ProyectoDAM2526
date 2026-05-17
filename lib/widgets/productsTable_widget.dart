@@ -20,7 +20,10 @@ class _ProductsTableWidgetState extends State<ProductsTableWidget> {
       horizontalMargin: 5,
       dataRowMinHeight: 0,
       dataRowMaxHeight: double.infinity,
-      border: TableBorder.all(width: 1),
+      border: TableBorder.all(
+        width: 1,
+        color: Theme.of(context).colorScheme.inversePrimary,
+      ),
       columns: [
         DataColumn(
           label: Expanded(child: Center(child: Text(l10n.nombre))),
@@ -72,13 +75,18 @@ class _ProductsTableWidgetState extends State<ProductsTableWidget> {
                       maxWidth: MediaQuery.of(context).size.width / 4,
                     ),
                     child: Padding(
-                      padding: EdgeInsets.only(top: 5,left: 2,right: 2,bottom: 5),
+                      padding: EdgeInsets.only(
+                        top: 5,
+                        left: 2,
+                        right: 2,
+                        bottom: 5,
+                      ),
                       child: Text(
                         product!['product'],
                         style: TextStyle(
                           color: product['quantity'] == 0
-                              ? AppColors.notStockFontColor
-                              : Colors.black,
+                            ? AppColors.notStockFontColor
+                            : Theme.of(context).colorScheme.inversePrimary,
                         ),
                       ),
                     ),
@@ -95,7 +103,7 @@ class _ProductsTableWidgetState extends State<ProductsTableWidget> {
                       style: TextStyle(
                         color: product['quantity'] == 0
                             ? AppColors.notStockFontColor
-                            : Colors.black,
+                            : Theme.of(context).colorScheme.inversePrimary,
                       ),
                     ),
                   ),
@@ -111,7 +119,7 @@ class _ProductsTableWidgetState extends State<ProductsTableWidget> {
                       style: TextStyle(
                         color: product['quantity'] == 0
                             ? AppColors.notStockFontColor
-                            : Colors.black,
+                            : Theme.of(context).colorScheme.inversePrimary,
                       ),
                     ),
                   ),

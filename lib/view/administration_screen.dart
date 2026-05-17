@@ -19,11 +19,7 @@ class AdministrationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      appBar: AppBar(
-        title: Center(child: Text(l10n.administracion)),
-        backgroundColor: AppColors.primary,
-      ),
+      appBar: AppBar(title: Center(child: Text(l10n.administracion))),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -58,13 +54,15 @@ class AdministrationScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             border: Border.all(width: 2),
                             borderRadius: BorderRadius.circular(10),
-                            color: AppColors.secondary,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               l10n.anadirUsuario,
-                              style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                             ),
                           ),
                         ),
@@ -83,11 +81,16 @@ class AdministrationScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             border: Border.all(width: 2),
                             borderRadius: BorderRadius.circular(10),
-                            color: AppColors.secondary,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(l10n.modificarUsuario),
+                            child: Text(
+                              l10n.modificarUsuario,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -130,13 +133,17 @@ class AdministrationScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 border: Border.all(width: 2),
                                 borderRadius: BorderRadius.circular(10),
-                                color: AppColors.secondary,
+                                color: Theme.of(context).colorScheme.secondary,
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
                                   l10n.anadirProducto,
-                                  style: TextStyle(color: Colors.black),
+                                  style: TextStyle(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onPrimary,
+                                  ),
                                 ),
                               ),
                             ),
@@ -155,13 +162,17 @@ class AdministrationScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 border: Border.all(width: 2),
                                 borderRadius: BorderRadius.circular(10),
-                                color: AppColors.secondary,
+                                color: Theme.of(context).colorScheme.secondary,
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
                                   l10n.modificarInventario,
-                                  style: TextStyle(color: Colors.black),
+                                  style: TextStyle(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onPrimary,
+                                  ),
                                 ),
                               ),
                             ),
@@ -182,13 +193,15 @@ class AdministrationScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             border: Border.all(width: 2),
                             borderRadius: BorderRadius.circular(10),
-                            color: AppColors.secondary,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               l10n.historial,
-                              style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                             ),
                           ),
                         ),
@@ -216,13 +229,15 @@ class AdministrationScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             border: Border.all(width: 2),
                             borderRadius: BorderRadius.circular(10),
-                            color: AppColors.secondary,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               l10n.anadirUbicacion,
-                              style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                             ),
                           ),
                         ),
@@ -241,13 +256,15 @@ class AdministrationScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             border: Border.all(width: 2),
                             borderRadius: BorderRadius.circular(10),
-                            color: AppColors.secondary,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               l10n.borrarUbicacion,
-                              style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                             ),
                           ),
                         ),
@@ -275,13 +292,15 @@ class AdministrationScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             border: Border.all(width: 2),
                             borderRadius: BorderRadius.circular(10),
-                            color: AppColors.secondary,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               l10n.anadirTipo,
-                              style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                             ),
                           ),
                         ),
@@ -290,7 +309,9 @@ class AdministrationScreen extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => TypesScreen()),
+                            MaterialPageRoute(
+                              builder: (context) => TypesScreen(),
+                            ),
                           );
                         },
                         child: Container(
@@ -298,13 +319,15 @@ class AdministrationScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             border: Border.all(width: 2),
                             borderRadius: BorderRadius.circular(10),
-                            color: AppColors.secondary,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               l10n.borrarTipo,
-                              style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                             ),
                           ),
                         ),

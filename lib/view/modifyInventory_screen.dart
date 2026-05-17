@@ -23,12 +23,16 @@ class _ModifyInventoryState extends State<ModifyInventory> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      appBar: AppBar(title: Center(child: Text(l10n.modificarInventario)),backgroundColor: AppColors.primary,),
+      appBar: AppBar(title: Center(child: Text(l10n.modificarInventario))),
       body: Column(
         children: [
           Container(
-            decoration: BoxDecoration(border: Border.all(width: 1)),
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 1,
+                color: Theme.of(context).colorScheme.inversePrimary,
+              ),
+            ),
             margin: EdgeInsets.all(5),
             child: Padding(
               padding: EdgeInsets.all(8.0),
@@ -45,9 +49,7 @@ class _ModifyInventoryState extends State<ModifyInventory> {
             ),
           ),
           FutureBuilder(
-            future: context.watch<SupabaseService>().getProductsFromName(
-              name!,
-            ),
+            future: context.watch<SupabaseService>().getProductsFromName(name!),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return CircularProgressIndicator();
@@ -64,7 +66,12 @@ class _ModifyInventoryState extends State<ModifyInventory> {
                     itemBuilder: (context, index) {
                       return Container(
                         margin: EdgeInsets.all(10),
-                        decoration: BoxDecoration(border: Border.all(width: 1)),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1,
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                          ),
+                        ),
                         child: ProductViewWidget(
                           idProduct: products[index]['id_product'],
                           name: products[index]['product'],

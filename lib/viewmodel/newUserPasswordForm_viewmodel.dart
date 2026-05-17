@@ -12,9 +12,17 @@ class NewUserPasswordFormViewModel extends ChangeNotifier {
   TextEditingController secondPassword = TextEditingController();
 
   String? checkOldPassword(String? value, AppLocalizations l10n) =>
-      (value == null || value.isEmpty) ? l10n.campoVacio : null;
+      (value == null || value.isEmpty)
+      ? l10n.campoVacio
+      : (value.length < 6)
+      ? l10n.contrasenaCorta
+      : null;
   String? checkNewPassword(String? value, AppLocalizations l10n) =>
-      (value == null || value.isEmpty) ? l10n.campoVacio : null;
+      (value == null || value.isEmpty)
+      ? l10n.campoVacio
+      : (value.length < 6)
+      ? l10n.contrasenaCorta
+      : null;
   String? checkBothPasswords(
     BuildContext context,
     AppLocalizations l10n,
@@ -43,12 +51,13 @@ class NewUserPasswordFormViewModel extends ChangeNotifier {
       oldPassword,
       newPassword,
       context,
+      l10n,
     );
     if (changedPassword == true) {
       await context.read<MessagesViewmodel>().showInformationDialog(
         context,
         MediaQuery.of(context).size.width / 2,
-        MediaQuery.of(context).size.height / 2,
+        MediaQuery.of(context).size.height / 3,
         l10n.contrasenaActualizada,
       );
       notifyListeners();

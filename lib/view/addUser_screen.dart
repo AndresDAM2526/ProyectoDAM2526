@@ -90,10 +90,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.anadirUsuario),
-        backgroundColor: AppColors.primary,
-      ),
+      appBar: AppBar(title: Text(l10n.anadirUsuario)),
       body: Form(
         key: checkForm,
         child: (MediaQuery.of(context).orientation == Orientation.portrait)
@@ -224,10 +221,6 @@ class _AddUserScreenState extends State<AddUserScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            foregroundColor: Colors.black,
-                          ),
                           onPressed: () async {
                             if (checkForm.currentState!.validate()) {
                               int? idRole =
@@ -275,10 +268,6 @@ class _AddUserScreenState extends State<AddUserScreen> {
                           child: Text(l10n.enviar),
                         ),
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            foregroundColor: Colors.black,
-                          ),
                           onPressed: () {
                             context.read<AdduserFormViewmodel>().clearForm();
                           },
@@ -417,10 +406,6 @@ class _AddUserScreenState extends State<AddUserScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            foregroundColor: Colors.black,
-                          ),
                           onPressed: () {
                             if (checkForm.currentState!.validate()) {
                               context.read<DatabaseService>().addUser(
@@ -453,10 +438,6 @@ class _AddUserScreenState extends State<AddUserScreen> {
                           child: Text(l10n.enviar),
                         ),
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            foregroundColor: Colors.black,
-                          ),
                           onPressed: () {
                             context.read<AdduserFormViewmodel>().clearForm();
                           },

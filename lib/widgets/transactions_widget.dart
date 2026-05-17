@@ -34,9 +34,9 @@ class _TransactionsState extends State<Transactions> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+    
       appBar: AppBar(
-        backgroundColor: AppColors.primary,
+       
         title: Center(
           child: (widget.typeRequest.compareTo("Coger") == 0)
               ? Text(l10n.obtenerProducto)
@@ -190,10 +190,7 @@ class _TransactionsState extends State<Transactions> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.black,
-                  ),
+                  
                   onPressed: () {
                     if (checkForm.currentState!.validate()) {
                       if (widget.typeRequest.compareTo("Coger") == 0) {

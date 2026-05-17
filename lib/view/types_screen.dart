@@ -17,10 +17,8 @@ class _TypesScreenState extends State<TypesScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         title: Text(l10n.tipo),
-        backgroundColor: AppColors.primary,
       ),
       body: Column(
         children: [

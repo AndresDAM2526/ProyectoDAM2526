@@ -81,7 +81,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get contrasenaActualMensaje => 'Enter current password';
 
   @override
-  String get contrasenaActualIncorrecta => 'Current password is incorrect,please try again';
+  String get contrasenaActualIncorrecta => 'Current password is incorrect, please try again';
 
   @override
   String get contrasenaActualizada => 'Password has been updated';

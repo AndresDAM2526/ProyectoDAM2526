@@ -58,10 +58,6 @@ class _AddlocationScreenState extends State<AddlocationScreen> {
             Container(
               margin: EdgeInsets.all(20),
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: Colors.black,
-                ),
                 onPressed: () async {
                   if (checkForm.currentState!.validate()) {
                     bool added = await context

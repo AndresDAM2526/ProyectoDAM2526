@@ -18,8 +18,7 @@ class _UserHistoryScreenState extends State<UserHistoryScreen> {
   Widget build(BuildContext context) {
     final l10n=AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      appBar: AppBar(title: Text(l10n.historial),backgroundColor: AppColors.primary,),
+      appBar: AppBar(title: Text(l10n.historial)),
       body: FutureBuilder(
         future: context.watch<SupabaseService>().getHistoryRegisterByIdUser(
           context.watch<AuthService>().userDatabase!.idUser,
