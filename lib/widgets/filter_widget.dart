@@ -115,7 +115,7 @@ class _FilterWidgetState extends State<FilterWidget> {
             selectedTypeRadio,
           ]);
         },
-        child: Text(l10n.filtrar, style: TextStyle(color: Colors.black)),
+        child: Icon(Icons.filter_list_rounded),
       ),
     );
   }

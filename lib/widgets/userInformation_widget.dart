@@ -119,7 +119,7 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
                       ],
                     ),
                     ExpansionTile(
-                      title: Text("Opciones"),
+                      title: Text(l10n.opciones),
                       children: [
                         Row(
                           children: [
@@ -141,13 +141,22 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
                                   right: 4,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: AppColors.secondary,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.secondary,
                                   border: Border.all(width: 1),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(l10n.modificarUsuario),
+                                  child: Text(
+                                    l10n.modificarUsuario,
+                                    style: TextStyle(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onPrimary,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -170,13 +179,22 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
                                   right: 4,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: AppColors.secondary,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.secondary,
                                   border: Border.all(width: 1),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(l10n.cambiarContrasena),
+                                  child: Text(
+                                    l10n.cambiarContrasena,
+                                    style: TextStyle(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onPrimary,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),

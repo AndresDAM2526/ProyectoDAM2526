@@ -18,9 +18,7 @@ class _LocationsScreenState extends State<LocationsScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.ubicacion),
-      ),
+      appBar: AppBar(title: Text(l10n.ubicacion)),
       body: Column(
         children: [
           Expanded(
@@ -45,9 +43,9 @@ class _LocationsScreenState extends State<LocationsScreen> {
                                 .read<MessagesViewmodel>()
                                 .showInformationDialog(
                                   context,
-                                  MediaQuery.of(context).size.width / 2,
-                                  MediaQuery.of(context).size.height / 2,
-                                  "Ubicación eliminada",
+                                  MediaQuery.of(context).size.width,
+                                  MediaQuery.of(context).size.height * 0.4,
+                                  l10n.ubicacionBorrada,
                                 );
                           }
                         },

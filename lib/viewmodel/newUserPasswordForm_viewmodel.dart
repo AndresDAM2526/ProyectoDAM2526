@@ -4,6 +4,7 @@ import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/service/auth_service.dart';
 import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/theme_viewmodel.dart';
 import 'package:sqflite/sqflite.dart';
 
 class NewUserPasswordFormViewModel extends ChangeNotifier {
@@ -37,6 +38,13 @@ class NewUserPasswordFormViewModel extends ChangeNotifier {
     return null;
   }
 
+  void clearForm() {
+    oldPassword.clear();
+    newPassword.clear();
+    secondPassword.clear();
+    notifyListeners();
+  }
+
   Future<bool> updatePassword(
     String idUser,
     String email,
@@ -54,12 +62,16 @@ class NewUserPasswordFormViewModel extends ChangeNotifier {
       l10n,
     );
     if (changedPassword == true) {
+      clearForm();
       await context.read<MessagesViewmodel>().showInformationDialog(
         context,
-        MediaQuery.of(context).size.width / 2,
-        MediaQuery.of(context).size.height / 3,
+        MediaQuery.of(context).size.width,
+        (context.read<ThemeViewmodel>().fontSize < 24)
+            ? MediaQuery.of(context).size.height / 3
+            : MediaQuery.of(context).size.height * 0.4,
         l10n.contrasenaActualizada,
       );
+
       notifyListeners();
       return true;
     }

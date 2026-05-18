@@ -18,7 +18,11 @@ class InformationMessageWidget extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
-        Container(width: double.infinity, height: 2, color: Colors.black),
+        Container(
+          width: double.infinity,
+          height: 2,
+          color: Theme.of(context).colorScheme.inversePrimary,
+        ),
         Padding(
           padding: const EdgeInsets.only(
             top: 30,

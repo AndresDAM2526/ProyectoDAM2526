@@ -15,7 +15,10 @@ class ConfirmMessageWidget extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Text(l10n.informacion),
         ),
-        Container(width: double.infinity, height: 2, color: Colors.black),
+        Container(
+          width: double.infinity,
+          color: Theme.of(context).colorScheme.inversePrimary,
+        ),
         Padding(
           padding: const EdgeInsets.only(
             top: 30,

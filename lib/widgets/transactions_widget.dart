@@ -105,11 +105,21 @@ class _TransactionsState extends State<Transactions> {
                             child: Column(
                               children: [
                                 ListTile(
-                                  leading: Radio(value: "Temporal"),
+                                  leading: Radio(
+                                    value: "Temporal",
+                                    activeColor: Theme.of(
+                                      context,
+                                    ).colorScheme.secondary,
+                                  ),
                                   title: Text(l10n.temporal),
                                 ),
                                 ListTile(
-                                  leading: Radio(value: "Definitivo"),
+                                  leading: Radio(
+                                    value: "Definitivo",
+                                    activeColor: Theme.of(
+                                      context,
+                                    ).colorScheme.secondary,
+                                  ),
                                   title: Text(l10n.definitivo),
                                 ),
                               ],

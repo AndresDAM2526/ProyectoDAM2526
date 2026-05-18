@@ -235,7 +235,7 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: AppColors.primaryDark,
+          backgroundColor: AppColors.secondaryDark,
         ),
         textTheme: TextTheme(
           titleLarge: TextStyle(

@@ -120,7 +120,7 @@ class AuthService extends ChangeNotifier {
       if (e.code!.contains("invalid_credentials")) {
         context.read<MessagesViewmodel>().showErrorDialog(
           context,
-          MediaQuery.of(context).size.width / 2,
+          MediaQuery.of(context).size.width,
           MediaQuery.of(context).size.height / 3,
           l10n.inicioSesionIncorrecto,
         );

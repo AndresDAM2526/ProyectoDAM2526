@@ -7,6 +7,7 @@ import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/theme_viewmodel.dart';
 import 'package:proyecto_dam_2526/widgets/productView_widget.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -79,18 +80,45 @@ class _ModifyInventoryState extends State<ModifyInventory> {
                           type: products[index]['type']['type'],
                           quantity: products[index]['quantity'],
                           leftSideWidget: IconButton(
-                            onPressed: () {
-                              context.read<SupabaseService>().deleteProduct(
-                                products[index]['id_product'],
-                              );
-                              context
+                            onPressed: () async {
+                              bool? confirm = await context
                                   .read<MessagesViewmodel>()
-                                  .showInformationDialog(
+                                  .showConfirmDialog(
                                     context,
-                                    MediaQuery.of(context).size.width / 2,
-                                    MediaQuery.of(context).size.height / 3,
-                                    l10n.productoBorrado,
+                                    MediaQuery.of(context).size.width,
+                                    MediaQuery.of(context).size.height * 0.4,
+                                    l10n.confirmarBorradoProducto,
                                   );
+                              if (confirm && mounted) {
+                                bool? deleted = await context
+                                    .read<SupabaseService>()
+                                    .deleteProduct(
+                                      products[index]['id_product'],
+                                      context,
+                                      l10n,
+                                    );
+                                if (deleted) {
+                                  context
+                                      .read<MessagesViewmodel>()
+                                      .showInformationDialog(
+                                        context,
+                                        MediaQuery.of(context).size.width,
+                                        (context
+                                                    .read<ThemeViewmodel>()
+                                                    .fontSize <
+                                                24)
+                                            ? MediaQuery.of(
+                                                    context,
+                                                  ).size.height /
+                                                  3
+                                            : MediaQuery.of(
+                                                    context,
+                                                  ).size.height *
+                                                  0.4,
+                                        l10n.productoBorrado,
+                                      );
+                                }
+                              }
                             },
                             icon: Icon(Icons.delete),
                           ),

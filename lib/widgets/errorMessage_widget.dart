@@ -15,7 +15,7 @@ class ErrorMessageWidget extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Text(l10n.error, style: TextStyle(color: Colors.red)),
         ),
-        Container(width: double.infinity, height: 2, color: Colors.black),
+        Container(width: double.infinity, height: 2, color: Theme.of(context).colorScheme.inversePrimary),
         Padding(
           padding: const EdgeInsets.only(
             top: 30,

@@ -39,7 +39,7 @@ class _NewUserPasswordState extends State<NewUserPassword> {
           children: [
             Container(
               margin: EdgeInsets.all(10),
-              decoration: BoxDecoration(border: Border.all(width: 1)),
+              decoration: BoxDecoration(border: Border.all(width: 1,color: Theme.of(context).colorScheme.inversePrimary)),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(l10n.nuevoUsuarioPantalla),
@@ -147,7 +147,6 @@ class _NewUserPasswordState extends State<NewUserPassword> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              
               onPressed: () async {
                 if (checkForm.currentState!.validate()) {
                   bool changedPassword = await context

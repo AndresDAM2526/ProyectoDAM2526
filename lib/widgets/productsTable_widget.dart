@@ -58,7 +58,7 @@ class _ProductsTableWidgetState extends State<ProductsTableWidget> {
                                 : MediaQuery.of(context).size.height,
                             child: ProductInformation(
                               product: Product(
-                                name: product!['product'],
+                                name: product['product'],
                                 type: product['type']['type'],
                                 location: product['location']['location'],
                                 quantity: product['quantity'],

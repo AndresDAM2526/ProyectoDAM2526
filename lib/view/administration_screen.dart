@@ -11,6 +11,7 @@ import 'package:proyecto_dam_2526/view/modifyUser_screen.dart';
 import 'package:proyecto_dam_2526/view/types_screen.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/theme_viewmodel.dart';
 
 class AdministrationScreen extends StatelessWidget {
   const AdministrationScreen({super.key});
@@ -22,6 +23,7 @@ class AdministrationScreen extends StatelessWidget {
       appBar: AppBar(title: Center(child: Text(l10n.administracion))),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               margin: EdgeInsets.all(10),
@@ -43,8 +45,11 @@ class AdministrationScreen extends StatelessWidget {
                                 .read<MessagesViewmodel>()
                                 .showInformationDialog(
                                   context,
-                                  MediaQuery.of(context).size.width / 2,
-                                  MediaQuery.of(context).size.height / 3,
+                                  MediaQuery.of(context).size.width,
+                                  (context.read<ThemeViewmodel>().fontSize < 24)
+                                      ? MediaQuery.of(context).size.height / 3
+                                      : MediaQuery.of(context).size.height *
+                                            0.4,
                                   l10n.nuevoUsuarioMensaje,
                                 );
                           }
@@ -105,80 +110,184 @@ class AdministrationScreen extends StatelessWidget {
                 title: Text(l10n.inventario),
                 children: [
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () async {
-                              bool? result = await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => AddProductScreen(),
-                                ),
-                              );
-                              if (result == true) {
-                                await context
-                                    .read<MessagesViewmodel>()
-                                    .showInformationDialog(
+                      (context.read<ThemeViewmodel>().fontSize < 24)
+                          ? Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () async {
+                                    bool? result = await Navigator.push(
                                       context,
-                                      MediaQuery.of(context).size.width / 2,
-                                      MediaQuery.of(context).size.height / 3,
-                                      l10n.nuevoProductoMensaje,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            AddProductScreen(),
+                                      ),
                                     );
-                              }
-                            },
-                            child: Container(
-                              margin: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                border: Border.all(width: 2),
-                                borderRadius: BorderRadius.circular(10),
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  l10n.anadirProducto,
-                                  style: TextStyle(
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.onPrimary,
+                                    if (result == true) {
+                                      await context
+                                          .read<MessagesViewmodel>()
+                                          .showInformationDialog(
+                                            context,
+                                            MediaQuery.of(context).size.width,
+                                            (context
+                                                        .read<ThemeViewmodel>()
+                                                        .fontSize <
+                                                    24)
+                                                ? MediaQuery.of(
+                                                        context,
+                                                      ).size.height /
+                                                      3
+                                                : MediaQuery.of(
+                                                        context,
+                                                      ).size.height *
+                                                      0.4,
+                                            l10n.nuevoProductoMensaje,
+                                          );
+                                    }
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(width: 2),
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.secondary,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        l10n.anadirProducto,
+                                        style: TextStyle(
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.onPrimary,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ModifyInventory(),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              margin: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                border: Border.all(width: 2),
-                                borderRadius: BorderRadius.circular(10),
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  l10n.modificarInventario,
-                                  style: TextStyle(
-                                    color: Theme.of(
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
                                       context,
-                                    ).colorScheme.onPrimary,
+                                      MaterialPageRoute(
+                                        builder: (context) => ModifyInventory(),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(width: 2),
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.secondary,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        l10n.modificarInventario,
+                                        style: TextStyle(
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.onPrimary,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
+                              ],
+                            )
+                          : Column(
+                              children: [
+                                GestureDetector(
+                                  onTap: () async {
+                                    bool? result = await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            AddProductScreen(),
+                                      ),
+                                    );
+                                    if (result == true) {
+                                      await context
+                                          .read<MessagesViewmodel>()
+                                          .showInformationDialog(
+                                            context,
+                                            MediaQuery.of(context).size.width,
+                                            (context
+                                                        .read<ThemeViewmodel>()
+                                                        .fontSize <
+                                                    24)
+                                                ? MediaQuery.of(
+                                                        context,
+                                                      ).size.height /
+                                                      3
+                                                : MediaQuery.of(
+                                                        context,
+                                                      ).size.height *
+                                                      0.4,
+                                            l10n.nuevoProductoMensaje,
+                                          );
+                                    }
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(width: 2),
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.secondary,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        l10n.anadirProducto,
+                                        style: TextStyle(
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.onPrimary,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ModifyInventory(),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(width: 2),
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.secondary,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        l10n.modificarInventario,
+                                        style: TextStyle(
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.onPrimary,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -216,61 +325,134 @@ class AdministrationScreen extends StatelessWidget {
               child: ExpansionTile(
                 title: Text(l10n.ubicacion),
                 children: [
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          context
-                              .read<AdministrationscreenViewmodel>()
-                              .showAddLocationDialog(context, l10n);
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 2),
-                            borderRadius: BorderRadius.circular(10),
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              l10n.anadirUbicacion,
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.onPrimary,
+                  (context.read<ThemeViewmodel>().fontSize < 24)
+                      ? Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                context
+                                    .read<AdministrationscreenViewmodel>()
+                                    .showAddLocationDialog(context, l10n);
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  border: Border.all(width: 2),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.secondary,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    l10n.anadirUbicacion,
+                                    style: TextStyle(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onPrimary,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => LocationsScreen(),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 2),
-                            borderRadius: BorderRadius.circular(10),
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              l10n.borrarUbicacion,
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.onPrimary,
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LocationsScreen(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  border: Border.all(width: 2),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.secondary,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    l10n.borrarUbicacion,
+                                    style: TextStyle(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onPrimary,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                          ],
+                        )
+                      : Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                context
+                                    .read<AdministrationscreenViewmodel>()
+                                    .showAddLocationDialog(context, l10n);
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  border: Border.all(width: 2),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.secondary,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    l10n.anadirUbicacion,
+                                    style: TextStyle(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onPrimary,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LocationsScreen(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  border: Border.all(width: 2),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.secondary,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    l10n.borrarUbicacion,
+                                    style: TextStyle(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onPrimary,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),

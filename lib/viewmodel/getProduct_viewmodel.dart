@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/requestProduct.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/theme_viewmodel.dart';
 import 'package:proyecto_dam_2526/widgets/transactions_widget.dart';
 
 class GetProductViewmodel extends ChangeNotifier {
@@ -97,8 +98,10 @@ class GetProductViewmodel extends ChangeNotifier {
     if (result == true) {
       context.read<MessagesViewmodel>().showInformationDialog(
         context,
-        MediaQuery.of(context).size.width / 2,
-        MediaQuery.of(context).size.height / 3,
+        MediaQuery.of(context).size.width,
+        (context.read<ThemeViewmodel>().fontSize < 24)
+            ? MediaQuery.of(context).size.height / 3
+            : MediaQuery.of(context).size.height * 0.4,
         l10n.peticionCorrecta,
       );
     } else {

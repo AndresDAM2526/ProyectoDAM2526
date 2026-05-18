@@ -69,6 +69,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirmarBorradoUsuario => 'Do you want to delete the user?';
 
   @override
+  String get confirmarBorradoProducto => 'Do you want to delete the product?';
+
+  @override
   String get confirmarContrasena => 'Confirm password';
 
   @override
@@ -243,6 +246,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get obtenerProducto => 'Get product';
 
   @override
+  String get opciones => 'Options';
+
+  @override
   String get perfil => 'Profile';
 
   @override
@@ -289,6 +295,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ubicacion => 'Location';
+
+  @override
+  String get ubicacionBorrada => 'Deleted location';
 
   @override
   String get unidadesDevolver => 'Units to return';

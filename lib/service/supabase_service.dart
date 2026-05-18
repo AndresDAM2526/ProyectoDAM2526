@@ -9,6 +9,7 @@ import 'package:proyecto_dam_2526/model/product.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
 import 'package:proyecto_dam_2526/view/addTypeProduct_screen.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/theme_viewmodel.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseService extends ChangeNotifier {
@@ -276,14 +277,31 @@ class SupabaseService extends ChangeNotifier {
     }
   }
 
-  Future<bool> deleteProduct(int idProduct) async {
+  Future<bool> deleteProduct(
+    int idProduct,
+    BuildContext context,
+    AppLocalizations l10n,
+  ) async {
     try {
       await supabase.from('product').delete().eq('id_product', idProduct);
       await getAllProducts();
       notifyListeners();
       return true;
+    } on PostgrestException catch (e) {
+      if (e.code == '23503') {
+        await context.read<MessagesViewmodel>().showErrorDialog(
+          context,
+          MediaQuery.of(context).size.width,
+          (context.read<ThemeViewmodel>().fontSize < 24)
+              ? MediaQuery.of(context).size.height / 3
+              : MediaQuery.of(context).size.height * 0.4,
+          l10n.errorBorrado,
+        );
+        return false;
+      }
+      return false;
     } catch (e) {
-      print("Error al borrar el producto");
+      print(e);
       return false;
     }
   }

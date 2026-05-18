@@ -32,8 +32,8 @@ class _UserHistoryScreenState extends State<UserHistoryScreen> {
             itemCount: history.length,
             itemBuilder: (context, index) {
               return Container(
-                margin: EdgeInsets.all(5),
-                decoration: BoxDecoration(border: Border.all(width: 1)),
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(border: Border.all(width: 1,color: Theme.of(context).colorScheme.inversePrimary)),
                 child: HistoryRegisterWidget(
                   name: history[index]['product']['product'],
                   typeProduct: history[index]['product']['type']['type'],

@@ -9,7 +9,7 @@ class ProductInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n=AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -19,7 +19,10 @@ class ProductInformation extends StatelessWidget {
               Container(
                 margin: EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  border: Border.all(width: 1),
+                  border: Border.all(
+                    width: 1,
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
@@ -29,14 +32,17 @@ class ProductInformation extends StatelessWidget {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: Colors.red,
-                        border: Border.all(width: 1),
+                        border: Border.all(
+                          width: 1,
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
                         top: 10,
-                        left: 70,
-                        right: 70,
+                        left: 40,
+                        right: 40,
                         bottom: 10,
                       ),
                       child: Text(product.name),
@@ -47,7 +53,10 @@ class ProductInformation extends StatelessWidget {
               Container(
                 margin: EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  border: Border.all(width: 1),
+                  border: Border.all(
+                    width: 1,
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
@@ -57,24 +66,31 @@ class ProductInformation extends StatelessWidget {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: Colors.red,
-                        border: Border.all(width: 1),
+                        border: Border.all(
+                          width: 1,
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
                         top: 10,
-                        left: 70,
-                        right: 70,
+                        left: 40,
+                        right: 40,
                         bottom: 10,
                       ),
                       child: Text(product.type),
                     ),
                   ],
                 ),
-              ),Container(
+              ),
+              Container(
                 margin: EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  border: Border.all(width: 1),
+                  border: Border.all(
+                    width: 1,
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
@@ -84,14 +100,17 @@ class ProductInformation extends StatelessWidget {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: Colors.red,
-                        border: Border.all(width: 1),
+                        border: Border.all(
+                          width: 1,
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
                         top: 10,
-                        left: 70,
-                        right: 70,
+                        left: 40,
+                        right: 40,
                         bottom: 10,
                       ),
                       child: Text(product.location),
@@ -102,7 +121,10 @@ class ProductInformation extends StatelessWidget {
               Container(
                 margin: EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  border: Border.all(width: 1),
+                  border: Border.all(
+                    width: 1,
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
@@ -112,7 +134,10 @@ class ProductInformation extends StatelessWidget {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: Colors.red,
-                        border: Border.all(width: 1),
+                        border: Border.all(
+                          width: 1,
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
                       ),
                     ),
                     Padding(

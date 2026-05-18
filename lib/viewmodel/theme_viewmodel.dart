@@ -43,6 +43,7 @@ class ThemeViewmodel extends ChangeNotifier {
   void changeFontSize(double size) async {
     multiplier = size;
     notifyListeners();
+    print(fontSize);
     final prefs = await SharedPreferences.getInstance();
     prefs.setDouble('multiplier', multiplier);
   }

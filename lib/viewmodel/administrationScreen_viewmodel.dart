@@ -9,6 +9,7 @@ import 'package:proyecto_dam_2526/view/changePassword_screen.dart';
 import 'package:proyecto_dam_2526/view/modifyProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/modifyUserPropierties_screen.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/theme_viewmodel.dart';
 
 class AdministrationscreenViewmodel extends ChangeNotifier {
   TextEditingController userController = TextEditingController();
@@ -62,9 +63,9 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
       context.read<MessagesViewmodel>().showInformationDialog(
         context,
         MediaQuery.of(context).size.width,
-        (MediaQuery.of(context).orientation == Orientation.portrait)
+        (context.read<ThemeViewmodel>().fontSize < 24)
             ? MediaQuery.of(context).size.height / 3
-            : MediaQuery.of(context).size.height,
+            : MediaQuery.of(context).size.height * 0.4,
         l10n.nuevaUbicacionMensaje,
       );
     }
@@ -91,9 +92,9 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
       context.read<MessagesViewmodel>().showInformationDialog(
         context,
         MediaQuery.of(context).size.width,
-        (MediaQuery.of(context).orientation == Orientation.portrait)
+        (context.read<ThemeViewmodel>().fontSize < 24)
             ? MediaQuery.of(context).size.height / 3
-            : MediaQuery.of(context).size.height,
+            : MediaQuery.of(context).size.height * 0.4,
         l10n.nuevoTipoMensaje,
       );
     }
@@ -186,8 +187,10 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
     if (modified == true) {
       context.read<MessagesViewmodel>().showInformationDialog(
         context,
-        MediaQuery.of(context).size.width / 2,
-        MediaQuery.of(context).size.height / 4,
+        MediaQuery.of(context).size.width,
+        (context.read<ThemeViewmodel>().fontSize < 24)
+            ? MediaQuery.of(context).size.height / 2
+            : MediaQuery.of(context).size.height * 0.4,
         l10n.modificarProductoMensaje,
       );
     }

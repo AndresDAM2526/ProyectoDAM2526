@@ -215,6 +215,12 @@ abstract class AppLocalizations {
   /// **'Do you want to delete the user?'**
   String get confirmarBorradoUsuario;
 
+  /// No description provided for @confirmarBorradoProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you want to delete the product?'**
+  String get confirmarBorradoProducto;
+
   /// No description provided for @confirmarContrasena.
   ///
   /// In en, this message translates to:
@@ -563,6 +569,12 @@ abstract class AppLocalizations {
   /// **'Get product'**
   String get obtenerProducto;
 
+  /// No description provided for @opciones.
+  ///
+  /// In en, this message translates to:
+  /// **'Options'**
+  String get opciones;
+
   /// No description provided for @perfil.
   ///
   /// In en, this message translates to:
@@ -658,6 +670,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Location'**
   String get ubicacion;
+
+  /// No description provided for @ubicacionBorrada.
+  ///
+  /// In en, this message translates to:
+  /// **'Deleted location'**
+  String get ubicacionBorrada;
 
   /// No description provided for @unidadesDevolver.
   ///
