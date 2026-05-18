@@ -7,6 +7,8 @@ class Register {
   String location;
   String date;
   int quantity;
+  String? duration;
+  String? description;
 
   Register({
     required this.user,
@@ -17,5 +19,7 @@ class Register {
     required this.location,
     required this.date,
     required this.quantity,
+    required this.duration,
+    required this.description,
   });
 }

@@ -43,7 +43,9 @@ create table if not exists register(
   id_user uuid references users(id_user),
   id_location integer referes location(id_location),
   date timestamp,
-  quantity integer
+  quantity integer,
+  duration text,
+  description text
 );
 
 insert into role(role) values ('Administrador'),('Profesor'),('Alumno');

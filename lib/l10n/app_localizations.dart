@@ -269,11 +269,29 @@ abstract class AppLocalizations {
   /// **'Invalid email format'**
   String get correoIncorrecto;
 
+  /// No description provided for @definitivo.
+  ///
+  /// In en, this message translates to:
+  /// **'Definitive'**
+  String get definitivo;
+
+  /// No description provided for @descripcion.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get descripcion;
+
   /// No description provided for @devolverProducto.
   ///
   /// In en, this message translates to:
   /// **'Return product'**
   String get devolverProducto;
+
+  /// No description provided for @duracion.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get duracion;
 
   /// No description provided for @email.
   ///
@@ -604,6 +622,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Font size'**
   String get tamanioFuente;
+
+  /// No description provided for @temporal.
+  ///
+  /// In en, this message translates to:
+  /// **'Temporary'**
+  String get temporal;
 
   /// No description provided for @tipo.
   ///

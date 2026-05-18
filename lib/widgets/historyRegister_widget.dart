@@ -10,6 +10,8 @@ class HistoryRegisterWidget extends StatelessWidget {
   String typeRegister;
   String date;
   int quantity;
+  String? duration;
+  String? description;
   HistoryRegisterWidget({
     super.key,
     required this.name,
@@ -18,6 +20,8 @@ class HistoryRegisterWidget extends StatelessWidget {
     required this.typeRegister,
     required this.date,
     required this.quantity,
+    required this.duration,
+    required this.description,
   });
 
   @override
@@ -74,6 +78,34 @@ class HistoryRegisterWidget extends StatelessWidget {
               Text("$quantity"),
             ],
           ),
+          (typeRegister == "Coger")
+              ? Row(
+                  children: [
+                    Text(
+                      "${l10n.duracion}: ",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text("$duration"),
+                  ],
+                )
+              : SizedBox(),
+          (typeRegister == "Coger")
+              ? Row(
+                  children: [
+                    Text(
+                      "${l10n.descripcion}: ",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Expanded(
+                      child: Text(
+                        "$description",
+                        style: TextStyle(overflow: TextOverflow.ellipsis),
+                        maxLines: 5,
+                      ),
+                    ),
+                  ],
+                )
+              : SizedBox(),
         ],
       ),
     );

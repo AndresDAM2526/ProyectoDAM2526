@@ -28,9 +28,7 @@ class _HistorialScreenState extends State<HistorialScreen> {
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: Text(l10n.historial),
-        ),
+        appBar: AppBar(title: Text(l10n.historial)),
         body: Column(
           children: [
             Container(
@@ -92,6 +90,8 @@ class _HistorialScreenState extends State<HistorialScreen> {
                                         historial[index]['date'],
                                       ),
                                   quantity: historial[index]['quantity'],
+                                  duration: historial[index]['duration'],
+                                  description: historial[index]['description'],
                                 ),
                               ),
                             );

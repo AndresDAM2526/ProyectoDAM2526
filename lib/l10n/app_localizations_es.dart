@@ -96,7 +96,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get correoIncorrecto => 'Formato de correo incorrecto';
 
   @override
+  String get definitivo => 'Definitivo';
+
+  @override
+  String get descripcion => 'Descripción';
+
+  @override
   String get devolverProducto => 'Devolver producto';
+
+  @override
+  String get duracion => 'Duración';
 
   @override
   String get email => 'Email';
@@ -262,6 +271,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get tamanioFuente => 'Tamaño de la fuente';
+
+  @override
+  String get temporal => 'Temporal';
 
   @override
   String get tipo => 'Tipo';

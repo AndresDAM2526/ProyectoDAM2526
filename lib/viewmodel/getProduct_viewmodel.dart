@@ -8,6 +8,7 @@ import 'package:proyecto_dam_2526/widgets/transactions_widget.dart';
 class GetProductViewmodel extends ChangeNotifier {
   int userQuantity = 0;
   TextEditingController quantityController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
   String? checkQuantityGetProduct(
     String? value,
@@ -64,6 +65,7 @@ class GetProductViewmodel extends ChangeNotifier {
   void clearForm() {
     userQuantity = 0;
     quantityController.clear();
+    descriptionController.clear;
     notifyListeners();
   }
 

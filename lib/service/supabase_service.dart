@@ -337,6 +337,8 @@ class SupabaseService extends ChangeNotifier {
     String date,
     int quantity,
     String location,
+    String? duration,
+    String? description,
   ) async {
     try {
       int? idRegisterType = await getIdTypeRegisterFromNameType(registerType);
@@ -351,6 +353,8 @@ class SupabaseService extends ChangeNotifier {
           'id_location': idLocation,
           'date': DateTime.now().toLocal().toString(),
           'quantity': quantity,
+          'duration': duration,
+          'description': description,
         });
         getAllProducts();
         notifyListeners();
@@ -369,7 +373,7 @@ class SupabaseService extends ChangeNotifier {
       final registers = await supabase
           .from('register')
           .select('''
-          quantity,date,product:id_product ( product,type:id_type(type),location:id_location(location) ), type:id_type_register ( type_register )
+          quantity,date,duration,description,product:id_product ( product,type:id_type(type),location:id_location(location) ), type:id_type_register ( type_register )
         ''')
           .eq('id_user', idUser)
           .order('date', ascending: false);
@@ -556,7 +560,7 @@ class SupabaseService extends ChangeNotifier {
       final result = await supabase
           .from('register')
           .select(
-            'type_register(type_register),users(name,username),product:id_product(product,type:id_type(type),location:id_location(location)),quantity,date',
+            'type_register(type_register),users(name,username),product:id_product(product,type:id_type(type),location:id_location(location)),quantity,date,duration,description',
           );
       final filtered = result.where((element) {
         String name = element['product']['product'];

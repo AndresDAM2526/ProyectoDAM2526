@@ -27,6 +27,8 @@ class Transactions extends StatefulWidget {
 }
 
 class _TransactionsState extends State<Transactions> {
+  List<String> statusList = ['Temporal', 'Definitivo'];
+  String? status;
   int userQuantity = 0;
   bool? readOnlyTextForm = false;
   final checkForm = GlobalKey<FormState>();
@@ -34,9 +36,7 @@ class _TransactionsState extends State<Transactions> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-    
       appBar: AppBar(
-       
         title: Center(
           child: (widget.typeRequest.compareTo("Coger") == 0)
               ? Text(l10n.obtenerProducto)
@@ -86,13 +86,64 @@ class _TransactionsState extends State<Transactions> {
                       Text(widget.product.location),
                     ],
                   ),
-
-                  /*Text("${l10n.nombre} : ${widget.product.name}"),
-                  Text("${l10n.tipo} : ${widget.product.type}"),
-                  Text("${l10n.ubicacion} : ${widget.product.location}\n"),*/
+                  ?(widget.typeRequest.compareTo("Coger") == 0)
+                      ? Text(
+                          "${l10n.duracion}:",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      : null,
+                  ?(widget.typeRequest.compareTo("Coger") == 0)
+                      ? Container(
+                          margin: EdgeInsets.all(5),
+                          child: RadioGroup(
+                            groupValue: status,
+                            onChanged: (value) {
+                              setState(() {
+                                status = value;
+                              });
+                            },
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  leading: Radio(value: "Temporal"),
+                                  title: Text(l10n.temporal),
+                                ),
+                                ListTile(
+                                  leading: Radio(value: "Definitivo"),
+                                  title: Text(l10n.definitivo),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      : null,
+                  ?(widget.typeRequest.compareTo("Coger") == 0)
+                      ? Container(
+                          margin: EdgeInsets.all(5),
+                          child: TextField(
+                            controller: context
+                                .read<GetProductViewmodel>()
+                                .descriptionController,
+                            maxLines: 5,
+                            decoration: InputDecoration(
+                              label: Text(l10n.descripcion),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(width: 1),
+                              ),
+                            ),
+                          ),
+                        )
+                      : null,
+                  ?(widget.typeRequest.compareTo("Coger") == 0)
+                      ? Text(
+                          "${l10n.cantidad}:",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      : null,
                 ],
               ),
             ),
+
             ?(widget.typeRequest.compareTo("Coger") == 0)
                 ? Row(
                     children: [
@@ -190,7 +241,6 @@ class _TransactionsState extends State<Transactions> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
-                  
                   onPressed: () {
                     if (checkForm.currentState!.validate()) {
                       if (widget.typeRequest.compareTo("Coger") == 0) {
@@ -206,6 +256,11 @@ class _TransactionsState extends State<Transactions> {
                                 .text,
                           ),
                           widget.product.location,
+                          status,
+                          context
+                              .read<GetProductViewmodel>()
+                              .descriptionController
+                              .text,
                         );
                         context.read<GetProductViewmodel>().clearForm();
                       } else {
@@ -221,6 +276,8 @@ class _TransactionsState extends State<Transactions> {
                                 .text,
                           ),
                           widget.product.location,
+                          null,
+                          null,
                         );
                         context.read<GetProductViewmodel>().clearForm();
                       }

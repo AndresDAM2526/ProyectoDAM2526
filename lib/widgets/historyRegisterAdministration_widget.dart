@@ -90,7 +90,18 @@ class HistoryRegisterAdministrationWidget extends StatelessWidget {
                           Text(register.typeRegiser),
                         ],
                       ),
-                  
+                      (register.typeRegiser == "Coger")
+                          ? Row(
+                              children: [
+                                Text(
+                                  "${l10n.duracion}: ",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                Text("${register.duration}"),
+                              ],
+                            )
+                          : SizedBox(),
+
                       Row(
                         children: [
                           Text(
@@ -100,6 +111,25 @@ class HistoryRegisterAdministrationWidget extends StatelessWidget {
                           Text("${register.quantity}"),
                         ],
                       ),
+                      (register.typeRegiser == "Coger")
+                          ? Row(
+                              children: [
+                                Text(
+                                  "${l10n.descripcion}: ",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    "${register.description}",
+                                    style: TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    maxLines: 5,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : SizedBox(),
                     ],
                   ),
                 ),

@@ -41,6 +41,8 @@ class _UserHistoryScreenState extends State<UserHistoryScreen> {
                   location: history[index]['product']['location']['location'],
                   quantity: history[index]['quantity'],
                   date: history[index]['date'],
+                  duration: history[index]['duration'],
+                  description: history[index]['description'],
                 ),
               );
             },
