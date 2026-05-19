@@ -272,7 +272,6 @@ class _TransactionsState extends State<Transactions> {
                               .descriptionController
                               .text,
                         );
-                        context.read<GetProductViewmodel>().clearForm();
                       } else {
                         context.read<SupabaseService>().newRegister(
                           widget.product.idProduct,
@@ -289,7 +288,6 @@ class _TransactionsState extends State<Transactions> {
                           null,
                           null,
                         );
-                        context.read<GetProductViewmodel>().clearForm();
                       }
                       Navigator.pop(context, true);
                     }

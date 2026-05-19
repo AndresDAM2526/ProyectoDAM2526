@@ -66,7 +66,7 @@ class GetProductViewmodel extends ChangeNotifier {
   void clearForm() {
     userQuantity = 0;
     quantityController.clear();
-    descriptionController.clear;
+    descriptionController.clear();
     notifyListeners();
   }
 
@@ -104,6 +104,7 @@ class GetProductViewmodel extends ChangeNotifier {
             : MediaQuery.of(context).size.height * 0.4,
         l10n.peticionCorrecta,
       );
+      context.read<GetProductViewmodel>().clearForm();
     } else {
       context.read<GetProductViewmodel>().clearForm();
     }
