@@ -8,6 +8,7 @@ import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/view/newUserPassword_screen.dart';
 import 'package:proyecto_dam_2526/viewmodel/loginForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/theme_viewmodel.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide User;
 
 class AuthService extends ChangeNotifier {
@@ -136,7 +137,7 @@ class AuthService extends ChangeNotifier {
     String password,
     String newPassword,
     BuildContext context,
-    AppLocalizations l10n
+    AppLocalizations l10n,
   ) async {
     try {
       final updatedPassword = await supabase.functions.invoke(
@@ -159,7 +160,9 @@ class AuthService extends ChangeNotifier {
         context.read<MessagesViewmodel>().showErrorDialog(
           context,
           MediaQuery.of(context).size.width / 2,
-          MediaQuery.of(context).size.height /3,
+          (context.read<ThemeViewmodel>().fontSize < 24)
+              ? MediaQuery.of(context).size.height *0.4
+              : MediaQuery.of(context).size.height * 0.4,
           l10n.contrasenaActualIncorrecta,
         );
         return false;

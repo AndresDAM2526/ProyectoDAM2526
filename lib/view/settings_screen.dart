@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
-import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/viewmodel/theme_viewmodel.dart';
 
@@ -189,6 +188,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           max: 1.5,
                           value: context.watch<ThemeViewmodel>().multiplier,
                           onChanged: (value) {
+                            print(context.read<ThemeViewmodel>().fontSize);
                             context.read<ThemeViewmodel>().changeFontSize(
                               value,
                             );

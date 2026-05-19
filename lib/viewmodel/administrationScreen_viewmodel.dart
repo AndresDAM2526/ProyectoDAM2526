@@ -124,7 +124,9 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
       context.read<MessagesViewmodel>().showInformationDialog(
         context,
         MediaQuery.of(context).size.width,
-        MediaQuery.of(context).size.height,
+        (context.read<ThemeViewmodel>().fontSize < 24)
+            ? MediaQuery.of(context).size.height/3
+            : MediaQuery.of(context).size.height*0.4,
         l10n.modificarContrasenaMensaje,
       );
     }

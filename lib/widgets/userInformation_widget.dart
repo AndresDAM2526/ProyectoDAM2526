@@ -5,11 +5,11 @@ import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/user.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
-import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/theme_viewmodel.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class UserInformationWidget extends StatefulWidget {
@@ -121,85 +121,165 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
                     ExpansionTile(
                       title: Text(l10n.opciones),
                       children: [
-                        Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                context
-                                    .read<AdministrationscreenViewmodel>()
-                                    .showModifyPropertiesUserDialog(
-                                      context,
-                                      l10n,
-                                      widget.user,
-                                    );
-                              },
-                              child: Container(
-                                margin: EdgeInsets.only(
-                                  left: 8,
-                                  top: 8,
-                                  bottom: 8,
-                                  right: 4,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.secondary,
-                                  border: Border.all(width: 1),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    l10n.modificarUsuario,
-                                    style: TextStyle(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.onPrimary,
+                        (context.read<ThemeViewmodel>().fontSize < 20)
+                            ? Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      context
+                                          .read<AdministrationscreenViewmodel>()
+                                          .showModifyPropertiesUserDialog(
+                                            context,
+                                            l10n,
+                                            widget.user,
+                                          );
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                        left: 8,
+                                        top: 8,
+                                        bottom: 8,
+                                        right: 4,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.secondary,
+                                        border: Border.all(width: 1),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          l10n.modificarUsuario,
+                                          style: TextStyle(
+                                            color: Theme.of(
+                                              context,
+                                            ).colorScheme.onPrimary,
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                context
-                                    .read<AdministrationscreenViewmodel>()
-                                    .showChangePasswordDialog(
-                                      context,
-                                      l10n,
-                                      widget.user,
-                                      (UserInformationWidget).toString(),
-                                    );
-                              },
-                              child: Container(
-                                margin: EdgeInsets.only(
-                                  left: 4,
-                                  top: 8,
-                                  bottom: 8,
-                                  right: 4,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.secondary,
-                                  border: Border.all(width: 1),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    l10n.cambiarContrasena,
-                                    style: TextStyle(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.onPrimary,
+                                  GestureDetector(
+                                    onTap: () {
+                                      context
+                                          .read<AdministrationscreenViewmodel>()
+                                          .showChangePasswordDialog(
+                                            context,
+                                            l10n,
+                                            widget.user,
+                                            (UserInformationWidget).toString(),
+                                          );
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                        left: 4,
+                                        top: 8,
+                                        bottom: 8,
+                                        right: 4,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.secondary,
+                                        border: Border.all(width: 1),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          l10n.cambiarContrasena,
+                                          style: TextStyle(
+                                            color: Theme.of(
+                                              context,
+                                            ).colorScheme.onPrimary,
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                ],
+                              )
+                            : Column(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      context
+                                          .read<AdministrationscreenViewmodel>()
+                                          .showModifyPropertiesUserDialog(
+                                            context,
+                                            l10n,
+                                            widget.user,
+                                          );
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                        left: 8,
+                                        top: 8,
+                                        bottom: 8,
+                                        right: 4,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.secondary,
+                                        border: Border.all(width: 1),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          l10n.modificarUsuario,
+                                          style: TextStyle(
+                                            color: Theme.of(
+                                              context,
+                                            ).colorScheme.onPrimary,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      context
+                                          .read<AdministrationscreenViewmodel>()
+                                          .showChangePasswordDialog(
+                                            context,
+                                            l10n,
+                                            widget.user,
+                                            (UserInformationWidget).toString(),
+                                          );
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                        left: 4,
+                                        top: 8,
+                                        bottom: 8,
+                                        right: 4,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.secondary,
+                                        border: Border.all(width: 1),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          l10n.cambiarContrasena,
+                                          style: TextStyle(
+                                            color: Theme.of(
+                                              context,
+                                            ).colorScheme.onPrimary,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ],

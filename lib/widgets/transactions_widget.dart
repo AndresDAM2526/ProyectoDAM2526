@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/requestProduct.dart';
 import 'package:proyecto_dam_2526/service/auth_service.dart';
-import 'package:proyecto_dam_2526/service/database_service.dart';
+
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/viewmodel/getProduct_viewmodel.dart';

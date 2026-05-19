@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
-import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/view/changePassword_screen.dart';
 
 class ProfileFormViewmodel extends ChangeNotifier {
@@ -49,19 +49,7 @@ class ProfileFormViewmodel extends ChangeNotifier {
     );
   }
 
-  Future<bool> checkDatabasePassword(
-    BuildContext context,
-    String password,
-    String idUser,
-  ) async {
-    String oldPassword = await context
-        .read<DatabaseService>()
-        .getPasswordFromUser(idUser);
-    if (oldPassword.compareTo(password) != 0) {
-      return false;
-    }
-    return true;
-  }
+  
 
   void clearForm() {
     oldPasswordController.clear();

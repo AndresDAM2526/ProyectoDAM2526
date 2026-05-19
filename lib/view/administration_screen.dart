@@ -30,77 +30,182 @@ class AdministrationScreen extends StatelessWidget {
               child: ExpansionTile(
                 title: Text(l10n.usuarios),
                 children: [
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          bool? result = await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AddUserScreen(),
-                            ),
-                          );
-                          if (result == true) {
-                            await context
-                                .read<MessagesViewmodel>()
-                                .showInformationDialog(
+                  (context.read<ThemeViewmodel>().fontSize < 20)
+                      ? Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () async {
+                                bool? result = await Navigator.push(
                                   context,
-                                  MediaQuery.of(context).size.width,
-                                  (context.read<ThemeViewmodel>().fontSize < 24)
-                                      ? MediaQuery.of(context).size.height / 3
-                                      : MediaQuery.of(context).size.height *
-                                            0.4,
-                                  l10n.nuevoUsuarioMensaje,
+                                  MaterialPageRoute(
+                                    builder: (context) => AddUserScreen(),
+                                  ),
                                 );
-                          }
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 2),
-                            borderRadius: BorderRadius.circular(10),
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              l10n.anadirUsuario,
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.onPrimary,
+                                if (result == true) {
+                                  await context
+                                      .read<MessagesViewmodel>()
+                                      .showInformationDialog(
+                                        context,
+                                        MediaQuery.of(context).size.width,
+                                        (context
+                                                    .read<ThemeViewmodel>()
+                                                    .fontSize <
+                                                24)
+                                            ? MediaQuery.of(
+                                                    context,
+                                                  ).size.height /
+                                                  3
+                                            : MediaQuery.of(
+                                                    context,
+                                                  ).size.height *
+                                                  0.4,
+                                        l10n.nuevoUsuarioMensaje,
+                                      );
+                                }
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  border: Border.all(width: 2),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.secondary,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    l10n.anadirUsuario,
+                                    style: TextStyle(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onPrimary,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ModifyUserScreen(),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 2),
-                            borderRadius: BorderRadius.circular(10),
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              l10n.modificarUsuario,
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.onPrimary,
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ModifyUserScreen(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  border: Border.all(width: 2),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.secondary,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    l10n.modificarUsuario,
+                                    style: TextStyle(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onPrimary,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                          ],
+                        )
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            GestureDetector(
+                              onTap: () async {
+                                bool? result = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AddUserScreen(),
+                                  ),
+                                );
+                                if (result == true) {
+                                  await context
+                                      .read<MessagesViewmodel>()
+                                      .showInformationDialog(
+                                        context,
+                                        MediaQuery.of(context).size.width,
+                                        (context
+                                                    .read<ThemeViewmodel>()
+                                                    .fontSize <
+                                                24)
+                                            ? MediaQuery.of(
+                                                    context,
+                                                  ).size.height /
+                                                  3
+                                            : MediaQuery.of(
+                                                    context,
+                                                  ).size.height *
+                                                  0.4,
+                                        l10n.nuevoUsuarioMensaje,
+                                      );
+                                }
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  border: Border.all(width: 2),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.secondary,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    l10n.anadirUsuario,
+                                    style: TextStyle(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onPrimary,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ModifyUserScreen(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  border: Border.all(width: 2),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.secondary,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    l10n.modificarUsuario,
+                                    style: TextStyle(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onPrimary,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
@@ -111,7 +216,7 @@ class AdministrationScreen extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      (context.read<ThemeViewmodel>().fontSize < 24)
+                      (context.read<ThemeViewmodel>().fontSize < 20)
                           ? Row(
                               children: [
                                 GestureDetector(
@@ -325,7 +430,7 @@ class AdministrationScreen extends StatelessWidget {
               child: ExpansionTile(
                 title: Text(l10n.ubicacion),
                 children: [
-                  (context.read<ThemeViewmodel>().fontSize < 24)
+                  (context.read<ThemeViewmodel>().fontSize < 20)
                       ? Row(
                           children: [
                             GestureDetector(
@@ -390,7 +495,7 @@ class AdministrationScreen extends StatelessWidget {
                           ],
                         )
                       : Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             GestureDetector(
                               onTap: () {

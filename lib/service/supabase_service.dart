@@ -458,7 +458,7 @@ class SupabaseService extends ChangeNotifier {
     }
   }
 
-  Future<bool?> changePassword(
+  Future<bool> changePassword(
     String uuid,
     String newPassword,
     BuildContext context,
@@ -484,9 +484,41 @@ class SupabaseService extends ChangeNotifier {
           MediaQuery.of(context).size.height / 3,
           "La contraseña debe tener al menos 6 caracteres",
         );
+        return false;
       }
+      return false;
     } catch (e) {
       print(e);
+      return false;
+    }
+  }
+
+  Future<bool> updatePassword(
+    String oldPassword,
+    String newPassword,
+    BuildContext context,
+    AppLocalizations l10n,
+    String email,
+  ) async {
+    try {
+      await supabase.auth.signInWithPassword(
+        email: email,
+        password: oldPassword,
+      );
+      print("llega");
+      await supabase.auth.updateUser(UserAttributes(password: newPassword));
+      return true;
+    } catch (e) {
+      print(e);
+      context.read<MessagesViewmodel>().showErrorDialog(
+        context,
+        MediaQuery.of(context).size.width,
+        (context.read<ThemeViewmodel>().fontSize < 24)
+            ? MediaQuery.of(context).size.height * 0.4
+            : MediaQuery.of(context).size.height * 0.4,
+        l10n.contrasenaActualIncorrecta,
+      );
+      return false;
     }
   }
 

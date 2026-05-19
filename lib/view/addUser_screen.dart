@@ -4,7 +4,6 @@ import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/newUser.dart';
 import 'package:proyecto_dam_2526/model/user.dart';
 import 'package:proyecto_dam_2526/service/auth_service.dart';
-import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/viewmodel/addUserForm_viewmodel.dart';
@@ -368,7 +367,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
                     Container(
                       margin: EdgeInsets.all(10),
                       child: FutureBuilder(
-                        future: context.read<DatabaseService>().showRoles(),
+                        future: context.read<SupabaseService>().showRoles(),
                         builder: (context, snapshot) {
                           final roles = snapshot.data ?? [];
                           return DropdownButtonFormField(
@@ -406,33 +405,50 @@ class _AddUserScreenState extends State<AddUserScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (checkForm.currentState!.validate()) {
-                              context.read<DatabaseService>().addUser(
-                                User(
-                                  email: context
+                              if (checkForm.currentState!.validate()) {
+                                int? idRole =
+                                    await context
+                                        .read<SupabaseService>()
+                                        .getIdRoleFromNameRole(
+                                          context
+                                              .read<AdduserFormViewmodel>()
+                                              .role!,
+                                        ) ??
+                                    2;
+                                bool? added = await context
+                                    .read<AuthService>()
+                                    .createNewUser(
+                                      NewUser(
+                                        email: context
+                                            .read<AdduserFormViewmodel>()
+                                            .emailController
+                                            .text,
+                                        name: context
+                                            .read<AdduserFormViewmodel>()
+                                            .nameController
+                                            .text,
+                                        username: context
+                                            .read<AdduserFormViewmodel>()
+                                            .userController
+                                            .text,
+                                        password: context
+                                            .read<AdduserFormViewmodel>()
+                                            .passwordController
+                                            .text,
+                                        idRole: idRole,
+                                      ),
+                                      context,
+                                      l10n,
+                                    );
+                                if (added == true) {
+                                  context
                                       .read<AdduserFormViewmodel>()
-                                      .emailController
-                                      .text,
-                                  name: context
-                                      .read<AdduserFormViewmodel>()
-                                      .nameController
-                                      .text,
-                                  username: context
-                                      .read<AdduserFormViewmodel>()
-                                      .userController
-                                      .text,
-                                  password: context
-                                      .read<AdduserFormViewmodel>()
-                                      .passwordController
-                                      .text,
-                                  role: context
-                                      .read<AdduserFormViewmodel>()
-                                      .role!,
-                                ),
-                              );
-                              context.read<AdduserFormViewmodel>().clearForm();
-                              Navigator.pop(context, true);
+                                      .clearForm();
+                                  Navigator.pop(context, true);
+                                }
+                              }
                             }
                           },
                           child: Text(l10n.enviar),

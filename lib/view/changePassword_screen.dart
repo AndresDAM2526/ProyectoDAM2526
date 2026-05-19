@@ -3,12 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
-import 'package:proyecto_dam_2526/service/database_service.dart';
+import 'package:proyecto_dam_2526/service/auth_service.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/profileForm_viewmodel.dart';
+import 'package:proyecto_dam_2526/viewmodel/theme_viewmodel.dart';
 import 'package:proyecto_dam_2526/widgets/errorMessage_widget.dart';
 import 'package:proyecto_dam_2526/widgets/userInformation_widget.dart';
 
@@ -51,9 +52,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.cambiarContrasena),
-      ),
+      appBar: AppBar(title: Text(l10n.cambiarContrasena)),
       body:
           ((widget.sourceScreen?.compareTo(
                 (UserInformationWidget).toString(),
@@ -97,7 +96,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       ),
                     ),
                     ElevatedButton(
-                     
                       onPressed: () async {
                         if (checkForm.currentState!.validate()) {
                           bool? result = await context
@@ -237,27 +235,39 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     ),
                     SizedBox(width: 20),
                     ElevatedButton(
-                    
                       onPressed: () async {
                         if (checkForm.currentState!.validate()) {
                           if (mounted) {
-                            if (context
-                                    .read<ProfileFormViewmodel>()
-                                    .checkDatabasePassword(
-                                      context,
-                                      context
-                                          .read<ProfileFormViewmodel>()
-                                          .oldPasswordController
-                                          .text,
-                                      widget.user!.idUser,
-                                    ) !=
-                                true) {
-                              context.read<MessagesViewmodel>().showErrorDialog(
-                                context,
-                                MediaQuery.of(context).size.width,
-                                MediaQuery.of(context).size.height / 3,
-                                l10n.contrasenaActualIncorrecta,
-                              );
+                            bool changedPassword = await context
+                                .read<SupabaseService>()
+                                .updatePassword(
+                                  context
+                                      .read<ProfileFormViewmodel>()
+                                      .oldPasswordController
+                                      .text,
+                                  context
+                                      .read<ProfileFormViewmodel>()
+                                      .newPasswordController
+                                      .text,
+                                  context,
+                                  l10n,
+                                  widget.user!.email,
+                                );
+                            if (changedPassword) {
+                              await context
+                                  .read<MessagesViewmodel>()
+                                  .showInformationDialog(
+                                    context,
+                                    MediaQuery.of(context).size.width,
+                                    (context.read<ThemeViewmodel>().fontSize <
+                                            24)
+                                        ? MediaQuery.of(context).size.height / 2
+                                        : MediaQuery.of(context).size.height *
+                                              0.4,
+                                    l10n.contrasenaActualizada,
+                                  );
+                              context.read<ProfileFormViewmodel>().clearForm();
+                              Navigator.pop(context);
                             }
                           }
                         }

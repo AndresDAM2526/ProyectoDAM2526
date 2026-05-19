@@ -4,8 +4,6 @@ import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/product.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/utils/AppColors.dart';
-import 'package:proyecto_dam_2526/view/product_information.dart';
-import 'package:proyecto_dam_2526/service/database_service.dart';
 import 'package:proyecto_dam_2526/viewmodel/inventoryScreen_viewmodel.dart';
 import 'package:proyecto_dam_2526/widgets/productsTable_widget.dart';
 import 'package:sqflite/sqflite.dart';
@@ -69,7 +67,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                   ),
             Container(
               width: MediaQuery.of(context).size.width,
-              margin: EdgeInsets.only(top: 5,left: 10,right: 10,bottom: 20),
+              margin: EdgeInsets.only(top: 5, left: 10, right: 10, bottom: 20),
               child: context.watch<SupabaseService>().filteredProducts == null
                   ? ProductsTableWidget(
                       productList: context.read<SupabaseService>().products,

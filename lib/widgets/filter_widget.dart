@@ -1,13 +1,10 @@
-import 'dart:math';
+
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
-import 'package:proyecto_dam_2526/service/database_service.dart';
+
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
-import 'package:proyecto_dam_2526/utils/AppColors.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class FilterWidget extends StatefulWidget {
   FilterWidget({super.key});

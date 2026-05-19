@@ -21,134 +21,147 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(title: Text(l10n.perfil)),
-      body: (MediaQuery.of(context).orientation == Orientation.portrait)
-          ? Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.all(10),
-                  child: TextField(
-                    enabled: false,
-                    decoration: InputDecoration(
-                      label: Text(
-                        "${l10n.usuario}:\t${widget.user!.username}",
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.all(10),
-                  child: TextField(
-                    enabled: false,
-                    decoration: InputDecoration(
-                      label: Text(
-                        "${l10n.email}:\t${widget.user!.email}",
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.all(10),
-                  child: TextField(
-                    enabled: false,
-                    decoration: InputDecoration(
-                      label: Text(
-                        "${l10n.nombre}:\t${widget.user!.name}",
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.all(10),
-                  child: TextField(
-                    enabled: false,
-                    decoration: InputDecoration(
-                      label: Text(
-                        "${l10n.rol}:\t${widget.user!.role}",
-                      ),
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  
-                  onPressed: () {
-                    context
-                        .read<ProfileFormViewmodel>()
-                        .showModifyPasswordDialog(
-                          context,
-                          widget.user!,
-                          (ProfileScreen).toString(),
-                        );
-                  },
-                  child: Text(l10n.cambiarContrasena),
-                ),
-              ],
-            )
-          : SingleChildScrollView(
-              child: Column(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 10),
+            Container(
+              margin: EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 10),
+              child: Row(
                 children: [
-                  Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.all(10),
-                        child: TextField(
-                          enabled: false,
-                          decoration: InputDecoration(
-                            label: Text(
-                              "${l10n.usuario}:\t${widget.user!.username}",
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.all(10),
-                        child: TextField(
-                          enabled: false,
-                          decoration: InputDecoration(
-                            label: Text(
-                              "${l10n.email}:\t${widget.user!.email}",
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.all(10),
-                        child: TextField(
-                          enabled: false,
-                          decoration: InputDecoration(
-                            label: Text(
-                              "${l10n.nombre}:\t${widget.user!.name}",
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.all(10),
-                        child: TextField(
-                          enabled: false,
-                          decoration: InputDecoration(
-                            label: Text(
-                              "${l10n.rol}:\t${widget.user!.role}",
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 8,
+                      left: 10,
+                      right: 22,
+                      bottom: 8,
+                    ),
+                    child: Text(l10n.usuario),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      context
-                          .read<ProfileFormViewmodel>()
-                          .showModifyPasswordDialog(
-                            context,
-                            widget.user!,
-                            (ProfileScreen).toString(),
-                          );
-                    },
-                    child: Text(l10n.cambiarContrasena),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(widget.user!.username),
+                      ),
+                    ),
                   ),
                 ],
               ),
             ),
+            Container(
+              margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 8,
+                      left: 10,
+                      right: 40,
+                      bottom: 8,
+                    ),
+                    child: Text(l10n.email),
+                  ),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(widget.user!.email),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 8,
+                      left: 10,
+                      right: 20,
+                      bottom: 8,
+                    ),
+                    child: Text(l10n.nombre),
+                  ),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Text(
+                          widget.user!.name,
+                          style: TextStyle(overflow: TextOverflow.ellipsis),
+                          maxLines: 4,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 40),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 8,
+                      left: 10,
+                      right: 60,
+                      bottom: 8,
+                    ),
+                    child: Text(l10n.rol),
+                  ),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(widget.user!.role),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                context.read<ProfileFormViewmodel>().showModifyPasswordDialog(
+                  context,
+                  widget.user!,
+                  (ProfileScreen).toString(),
+                );
+              },
+              child: Text(l10n.cambiarContrasena),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

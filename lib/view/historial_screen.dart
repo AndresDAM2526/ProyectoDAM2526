@@ -34,12 +34,6 @@ class _HistorialScreenState extends State<HistorialScreen> {
             Container(
               margin: EdgeInsets.all(8),
               child: TextField(
-                decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.calendar_month),
-                  ),
-                ),
                 onChanged: (value) {
                   setState(() {
                     search = value.trim();
@@ -104,7 +98,7 @@ class _HistorialScreenState extends State<HistorialScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(top: 50.0),
                       child: SingleChildScrollView(
-                        child: Text("Introduzca la búsqueda"),
+                        child: Text(l10n.introducirNombre),
                       ),
                     ),
                   ),
