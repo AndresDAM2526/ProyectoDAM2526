@@ -4,7 +4,6 @@ import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
 import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/viewmodel/messages_viewmodel.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LocationsScreen extends StatefulWidget {
   const LocationsScreen({super.key});
@@ -21,40 +20,50 @@ class _LocationsScreenState extends State<LocationsScreen> {
       appBar: AppBar(title: Text(l10n.ubicacion)),
       body: Column(
         children: [
-          Expanded(
-            child: Consumer<SupabaseService>(
-              builder: (context, value, child) {
-                final locations = value.locations;
-                if (locations.isEmpty) {
-                  return CircularProgressIndicator();
-                }
-                return ListView.builder(
-                  itemCount: locations.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(locations[index]['location']),
-                      trailing: IconButton(
-                        onPressed: () async {
-                          bool result = await context
-                              .read<SupabaseService>()
-                              .deleteLocation(locations[index]['id_location']);
-                          if (result) {
-                            await context
-                                .read<MessagesViewmodel>()
-                                .showInformationDialog(
-                                  context,
-                                  MediaQuery.of(context).size.width,
-                                  MediaQuery.of(context).size.height * 0.4,
-                                  l10n.ubicacionBorrada,
-                                );
-                          }
-                        },
-                        icon: Icon(Icons.delete, color: AppColors.secondary),
-                      ),
-                    );
-                  },
-                );
-              },
+          Semantics(
+            label: "Listado de ubicaciones",
+            hint: "Listado con todas las ubicaciones del inventario",
+            child: Expanded(
+              child: Consumer<SupabaseService>(
+                builder: (context, value, child) {
+                  final locations = value.locations;
+                  if (locations.isEmpty) {
+                    return CircularProgressIndicator();
+                  }
+                  return ListView.builder(
+                    itemCount: locations.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(locations[index]['location']),
+                        trailing: Semantics(
+                          label: l10n.accLabelBtnBorrarUbicacion,
+                          hint: l10n.accHintBtnBorrarUbicacion,
+                          child: IconButton(
+                            onPressed: () async {
+                              bool result = await context
+                                  .read<SupabaseService>()
+                                  .deleteLocation(
+                                    locations[index]['id_location'],
+                                  );
+                              if (result) {
+                                await context
+                                    .read<MessagesViewmodel>()
+                                    .showInformationDialog(
+                                      context,
+                                      MediaQuery.of(context).size.width,
+                                      MediaQuery.of(context).size.height * 0.4,
+                                      l10n.ubicacionBorrada,
+                                    );
+                              }
+                            },
+                            icon: Icon(Icons.delete, color: AppColors.secondary),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ),
         ],

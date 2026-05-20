@@ -16,38 +16,47 @@ class UserHistoryScreen extends StatefulWidget {
 class _UserHistoryScreenState extends State<UserHistoryScreen> {
   @override
   Widget build(BuildContext context) {
-    final l10n=AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(title: Text(l10n.historial)),
-      body: FutureBuilder(
-        future: context.watch<SupabaseService>().getHistoryRegisterByIdUser(
-          context.watch<AuthService>().userDatabase!.idUser,
+      body: Semantics(
+        label: "Listado de registros",
+        hint: "Listado con todos los registros de un usuario",
+        child: FutureBuilder(
+          future: context.watch<SupabaseService>().getHistoryRegisterByIdUser(
+            context.watch<AuthService>().userDatabase!.idUser,
+          ),
+          builder: (context, snapshot) {
+            final history = snapshot.data ?? [];
+            if (history.isEmpty) {
+              return Center(child: Text(l10n.sinResultados));
+            }
+            return ListView.builder(
+              itemCount: history.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 1,
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                    ),
+                  ),
+                  child: HistoryRegisterWidget(
+                    name: history[index]['product']['product'],
+                    typeProduct: history[index]['product']['type']['type'],
+                    typeRegister: history[index]['type']['type_register'],
+                    location: history[index]['product']['location']['location'],
+                    quantity: history[index]['quantity'],
+                    date: history[index]['date'],
+                    duration: history[index]['duration'],
+                    description: history[index]['description'],
+                  ),
+                );
+              },
+            );
+          },
         ),
-        builder: (context, snapshot) {
-          final history = snapshot.data ?? [];
-          if (history.isEmpty) {
-            return Center(child: Text(l10n.sinResultados));
-          }
-          return ListView.builder(
-            itemCount: history.length,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.all(10),
-                decoration: BoxDecoration(border: Border.all(width: 1,color: Theme.of(context).colorScheme.inversePrimary)),
-                child: HistoryRegisterWidget(
-                  name: history[index]['product']['product'],
-                  typeProduct: history[index]['product']['type']['type'],
-                  typeRegister: history[index]['type']['type_register'],
-                  location: history[index]['product']['location']['location'],
-                  quantity: history[index]['quantity'],
-                  date: history[index]['date'],
-                  duration: history[index]['duration'],
-                  description: history[index]['description'],
-                ),
-              );
-            },
-          );
-        },
       ),
     );
   }

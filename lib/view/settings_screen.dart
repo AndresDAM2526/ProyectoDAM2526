@@ -21,89 +21,120 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ? SingleChildScrollView(
               child: Column(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 1,
-                        color: Theme.of(context).colorScheme.inversePrimary,
-                      ),
-                    ),
-                    margin: EdgeInsets.all(10),
-                    child: ExpansionTile(
-                      title: Text(l10n.modoOscuro),
-                      children: [
-                        ListTile(
-                          title: Switch(
-                            value: context.watch<ThemeViewmodel>().darkMode,
-                            onChanged: (value) {
-                              setState(() {
-                                context.read<ThemeViewmodel>().changeTheme();
-                              });
-                            },
-                          ),
+                  Semantics(
+                    label: "Apartado de modo oscuro",
+                    hint: "Apartado para cambiar el estilo de la aplicación",
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Theme.of(context).colorScheme.inversePrimary,
                         ),
-                      ],
+                      ),
+                      margin: EdgeInsets.all(10),
+                      child: ExpansionTile(
+                        title: Text(l10n.modoOscuro),
+                        children: [
+                          ListTile(
+                            title: Semantics(
+                              label: "Selector de estilo",
+                              hint:
+                                  "Selector para cambiar el estilo de la aplicación",
+                              child: Switch(
+                                value: context.watch<ThemeViewmodel>().darkMode,
+                                onChanged: (value) {
+                                  setState(() {
+                                    context
+                                        .read<ThemeViewmodel>()
+                                        .changeTheme();
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 1,
-                        color: Theme.of(context).colorScheme.inversePrimary,
-                      ),
-                    ),
-                    margin: EdgeInsets.all(10),
-                    child: ExpansionTile(
-                      expansionAnimationStyle: AnimationStyle(
-                        curve: Curves.bounceIn,
-                      ),
-                      title: Text(l10n.idioma),
-                      children: [
-                        ListTile(
-                          title: DropdownButtonFormField(
-                            initialValue: context.read<ThemeViewmodel>().lang,
-                            items: [
-                              DropdownMenuItem(
-                                value: "es",
-                                child: Text("Español"),
-                              ),
-                              DropdownMenuItem(
-                                value: "en",
-                                child: Text("English"),
-                              ),
-                            ],
-                            onChanged: (value) {
-                              context.read<ThemeViewmodel>().changeLang(value!);
-                            },
-                          ),
+                  Semantics(
+                    label: "Apartado de idioma",
+                    hint: "Apartado para cambiar el idioma",
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Theme.of(context).colorScheme.inversePrimary,
                         ),
-                      ],
+                      ),
+                      margin: EdgeInsets.all(10),
+                      child: ExpansionTile(
+                        expansionAnimationStyle: AnimationStyle(
+                          curve: Curves.bounceIn,
+                        ),
+                        title: Text(l10n.idioma),
+                        children: [
+                          ListTile(
+                            title: Semantics(
+                              label: "Desplegable con los idiomas",
+                              hint: "Desplegable para cambiar el idioma",
+                              child: DropdownButtonFormField(
+                                initialValue: context
+                                    .read<ThemeViewmodel>()
+                                    .lang,
+                                items: [
+                                  DropdownMenuItem(
+                                    value: "es",
+                                    child: Text("Español"),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: "en",
+                                    child: Text("English"),
+                                  ),
+                                ],
+                                onChanged: (value) {
+                                  context.read<ThemeViewmodel>().changeLang(
+                                    value!,
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 1,
-                        color: Theme.of(context).colorScheme.inversePrimary,
-                      ),
-                    ),
-                    margin: EdgeInsets.all(10),
-                    child: ExpansionTile(
-                      title: Text(l10n.tamanioFuente),
-                      children: [
-                        Slider(
-                          divisions: 4,
-                          min: 1,
-                          max: 1.5,
-                          value: context.watch<ThemeViewmodel>().multiplier,
-                          onChanged: (value) {
-                            print(context.read<ThemeViewmodel>().fontSize);
-                            context.read<ThemeViewmodel>().changeFontSize(
-                              value,
-                            );
-                          },
+                  Semantics(
+                    label: "Apartado de tamaño de la fuente",
+                    hint: "Apartado para cambiar el tamaño de la fuente",
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Theme.of(context).colorScheme.inversePrimary,
                         ),
-                      ],
+                      ),
+                      margin: EdgeInsets.all(10),
+                      child: ExpansionTile(
+                        title: Text(l10n.tamanioFuente),
+                        children: [
+                          Semantics(
+                            label: "Barra de cambio de tamaño de fuente",
+                            hint: "Barra para cambiar el tamaño de la fuente",
+                            child: Slider(
+                              divisions: 4,
+                              min: 1,
+                              max: 1.5,
+                              value: context.watch<ThemeViewmodel>().multiplier,
+                              onChanged: (value) {
+                                print(context.read<ThemeViewmodel>().fontSize);
+                                context.read<ThemeViewmodel>().changeFontSize(
+                                  value,
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -112,89 +143,120 @@ class _SettingsScreenState extends State<SettingsScreen> {
           : SingleChildScrollView(
               child: Column(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 1,
-                        color: Theme.of(context).colorScheme.inversePrimary,
-                      ),
-                    ),
-                    margin: EdgeInsets.all(10),
-                    child: ExpansionTile(
-                      title: Text(l10n.modoOscuro),
-                      children: [
-                        ListTile(
-                          title: Switch(
-                            value: context.watch<ThemeViewmodel>().darkMode,
-                            onChanged: (value) {
-                              setState(() {
-                                context.read<ThemeViewmodel>().changeTheme();
-                              });
-                            },
-                          ),
+                  Semantics(
+                    label: "Apartado de modo oscuro",
+                    hint: "Apartado para cambiar el estilo de la aplicación",
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Theme.of(context).colorScheme.inversePrimary,
                         ),
-                      ],
+                      ),
+                      margin: EdgeInsets.all(10),
+                      child: ExpansionTile(
+                        title: Text(l10n.modoOscuro),
+                        children: [
+                          ListTile(
+                            title: Semantics(
+                              label: "Selector de estilo",
+                              hint:
+                                  "Selector para cambiar el estilo de la aplicación",
+                              child: Switch(
+                                value: context.watch<ThemeViewmodel>().darkMode,
+                                onChanged: (value) {
+                                  setState(() {
+                                    context
+                                        .read<ThemeViewmodel>()
+                                        .changeTheme();
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 1,
-                        color: Theme.of(context).colorScheme.inversePrimary,
-                      ),
-                    ),
-                    margin: EdgeInsets.all(10),
-                    child: ExpansionTile(
-                      expansionAnimationStyle: AnimationStyle(
-                        curve: Curves.bounceIn,
-                      ),
-                      title: Text(l10n.idioma),
-                      children: [
-                        ListTile(
-                          title: DropdownButtonFormField(
-                            initialValue: context.read<ThemeViewmodel>().lang,
-                            items: [
-                              DropdownMenuItem(
-                                value: "es",
-                                child: Text("Español"),
-                              ),
-                              DropdownMenuItem(
-                                value: "en",
-                                child: Text("English"),
-                              ),
-                            ],
-                            onChanged: (value) {
-                              context.read<ThemeViewmodel>().changeLang(value!);
-                            },
-                          ),
+                  Semantics(
+                    label: "Apartado de idioma",
+                    hint: "Apartado para cambiar el idioma",
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Theme.of(context).colorScheme.inversePrimary,
                         ),
-                      ],
+                      ),
+                      margin: EdgeInsets.all(10),
+                      child: ExpansionTile(
+                        expansionAnimationStyle: AnimationStyle(
+                          curve: Curves.bounceIn,
+                        ),
+                        title: Text(l10n.idioma),
+                        children: [
+                          ListTile(
+                            title: Semantics(
+                              label: "Desplegable con los idiomas",
+                              hint: "Desplegable para cambiar el idioma",
+                              child: DropdownButtonFormField(
+                                initialValue: context
+                                    .read<ThemeViewmodel>()
+                                    .lang,
+                                items: [
+                                  DropdownMenuItem(
+                                    value: "es",
+                                    child: Text("Español"),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: "en",
+                                    child: Text("English"),
+                                  ),
+                                ],
+                                onChanged: (value) {
+                                  context.read<ThemeViewmodel>().changeLang(
+                                    value!,
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 1,
-                        color: Theme.of(context).colorScheme.inversePrimary,
-                      ),
-                    ),
-                    margin: EdgeInsets.all(10),
-                    child: ExpansionTile(
-                      title: Text(l10n.tamanioFuente),
-                      children: [
-                        Slider(
-                          divisions: 4,
-                          min: 1,
-                          max: 1.5,
-                          value: context.watch<ThemeViewmodel>().multiplier,
-                          onChanged: (value) {
-                            print(context.read<ThemeViewmodel>().fontSize);
-                            context.read<ThemeViewmodel>().changeFontSize(
-                              value,
-                            );
-                          },
+                  Semantics(
+                    label: "Apartado de tamaño de la fuente",
+                    hint: "Apartado para cambiar el tamaño de la fuente",
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Theme.of(context).colorScheme.inversePrimary,
                         ),
-                      ],
+                      ),
+                      margin: EdgeInsets.all(10),
+                      child: ExpansionTile(
+                        title: Text(l10n.tamanioFuente),
+                        children: [
+                          Semantics(
+                            label: "Barra de cambio de tamaño de fuente",
+                            hint: "Barra para cambiar el tamaño de la fuente",
+                            child: Slider(
+                              divisions: 4,
+                              min: 1,
+                              max: 1.5,
+                              value: context.watch<ThemeViewmodel>().multiplier,
+                              onChanged: (value) {
+                                print(context.read<ThemeViewmodel>().fontSize);
+                                context.read<ThemeViewmodel>().changeFontSize(
+                                  value,
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

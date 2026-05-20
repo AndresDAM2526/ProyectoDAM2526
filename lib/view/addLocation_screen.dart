@@ -3,8 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/service/supabase_service.dart';
-import 'package:proyecto_dam_2526/utils/AppColors.dart';
-import 'package:proyecto_dam_2526/viewmodel/addProductForm_viewmodel.dart';
 import 'package:proyecto_dam_2526/viewmodel/administrationScreen_viewmodel.dart';
 
 class AddlocationScreen extends StatefulWidget {
@@ -42,43 +40,51 @@ class _AddlocationScreenState extends State<AddlocationScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              margin: EdgeInsets.all(20),
-              child: TextFormField(
-                controller: context
-                    .read<AdministrationscreenViewmodel>()
-                    .locationController,
-                decoration: InputDecoration(label: Text(l10n.nuevaUbicacion)),
-                validator: (value) => context
-                    .read<AdministrationscreenViewmodel>()
-                    .checkLocation(value, l10n),
+            Semantics(
+              label: l10n.accLabelCampoUbicacion,
+              hint: l10n.accHintCampoUbicacion,
+              child: Container(
+                margin: EdgeInsets.all(20),
+                child: TextFormField(
+                  controller: context
+                      .read<AdministrationscreenViewmodel>()
+                      .locationController,
+                  decoration: InputDecoration(label: Text(l10n.nuevaUbicacion)),
+                  validator: (value) => context
+                      .read<AdministrationscreenViewmodel>()
+                      .checkLocation(value, l10n),
+                ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.all(20),
-              child: ElevatedButton(
-                onPressed: () async {
-                  if (checkForm.currentState!.validate()) {
-                    bool added = await context
-                        .read<SupabaseService>()
-                        .addLocation(
-                          context
-                              .read<AdministrationscreenViewmodel>()
-                              .locationController
-                              .text,
-                        );
-                    if (added == true) {
-                      context
-                          .read<AdministrationscreenViewmodel>()
-                          .clearLocation();
-                      await Future.delayed(Duration(milliseconds: 100));
-                      if (mounted) {
-                        Navigator.pop(context, true);
+            Semantics(
+              label: l10n.accLabelBtnEnviar,
+              hint: l10n.accHintBtnEnviar,
+              child: Container(
+                margin: EdgeInsets.all(20),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    if (checkForm.currentState!.validate()) {
+                      bool added = await context
+                          .read<SupabaseService>()
+                          .addLocation(
+                            context
+                                .read<AdministrationscreenViewmodel>()
+                                .locationController
+                                .text,
+                          );
+                      if (added == true) {
+                        context
+                            .read<AdministrationscreenViewmodel>()
+                            .clearLocation();
+                        await Future.delayed(Duration(milliseconds: 100));
+                        if (mounted) {
+                          Navigator.pop(context, true);
+                        }
                       }
                     }
-                  }
-                },
-                child: Text(l10n.anadirUbicacion),
+                  },
+                  child: Text(l10n.anadirUbicacion),
+                ),
               ),
             ),
           ],

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
-import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/view/addProduct_screen.dart';
 import 'package:proyecto_dam_2526/view/addUser_screen.dart';
 import 'package:proyecto_dam_2526/view/historial_screen.dart';
@@ -25,207 +24,26 @@ class AdministrationScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              margin: EdgeInsets.all(10),
-              child: ExpansionTile(
-                title: Text(l10n.usuarios),
-                children: [
-                  (context.read<ThemeViewmodel>().fontSize < 20)
-                      ? Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () async {
-                                bool? result = await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => AddUserScreen(),
-                                  ),
-                                );
-                                if (result == true) {
-                                  await context
-                                      .read<MessagesViewmodel>()
-                                      .showInformationDialog(
-                                        context,
-                                        MediaQuery.of(context).size.width,
-                                        (context
-                                                    .read<ThemeViewmodel>()
-                                                    .fontSize <
-                                                24)
-                                            ? MediaQuery.of(
-                                                    context,
-                                                  ).size.height /
-                                                  3
-                                            : MediaQuery.of(
-                                                    context,
-                                                  ).size.height *
-                                                  0.4,
-                                        l10n.nuevoUsuarioMensaje,
-                                      );
-                                }
-                              },
-                              child: Container(
-                                margin: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  border: Border.all(width: 2),
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.secondary,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    l10n.anadirUsuario,
-                                    style: TextStyle(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.onPrimary,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ModifyUserScreen(),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                margin: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  border: Border.all(width: 2),
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.secondary,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    l10n.modificarUsuario,
-                                    style: TextStyle(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.onPrimary,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            GestureDetector(
-                              onTap: () async {
-                                bool? result = await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => AddUserScreen(),
-                                  ),
-                                );
-                                if (result == true) {
-                                  await context
-                                      .read<MessagesViewmodel>()
-                                      .showInformationDialog(
-                                        context,
-                                        MediaQuery.of(context).size.width,
-                                        (context
-                                                    .read<ThemeViewmodel>()
-                                                    .fontSize <
-                                                24)
-                                            ? MediaQuery.of(
-                                                    context,
-                                                  ).size.height /
-                                                  3
-                                            : MediaQuery.of(
-                                                    context,
-                                                  ).size.height *
-                                                  0.4,
-                                        l10n.nuevoUsuarioMensaje,
-                                      );
-                                }
-                              },
-                              child: Container(
-                                margin: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  border: Border.all(width: 2),
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.secondary,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    l10n.anadirUsuario,
-                                    style: TextStyle(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.onPrimary,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ModifyUserScreen(),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                margin: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  border: Border.all(width: 2),
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.secondary,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    l10n.modificarUsuario,
-                                    style: TextStyle(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.onPrimary,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ExpansionTile(
-                title: Text(l10n.inventario),
-                children: [
-                  Column(
-                    children: [
-                      (context.read<ThemeViewmodel>().fontSize < 20)
-                          ? Row(
-                              children: [
-                                GestureDetector(
+            Semantics(
+              label: l10n.accLabelApartadoUsuarios,
+              hint: l10n.accHintApartadoUsuarios,
+              child: Container(
+                margin: EdgeInsets.all(10),
+                child: ExpansionTile(
+                  title: Text(l10n.usuarios),
+                  children: [
+                    (context.read<ThemeViewmodel>().fontSize < 20)
+                        ? Row(
+                            children: [
+                              Semantics(
+                                label: l10n.accLabelBtnFormAnadirUsuario,
+                                hint: l10n.accHintBtnFormAnadirUsuario,
+                                child: GestureDetector(
                                   onTap: () async {
                                     bool? result = await Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            AddProductScreen(),
+                                        builder: (context) => AddUserScreen(),
                                       ),
                                     );
                                     if (result == true) {
@@ -246,7 +64,7 @@ class AdministrationScreen extends StatelessWidget {
                                                         context,
                                                       ).size.height *
                                                       0.4,
-                                            l10n.nuevoProductoMensaje,
+                                            l10n.nuevoUsuarioMensaje,
                                           );
                                     }
                                   },
@@ -262,7 +80,7 @@ class AdministrationScreen extends StatelessWidget {
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        l10n.anadirProducto,
+                                        l10n.anadirUsuario,
                                         style: TextStyle(
                                           color: Theme.of(
                                             context,
@@ -272,12 +90,18 @@ class AdministrationScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                GestureDetector(
+                              ),
+                              Semantics(
+                                label:
+                                    l10n.accLabelBtnApartadoModificarUsuarios,
+                                hint: l10n.accHintBtnApartadoModificarUsuarios,
+                                child: GestureDetector(
                                   onTap: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => ModifyInventory(),
+                                        builder: (context) =>
+                                            ModifyUserScreen(),
                                       ),
                                     );
                                   },
@@ -293,7 +117,7 @@ class AdministrationScreen extends StatelessWidget {
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        l10n.modificarInventario,
+                                        l10n.modificarUsuario,
                                         style: TextStyle(
                                           color: Theme.of(
                                             context,
@@ -303,17 +127,22 @@ class AdministrationScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                              ],
-                            )
-                          : Column(
-                              children: [
-                                GestureDetector(
+                              ),
+                            ],
+                          )
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Semantics(
+                                label: l10n.accLabelBtnFormAnadirUsuario,
+                                hint:
+                                    l10n.accHintBtnFormAnadirUsuario,
+                                child: GestureDetector(
                                   onTap: () async {
                                     bool? result = await Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            AddProductScreen(),
+                                        builder: (context) => AddUserScreen(),
                                       ),
                                     );
                                     if (result == true) {
@@ -334,7 +163,7 @@ class AdministrationScreen extends StatelessWidget {
                                                         context,
                                                       ).size.height *
                                                       0.4,
-                                            l10n.nuevoProductoMensaje,
+                                            l10n.nuevoUsuarioMensaje,
                                           );
                                     }
                                   },
@@ -350,7 +179,7 @@ class AdministrationScreen extends StatelessWidget {
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        l10n.anadirProducto,
+                                        l10n.anadirUsuario,
                                         style: TextStyle(
                                           color: Theme.of(
                                             context,
@@ -360,12 +189,18 @@ class AdministrationScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                GestureDetector(
+                              ),
+                              Semantics(
+                                label: l10n.accLabelBtnApartadoModificarUsuarios,
+                                hint:
+                                    l10n.accHintBtnApartadoModificarUsuarios,
+                                child: GestureDetector(
                                   onTap: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => ModifyInventory(),
+                                        builder: (context) =>
+                                            ModifyUserScreen(),
                                       ),
                                     );
                                   },
@@ -381,7 +216,7 @@ class AdministrationScreen extends StatelessWidget {
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        l10n.modificarInventario,
+                                        l10n.modificarUsuario,
                                         style: TextStyle(
                                           color: Theme.of(
                                             context,
@@ -391,237 +226,509 @@ class AdministrationScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HistorialScreen(),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 2),
-                            borderRadius: BorderRadius.circular(10),
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              l10n.historial,
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.onPrimary,
                               ),
-                            ),
+                            ],
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ExpansionTile(
-                title: Text(l10n.ubicacion),
-                children: [
-                  (context.read<ThemeViewmodel>().fontSize < 20)
-                      ? Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                context
-                                    .read<AdministrationscreenViewmodel>()
-                                    .showAddLocationDialog(context, l10n);
-                              },
-                              child: Container(
-                                margin: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  border: Border.all(width: 2),
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.secondary,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    l10n.anadirUbicacion,
-                                    style: TextStyle(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.onPrimary,
+              child: Semantics(
+                label: "Apartado de modificar propiedades del inventario",
+                hint: "Apartado para modificar propiedades del inventario",
+                child: ExpansionTile(
+                  title: Text(l10n.inventario),
+                  children: [
+                    Column(
+                      children: [
+                        (context.read<ThemeViewmodel>().fontSize < 20)
+                            ? Row(
+                                children: [
+                                  Semantics(
+                                    label: "Botón de añadir producto",
+                                    hint:
+                                        "Botón para desplegar el formulario de añadir producto",
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        bool? result = await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                AddProductScreen(),
+                                          ),
+                                        );
+                                        if (result == true) {
+                                          await context
+                                              .read<MessagesViewmodel>()
+                                              .showInformationDialog(
+                                                context,
+                                                MediaQuery.of(
+                                                  context,
+                                                ).size.width,
+                                                (context
+                                                            .read<
+                                                              ThemeViewmodel
+                                                            >()
+                                                            .fontSize <
+                                                        24)
+                                                    ? MediaQuery.of(
+                                                            context,
+                                                          ).size.height /
+                                                          3
+                                                    : MediaQuery.of(
+                                                            context,
+                                                          ).size.height *
+                                                          0.4,
+                                                l10n.nuevoProductoMensaje,
+                                              );
+                                        }
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(width: 2),
+                                          borderRadius: BorderRadius.circular(
+                                            10,
+                                          ),
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.secondary,
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            l10n.anadirProducto,
+                                            style: TextStyle(
+                                              color: Theme.of(
+                                                context,
+                                              ).colorScheme.onPrimary,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ),
+                                  ),
+                                  Semantics(
+                                    label: l10n.accLabelBtnModificarInventario,
+                                    hint: l10n.accHintBtnModificarInventario,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ModifyInventory(),
+                                          ),
+                                        );
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(width: 2),
+                                          borderRadius: BorderRadius.circular(
+                                            10,
+                                          ),
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.secondary,
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            l10n.modificarInventario,
+                                            style: TextStyle(
+                                              color: Theme.of(
+                                                context,
+                                              ).colorScheme.onPrimary,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Column(
+                                children: [
+                                  Semantics(
+                                    label: "Botón de añadir producto",
+                                    hint:
+                                        "Botón para desplegar el formulario de añadir producto",
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        bool? result = await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                AddProductScreen(),
+                                          ),
+                                        );
+                                        if (result == true) {
+                                          await context
+                                              .read<MessagesViewmodel>()
+                                              .showInformationDialog(
+                                                context,
+                                                MediaQuery.of(
+                                                  context,
+                                                ).size.width,
+                                                (context
+                                                            .read<
+                                                              ThemeViewmodel
+                                                            >()
+                                                            .fontSize <
+                                                        24)
+                                                    ? MediaQuery.of(
+                                                            context,
+                                                          ).size.height /
+                                                          3
+                                                    : MediaQuery.of(
+                                                            context,
+                                                          ).size.height *
+                                                          0.4,
+                                                l10n.nuevoProductoMensaje,
+                                              );
+                                        }
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(width: 2),
+                                          borderRadius: BorderRadius.circular(
+                                            10,
+                                          ),
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.secondary,
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            l10n.anadirProducto,
+                                            style: TextStyle(
+                                              color: Theme.of(
+                                                context,
+                                              ).colorScheme.onPrimary,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Semantics(
+                                    label: "Botón de modificar el inventario",
+                                    hint: "Botón para modificar el inventario",
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ModifyInventory(),
+                                          ),
+                                        );
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(width: 2),
+                                          borderRadius: BorderRadius.circular(
+                                            10,
+                                          ),
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.secondary,
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            l10n.modificarInventario,
+                                            style: TextStyle(
+                                              color: Theme.of(
+                                                context,
+                                              ).colorScheme.onPrimary,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                        Semantics(
+                          label: "Botón para ver el historial de movimientos",
+                          hint:
+                              "Botón que redirecciona a la página de movimientos",
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HistorialScreen(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              margin: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                border: Border.all(width: 2),
+                                borderRadius: BorderRadius.circular(10),
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  l10n.historial,
+                                  style: TextStyle(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onPrimary,
                                   ),
                                 ),
                               ),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => LocationsScreen(),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                margin: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  border: Border.all(width: 2),
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.secondary,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    l10n.borrarUbicacion,
-                                    style: TextStyle(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.onPrimary,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                context
-                                    .read<AdministrationscreenViewmodel>()
-                                    .showAddLocationDialog(context, l10n);
-                              },
-                              child: Container(
-                                margin: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  border: Border.all(width: 2),
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.secondary,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    l10n.anadirUbicacion,
-                                    style: TextStyle(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.onPrimary,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => LocationsScreen(),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                margin: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  border: Border.all(width: 2),
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.secondary,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    l10n.borrarUbicacion,
-                                    style: TextStyle(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.onPrimary,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ExpansionTile(
-                title: Text(l10n.tipo),
-                children: [
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          context
-                              .read<AdministrationscreenViewmodel>()
-                              .showAddTypeProductDialog(context, l10n);
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 2),
-                            borderRadius: BorderRadius.circular(10),
-                            color: Theme.of(context).colorScheme.secondary,
+              child: Semantics(
+                label: l10n.accLabelApartadoModificarUbicaciones,
+                hint: l10n.accHintApartadoModificarUbicaciones,
+                child: ExpansionTile(
+                  title: Text(l10n.ubicacion),
+                  children: [
+                    (context.read<ThemeViewmodel>().fontSize < 20)
+                        ? Row(
+                            children: [
+                              Semantics(
+                                label: l10n.accLabelBtnAnadirUbicacion,
+                                hint: l10n.accHintBtnAnadirUbicacion,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    context
+                                        .read<AdministrationscreenViewmodel>()
+                                        .showAddLocationDialog(context, l10n);
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(width: 2),
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.secondary,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        l10n.anadirUbicacion,
+                                        style: TextStyle(
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.onPrimary,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Semantics(
+                                label: l10n.accLabelBtnBorrarUbicacion,
+                                hint: l10n.accHintBtnBorrarUbicacion,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => LocationsScreen(),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(width: 2),
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.secondary,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        l10n.borrarUbicacion,
+                                        style: TextStyle(
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.onPrimary,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Semantics(
+                                label: l10n.accLabelBtnAnadirUbicacion,
+                                hint: l10n.accHintBtnAnadirUbicacion,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    context
+                                        .read<AdministrationscreenViewmodel>()
+                                        .showAddLocationDialog(context, l10n);
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(width: 2),
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.secondary,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        l10n.anadirUbicacion,
+                                        style: TextStyle(
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.onPrimary,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Semantics(
+                                label: l10n.accLabelBtnBorrarUbicacion,
+                                hint: l10n.accHintBtnBorrarUbicacion,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => LocationsScreen(),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(width: 2),
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.secondary,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        l10n.borrarUbicacion,
+                                        style: TextStyle(
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.onPrimary,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              l10n.anadirTipo,
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.onPrimary,
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Semantics(
+                label: l10n.accLabelApartadoTiposProducto,
+                hint: l10n.accHintApartadoTiposProducto,
+                child: ExpansionTile(
+                  title: Text(l10n.tipo),
+                  children: [
+                    Row(
+                      children: [
+                        Semantics(
+                          label: l10n.accLabelBtnAnadirTipoProducto,
+                          hint: l10n.accHintBtnAnadirTipoProducto,
+                          child: GestureDetector(
+                            onTap: () {
+                              context
+                                  .read<AdministrationscreenViewmodel>()
+                                  .showAddTypeProductDialog(context, l10n);
+                            },
+                            child: Container(
+                              margin: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                border: Border.all(width: 2),
+                                borderRadius: BorderRadius.circular(10),
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  l10n.anadirTipo,
+                                  style: TextStyle(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onPrimary,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => TypesScreen(),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 2),
-                            borderRadius: BorderRadius.circular(10),
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              l10n.borrarTipo,
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.onPrimary,
+                        Semantics(
+                          label: l10n.accLabelBtnBorrarTipoProducto,
+                          hint: l10n.accHintBtnBorrarTipoProducto,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TypesScreen(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              margin: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                border: Border.all(width: 2),
+                                borderRadius: BorderRadius.circular(10),
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  l10n.borrarTipo,
+                                  style: TextStyle(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onPrimary,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

@@ -17,49 +17,58 @@ class _TypesScreenState extends State<TypesScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.tipo),
-      ),
+      appBar: AppBar(title: Text(l10n.tipo)),
       body: Column(
         children: [
-          Expanded(
-            child: Consumer<SupabaseService>(
-              builder: (context, value, child) {
-                final types = value.types;
-                if (types.isEmpty) {
-                  return CircularProgressIndicator();
-                }
-                return ListView.builder(
-                  itemCount: types.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(types[index]['type']),
-                      trailing: IconButton(
-                        onPressed: () async {
-                          bool result = await context
-                              .read<SupabaseService>()
-                              .deleteType(
-                                context,
-                                types[index]['id_type'],
-                                l10n,
-                              );
-                          if (result) {
-                            context
-                                .read<MessagesViewmodel>()
-                                .showInformationDialog(
-                                  context,
-                                  MediaQuery.of(context).size.width,
-                                  MediaQuery.of(context).size.height / 3,
-                                  l10n.tipoEliminado,
-                                );
-                          }
-                        },
-                        icon: Icon(Icons.delete, color: AppColors.secondary),
-                      ),
-                    );
-                  },
-                );
-              },
+          Semantics(
+            label: "Listado de tipos de producto",
+            hint: "Listado con todas los tipos de producto del inventario",
+            child: Expanded(
+              child: Consumer<SupabaseService>(
+                builder: (context, value, child) {
+                  final types = value.types;
+                  if (types.isEmpty) {
+                    return CircularProgressIndicator();
+                  }
+                  return ListView.builder(
+                    itemCount: types.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(types[index]['type']),
+                        trailing: Semantics(
+                          label: "Botón de borrar",
+                          hint: "Botón para borrar un tipo de producto",
+                          child: IconButton(
+                            onPressed: () async {
+                              bool result = await context
+                                  .read<SupabaseService>()
+                                  .deleteType(
+                                    context,
+                                    types[index]['id_type'],
+                                    l10n,
+                                  );
+                              if (result) {
+                                context
+                                    .read<MessagesViewmodel>()
+                                    .showInformationDialog(
+                                      context,
+                                      MediaQuery.of(context).size.width,
+                                      MediaQuery.of(context).size.height / 3,
+                                      l10n.tipoEliminado,
+                                    );
+                              }
+                            },
+                            icon: Icon(
+                              Icons.delete,
+                              color: AppColors.secondary,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ),
         ],

@@ -25,139 +25,159 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           children: [
             SizedBox(height: 10),
-            Container(
-              margin: EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 10),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 8,
-                      left: 10,
-                      right: 22,
-                      bottom: 8,
+            Semantics(
+              label: "Campo para el nombre de usuario",
+              hint: "Campo con el nombre de usuario",
+              child: Container(
+                margin: EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 10),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 8,
+                        left: 10,
+                        right: 22,
+                        bottom: 8,
+                      ),
+                      child: Text(l10n.usuario),
                     ),
-                    child: Text(l10n.usuario),
-                  ),
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 1,
-                          color: Theme.of(context).colorScheme.inversePrimary,
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1,
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(widget.user!.username),
                         ),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(widget.user!.username),
-                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 8,
-                      left: 10,
-                      right: 40,
-                      bottom: 8,
+            Semantics(
+              label: "Campo para el correo electrónico",
+              hint: "Campo con el correo electrónico",
+              child: Container(
+                margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 8,
+                        left: 10,
+                        right: 40,
+                        bottom: 8,
+                      ),
+                      child: Text(l10n.email),
                     ),
-                    child: Text(l10n.email),
-                  ),
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 1,
-                          color: Theme.of(context).colorScheme.inversePrimary,
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1,
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(widget.user!.email),
                         ),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(widget.user!.email),
-                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 8,
-                      left: 10,
-                      right: 20,
-                      bottom: 8,
+            Semantics(
+              label: "Campo para el nombre",
+              hint: "Campo con el nombre",
+              child: Container(
+                margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 8,
+                        left: 10,
+                        right: 20,
+                        bottom: 8,
+                      ),
+                      child: Text(l10n.nombre),
                     ),
-                    child: Text(l10n.nombre),
-                  ),
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 1,
-                          color: Theme.of(context).colorScheme.inversePrimary,
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1,
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Text(
+                            widget.user!.name,
+                            style: TextStyle(overflow: TextOverflow.ellipsis),
+                            maxLines: 4,
+                          ),
                         ),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Text(
-                          widget.user!.name,
-                          style: TextStyle(overflow: TextOverflow.ellipsis),
-                          maxLines: 4,
-                        ),
-                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 40),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 8,
-                      left: 10,
-                      right: 60,
-                      bottom: 8,
+            Semantics(
+              label: "Campo para el rol",
+              hint: "Campo con el rol",
+              child: Container(
+                margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 40),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 8,
+                        left: 10,
+                        right: 60,
+                        bottom: 8,
+                      ),
+                      child: Text(l10n.rol),
                     ),
-                    child: Text(l10n.rol),
-                  ),
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 1,
-                          color: Theme.of(context).colorScheme.inversePrimary,
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1,
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(widget.user!.role),
                         ),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(widget.user!.role),
-                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                context.read<ProfileFormViewmodel>().showModifyPasswordDialog(
-                  context,
-                  widget.user!,
-                  (ProfileScreen).toString(),
-                );
-              },
-              child: Text(l10n.cambiarContrasena),
+            Semantics(
+              label: "Botón de cambio de contraseña",
+              hint: "Botón que despliega el formulario para cambiar la contraseña",
+              child: ElevatedButton(
+                onPressed: () {
+                  context.read<ProfileFormViewmodel>().showModifyPasswordDialog(
+                    context,
+                    widget.user!,
+                    (ProfileScreen).toString(),
+                  );
+                },
+                child: Text(l10n.cambiarContrasena),
+              ),
             ),
           ],
         ),
