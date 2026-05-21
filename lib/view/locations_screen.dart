@@ -20,10 +20,10 @@ class _LocationsScreenState extends State<LocationsScreen> {
       appBar: AppBar(title: Text(l10n.ubicacion)),
       body: Column(
         children: [
-          Semantics(
-            label: l10n.accLabelListadoUbicaciones,
-            hint: l10n.accHintListadoUbicaciones,
-            child: Expanded(
+          Expanded(
+            child: Semantics(
+              label: l10n.accLabelListadoUbicaciones,
+              hint: l10n.accHintListadoUbicaciones,
               child: Consumer<SupabaseService>(
                 builder: (context, value, child) {
                   final locations = value.locations;
@@ -44,6 +44,8 @@ class _LocationsScreenState extends State<LocationsScreen> {
                                   .read<SupabaseService>()
                                   .deleteLocation(
                                     locations[index]['id_location'],
+                                    context,
+                                    l10n,
                                   );
                               if (result) {
                                 await context
@@ -51,12 +53,20 @@ class _LocationsScreenState extends State<LocationsScreen> {
                                     .showInformationDialog(
                                       context,
                                       MediaQuery.of(context).size.width,
-                                      MediaQuery.of(context).size.height * 0.4,
+                                      (MediaQuery.of(context).orientation ==
+                                              Orientation.portrait)
+                                          ? MediaQuery.of(context).size.height *
+                                                0.3
+                                          : MediaQuery.of(context).size.height *
+                                                0.6,
                                       l10n.ubicacionBorrada,
                                     );
                               }
                             },
-                            icon: Icon(Icons.delete, color: AppColors.secondary),
+                            icon: Icon(
+                              Icons.delete,
+                              color: AppColors.secondary,
+                            ),
                           ),
                         ),
                       );

@@ -44,7 +44,7 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
                 MediaQuery.of(context).size.width / 2,
                 (MediaQuery.of(context).orientation == Orientation.portrait)
                     ? MediaQuery.of(context).size.height / 3
-                    : MediaQuery.of(context).size.height,
+                    : MediaQuery.of(context).size.height*0.6,
                 l10n.usuarioEliminado,
               );
             }

@@ -18,118 +18,125 @@ class _ProductsTableWidgetState extends State<ProductsTableWidget> {
     final l10n = AppLocalizations.of(context)!;
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: DataTable(
-        horizontalMargin: 5,
-        dataRowMinHeight: 0,
-        dataRowMaxHeight: double.infinity,
-        border: TableBorder.all(
-          width: 1,
-          color: Theme.of(context).colorScheme.inversePrimary,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          minWidth: MediaQuery.of(context).size.width,
         ),
-        columns: [
-          DataColumn(
-            label: Expanded(child: Center(child: Text(l10n.nombre))),
+        child: DataTable(
+          horizontalMargin: 5,
+          dataRowMinHeight: 0,
+          dataRowMaxHeight: double.infinity,
+          border: TableBorder.all(
+            width: 1,
+            color: Theme.of(context).colorScheme.inversePrimary,
           ),
-          DataColumn(
-            label: Expanded(child: Center(child: Text(l10n.tipo))),
-          ),
-          DataColumn(
-            label: Expanded(child: Center(child: Text(l10n.ubicacion))),
-          ),
-        ],
-        rows: widget.productList
-            .map(
-              (product) => DataRow(
-                cells: [
-                  DataCell(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return Dialog(
-                            child: SizedBox(
-                              width:
-                                  (MediaQuery.of(context).orientation ==
-                                      Orientation.portrait)
-                                  ? MediaQuery.of(context).size.width / 3
-                                  : MediaQuery.of(context).size.width,
-                              height:
-                                  (MediaQuery.of(context).orientation ==
-                                      Orientation.portrait)
-                                  ? MediaQuery.of(context).size.height / 2
-                                  : MediaQuery.of(context).size.height,
-                              child: ProductInformation(
-                                product: Product(
-                                  name: product['product'],
-                                  type: product['type']['type'],
-                                  location: product['location']['location'],
-                                  quantity: product['quantity'],
+          columns: [
+            DataColumn(
+              label: Expanded(child: Center(child: Text(l10n.nombre))),
+            ),
+            DataColumn(
+              label: Expanded(child: Center(child: Text(l10n.tipo))),
+            ),
+            DataColumn(
+              label: Expanded(child: Center(child: Text(l10n.ubicacion))),
+            ),
+          ],
+          rows: widget.productList
+              .map(
+                (product) => DataRow(
+                  cells: [
+                    DataCell(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Dialog(
+                              child: SizedBox(
+                                width:
+                                    (MediaQuery.of(context).orientation ==
+                                        Orientation.portrait)
+                                    ? MediaQuery.of(context).size.width / 3
+                                    : MediaQuery.of(context).size.width,
+                                height:
+                                    (MediaQuery.of(context).orientation ==
+                                        Orientation.portrait)
+                                    ? MediaQuery.of(context).size.height / 2
+                                    : MediaQuery.of(context).size.height,
+                                child: ProductInformation(
+                                  product: Product(
+                                    name: product['product'],
+                                    type: product['type']['type'],
+                                    location: product['location']['location'],
+                                    quantity: product['quantity'],
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxHeight: double.infinity,
-                        maxWidth: MediaQuery.of(context).size.width / 4,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          top: 5,
-                          left: 2,
-                          right: 2,
-                          bottom: 5,
+                            );
+                          },
+                        );
+                      },
+                      ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxHeight: double.infinity,
+                          maxWidth: MediaQuery.of(context).size.width / 4,
                         ),
-                        child: Text(
-                          product!['product'],
-                          style: TextStyle(
-                            color: product['quantity'] == 0
-                              ? AppColors.notStockFontColor
-                              : Theme.of(context).colorScheme.inversePrimary,
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            top: 5,
+                            left: 2,
+                            right: 2,
+                            bottom: 5,
+                          ),
+                          child: Text(
+                            product!['product'],
+                            style: TextStyle(
+                              color: product['quantity'] == 0
+                                  ? AppColors.notStockFontColor
+                                  : Theme.of(
+                                      context,
+                                    ).colorScheme.inversePrimary,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  DataCell(
-                    ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxHeight: double.infinity,
-                        maxWidth: MediaQuery.of(context).size.width / 5,
-                      ),
-                      child: Text(
-                        product['type']['type'],
-                        style: TextStyle(
-                          color: product['quantity'] == 0
-                              ? AppColors.notStockFontColor
-                              : Theme.of(context).colorScheme.inversePrimary,
+                    DataCell(
+                      ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxHeight: double.infinity,
+                          maxWidth: MediaQuery.of(context).size.width / 5,
+                        ),
+                        child: Text(
+                          product['type']['type'],
+                          style: TextStyle(
+                            color: product['quantity'] == 0
+                                ? AppColors.notStockFontColor
+                                : Theme.of(context).colorScheme.inversePrimary,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  DataCell(
-                    ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxHeight: double.infinity,
-                        maxWidth: MediaQuery.of(context).size.width / 5,
-                      ),
-                      child: Text(
-                        product['location']['location'],
-                        style: TextStyle(
-                          color: product['quantity'] == 0
-                              ? AppColors.notStockFontColor
-                              : Theme.of(context).colorScheme.inversePrimary,
+                    DataCell(
+                      ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxHeight: double.infinity,
+                          maxWidth: MediaQuery.of(context).size.width / 5,
+                        ),
+                        child: Text(
+                          product['location']['location'],
+                          style: TextStyle(
+                            color: product['quantity'] == 0
+                                ? AppColors.notStockFontColor
+                                : Theme.of(context).colorScheme.inversePrimary,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            )
-            .toList(),
+                  ],
+                ),
+              )
+              .toList(),
+        ),
       ),
     );
   }

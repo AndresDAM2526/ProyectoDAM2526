@@ -45,10 +45,10 @@ class _FilterWidgetState extends State<FilterWidget> {
             ),
           ),
           selectedIndex == 0
-              ? Semantics(
-                  label:l10n.accLabelListadoUbicaciones,
-                  hint: l10n.accHintListadoUbicaciones,
-                  child: Expanded(
+              ? Expanded(
+                  child: Semantics(
+                    label: l10n.accLabelListadoUbicaciones,
+                    hint: l10n.accHintListadoUbicaciones,
                     child: FutureBuilder(
                       future: context.read<SupabaseService>().showLocations(),
                       builder: (context, snapshot) {
@@ -79,40 +79,40 @@ class _FilterWidgetState extends State<FilterWidget> {
                     ),
                   ),
                 )
-              : Semantics(
+              : Expanded(
+                child: Semantics(
                   label: l10n.accLabelListadoTiposProducto,
                   hint: l10n.accHintListadoTiposProducto,
-                  child: Expanded(
-                    child: FutureBuilder(
-                      future: context.read<SupabaseService>().showTypes(),
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData) {
-                          return Text(l10n.errorCargaDatos);
-                        }
-                        final elementList = snapshot.data;
-                        return RadioGroup<String>(
-                          groupValue: selectedTypeRadio,
-                          onChanged: (value) {
-                            setState(() {
-                              selectedTypeRadio = value;
-                            });
+                  child: FutureBuilder(
+                    future: context.read<SupabaseService>().showTypes(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Text(l10n.errorCargaDatos);
+                      }
+                      final elementList = snapshot.data;
+                      return RadioGroup<String>(
+                        groupValue: selectedTypeRadio,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedTypeRadio = value;
+                          });
+                        },
+                        child: ListView.builder(
+                          itemCount: elementList!.length,
+                          itemBuilder: (context, index) {
+                            return SizedBox(
+                              child: ListTile(
+                                leading: Radio(value: elementList[index]),
+                                title: Text(elementList[index]),
+                              ),
+                            );
                           },
-                          child: ListView.builder(
-                            itemCount: elementList!.length,
-                            itemBuilder: (context, index) {
-                              return SizedBox(
-                                child: ListTile(
-                                  leading: Radio(value: elementList[index]),
-                                  title: Text(elementList[index]),
-                                ),
-                              );
-                            },
-                          ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
                 ),
+              ),
         ],
       ),
       floatingActionButton: Semantics(

@@ -20,10 +20,10 @@ class _TypesScreenState extends State<TypesScreen> {
       appBar: AppBar(title: Text(l10n.tipo)),
       body: Column(
         children: [
-          Semantics(
-            label:l10n.accLabelListadoTiposProducto,
-            hint: l10n.accHintListadoTiposProducto,
-            child: Expanded(
+          Expanded(
+            child: Semantics(
+              label: l10n.accLabelListadoTiposProducto,
+              hint: l10n.accHintListadoTiposProducto,
               child: Consumer<SupabaseService>(
                 builder: (context, value, child) {
                   final types = value.types;
@@ -53,7 +53,12 @@ class _TypesScreenState extends State<TypesScreen> {
                                     .showInformationDialog(
                                       context,
                                       MediaQuery.of(context).size.width,
-                                      MediaQuery.of(context).size.height / 3,
+                                      (MediaQuery.of(context).orientation ==
+                                              Orientation.portrait)
+                                          ? MediaQuery.of(context).size.height *
+                                                0.35
+                                          : MediaQuery.of(context).size.height *
+                                                0.6,
                                       l10n.tipoEliminado,
                                     );
                               }

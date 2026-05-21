@@ -125,8 +125,8 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
         context,
         MediaQuery.of(context).size.width,
         (context.read<ThemeViewmodel>().fontSize < 24)
-            ? MediaQuery.of(context).size.height/3
-            : MediaQuery.of(context).size.height*0.4,
+            ? MediaQuery.of(context).size.height / 3
+            : MediaQuery.of(context).size.height * 0.4,
         l10n.modificarContrasenaMensaje,
       );
     }
@@ -142,9 +142,7 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
       builder: (context) {
         return Dialog(
           child: SizedBox(
-            width: (MediaQuery.of(context).orientation == Orientation.portrait)
-                ? MediaQuery.of(context).size.width / 2
-                : MediaQuery.of(context).size.width,
+            width: MediaQuery.of(context).size.width,
             height: (MediaQuery.of(context).orientation == Orientation.portrait)
                 ? MediaQuery.of(context).size.height / 2
                 : MediaQuery.of(context).size.height,
@@ -157,7 +155,9 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
       context.read<MessagesViewmodel>().showInformationDialog(
         context,
         MediaQuery.of(context).size.width / 2,
-        MediaQuery.of(context).size.height / 4,
+        (MediaQuery.of(context).orientation == Orientation.portrait)
+            ? MediaQuery.of(context).size.height * 0.35
+            : MediaQuery.of(context).size.height * 0.6,
         l10n.modificarUsuarioMensaje,
       );
     }
@@ -177,7 +177,7 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
               width: MediaQuery.of(context).size.width,
               height:
                   (MediaQuery.of(context).orientation == Orientation.portrait)
-                  ? MediaQuery.of(context).size.height / 2
+                  ? MediaQuery.of(context).size.height * 0.6
                   : MediaQuery.of(context).size.height,
               child: ModifyProductScreen(product: product),
             ),
@@ -190,9 +190,9 @@ class AdministrationscreenViewmodel extends ChangeNotifier {
       context.read<MessagesViewmodel>().showInformationDialog(
         context,
         MediaQuery.of(context).size.width,
-        (context.read<ThemeViewmodel>().fontSize < 24)
-            ? MediaQuery.of(context).size.height / 2
-            : MediaQuery.of(context).size.height * 0.4,
+        (MediaQuery.of(context).orientation == Orientation.portrait)
+            ? MediaQuery.of(context).size.height* 0.35
+            : MediaQuery.of(context).size.height * 0.7,
         l10n.modificarProductoMensaje,
       );
     }

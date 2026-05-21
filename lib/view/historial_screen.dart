@@ -45,10 +45,10 @@ class _HistorialScreenState extends State<HistorialScreen> {
               ),
             ),
             search.isNotEmpty
-                ? Semantics(
-                  label: l10n.accLabelResultadoBusqueda,
-                  hint: l10n.accHintResultadoBusqueda,
-                  child: Expanded(
+                ? Expanded(
+                    child: Semantics(
+                      label: l10n.accLabelResultadoBusqueda,
+                      hint: l10n.accHintResultadoBusqueda,
                       child: FutureBuilder(
                         future: context
                             .read<SupabaseService>()
@@ -91,7 +91,8 @@ class _HistorialScreenState extends State<HistorialScreen> {
                                         ),
                                     quantity: historial[index]['quantity'],
                                     duration: historial[index]['duration'],
-                                    description: historial[index]['description'],
+                                    description:
+                                        historial[index]['description'],
                                   ),
                                 ),
                               );
@@ -100,7 +101,7 @@ class _HistorialScreenState extends State<HistorialScreen> {
                         },
                       ),
                     ),
-                )
+                  )
                 : Center(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 50.0),

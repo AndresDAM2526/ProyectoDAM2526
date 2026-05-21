@@ -50,21 +50,23 @@ class _ModifyInventoryState extends State<ModifyInventory> {
               ),
             ),
           ),
-          Semantics(
-            label: l10n.accLabelListadoResultados,
-            hint: l10n.accHintListadoResultados,
-            child: FutureBuilder(
-              future: context.watch<SupabaseService>().getProductsFromName(name!),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                }
-                if (!snapshot.hasData) {
-                  return Center(child: Text(l10n.sinResultados));
-                }
-                final products = snapshot.data ?? [];
-                return Expanded(
-                  child: Container(
+          Expanded(
+            child: Semantics(
+              label: l10n.accLabelListadoResultados,
+              hint: l10n.accHintListadoResultados,
+              child: FutureBuilder(
+                future: context.watch<SupabaseService>().getProductsFromName(
+                  name!,
+                ),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  }
+                  if (!snapshot.hasData) {
+                    return Center(child: Text(l10n.sinResultados));
+                  }
+                  final products = snapshot.data ?? [];
+                  return Container(
                     margin: EdgeInsets.all(5),
                     child: ListView.builder(
                       itemCount: products.length,
@@ -74,7 +76,9 @@ class _ModifyInventoryState extends State<ModifyInventory> {
                           decoration: BoxDecoration(
                             border: Border.all(
                               width: 1,
-                              color: Theme.of(context).colorScheme.inversePrimary,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.inversePrimary,
                             ),
                           ),
                           child: ProductViewWidget(
@@ -93,7 +97,16 @@ class _ModifyInventoryState extends State<ModifyInventory> {
                                       .showConfirmDialog(
                                         context,
                                         MediaQuery.of(context).size.width,
-                                        MediaQuery.of(context).size.height * 0.4,
+                                        (MediaQuery.of(context).orientation ==
+                                                Orientation.portrait)
+                                            ? MediaQuery.of(
+                                                    context,
+                                                  ).size.height *
+                                                  0.4
+                                            : MediaQuery.of(
+                                                    context,
+                                                  ).size.height *
+                                                  0.6,
                                         l10n.confirmarBorradoProducto,
                                       );
                                   if (confirm && mounted) {
@@ -110,18 +123,18 @@ class _ModifyInventoryState extends State<ModifyInventory> {
                                           .showInformationDialog(
                                             context,
                                             MediaQuery.of(context).size.width,
-                                            (context
-                                                        .read<ThemeViewmodel>()
-                                                        .fontSize <
-                                                    24)
+                                            (MediaQuery.of(
+                                                      context,
+                                                    ).orientation ==
+                                                    Orientation.portrait)
                                                 ? MediaQuery.of(
                                                         context,
-                                                      ).size.height /
-                                                      3
+                                                      ).size.height *
+                                                      0.4
                                                 : MediaQuery.of(
                                                         context,
                                                       ).size.height *
-                                                      0.4,
+                                                      0.6,
                                             l10n.productoBorrado,
                                           );
                                     }
@@ -141,7 +154,8 @@ class _ModifyInventoryState extends State<ModifyInventory> {
                                         context,
                                         l10n,
                                         DatabaseProduct(
-                                          idProduct: products[index]['id_product'],
+                                          idProduct:
+                                              products[index]['id_product'],
                                           name: products[index]['product'],
                                           type: products[index]['type']['type'],
                                           location:
@@ -157,9 +171,9 @@ class _ModifyInventoryState extends State<ModifyInventory> {
                         );
                       },
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
         ],

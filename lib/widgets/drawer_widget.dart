@@ -18,7 +18,10 @@ class DrawerWidget extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       child: Column(
         children: [
-          Expanded(
+          SizedBox(
+            height: (MediaQuery.of(context).orientation == Orientation.portrait)
+                ? MediaQuery.of(context).size.height * 0.2
+                : MediaQuery.of(context).size.height * 0.3,
             child: UserAccountsDrawerHeader(
               decoration: BoxDecoration(color: Theme.of(context).primaryColor),
               accountName: Text(
@@ -58,7 +61,7 @@ class DrawerWidget extends StatelessWidget {
 
           Semantics(
             label: l10n.accLabelBtnHistorial,
-            hint:l10n.accHintBtnHistorial,
+            hint: l10n.accHintBtnHistorial,
             child: ListTile(
               title: Text(l10n.historial),
               onTap: () {
@@ -74,9 +77,9 @@ class DrawerWidget extends StatelessWidget {
                   context.read<AuthService>().userDatabase!.role ==
                       "Administrador")
               ? Semantics(
-                label: l10n.accLabelBtnAdministracion,
-                hint: l10n.accHintBtnAdministracion,
-                child: ListTile(
+                  label: l10n.accLabelBtnAdministracion,
+                  hint: l10n.accHintBtnAdministracion,
+                  child: ListTile(
                     title: Text(l10n.administracion),
                     onTap: () {
                       Navigator.push(
@@ -87,12 +90,14 @@ class DrawerWidget extends StatelessWidget {
                       );
                     },
                   ),
-              )
-              : Spacer(),
+                )
+              : SizedBox.shrink(),
+
           Spacer(),
+
           Semantics(
             label: l10n.accLabelBtnCerrarSesion,
-            hint:  l10n.accHintBtnCerrarSesion,
+            hint: l10n.accHintBtnCerrarSesion,
             child: ListTile(
               title: IconButton(
                 onPressed: () {
@@ -102,7 +107,9 @@ class DrawerWidget extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          (MediaQuery.of(context).orientation == Orientation.portrait)
+              ? SizedBox(height: 20)
+              : SizedBox.shrink(),
         ],
       ),
     );

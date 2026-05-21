@@ -52,10 +52,10 @@ class AdministrationScreen extends StatelessWidget {
                                           .showInformationDialog(
                                             context,
                                             MediaQuery.of(context).size.width,
-                                            (context
-                                                        .read<ThemeViewmodel>()
-                                                        .fontSize <
-                                                    24)
+                                            (MediaQuery.of(
+                                                      context,
+                                                    ).orientation ==
+                                                    Orientation.portrait)
                                                 ? MediaQuery.of(
                                                         context,
                                                       ).size.height /
@@ -63,7 +63,7 @@ class AdministrationScreen extends StatelessWidget {
                                                 : MediaQuery.of(
                                                         context,
                                                       ).size.height *
-                                                      0.4,
+                                                      0.9,
                                             l10n.nuevoUsuarioMensaje,
                                           );
                                     }
@@ -135,8 +135,7 @@ class AdministrationScreen extends StatelessWidget {
                             children: [
                               Semantics(
                                 label: l10n.accLabelBtnFormAnadirUsuario,
-                                hint:
-                                    l10n.accHintBtnFormAnadirUsuario,
+                                hint: l10n.accHintBtnFormAnadirUsuario,
                                 child: GestureDetector(
                                   onTap: () async {
                                     bool? result = await Navigator.push(
@@ -151,18 +150,18 @@ class AdministrationScreen extends StatelessWidget {
                                           .showInformationDialog(
                                             context,
                                             MediaQuery.of(context).size.width,
-                                            (context
-                                                        .read<ThemeViewmodel>()
-                                                        .fontSize <
-                                                    24)
+                                            (MediaQuery.of(
+                                                      context,
+                                                    ).orientation ==
+                                                    Orientation.portrait)
                                                 ? MediaQuery.of(
                                                         context,
-                                                      ).size.height /
-                                                      3
+                                                      ).size.height *
+                                                      0.4
                                                 : MediaQuery.of(
                                                         context,
                                                       ).size.height *
-                                                      0.4,
+                                                      0.6,
                                             l10n.nuevoUsuarioMensaje,
                                           );
                                     }
@@ -191,9 +190,9 @@ class AdministrationScreen extends StatelessWidget {
                                 ),
                               ),
                               Semantics(
-                                label: l10n.accLabelBtnApartadoModificarUsuarios,
-                                hint:
-                                    l10n.accHintBtnApartadoModificarUsuarios,
+                                label:
+                                    l10n.accLabelBtnApartadoModificarUsuarios,
+                                hint: l10n.accHintBtnApartadoModificarUsuarios,
                                 child: GestureDetector(
                                   onTap: () {
                                     Navigator.push(
@@ -248,8 +247,7 @@ class AdministrationScreen extends StatelessWidget {
                                 children: [
                                   Semantics(
                                     label: l10n.accLabelBtnFormAnadirProducto,
-                                    hint:
-                                        l10n.accHintBtnFormAnadirProducto,
+                                    hint: l10n.accHintBtnFormAnadirProducto,
                                     child: GestureDetector(
                                       onTap: () async {
                                         bool? result = await Navigator.push(
@@ -280,7 +278,7 @@ class AdministrationScreen extends StatelessWidget {
                                                     : MediaQuery.of(
                                                             context,
                                                           ).size.height *
-                                                          0.4,
+                                                          0.6,
                                                 l10n.nuevoProductoMensaje,
                                               );
                                         }
@@ -354,8 +352,7 @@ class AdministrationScreen extends StatelessWidget {
                                 children: [
                                   Semantics(
                                     label: l10n.accLabelBtnFormAnadirProducto,
-                                    hint:
-                                        l10n.accHintBtnFormAnadirProducto,
+                                    hint: l10n.accHintBtnFormAnadirProducto,
                                     child: GestureDetector(
                                       onTap: () async {
                                         bool? result = await Navigator.push(
@@ -373,20 +370,18 @@ class AdministrationScreen extends StatelessWidget {
                                                 MediaQuery.of(
                                                   context,
                                                 ).size.width,
-                                                (context
-                                                            .read<
-                                                              ThemeViewmodel
-                                                            >()
-                                                            .fontSize <
-                                                        24)
+                                                (MediaQuery.of(
+                                                          context,
+                                                        ).orientation ==
+                                                        Orientation.portrait)
                                                     ? MediaQuery.of(
                                                             context,
-                                                          ).size.height /
-                                                          3
+                                                          ).size.height *
+                                                          0.4
                                                     : MediaQuery.of(
                                                             context,
                                                           ).size.height *
-                                                          0.4,
+                                                          0.6,
                                                 l10n.nuevoProductoMensaje,
                                               );
                                         }
@@ -458,8 +453,7 @@ class AdministrationScreen extends StatelessWidget {
                               ),
                         Semantics(
                           label: l10n.accLabelBtnHistorial,
-                          hint:
-                              l10n.accHintBtnHistorial,
+                          hint: l10n.accHintBtnHistorial,
                           child: GestureDetector(
                             onTap: () {
                               Navigator.push(

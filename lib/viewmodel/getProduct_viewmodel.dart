@@ -99,9 +99,9 @@ class GetProductViewmodel extends ChangeNotifier {
       context.read<MessagesViewmodel>().showInformationDialog(
         context,
         MediaQuery.of(context).size.width,
-        (context.read<ThemeViewmodel>().fontSize < 24)
-            ? MediaQuery.of(context).size.height / 3
-            : MediaQuery.of(context).size.height * 0.4,
+        (MediaQuery.of(context).orientation == Orientation.portrait)
+            ? MediaQuery.of(context).size.height *0.4
+            : MediaQuery.of(context).size.height * 0.7,
         l10n.peticionCorrecta,
       );
       context.read<GetProductViewmodel>().clearForm();

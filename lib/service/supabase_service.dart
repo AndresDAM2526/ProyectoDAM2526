@@ -446,12 +446,27 @@ class SupabaseService extends ChangeNotifier {
     }
   }
 
-  Future<bool> deleteLocation(int idLocation) async {
+  Future<bool> deleteLocation(
+    int idLocation,
+    BuildContext context,
+    AppLocalizations l10n,
+  ) async {
     try {
       await supabase.from('location').delete().eq('id_location', idLocation);
       await getLocations();
       notifyListeners();
       return true;
+    } on PostgrestException catch (e) {
+      if (e.code == '23503') {
+        await context.read<MessagesViewmodel>().showErrorDialog(
+          context,
+          MediaQuery.of(context).size.width,
+          MediaQuery.of(context).size.height / 3,
+          l10n.errorBorrado,
+        );
+        return false;
+      }
+      return false;
     } catch (e) {
       print(e);
       return false;

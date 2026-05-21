@@ -24,8 +24,7 @@ class _ModifyUserScreenState extends State<ModifyUserScreen> {
         children: [
           Semantics(
             label: l10n.accLabelCampoBuscarUsuario,
-            hint:
-                l10n.accHintCampoBuscarUsuario,
+            hint: l10n.accHintCampoBuscarUsuario,
             child: Container(
               margin: EdgeInsets.all(10),
               child: TextField(
@@ -41,10 +40,10 @@ class _ModifyUserScreenState extends State<ModifyUserScreen> {
             ),
           ),
           search!.isEmpty
-              ? Semantics(
-                  label: l10n.accLabelResultadoBusqueda,
-                  hint: l10n.accHintResultadoBusqueda,
-                  child: Expanded(
+              ? Expanded(
+                  child: Semantics(
+                    label: l10n.accLabelResultadoBusqueda,
+                    hint: l10n.accHintResultadoBusqueda,
                     child: FutureBuilder(
                       future: context.watch<SupabaseService>().getAllUsers(),
                       builder: (context, snapshot) {
@@ -79,10 +78,10 @@ class _ModifyUserScreenState extends State<ModifyUserScreen> {
                     ),
                   ),
                 )
-              : Semantics(
-                  label: l10n.accLabelResultadoBusqueda,
-                  hint: l10n.accHintResultadoBusqueda,
-                  child: Expanded(
+              : Expanded(
+                  child: Semantics(
+                    label: l10n.accLabelResultadoBusqueda,
+                    hint: l10n.accHintResultadoBusqueda,
                     child: FutureBuilder(
                       future: context
                           .watch<SupabaseService>()

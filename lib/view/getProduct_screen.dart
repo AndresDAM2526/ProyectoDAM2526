@@ -36,10 +36,10 @@ class _GetProductScreenState extends State<GetProductScreen> {
               ),
             ),
           ),
-          Semantics(
-            label: l10n.accLabelResultadoBusqueda,
-            hint: l10n.accHintResultadoBusqueda,
-            child: Expanded(
+          Expanded(
+            child: Semantics(
+              label: l10n.accLabelResultadoBusqueda,
+              hint: l10n.accHintResultadoBusqueda,
               child: FutureBuilder(
                 future: context.watch<SupabaseService>().getProductsFromName(
                   name!,
@@ -76,7 +76,8 @@ class _GetProductScreenState extends State<GetProductScreen> {
                                 foundProducts[index]['location']['location'],
                             type: foundProducts[index]['type']['type'],
                             quantity: foundProducts[index]['quantity'],
-                            leftSideWidget: foundProducts[index]['quantity'] != 0
+                            leftSideWidget:
+                                foundProducts[index]['quantity'] != 0
                                 ? IconButton(
                                     onPressed: () {
                                       context
@@ -102,28 +103,27 @@ class _GetProductScreenState extends State<GetProductScreen> {
                                   )
                                 : null,
                             rightSideWidget: IconButton(
-                                    onPressed: () {
-                                      context
-                                          .read<GetProductViewmodel>()
-                                          .showGetProductWidgetDialog(
-                                            context,
-                                            l10n,
-                                            RequestProduct(
-                                              idProduct:
-                                                  foundProducts[index]['id_product'],
-                                              name:
-                                                  foundProducts[index]['product'],
-                                              type:
-                                                  foundProducts[index]['type']['type'],
-                                              location:
-                                                  foundProducts[index]['location']['location'],
-                                            ),
-                                            foundProducts[index]['quantity'],
-                                            "Devolver",
-                                          );
-                                    },
-                                    icon: Icon(Icons.backup),
-                                  ),
+                              onPressed: () {
+                                context
+                                    .read<GetProductViewmodel>()
+                                    .showGetProductWidgetDialog(
+                                      context,
+                                      l10n,
+                                      RequestProduct(
+                                        idProduct:
+                                            foundProducts[index]['id_product'],
+                                        name: foundProducts[index]['product'],
+                                        type:
+                                            foundProducts[index]['type']['type'],
+                                        location:
+                                            foundProducts[index]['location']['location'],
+                                      ),
+                                      foundProducts[index]['quantity'],
+                                      "Devolver",
+                                    );
+                              },
+                              icon: Icon(Icons.backup),
+                            ),
                           ),
                         );
                       },
