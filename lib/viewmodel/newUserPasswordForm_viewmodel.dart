@@ -66,7 +66,7 @@ class NewUserPasswordFormViewModel extends ChangeNotifier {
         context,
         MediaQuery.of(context).size.width,
         (MediaQuery.of(context).orientation == Orientation.portrait)
-            ? MediaQuery.of(context).size.height / 3
+            ? MediaQuery.of(context).size.height * 0.4
             : MediaQuery.of(context).size.height * 0.6,
         l10n.contrasenaActualizada,
       );

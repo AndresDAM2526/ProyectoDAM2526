@@ -26,7 +26,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               label: l10n.accLabelCampoUsuarioPerfil,
               hint: l10n.accHintCampoUsuarioPerfil,
               child: Container(
-                margin: EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 10),
+                margin: EdgeInsets.only(
+                  top: 20,
+                  left: 10,
+                  right: 10,
+                  bottom: 10,
+                ),
                 child: Row(
                   children: [
                     Padding(
@@ -60,7 +65,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               label: l10n.accLabelCampoCorreo,
               hint: l10n.accHintCampoCorreo,
               child: Container(
-                margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
+                margin: EdgeInsets.only(
+                  top: 10,
+                  left: 10,
+                  right: 10,
+                  bottom: 10,
+                ),
                 child: Row(
                   children: [
                     Padding(
@@ -94,7 +104,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               label: l10n.accLabelCampoNombre,
               hint: l10n.accHintCampoNombre,
               child: Container(
-                margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
+                margin: EdgeInsets.only(
+                  top: 10,
+                  left: 10,
+                  right: 10,
+                  bottom: 10,
+                ),
                 child: Row(
                   children: [
                     Padding(
@@ -132,7 +147,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               label: l10n.accLabelCampoRolPerfil,
               hint: l10n.accHintCampoRolPerfil,
               child: Container(
-                margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 40),
+                margin: EdgeInsets.only(
+                  top: 10,
+                  left: 10,
+                  right: 10,
+                  bottom: 40,
+                ),
                 child: Row(
                   children: [
                     Padding(
@@ -176,6 +196,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Text(l10n.cambiarContrasena),
               ),
             ),
+            SizedBox(height: 20),
           ],
         ),
       ),

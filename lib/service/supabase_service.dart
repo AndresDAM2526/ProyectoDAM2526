@@ -135,7 +135,9 @@ class SupabaseService extends ChangeNotifier {
         await context.read<MessagesViewmodel>().showErrorDialog(
           context,
           MediaQuery.of(context).size.width,
-          MediaQuery.of(context).size.height / 3,
+          (MediaQuery.of(context).orientation == Orientation.portrait)
+              ? MediaQuery.of(context).size.height * 0.4
+              : MediaQuery.of(context).size.height * 0.7,
           l10n.errorBorrado,
         );
         return false;
@@ -292,9 +294,9 @@ class SupabaseService extends ChangeNotifier {
         await context.read<MessagesViewmodel>().showErrorDialog(
           context,
           MediaQuery.of(context).size.width,
-          (context.read<ThemeViewmodel>().fontSize < 24)
-              ? MediaQuery.of(context).size.height / 3
-              : MediaQuery.of(context).size.height * 0.4,
+          (MediaQuery.of(context).orientation == Orientation.portrait)
+              ? MediaQuery.of(context).size.height * 0.4
+              : MediaQuery.of(context).size.height * 0.75,
           l10n.errorBorrado,
         );
         return false;
@@ -426,7 +428,11 @@ class SupabaseService extends ChangeNotifier {
     }
   }
 
-  Future<bool?> deleteUser(String uuid) async {
+  Future<bool?> deleteUser(
+    String uuid,
+    BuildContext context,
+    AppLocalizations l10n,
+  ) async {
     try {
       final deletedUser = await supabase.functions.invoke(
         'delete-user',
@@ -439,6 +445,17 @@ class SupabaseService extends ChangeNotifier {
         return true;
       } else {
         return false;
+      }
+    } on FunctionException catch (e) {
+      if (e.details.toString().contains("violates foreign key constraint")) {
+        await context.read<MessagesViewmodel>().showErrorDialog(
+          context,
+          MediaQuery.of(context).size.width,
+          (MediaQuery.of(context).orientation == Orientation.portrait)
+              ? MediaQuery.of(context).size.height * 0.4
+              : MediaQuery.of(context).size.height * 0.7,
+          l10n.errorBorrado,
+        );
       }
     } catch (e) {
       print(e);
@@ -461,7 +478,9 @@ class SupabaseService extends ChangeNotifier {
         await context.read<MessagesViewmodel>().showErrorDialog(
           context,
           MediaQuery.of(context).size.width,
-          MediaQuery.of(context).size.height / 3,
+          (MediaQuery.of(context).orientation == Orientation.portrait)
+              ? MediaQuery.of(context).size.height * 0.4
+              : MediaQuery.of(context).size.height * 0.7,
           l10n.errorBorrado,
         );
         return false;

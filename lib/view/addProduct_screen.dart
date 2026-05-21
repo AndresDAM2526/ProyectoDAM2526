@@ -217,6 +217,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                   ],
                 ),
+                SizedBox(height: 20),
               ],
             ),
           ),

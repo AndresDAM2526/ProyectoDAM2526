@@ -37,6 +37,8 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
           if (result) {
             bool? deleteUser = await context.read<SupabaseService>().deleteUser(
               widget.user.idUser,
+              context,
+              l10n,
             );
             if (deleteUser == true) {
               await context.read<MessagesViewmodel>().showInformationDialog(
@@ -44,7 +46,7 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
                 MediaQuery.of(context).size.width / 2,
                 (MediaQuery.of(context).orientation == Orientation.portrait)
                     ? MediaQuery.of(context).size.height / 3
-                    : MediaQuery.of(context).size.height*0.6,
+                    : MediaQuery.of(context).size.height * 0.6,
                 l10n.usuarioEliminado,
               );
             }
@@ -171,8 +173,7 @@ class _UserInformationWidgetState extends State<UserInformationWidget> {
                                     ),
                                     Semantics(
                                       label: l10n.accLabelBtnFormCambioPass,
-                                      hint:
-                                          l10n.accHintBtnFormCambioPass,
+                                      hint: l10n.accHintBtnFormCambioPass,
                                       child: GestureDetector(
                                         onTap: () {
                                           context

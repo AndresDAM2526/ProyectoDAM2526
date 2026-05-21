@@ -517,6 +517,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
                         ),
                       ],
                     ),
+                    SizedBox(height: 25),
                   ],
                 ),
               ),

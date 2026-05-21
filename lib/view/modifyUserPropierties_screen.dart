@@ -307,6 +307,7 @@ class _ModifyUserPropiertiesScreenState
                         child: Text(l10n.enviar),
                       ),
                     ),
+                    SizedBox(height: 15,)
                   ],
                 ),
               ),
