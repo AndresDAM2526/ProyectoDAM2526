@@ -95,515 +95,11 @@ abstract class AppLocalizations {
     Locale('es')
   ];
 
-  /// No description provided for @accLabelCampoUbicacion.
-  ///
-  /// In en, this message translates to:
-  /// **'Location field'**
-  String get accLabelCampoUbicacion;
-
-  /// No description provided for @accHintCampoUbicacion.
-  ///
-  /// In en, this message translates to:
-  /// **'Field to enter the location'**
-  String get accHintCampoUbicacion;
-
-  /// No description provided for @accLabelBtnAnadirUbicacion.
-  ///
-  /// In en, this message translates to:
-  /// **'Add location button'**
-  String get accLabelBtnAnadirUbicacion;
-
-  /// No description provided for @accHintBtnAnadirUbicacion.
-  ///
-  /// In en, this message translates to:
-  /// **'Button to add a new location'**
-  String get accHintBtnAnadirUbicacion;
-
-  /// No description provided for @accLabelBtnBorrarUbicacion.
-  ///
-  /// In en, this message translates to:
-  /// **'Delete location button'**
-  String get accLabelBtnBorrarUbicacion;
-
-  /// No description provided for @accHintBtnBorrarUbicacion.
-  ///
-  /// In en, this message translates to:
-  /// **'Button to delete a location'**
-  String get accHintBtnBorrarUbicacion;
-
-  /// No description provided for @accLabelApartadoModificarUbicaciones.
-  ///
-  /// In en, this message translates to:
-  /// **'Modify locations section'**
-  String get accLabelApartadoModificarUbicaciones;
-
-  /// No description provided for @accHintApartadoModificarUbicaciones.
-  ///
-  /// In en, this message translates to:
-  /// **'Section to modify locations'**
-  String get accHintApartadoModificarUbicaciones;
-
-  /// No description provided for @accLabelCampoNombreProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Product name field'**
-  String get accLabelCampoNombreProducto;
-
-  /// No description provided for @acchintCampoNombreProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Field to enter the product name'**
-  String get acchintCampoNombreProducto;
-
-  /// No description provided for @accLabelCampoTipoProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Product type field'**
-  String get accLabelCampoTipoProducto;
-
-  /// No description provided for @accHintCampoTipoProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Field to select the product type'**
-  String get accHintCampoTipoProducto;
-
-  /// No description provided for @accLabelCampoUbicacionProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Product location field'**
-  String get accLabelCampoUbicacionProducto;
-
-  /// No description provided for @accHintCampoUbicacionProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Field to select the location'**
-  String get accHintCampoUbicacionProducto;
-
-  /// No description provided for @accLabelCampoCantidad.
-  ///
-  /// In en, this message translates to:
-  /// **'Quantity field'**
-  String get accLabelCampoCantidad;
-
-  /// No description provided for @accHintCampoCantidad.
-  ///
-  /// In en, this message translates to:
-  /// **'Field to enter the quantity'**
-  String get accHintCampoCantidad;
-
-  /// No description provided for @accLabelBtnAnadirProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Add product button'**
-  String get accLabelBtnAnadirProducto;
-
-  /// No description provided for @accHintBtnAnadirProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Button to save the new product in the inventory'**
-  String get accHintBtnAnadirProducto;
-
-  /// No description provided for @accLabelBtnFormProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Add product button'**
-  String get accLabelBtnFormProducto;
-
-  /// No description provided for @accHintBtnFormProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Button to display the add product form'**
-  String get accHintBtnFormProducto;
-
-  /// No description provided for @accLabelBtnModificarInventario.
-  ///
-  /// In en, this message translates to:
-  /// **'Modify inventory button'**
-  String get accLabelBtnModificarInventario;
-
-  /// No description provided for @accHintBtnModificarInventario.
-  ///
-  /// In en, this message translates to:
-  /// **'Button to modify the inventory'**
-  String get accHintBtnModificarInventario;
-
-  /// No description provided for @accLabelTbProductos.
-  ///
-  /// In en, this message translates to:
-  /// **'Products table'**
-  String get accLabelTbProductos;
-
-  /// No description provided for @accHintTbProductos.
-  ///
-  /// In en, this message translates to:
-  /// **'Table where inventory products appear'**
-  String get accHintTbProductos;
-
-  /// No description provided for @accLabelApartadoTiposProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Product types section'**
-  String get accLabelApartadoTiposProducto;
-
-  /// No description provided for @accHintApartadoTiposProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Section to modify product types'**
-  String get accHintApartadoTiposProducto;
-
-  /// No description provided for @accLabelBtnAnadirTipoProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Add product type button'**
-  String get accLabelBtnAnadirTipoProducto;
-
-  /// No description provided for @accHintBtnAnadirTipoProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Button to add a product type'**
-  String get accHintBtnAnadirTipoProducto;
-
-  /// No description provided for @accLabelBtnBorrarTipoProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Delete product type button'**
-  String get accLabelBtnBorrarTipoProducto;
-
-  /// No description provided for @accHintBtnBorrarTipoProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Button to delete a product type'**
-  String get accHintBtnBorrarTipoProducto;
-
-  /// No description provided for @accLabelListadoTiposProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Product types list'**
-  String get accLabelListadoTiposProducto;
-
-  /// No description provided for @accHintListadoTiposProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'List with all inventory product types'**
-  String get accHintListadoTiposProducto;
-
-  /// No description provided for @accLabelCampoNombreUsuario.
-  ///
-  /// In en, this message translates to:
-  /// **'Name field'**
-  String get accLabelCampoNombreUsuario;
-
-  /// No description provided for @accHintCampoNombreUsuario.
-  ///
-  /// In en, this message translates to:
-  /// **'Field to enter the username'**
-  String get accHintCampoNombreUsuario;
-
-  /// No description provided for @accLabelCampoUsuario.
-  ///
-  /// In en, this message translates to:
-  /// **'Username field'**
-  String get accLabelCampoUsuario;
-
-  /// No description provided for @accHintCampoUsuario.
-  ///
-  /// In en, this message translates to:
-  /// **'Field to enter the username'**
-  String get accHintCampoUsuario;
-
-  /// No description provided for @accLabelCampoRol.
-  ///
-  /// In en, this message translates to:
-  /// **'Role field'**
-  String get accLabelCampoRol;
-
-  /// No description provided for @accHintCampoRol.
-  ///
-  /// In en, this message translates to:
-  /// **'Field to select the role'**
-  String get accHintCampoRol;
-
-  /// No description provided for @accLabelApartadoUsuarios.
-  ///
-  /// In en, this message translates to:
-  /// **'Users section'**
-  String get accLabelApartadoUsuarios;
-
-  /// No description provided for @accHintApartadoUsuarios.
-  ///
-  /// In en, this message translates to:
-  /// **'Section to modify user properties'**
-  String get accHintApartadoUsuarios;
-
-  /// No description provided for @accLabelBtnFormAnadirUsuario.
-  ///
-  /// In en, this message translates to:
-  /// **'Add user button'**
-  String get accLabelBtnFormAnadirUsuario;
-
-  /// No description provided for @accHintBtnFormAnadirUsuario.
-  ///
-  /// In en, this message translates to:
-  /// **'Button to display the add user form'**
-  String get accHintBtnFormAnadirUsuario;
-
-  /// No description provided for @accLabelBtnApartadoModificarUsuarios.
-  ///
-  /// In en, this message translates to:
-  /// **'Modify users button'**
-  String get accLabelBtnApartadoModificarUsuarios;
-
-  /// No description provided for @accHintBtnApartadoModificarUsuarios.
-  ///
-  /// In en, this message translates to:
-  /// **'Button that redirects to the modify users section'**
-  String get accHintBtnApartadoModificarUsuarios;
-
-  /// No description provided for @accLabelBtnModificarUsuario.
-  ///
-  /// In en, this message translates to:
-  /// **'Modify user button'**
-  String get accLabelBtnModificarUsuario;
-
-  /// No description provided for @accHintBtnModificarUsuario.
-  ///
-  /// In en, this message translates to:
-  /// **'Saves changes for the selected user'**
-  String get accHintBtnModificarUsuario;
-
-  /// No description provided for @accLabelCampoRolPerfil.
-  ///
-  /// In en, this message translates to:
-  /// **'Role field'**
-  String get accLabelCampoRolPerfil;
-
-  /// No description provided for @accHintCampoRolPerfil.
-  ///
-  /// In en, this message translates to:
-  /// **'Displays role information'**
-  String get accHintCampoRolPerfil;
-
-  /// No description provided for @accLabelCampoUsuarioPerfil.
-  ///
-  /// In en, this message translates to:
-  /// **'Username field'**
-  String get accLabelCampoUsuarioPerfil;
-
-  /// No description provided for @accHintCampoUsuarioPerfil.
-  ///
-  /// In en, this message translates to:
-  /// **'Displays current username information'**
-  String get accHintCampoUsuarioPerfil;
-
-  /// No description provided for @accLabelCampoCorreo.
-  ///
-  /// In en, this message translates to:
-  /// **'Email field'**
-  String get accLabelCampoCorreo;
-
-  /// No description provided for @accHintCampoCorreo.
-  ///
-  /// In en, this message translates to:
-  /// **'Field to enter the email address'**
-  String get accHintCampoCorreo;
-
-  /// No description provided for @accLabelCampoPass.
-  ///
-  /// In en, this message translates to:
-  /// **'Password field'**
-  String get accLabelCampoPass;
-
-  /// No description provided for @accHintCampoPass.
-  ///
-  /// In en, this message translates to:
-  /// **'Field to enter the password'**
-  String get accHintCampoPass;
-
-  /// No description provided for @accLabelBtnIniciarSesion.
-  ///
-  /// In en, this message translates to:
-  /// **'Log in button'**
-  String get accLabelBtnIniciarSesion;
-
-  /// No description provided for @accHintBtnIniciarSesion.
-  ///
-  /// In en, this message translates to:
-  /// **'Button to log in'**
-  String get accHintBtnIniciarSesion;
-
-  /// No description provided for @accLabelBtnMostrarPass.
-  ///
-  /// In en, this message translates to:
-  /// **'Show password button'**
-  String get accLabelBtnMostrarPass;
-
-  /// No description provided for @accHintBtnMostrarPass.
-  ///
-  /// In en, this message translates to:
-  /// **'Button to show or hide the password in plain text'**
-  String get accHintBtnMostrarPass;
-
-  /// No description provided for @accLabelActualPass.
-  ///
-  /// In en, this message translates to:
-  /// **'Current password field'**
-  String get accLabelActualPass;
-
   /// No description provided for @accHintActualPass.
   ///
   /// In en, this message translates to:
   /// **'Field to enter the current password'**
   String get accHintActualPass;
-
-  /// No description provided for @accLabelNuevaPass.
-  ///
-  /// In en, this message translates to:
-  /// **'New password field'**
-  String get accLabelNuevaPass;
-
-  /// No description provided for @accHintNuevaPass.
-  ///
-  /// In en, this message translates to:
-  /// **'Field to enter the new password'**
-  String get accHintNuevaPass;
-
-  /// No description provided for @accLabelConfirmarPass.
-  ///
-  /// In en, this message translates to:
-  /// **'Confirm password field'**
-  String get accLabelConfirmarPass;
-
-  /// No description provided for @accHintConfirmarPass.
-  ///
-  /// In en, this message translates to:
-  /// **'Field to confirm the password'**
-  String get accHintConfirmarPass;
-
-  /// No description provided for @accLabelBtnFormCambioPass.
-  ///
-  /// In en, this message translates to:
-  /// **'Change password button'**
-  String get accLabelBtnFormCambioPass;
-
-  /// No description provided for @accHintBtnFormCambioPass.
-  ///
-  /// In en, this message translates to:
-  /// **'Button that displays the form to change the password'**
-  String get accHintBtnFormCambioPass;
-
-  /// No description provided for @accLabelCampoBuscarProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Search product field'**
-  String get accLabelCampoBuscarProducto;
-
-  /// No description provided for @accHintCampoBuscarProducto.
-  ///
-  /// In en, this message translates to:
-  /// **'Field to search for a product by its name'**
-  String get accHintCampoBuscarProducto;
-
-  /// No description provided for @accLabelCampoBuscarRegistro.
-  ///
-  /// In en, this message translates to:
-  /// **'Search log field'**
-  String get accLabelCampoBuscarRegistro;
-
-  /// No description provided for @accHintCampoBuscarRegistro.
-  ///
-  /// In en, this message translates to:
-  /// **'Field to search for a log entry by its name'**
-  String get accHintCampoBuscarRegistro;
-
-  /// No description provided for @accLabelResultadoBusqueda.
-  ///
-  /// In en, this message translates to:
-  /// **'Search result'**
-  String get accLabelResultadoBusqueda;
-
-  /// No description provided for @accHintResultadoBusqueda.
-  ///
-  /// In en, this message translates to:
-  /// **'List with the search results'**
-  String get accHintResultadoBusqueda;
-
-  /// No description provided for @accLabelBtnFiltrar.
-  ///
-  /// In en, this message translates to:
-  /// **'Filter button'**
-  String get accLabelBtnFiltrar;
-
-  /// No description provided for @accHintBtnFiltrar.
-  ///
-  /// In en, this message translates to:
-  /// **'Button that displays a tab to filter products'**
-  String get accHintBtnFiltrar;
-
-  /// No description provided for @accLabelTextoFiltros.
-  ///
-  /// In en, this message translates to:
-  /// **'Filters text'**
-  String get accLabelTextoFiltros;
-
-  /// No description provided for @accHintTextoFiltros.
-  ///
-  /// In en, this message translates to:
-  /// **'Text showing the applied filters'**
-  String get accHintTextoFiltros;
-
-  /// No description provided for @accLabelBtnListadoMovimientos.
-  ///
-  /// In en, this message translates to:
-  /// **'View movement history button'**
-  String get accLabelBtnListadoMovimientos;
-
-  /// No description provided for @accHintBtnListadoMovimientos.
-  ///
-  /// In en, this message translates to:
-  /// **'Button that redirects to the movements page'**
-  String get accHintBtnListadoMovimientos;
-
-  /// No description provided for @accLabelListadoRegistrosUsuario.
-  ///
-  /// In en, this message translates to:
-  /// **'Logs list'**
-  String get accLabelListadoRegistrosUsuario;
-
-  /// No description provided for @accHintListadoRegistrosUsuario.
-  ///
-  /// In en, this message translates to:
-  /// **'List with all logs of a user'**
-  String get accHintListadoRegistrosUsuario;
-
-  /// No description provided for @accLabelApartadoModoOscuro.
-  ///
-  /// In en, this message translates to:
-  /// **'Dark mode section'**
-  String get accLabelApartadoModoOscuro;
-
-  /// No description provided for @accHintApartadoModoOscuro.
-  ///
-  /// In en, this message translates to:
-  /// **'Section to change the application style'**
-  String get accHintApartadoModoOscuro;
-
-  /// No description provided for @accLabelSelectorEstilo.
-  ///
-  /// In en, this message translates to:
-  /// **'Style selector'**
-  String get accLabelSelectorEstilo;
-
-  /// No description provided for @accHintSelectorEstilo.
-  ///
-  /// In en, this message translates to:
-  /// **'Selector to change the application style'**
-  String get accHintSelectorEstilo;
-
-  /// No description provided for @accLabelApartadoIdioma.
-  ///
-  /// In en, this message translates to:
-  /// **'Language section'**
-  String get accLabelApartadoIdioma;
 
   /// No description provided for @accHintApartadoIdioma.
   ///
@@ -611,23 +107,23 @@ abstract class AppLocalizations {
   /// **'Section to change the language'**
   String get accHintApartadoIdioma;
 
-  /// No description provided for @accLabelDesplegableIdioma.
+  /// No description provided for @accHintApartadoModificarPropiedadesInventario.
   ///
   /// In en, this message translates to:
-  /// **'Language dropdown'**
-  String get accLabelDesplegableIdioma;
+  /// **'Section to modify inventory properties'**
+  String get accHintApartadoModificarPropiedadesInventario;
 
-  /// No description provided for @accHintDesplegableIdioma.
+  /// No description provided for @accHintApartadoModificarUbicaciones.
   ///
   /// In en, this message translates to:
-  /// **'Dropdown to change the language'**
-  String get accHintDesplegableIdioma;
+  /// **'Section to modify locations'**
+  String get accHintApartadoModificarUbicaciones;
 
-  /// No description provided for @accLabelApartadoTamanoFuente.
+  /// No description provided for @accHintApartadoModoOscuro.
   ///
   /// In en, this message translates to:
-  /// **'Font size section'**
-  String get accLabelApartadoTamanoFuente;
+  /// **'Section to change the application style'**
+  String get accHintApartadoModoOscuro;
 
   /// No description provided for @accHintApartadoTamanoFuente.
   ///
@@ -635,11 +131,17 @@ abstract class AppLocalizations {
   /// **'Section to change the font size'**
   String get accHintApartadoTamanoFuente;
 
-  /// No description provided for @accLabelBarraTamanioFuente.
+  /// No description provided for @accHintApartadoTiposProducto.
   ///
   /// In en, this message translates to:
-  /// **'Font size adjustment bar'**
-  String get accLabelBarraTamanioFuente;
+  /// **'Section to modify product types'**
+  String get accHintApartadoTiposProducto;
+
+  /// No description provided for @accHintApartadoUsuarios.
+  ///
+  /// In en, this message translates to:
+  /// **'Section to modify user properties'**
+  String get accHintApartadoUsuarios;
 
   /// No description provided for @accHintBarraTamanioFuente.
   ///
@@ -647,23 +149,275 @@ abstract class AppLocalizations {
   /// **'Bar to change the font size'**
   String get accHintBarraTamanioFuente;
 
-  /// No description provided for @accLabelBtnEnviar.
+  /// No description provided for @accHintBtnAceptar.
   ///
   /// In en, this message translates to:
-  /// **'Submit button'**
-  String get accLabelBtnEnviar;
+  /// **'Button to accept'**
+  String get accHintBtnAceptar;
+
+  /// No description provided for @accHintBtnAdministracion.
+  ///
+  /// In en, this message translates to:
+  /// **'Button that redirects to the administration section'**
+  String get accHintBtnAdministracion;
+
+  /// No description provided for @accHintBtnAnadirProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Button to save the new product in the inventory'**
+  String get accHintBtnAnadirProducto;
+
+  /// No description provided for @accHintBtnAnadirTipoProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Button to add a product type'**
+  String get accHintBtnAnadirTipoProducto;
+
+  /// No description provided for @accHintBtnAnadirUbicacion.
+  ///
+  /// In en, this message translates to:
+  /// **'Button to add a new location'**
+  String get accHintBtnAnadirUbicacion;
+
+  /// No description provided for @accHintBtnApartadoModificarUsuarios.
+  ///
+  /// In en, this message translates to:
+  /// **'Button that redirects to the modify users section'**
+  String get accHintBtnApartadoModificarUsuarios;
+
+  /// No description provided for @accHintBtnBorrarElemento.
+  ///
+  /// In en, this message translates to:
+  /// **'Deletes the selected element from the database'**
+  String get accHintBtnBorrarElemento;
+
+  /// No description provided for @accHintBtnBorrarTipoProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Button to delete a product type'**
+  String get accHintBtnBorrarTipoProducto;
+
+  /// No description provided for @accHintBtnBorrarUbicacion.
+  ///
+  /// In en, this message translates to:
+  /// **'Button to delete a location'**
+  String get accHintBtnBorrarUbicacion;
+
+  /// No description provided for @accHintBtnCancelar.
+  ///
+  /// In en, this message translates to:
+  /// **'Button to cancel'**
+  String get accHintBtnCancelar;
+
+  /// No description provided for @accHintBtnCerrarSesion.
+  ///
+  /// In en, this message translates to:
+  /// **'Button that closes the session'**
+  String get accHintBtnCerrarSesion;
 
   /// No description provided for @accHintBtnEnviar.
   ///
   /// In en, this message translates to:
-  /// **'Processes and submits current form data'**
+  /// **'Processes and sends the current form data'**
   String get accHintBtnEnviar;
 
-  /// No description provided for @accLabelLimpiarForm.
+  /// No description provided for @accHintBtnFiltrar.
   ///
   /// In en, this message translates to:
-  /// **'Clear form button'**
-  String get accLabelLimpiarForm;
+  /// **'Button to filter'**
+  String get accHintBtnFiltrar;
+
+  /// No description provided for @accHintBtnFormAnadirProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Button to display the add product form'**
+  String get accHintBtnFormAnadirProducto;
+
+  /// No description provided for @accHintBtnFormAnadirUsuario.
+  ///
+  /// In en, this message translates to:
+  /// **'Button to display the add user form'**
+  String get accHintBtnFormAnadirUsuario;
+
+  /// No description provided for @accHintBtnFormCambioPass.
+  ///
+  /// In en, this message translates to:
+  /// **'Button that displays a form to change the password'**
+  String get accHintBtnFormCambioPass;
+
+  /// No description provided for @accHintBtnFormModificar.
+  ///
+  /// In en, this message translates to:
+  /// **'Button that displays the form to modify the element'**
+  String get accHintBtnFormModificar;
+
+  /// No description provided for @accHintBtnFormModificarProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Button that displays the form to modify a product'**
+  String get accHintBtnFormModificarProducto;
+
+  /// No description provided for @accHintBtnFormProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Button to display the add product form'**
+  String get accHintBtnFormProducto;
+
+  /// No description provided for @accHintBtnHistorial.
+  ///
+  /// In en, this message translates to:
+  /// **'Button that redirects to the history section'**
+  String get accHintBtnHistorial;
+
+  /// No description provided for @accHintBtnIniciarSesion.
+  ///
+  /// In en, this message translates to:
+  /// **'Button to log in'**
+  String get accHintBtnIniciarSesion;
+
+  /// No description provided for @accHintBtnListadoMovimientos.
+  ///
+  /// In en, this message translates to:
+  /// **'Button that redirects to the movements page'**
+  String get accHintBtnListadoMovimientos;
+
+  /// No description provided for @accHintBtnMiPerfil.
+  ///
+  /// In en, this message translates to:
+  /// **'Button that redirects to my profile'**
+  String get accHintBtnMiPerfil;
+
+  /// No description provided for @accHintBtnModificar.
+  ///
+  /// In en, this message translates to:
+  /// **'Button that displays a form to modify user properties'**
+  String get accHintBtnModificar;
+
+  /// No description provided for @accHintBtnModificarInventario.
+  ///
+  /// In en, this message translates to:
+  /// **'Button to modify the inventory'**
+  String get accHintBtnModificarInventario;
+
+  /// No description provided for @accHintBtnModificarUsuario.
+  ///
+  /// In en, this message translates to:
+  /// **'Saves changes for the selected user'**
+  String get accHintBtnModificarUsuario;
+
+  /// No description provided for @accHintBtnMostrarPass.
+  ///
+  /// In en, this message translates to:
+  /// **'Button to show or hide the password in plain text'**
+  String get accHintBtnMostrarPass;
+
+  /// No description provided for @accHintBtnVolver.
+  ///
+  /// In en, this message translates to:
+  /// **'Button to go back'**
+  String get accHintBtnVolver;
+
+  /// No description provided for @accHintCampoBuscarProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Field to search for a product by name'**
+  String get accHintCampoBuscarProducto;
+
+  /// No description provided for @accHintCampoBuscarRegistro.
+  ///
+  /// In en, this message translates to:
+  /// **'Field to search for a log by name'**
+  String get accHintCampoBuscarRegistro;
+
+  /// No description provided for @accHintCampoBuscarUsuario.
+  ///
+  /// In en, this message translates to:
+  /// **'Field to search for a user by name or username'**
+  String get accHintCampoBuscarUsuario;
+
+  /// No description provided for @accHintCampoCantidad.
+  ///
+  /// In en, this message translates to:
+  /// **'Field to enter the quantity'**
+  String get accHintCampoCantidad;
+
+  /// No description provided for @accHintCampoCorreo.
+  ///
+  /// In en, this message translates to:
+  /// **'Field to enter the email'**
+  String get accHintCampoCorreo;
+
+  /// No description provided for @accHintCampoNombre.
+  ///
+  /// In en, this message translates to:
+  /// **'Field with the name'**
+  String get accHintCampoNombre;
+
+  /// No description provided for @accHintCampoNombreUsuario.
+  ///
+  /// In en, this message translates to:
+  /// **'Field to enter the username'**
+  String get accHintCampoNombreUsuario;
+
+  /// No description provided for @accHintCampoPass.
+  ///
+  /// In en, this message translates to:
+  /// **'Field to enter the password'**
+  String get accHintCampoPass;
+
+  /// No description provided for @accHintCampoRol.
+  ///
+  /// In en, this message translates to:
+  /// **'Field to select the role'**
+  String get accHintCampoRol;
+
+  /// No description provided for @accHintCampoRolPerfil.
+  ///
+  /// In en, this message translates to:
+  /// **'Displays role information'**
+  String get accHintCampoRolPerfil;
+
+  /// No description provided for @accHintCampoTipoProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Field to select the product type'**
+  String get accHintCampoTipoProducto;
+
+  /// No description provided for @accHintCampoUbicacion.
+  ///
+  /// In en, this message translates to:
+  /// **'Field to enter the location'**
+  String get accHintCampoUbicacion;
+
+  /// No description provided for @accHintCampoUbicacionProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Field to select the location'**
+  String get accHintCampoUbicacionProducto;
+
+  /// No description provided for @accHintCampoUsuario.
+  ///
+  /// In en, this message translates to:
+  /// **'Field to enter the user'**
+  String get accHintCampoUsuario;
+
+  /// No description provided for @accHintCampoUsuarioPerfil.
+  ///
+  /// In en, this message translates to:
+  /// **'Displays the current username information'**
+  String get accHintCampoUsuarioPerfil;
+
+  /// No description provided for @accHintConfirmarPass.
+  ///
+  /// In en, this message translates to:
+  /// **'Field to confirm the password'**
+  String get accHintConfirmarPass;
+
+  /// No description provided for @accHintDesplegableIdioma.
+  ///
+  /// In en, this message translates to:
+  /// **'Dropdown to change the language'**
+  String get accHintDesplegableIdioma;
 
   /// No description provided for @accHintLimpiarForm.
   ///
@@ -671,17 +425,227 @@ abstract class AppLocalizations {
   /// **'Clears all entered fields'**
   String get accHintLimpiarForm;
 
+  /// No description provided for @accHintListadoRegistrosUsuario.
+  ///
+  /// In en, this message translates to:
+  /// **'List with all log entries of a user'**
+  String get accHintListadoRegistrosUsuario;
+
+  /// No description provided for @accHintListadoResultados.
+  ///
+  /// In en, this message translates to:
+  /// **'List with the search results'**
+  String get accHintListadoResultados;
+
+  /// No description provided for @accHintListadoTiposProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'List showing product types'**
+  String get accHintListadoTiposProducto;
+
+  /// No description provided for @accHintListadoTiposProductos.
+  ///
+  /// In en, this message translates to:
+  /// **'List with all inventory product types'**
+  String get accHintListadoTiposProductos;
+
+  /// No description provided for @accHintListadoUbicaciones.
+  ///
+  /// In en, this message translates to:
+  /// **'List showing locations'**
+  String get accHintListadoUbicaciones;
+
+  /// No description provided for @accHintMenuLateral.
+  ///
+  /// In en, this message translates to:
+  /// **'Sidebar menu'**
+  String get accHintMenuLateral;
+
+  /// No description provided for @accHintNuevaPass.
+  ///
+  /// In en, this message translates to:
+  /// **'Field to enter the new password'**
+  String get accHintNuevaPass;
+
+  /// No description provided for @accHintResultadoBusqueda.
+  ///
+  /// In en, this message translates to:
+  /// **'List with the search results'**
+  String get accHintResultadoBusqueda;
+
+  /// No description provided for @accHintSelectorEstilo.
+  ///
+  /// In en, this message translates to:
+  /// **'Selector to change the application style'**
+  String get accHintSelectorEstilo;
+
+  /// No description provided for @accHintTbProductos.
+  ///
+  /// In en, this message translates to:
+  /// **'Table where inventory products appear'**
+  String get accHintTbProductos;
+
+  /// No description provided for @accHintTextoFiltros.
+  ///
+  /// In en, this message translates to:
+  /// **'Text showing applied filters'**
+  String get accHintTextoFiltros;
+
+  /// No description provided for @accLabelActualPass.
+  ///
+  /// In en, this message translates to:
+  /// **'Current password field'**
+  String get accLabelActualPass;
+
+  /// No description provided for @accLabelApartadoIdioma.
+  ///
+  /// In en, this message translates to:
+  /// **'Language section'**
+  String get accLabelApartadoIdioma;
+
+  /// No description provided for @accLabelApartadoModificarPropiedadesInventario.
+  ///
+  /// In en, this message translates to:
+  /// **'Modify inventory properties section'**
+  String get accLabelApartadoModificarPropiedadesInventario;
+
+  /// No description provided for @accLabelApartadoModificarUbicaciones.
+  ///
+  /// In en, this message translates to:
+  /// **'Modify locations section'**
+  String get accLabelApartadoModificarUbicaciones;
+
+  /// No description provided for @accLabelApartadoModoOscuro.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark mode section'**
+  String get accLabelApartadoModoOscuro;
+
+  /// No description provided for @accLabelApartadoTamanoFuente.
+  ///
+  /// In en, this message translates to:
+  /// **'Font size section'**
+  String get accLabelApartadoTamanoFuente;
+
+  /// No description provided for @accLabelApartadoTiposProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Product types section'**
+  String get accLabelApartadoTiposProducto;
+
+  /// No description provided for @accLabelApartadoUsuarios.
+  ///
+  /// In en, this message translates to:
+  /// **'Users section'**
+  String get accLabelApartadoUsuarios;
+
+  /// No description provided for @accLabelBarraTamanioFuente.
+  ///
+  /// In en, this message translates to:
+  /// **'Font size change bar'**
+  String get accLabelBarraTamanioFuente;
+
+  /// No description provided for @accLabelBtnAceptar.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept button'**
+  String get accLabelBtnAceptar;
+
+  /// No description provided for @accLabelBtnAdministracion.
+  ///
+  /// In en, this message translates to:
+  /// **'Administration button'**
+  String get accLabelBtnAdministracion;
+
+  /// No description provided for @accLabelBtnAnadirProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Button to add a product'**
+  String get accLabelBtnAnadirProducto;
+
+  /// No description provided for @accLabelBtnAnadirTipoProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Add product type button'**
+  String get accLabelBtnAnadirTipoProducto;
+
+  /// No description provided for @accLabelBtnAnadirUbicacion.
+  ///
+  /// In en, this message translates to:
+  /// **'Add location button'**
+  String get accLabelBtnAnadirUbicacion;
+
+  /// No description provided for @accLabelBtnApartadoModificarUsuarios.
+  ///
+  /// In en, this message translates to:
+  /// **'Modify users button'**
+  String get accLabelBtnApartadoModificarUsuarios;
+
   /// No description provided for @accLabelBtnBorrarElemento.
   ///
   /// In en, this message translates to:
   /// **'Delete button'**
   String get accLabelBtnBorrarElemento;
 
-  /// No description provided for @accHintBtnBorrarElemento.
+  /// No description provided for @accLabelBtnBorrarProducto.
   ///
   /// In en, this message translates to:
-  /// **'Removes the selected element from the database'**
-  String get accHintBtnBorrarElemento;
+  /// **'Delete button'**
+  String get accLabelBtnBorrarProducto;
+
+  /// No description provided for @accLabelBtnBorrarTipoProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete product type button'**
+  String get accLabelBtnBorrarTipoProducto;
+
+  /// No description provided for @accLabelBtnBorrarUbicacion.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete location button'**
+  String get accLabelBtnBorrarUbicacion;
+
+  /// No description provided for @accLabelBtnCancelar.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel button'**
+  String get accLabelBtnCancelar;
+
+  /// No description provided for @accLabelBtnCerrarSesion.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out button'**
+  String get accLabelBtnCerrarSesion;
+
+  /// No description provided for @accLabelBtnEnviar.
+  ///
+  /// In en, this message translates to:
+  /// **'Send button'**
+  String get accLabelBtnEnviar;
+
+  /// No description provided for @accLabelBtnFiltrar.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter button'**
+  String get accLabelBtnFiltrar;
+
+  /// No description provided for @accLabelBtnFormAnadirProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Add product button'**
+  String get accLabelBtnFormAnadirProducto;
+
+  /// No description provided for @accLabelBtnFormAnadirUsuario.
+  ///
+  /// In en, this message translates to:
+  /// **'Add user button'**
+  String get accLabelBtnFormAnadirUsuario;
+
+  /// No description provided for @accLabelBtnFormCambioPass.
+  ///
+  /// In en, this message translates to:
+  /// **'Change password button'**
+  String get accLabelBtnFormCambioPass;
 
   /// No description provided for @accLabelBtnFormModificar.
   ///
@@ -689,11 +653,257 @@ abstract class AppLocalizations {
   /// **'Modify button'**
   String get accLabelBtnFormModificar;
 
-  /// No description provided for @accHintBtnFormModificar.
+  /// No description provided for @accLabelBtnFormModificarProducto.
   ///
   /// In en, this message translates to:
-  /// **'Button that displays the form to modify the element'**
-  String get accHintBtnFormModificar;
+  /// **'Modify button'**
+  String get accLabelBtnFormModificarProducto;
+
+  /// No description provided for @accLabelBtnFormProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Add product button'**
+  String get accLabelBtnFormProducto;
+
+  /// No description provided for @accLabelBtnHistorial.
+  ///
+  /// In en, this message translates to:
+  /// **'History button'**
+  String get accLabelBtnHistorial;
+
+  /// No description provided for @accLabelBtnIniciarSesion.
+  ///
+  /// In en, this message translates to:
+  /// **'Log in button'**
+  String get accLabelBtnIniciarSesion;
+
+  /// No description provided for @accLabelBtnListadoMovimientos.
+  ///
+  /// In en, this message translates to:
+  /// **'Button to view movement history'**
+  String get accLabelBtnListadoMovimientos;
+
+  /// No description provided for @accLabelBtnMiPerfil.
+  ///
+  /// In en, this message translates to:
+  /// **'My profile button'**
+  String get accLabelBtnMiPerfil;
+
+  /// No description provided for @accLabelBtnModificar.
+  ///
+  /// In en, this message translates to:
+  /// **'Modify button'**
+  String get accLabelBtnModificar;
+
+  /// No description provided for @accLabelBtnModificarInventario.
+  ///
+  /// In en, this message translates to:
+  /// **'Modify inventory button'**
+  String get accLabelBtnModificarInventario;
+
+  /// No description provided for @accLabelBtnModificarUsuario.
+  ///
+  /// In en, this message translates to:
+  /// **'Button to modify a user'**
+  String get accLabelBtnModificarUsuario;
+
+  /// No description provided for @accLabelBtnMostrarPass.
+  ///
+  /// In en, this message translates to:
+  /// **'Show password button'**
+  String get accLabelBtnMostrarPass;
+
+  /// No description provided for @accLabelBtnVolver.
+  ///
+  /// In en, this message translates to:
+  /// **'Back button'**
+  String get accLabelBtnVolver;
+
+  /// No description provided for @accLabelCampoBuscarProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Search product field'**
+  String get accLabelCampoBuscarProducto;
+
+  /// No description provided for @accLabelCampoBuscarRegistro.
+  ///
+  /// In en, this message translates to:
+  /// **'Field to search for a log entry'**
+  String get accLabelCampoBuscarRegistro;
+
+  /// No description provided for @accLabelCampoBuscarUsuario.
+  ///
+  /// In en, this message translates to:
+  /// **'Field to search for a user'**
+  String get accLabelCampoBuscarUsuario;
+
+  /// No description provided for @accLabelCampoCantidad.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity field'**
+  String get accLabelCampoCantidad;
+
+  /// No description provided for @accLabelCampoCorreo.
+  ///
+  /// In en, this message translates to:
+  /// **'Email field'**
+  String get accLabelCampoCorreo;
+
+  /// No description provided for @accLabelCampoNombre.
+  ///
+  /// In en, this message translates to:
+  /// **'Name field'**
+  String get accLabelCampoNombre;
+
+  /// No description provided for @accLabelCampoNombreProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Product name field'**
+  String get accLabelCampoNombreProducto;
+
+  /// No description provided for @accLabelCampoNombreUsuario.
+  ///
+  /// In en, this message translates to:
+  /// **'Name field'**
+  String get accLabelCampoNombreUsuario;
+
+  /// No description provided for @accLabelCampoPass.
+  ///
+  /// In en, this message translates to:
+  /// **'Password field'**
+  String get accLabelCampoPass;
+
+  /// No description provided for @accLabelCampoRol.
+  ///
+  /// In en, this message translates to:
+  /// **'Role field'**
+  String get accLabelCampoRol;
+
+  /// No description provided for @accLabelCampoRolPerfil.
+  ///
+  /// In en, this message translates to:
+  /// **'Role info field'**
+  String get accLabelCampoRolPerfil;
+
+  /// No description provided for @accLabelCampoTipoProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Product type field'**
+  String get accLabelCampoTipoProducto;
+
+  /// No description provided for @accLabelCampoUbicacion.
+  ///
+  /// In en, this message translates to:
+  /// **'Location field'**
+  String get accLabelCampoUbicacion;
+
+  /// No description provided for @accLabelCampoUbicacionProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Product location field'**
+  String get accLabelCampoUbicacionProducto;
+
+  /// No description provided for @accLabelCampoUsuario.
+  ///
+  /// In en, this message translates to:
+  /// **'User field'**
+  String get accLabelCampoUsuario;
+
+  /// No description provided for @accLabelCampoUsuarioPerfil.
+  ///
+  /// In en, this message translates to:
+  /// **'Username field'**
+  String get accLabelCampoUsuarioPerfil;
+
+  /// No description provided for @accLabelConfirmarPass.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password field'**
+  String get accLabelConfirmarPass;
+
+  /// No description provided for @accLabelDesplegableIdioma.
+  ///
+  /// In en, this message translates to:
+  /// **'Dropdown with languages'**
+  String get accLabelDesplegableIdioma;
+
+  /// No description provided for @accLabelLimpiarForm.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear form button'**
+  String get accLabelLimpiarForm;
+
+  /// No description provided for @accLabelListadoRegistrosUsuario.
+  ///
+  /// In en, this message translates to:
+  /// **'Logs list'**
+  String get accLabelListadoRegistrosUsuario;
+
+  /// No description provided for @accLabelListadoResultados.
+  ///
+  /// In en, this message translates to:
+  /// **'Results list'**
+  String get accLabelListadoResultados;
+
+  /// No description provided for @accLabelListadoTiposProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Product types list'**
+  String get accLabelListadoTiposProducto;
+
+  /// No description provided for @accLabelListadoTiposProductos.
+  ///
+  /// In en, this message translates to:
+  /// **'Product types list'**
+  String get accLabelListadoTiposProductos;
+
+  /// No description provided for @accLabelListadoUbicaciones.
+  ///
+  /// In en, this message translates to:
+  /// **'Locations list'**
+  String get accLabelListadoUbicaciones;
+
+  /// No description provided for @accLabelMenuLateral.
+  ///
+  /// In en, this message translates to:
+  /// **'Sidebar menu'**
+  String get accLabelMenuLateral;
+
+  /// No description provided for @accLabelNuevaPass.
+  ///
+  /// In en, this message translates to:
+  /// **'New password field'**
+  String get accLabelNuevaPass;
+
+  /// No description provided for @accLabelResultadoBusqueda.
+  ///
+  /// In en, this message translates to:
+  /// **'Search result'**
+  String get accLabelResultadoBusqueda;
+
+  /// No description provided for @accLabelSelectorEstilo.
+  ///
+  /// In en, this message translates to:
+  /// **'Style selector'**
+  String get accLabelSelectorEstilo;
+
+  /// No description provided for @accLabelTbProductos.
+  ///
+  /// In en, this message translates to:
+  /// **'Products table'**
+  String get accLabelTbProductos;
+
+  /// No description provided for @accLabelTextoFiltros.
+  ///
+  /// In en, this message translates to:
+  /// **'Text with filters'**
+  String get accLabelTextoFiltros;
+
+  /// No description provided for @acchintCampoNombreProducto.
+  ///
+  /// In en, this message translates to:
+  /// **'Field to enter product name'**
+  String get acchintCampoNombreProducto;
 
   /// No description provided for @aceptar.
   ///
@@ -743,17 +953,17 @@ abstract class AppLocalizations {
   /// **'Add user'**
   String get anadirUsuario;
 
-  /// No description provided for @borrarUbicacion.
-  ///
-  /// In en, this message translates to:
-  /// **'Delete location'**
-  String get borrarUbicacion;
-
   /// No description provided for @borrarTipo.
   ///
   /// In en, this message translates to:
   /// **'Delete type'**
   String get borrarTipo;
+
+  /// No description provided for @borrarUbicacion.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete location'**
+  String get borrarUbicacion;
 
   /// No description provided for @cambiarContrasena.
   ///
@@ -764,7 +974,7 @@ abstract class AppLocalizations {
   /// No description provided for @campoVacio.
   ///
   /// In en, this message translates to:
-  /// **'Field is empty'**
+  /// **'Empty field'**
   String get campoVacio;
 
   /// No description provided for @cancelar.
@@ -782,7 +992,7 @@ abstract class AppLocalizations {
   /// No description provided for @cantidadCorrecta.
   ///
   /// In en, this message translates to:
-  /// **'Please enter a valid quantity'**
+  /// **'Enter a valid quantity'**
   String get cantidadCorrecta;
 
   /// No description provided for @cantidadIncorrecta.
@@ -806,7 +1016,7 @@ abstract class AppLocalizations {
   /// No description provided for @cantidadSuperior.
   ///
   /// In en, this message translates to:
-  /// **'The quantity entered exceeds the available stock'**
+  /// **'The quantity entered is higher than available'**
   String get cantidadSuperior;
 
   /// No description provided for @coger.
@@ -815,17 +1025,17 @@ abstract class AppLocalizations {
   /// **'Get'**
   String get coger;
 
-  /// No description provided for @confirmarBorradoUsuario.
-  ///
-  /// In en, this message translates to:
-  /// **'Do you want to delete this user?'**
-  String get confirmarBorradoUsuario;
-
   /// No description provided for @confirmarBorradoProducto.
   ///
   /// In en, this message translates to:
-  /// **'Do you want to delete this product?'**
+  /// **'Do you want to delete the product?'**
   String get confirmarBorradoProducto;
+
+  /// No description provided for @confirmarBorradoUsuario.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you want to delete the user?'**
+  String get confirmarBorradoUsuario;
 
   /// No description provided for @confirmarContrasena.
   ///
@@ -845,28 +1055,28 @@ abstract class AppLocalizations {
   /// **'Current password'**
   String get contrasenaActual;
 
-  /// No description provided for @contrasenaActualMensaje.
-  ///
-  /// In en, this message translates to:
-  /// **'Please enter your current password'**
-  String get contrasenaActualMensaje;
-
   /// No description provided for @contrasenaActualIncorrecta.
   ///
   /// In en, this message translates to:
-  /// **'The current password is incorrect, please try again'**
+  /// **'The current password is not correct, please try again'**
   String get contrasenaActualIncorrecta;
+
+  /// No description provided for @contrasenaActualMensaje.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the current password'**
+  String get contrasenaActualMensaje;
 
   /// No description provided for @contrasenaActualizada.
   ///
   /// In en, this message translates to:
-  /// **'Password has been updated'**
+  /// **'Password updated'**
   String get contrasenaActualizada;
 
   /// No description provided for @contrasenaCorta.
   ///
   /// In en, this message translates to:
-  /// **'Password must be at least 6 characters long'**
+  /// **'The password must be at least 6 characters'**
   String get contrasenaCorta;
 
   /// No description provided for @contrasenaNoCoincide.
@@ -884,7 +1094,7 @@ abstract class AppLocalizations {
   /// No description provided for @definitivo.
   ///
   /// In en, this message translates to:
-  /// **'Permanent'**
+  /// **'Final'**
   String get definitivo;
 
   /// No description provided for @descripcion.
@@ -920,13 +1130,13 @@ abstract class AppLocalizations {
   /// No description provided for @emailUsado.
   ///
   /// In en, this message translates to:
-  /// **'The specified email is already in use'**
+  /// **'The indicated email is already used'**
   String get emailUsado;
 
   /// No description provided for @enviar.
   ///
   /// In en, this message translates to:
-  /// **'Submit'**
+  /// **'Send'**
   String get enviar;
 
   /// No description provided for @error.
@@ -938,7 +1148,7 @@ abstract class AppLocalizations {
   /// No description provided for @errorBorrado.
   ///
   /// In en, this message translates to:
-  /// **'Cannot delete this record, foreign key restriction'**
+  /// **'Cannot delete this record, foreign key constraint'**
   String get errorBorrado;
 
   /// No description provided for @errorCargaDatos.
@@ -974,7 +1184,7 @@ abstract class AppLocalizations {
   /// No description provided for @formatoCantidadIncorrecto.
   ///
   /// In en, this message translates to:
-  /// **'The quantity format is incorrect'**
+  /// **'Quantity format is incorrect'**
   String get formatoCantidadIncorrecto;
 
   /// No description provided for @formatoIncorrecto.
@@ -1028,19 +1238,19 @@ abstract class AppLocalizations {
   /// No description provided for @introducirNombre.
   ///
   /// In en, this message translates to:
-  /// **'Please enter the name'**
+  /// **'Enter name'**
   String get introducirNombre;
 
   /// No description provided for @introducirTipo.
   ///
   /// In en, this message translates to:
-  /// **'Enter the type'**
+  /// **'Enter type'**
   String get introducirTipo;
 
   /// No description provided for @introducirUsuarioONombre.
   ///
   /// In en, this message translates to:
-  /// **'Please enter the username or name'**
+  /// **'Enter user or name'**
   String get introducirUsuarioONombre;
 
   /// No description provided for @inventario.
@@ -1124,31 +1334,31 @@ abstract class AppLocalizations {
   /// No description provided for @nuevaContrasenaMensaje.
   ///
   /// In en, this message translates to:
-  /// **'Please enter your new password'**
+  /// **'Enter the new password'**
   String get nuevaContrasenaMensaje;
 
   /// No description provided for @nuevaUbicacion.
   ///
   /// In en, this message translates to:
-  /// **'Please enter the location'**
+  /// **'Enter the location'**
   String get nuevaUbicacion;
 
   /// No description provided for @nuevaUbicacionMensaje.
   ///
   /// In en, this message translates to:
-  /// **'New location has been added'**
+  /// **'The new location has been added'**
   String get nuevaUbicacionMensaje;
 
   /// No description provided for @nuevoProductoMensaje.
   ///
   /// In en, this message translates to:
-  /// **'Product has been successfully added'**
+  /// **'Product added successfully'**
   String get nuevoProductoMensaje;
 
   /// No description provided for @nuevoTipoMensaje.
   ///
   /// In en, this message translates to:
-  /// **'New type has been successfully added'**
+  /// **'The new type has been added'**
   String get nuevoTipoMensaje;
 
   /// No description provided for @nuevoUsuario.
@@ -1160,13 +1370,13 @@ abstract class AppLocalizations {
   /// No description provided for @nuevoUsuarioMensaje.
   ///
   /// In en, this message translates to:
-  /// **'User has been successfully added'**
+  /// **'User added successfully'**
   String get nuevoUsuarioMensaje;
 
   /// No description provided for @nuevoUsuarioPantalla.
   ///
   /// In en, this message translates to:
-  /// **'This account was recently created, you must change your password to log in for the first time'**
+  /// **'This account was recently created, you must change the password to log in for the first time'**
   String get nuevoUsuarioPantalla;
 
   /// No description provided for @obtener.
@@ -1208,7 +1418,7 @@ abstract class AppLocalizations {
   /// No description provided for @productoBorrado.
   ///
   /// In en, this message translates to:
-  /// **'The product has been successfully deleted'**
+  /// **'The product has been deleted'**
   String get productoBorrado;
 
   /// No description provided for @quitarFiltro.
@@ -1250,7 +1460,7 @@ abstract class AppLocalizations {
   /// No description provided for @temporal.
   ///
   /// In en, this message translates to:
-  /// **'Temporary'**
+  /// **'Temporal'**
   String get temporal;
 
   /// No description provided for @tipo.
@@ -1262,7 +1472,7 @@ abstract class AppLocalizations {
   /// No description provided for @tipoEliminado.
   ///
   /// In en, this message translates to:
-  /// **'Type successfully deleted'**
+  /// **'Type deleted successfully'**
   String get tipoEliminado;
 
   /// No description provided for @tipoProducto.
@@ -1304,20 +1514,20 @@ abstract class AppLocalizations {
   /// No description provided for @usuario.
   ///
   /// In en, this message translates to:
-  /// **'Username'**
+  /// **'User'**
   String get usuario;
-
-  /// No description provided for @usuarios.
-  ///
-  /// In en, this message translates to:
-  /// **'Users'**
-  String get usuarios;
 
   /// No description provided for @usuarioEliminado.
   ///
   /// In en, this message translates to:
   /// **'User deleted'**
   String get usuarioEliminado;
+
+  /// No description provided for @usuarios.
+  ///
+  /// In en, this message translates to:
+  /// **'Users'**
+  String get usuarios;
 
   /// No description provided for @vaciar.
   ///

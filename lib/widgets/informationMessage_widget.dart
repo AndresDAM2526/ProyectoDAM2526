@@ -42,11 +42,15 @@ class InformationMessageWidget extends StatelessWidget {
                 left: 8,
                 right: 10,
               ),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text(l10n.aceptar),
+              child: Semantics(
+                label: l10n.accLabelBtnAceptar,
+                hint: l10n.accHintBtnAceptar,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(l10n.aceptar),
+                ),
               ),
             ),
           ],

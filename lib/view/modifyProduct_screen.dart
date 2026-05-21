@@ -157,8 +157,8 @@ class _ModifyProductScreenState extends State<ModifyProductScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Semantics(
-                        label: "Botón de modificar",
-                        hint: "Botón para modificar un producto",
+                        label: l10n.accLabelBtnEnviar,
+                        hint: l10n.accHintBtnEnviar,
                         child: ElevatedButton(
                           onPressed: () async {
                             if (checkForm.currentState!.validate()) {

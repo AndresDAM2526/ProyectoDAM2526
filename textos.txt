@@ -1,149 +1,26 @@
-"accLabelCampoUbicacion": "Campo para la ubicación",
-"accHintCampoUbicacion": "Campo para introducir la ubicación",
-
-"accLabelBtnAnadirUbicacion": "Botón de añadir ubicación",
-"accHintBtnAnadirUbicacion": "Botón para añadir una nueva ubicación",
-
-"accLabelBtnBorrarUbicacion": "Botón de borrar ubicación",
-"accHintBtnBorrarUbicacion": "Botón para borrar una ubicación",
-
-"accLabelApartadoModificarUbicaciones": "Apartado de modificar las ubicaciones",
-"accHintApartadoModificarUbicaciones": "Apartado para modificar las ubicaciones",
-
-"accLabelCampoNombreProducto": "Campo para el nombre del producto",
-"acchintCampoNombreProducto": "Campo para introducir el nombre del producto",
-
-"accLabelCampoTipoProducto": "Campo para el tipo de producto",
-"accHintCampoTipoProducto": "Campo para seleccionar el tipo de producto",
-
-"accLabelCampoUbicacionProducto": "Campo para la ubicación del producto",
-"accHintCampoUbicacionProducto": "Campo para seleccionar la ubicación",
-
-"accLabelCampoCantidad": "Campo para la cantidad",
-"accHintCampoCantidad": "Campo para introducir la cantidad",
-
-"accLabelBtnAnadirProducto": "Botón para añadir un producto",
-"accHintBtnAnadirProducto": "Botón para guardar el nuevo producto en el inventario",
-
-"accLabelBtnFormProducto": "Botón de añadir producto",
-"accHintBtnFormProducto": "Botón para desplegar el formulario de añadir producto",
-
-"accLabelBtnModificarInventario": "Botón de modificar el inventario",
-"accHintBtnModificarInventario": "Botón para modificar el inventario",
-
-"accLabelTbProductos": "Tabla de productos",
-"accHintTbProductos": "Tabla donde aparecen los productos del inventario",
-
-"accLabelApartadoTiposProducto": "Apartado de tipos de producto",
-"accHintApartadoTiposProducto": "Apartado para modificar los tipos de producto",
-
-"accLabelBtnAnadirTipoProducto": "Botón de añadir tipo de producto",
-"accHintBtnAnadirTipoProducto": "Botón para añadir tipo de producto",
-
-"accLabelBtnBorrarTipoProducto": "Botón de borrar tipo de producto",
-"accHintBtnBorrarTipoProducto": "Botón para borrar un tipo de producto",
-
+"accLabelBtnMiPerfil": "Botón de mi perfil",
+"accHintBtnMiPerfil": "Botón que redirecciona a mi perfil",
+"accLabelBtnHistorial": "Botón de historial",
+"accHintBtnHistorial": "Botón que redirecciona al apartado de historial",
+"accLabelBtnAdministracion": "Botón de administración",
+"accHintBtnAdministracion": "Botón que redirecciona al apartado de administración",
+"accLabelBtnCerrarSesion": "Botón de cerrar sesión",
+"accHintBtnCerrarSesion": "Botón que cierra la sesión",
+"accLabelBtnCancelar": "Botón de cancelar",
+"accHintBtnCancelar": "Botón para cancelar",
+"accLabelBtnAceptar": "Botón de aceptar",
+"accHintBtnAceptar": "Botón para aceptar",
+"accLabelBtnVolver": "Botón de volver",
+"accHintBtnVolver": "Botón para volver",
+"accLabelMenuLateral": "Menú lateral",
+"accHintMenuLateral": "Menú lateral",
+"accLabelListadoUbicaciones": "Listado de ubicaciones",
+"accHintListadoUbicaciones": "Listado que muestra las ubicaciones",
 "accLabelListadoTiposProducto": "Listado de tipos de producto",
-"accHintListadoTiposProducto": "Listado con todos los tipos de producto del inventario",
-
-"accLabelCampoNombreUsuario": "Campo para el nombre",
-"accHintCampoNombreUsuario": "Campo para introducir el nombre de usuario",
-
-"accLabelCampoUsuario": "Campo para el usuario",
-"accHintCampoUsuario": "Campo para introducir el usuario",
-
-"accLabelCampoRol": "Campo para el rol",
-"accHintCampoRol": "Campo para seleccionar el rol",
-
-"accLabelApartadoUsuarios": "Apartado de usuarios",
-"accHintApartadoUsuarios": "Apartado para modificar propiedades de los usuarios",
-
-"accLabelBtnFormAnadirUsuario": "Botón de añadir usuario",
-"accHintBtnFormAnadirUsuario": "Botón para desplegar el formulario de añadir usuarios",
-
-"accLabelBtnApartadoModificarUsuarios": "Botón de modificar usuarios",
-"accHintBtnApartadoModificarUsuarios": "Botón que redirecciona al apartado de modificar usuarios",
-
-"accLabelBtnModificarUsuario": "Botón para modificar un usuario",
-"accHintBtnModificarUsuario": "Guarda los cambios del usuario seleccionado",
-
-"accLabelCampoRol": "Campo con el rol",
-"accHintCampoRol": "Muestra la información del rol ",
-
-"accLabelCampoUsuarioPerfil": "Campo nombre de usuario",
-"accHintCampoUsuarioPerfil": "Muestra la información del nombe de usuario actual",
-
-"accLabelCampoCorreo": "Campo del correo electrónico",
-"accHintCampoCorreo": "Campo para introducir el correo electrónico",
-
-"accLabeCampoPass": "Campo de la contraseña",
-"accHintCampoPass": "Campo para introducir la contraseña",
-
-"accLabelBtnIniciarSesion": "Botón de iniciar sesión",
-"accHintBtnIniciarSesion": "Botón para iniciar sesión",
-
-"accLabelBtnMostrarPass": "Botón de mostrar contraseña",
-"accHintBtnMostrarPass": "Botón para mostrar u ocultar la contraseña en texto plano",
-
-"accLabelActualPass": "Campo de contraseña actual",
-"accHintActualPass": "Campo para introducir la contraseña actual",
-
-"accLabelNuevaPass": "Campo de nueva contraseña",
-"accHintNuevaPass": "Campo para introducir la nueva contraseña",
-
-"accLabelConfirmarPass": "Campo de confirmar contraseña",
-"accHintConfirmarPass": "Campo para confirmar la contraseña",
-
-"accLabelBtnFormCambioPass": "Botón de cambio de contraseña",
-"accHintBtnFormCambioPass": "Botón que despliega el formulario para cambiar la contraseña",
-
-"accLabelCampoBuscarProducto": "Campo de buscar un producto",
-"accHintCampoBuscarProducto": "Campo para buscar un producto por su nombre",
-
-"accLabelCampoBuscarRegistro": "Campo para buscar un registro",
-"accHintCampoBuscarRegistro": "Campo para buscar un registro por su nombre",
-
-"accLabelResultadoBusqueda": "Resultado de la búsqueda",
-"accHintResultadoBusqueda": "Listado con los resultados de la búsqueda",
-
+"accHintListadoTiposProducto": "Listado que muestra los tipos de producto",
 "accLabelBtnFiltrar": "Botón de filtrar",
-"accHintBtnFiltrar": "Botón que despliega una pestaña para filtrar los productos",
-
-"accLabelTextoFiltros": "Texto con los filtros",
-"accHintTextoFiltros": "Texto donde aparecen los filtros aplicados",
-
-"accLabelBtnListadoMovimientos": "Botón para ver el historial de movimientos",
-"accHintBtnListadoMovimientos": "Botón que redirecciona a la página de movimientos",
-
-"accLabelListadoRegistrosUsuario": "Listado de registros",
-"accHintListadoRegistrosUsuario": "Listado con todos los registros de un usuario",
-
-"accLabelApartadoModoOscuro": "Apartado de modo oscuro",
-"accHintApartadoModoOscuro": "Apartado para cambiar el estilo de la aplicación",
-
-"accLabelSelectorEstilo": "Selector de estilo",
-"accHintSelectorEstilo": "Selector para cambiar el estilo de la aplicación",
-
-"accLabelApartadoIdioma": "Apartado de idioma",
-"accHintApartadoIdioma": "Apartado para cambiar el idioma",
-
-"accLabelDesplegableIdioma": "Desplegable con los idiomas",
-"accHintDesplegableIdioma": "Desplegable para cambiar el idioma",
-
-"accLabelApartadoTamanoFuente": "Apartado de tamaño de la fuente",
-"accHintApartadoTamanoFuente": "Apartado para cambiar el tamaño de la fuente",
-
-"accLabelBarraTamanioFuente": "Barra de cambio de tamaño de fuente",
-"accHintBarraTamanioFuente": "Barra para cambiar el tamaño de la fuente",
-
-"accLabelBtnEnviar": "Botón de enviar",
-"accHintBtnEnviar": "Procesa y envía los datos del formulario actual",
-
-"accLabelLimpiarForm": "Botón de limpiar el formulario",
-"accHintLimpiarForm": "Borra todos los campos introducidos",
-
-"accLabelBtnBorrarElemento": "Botón de borrar",
-"accHintBtnBorrarElemento": "Elimina el elemento seleccionado de la base de datos",
-
-"accLabelBtnFormModificar": "Botón de modificar",
-"accHintBtnFormModificar": "Botón que despliega el formulario para modificar el elemento",
+"accHintBtnFiltrar": "Botón para filtrar",
+"accLabelBtnModificar": "Botón de modificar",
+"accHintBtnModificar": "Botón que despliega un formulario para modificar propiedades de un usuario",
+"accLabelBtnFormCambioPass": "Botón de cambiar contraseña",
+"accHintBtnFormCambioPass": "Botón que despliega un formulario para cambiar la contraseña"

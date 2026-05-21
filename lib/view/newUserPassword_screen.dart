@@ -53,8 +53,8 @@ class _NewUserPasswordState extends State<NewUserPassword> {
               child: Column(
                 children: [
                   Semantics(
-                    label: "Campo de contraseña actual",
-                    hint: "Campo para introducir la contraseña actual",
+                    label: l10n.accLabelActualPass,
+                    hint: l10n.accHintActualPass,
                     child: Container(
                       margin: EdgeInsets.all(10),
                       child: TextFormField(
@@ -67,8 +67,8 @@ class _NewUserPasswordState extends State<NewUserPassword> {
                               });
                             },
                             icon: Semantics(
-                              label: "Botón de mostrar contraseña",
-                              hint: "Botón para mostrar la contraseña",
+                              label: l10n.accLabelBtnMostrarPass,
+                              hint: l10n.accHintBtnMostrarPass,
                               child: Icon(
                                 showCurrentPass
                                     ? Icons.visibility
@@ -89,8 +89,8 @@ class _NewUserPasswordState extends State<NewUserPassword> {
                     ),
                   ),
                   Semantics(
-                    label: "Campo de nueva contraseña",
-                    hint: "Campo para introducir la nueva contraseña",
+                    label: l10n.accLabelNuevaPass,
+                    hint: l10n.accHintNuevaPass,
                     child: Container(
                       margin: EdgeInsets.all(10),
                       child: TextFormField(
@@ -103,8 +103,8 @@ class _NewUserPasswordState extends State<NewUserPassword> {
                               });
                             },
                             icon: Semantics(
-                              label: "Botón de mostrar contraseña",
-                              hint: "Botón para mostrar la contraseña",
+                              label: l10n.accLabelBtnMostrarPass,
+                              hint: l10n.accHintBtnMostrarPass,
                               child: Icon(
                                 showNewPass
                                     ? Icons.visibility
@@ -125,8 +125,8 @@ class _NewUserPasswordState extends State<NewUserPassword> {
                     ),
                   ),
                   Semantics(
-                    label: "Campo de confirmar contraseña",
-                    hint: "Campo para confirmar la contraseña",
+                    label: l10n.accLabelConfirmarPass,
+                    hint: l10n.accHintConfirmarPass,
                     child: Container(
                       margin: EdgeInsets.all(10),
                       child: TextFormField(
@@ -169,8 +169,8 @@ class _NewUserPasswordState extends State<NewUserPassword> {
             ),
             SizedBox(height: 20),
             Semantics(
-              label: "Botón de enviar",
-              hint: "Botón para cambiar la contraseña",
+              label: l10n.accLabelBtnEnviar,
+              hint: l10n.accHintBtnEnviar,
               child: ElevatedButton(
                 onPressed: () async {
                   if (checkForm.currentState!.validate()) {

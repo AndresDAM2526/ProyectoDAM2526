@@ -35,11 +35,15 @@ class ErrorMessageWidget extends StatelessWidget {
                 left: 8,
                 right: 10,
               ),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text(l10n.volver),
+              child: Semantics(
+                label: l10n.accLabelBtnVolver,
+                hint: l10n.accHintBtnVolver,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(l10n.volver),
+                ),
               ),
             ),
           ],

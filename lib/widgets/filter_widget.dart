@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
@@ -24,95 +22,111 @@ class _FilterWidgetState extends State<FilterWidget> {
       appBar: AppBar(title: Text(l10n.filtrarPor)),
       body: Row(
         children: [
-          NavigationRail(
-            destinations: [
-              NavigationRailDestination(
-                icon: Icon(Icons.location_on_sharp),
-                label: Text("location"),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.computer),
-                label: Text("data"),
-              ),
-            ],
-            onDestinationSelected: (value) {
-              setState(() {
-                selectedIndex = value;
-              });
-            },
-            selectedIndex: selectedIndex,
+          Semantics(
+            label: l10n.accLabelMenuLateral,
+            hint: l10n.accHintMenuLateral,
+            child: NavigationRail(
+              destinations: [
+                NavigationRailDestination(
+                  icon: Icon(Icons.location_on_sharp),
+                  label: Text("location"),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.computer),
+                  label: Text("data"),
+                ),
+              ],
+              onDestinationSelected: (value) {
+                setState(() {
+                  selectedIndex = value;
+                });
+              },
+              selectedIndex: selectedIndex,
+            ),
           ),
           selectedIndex == 0
-              ? Expanded(
-                  child: FutureBuilder(
-                    future: context.read<SupabaseService>().showLocations(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return Text(l10n.errorCargaDatos);
-                      }
-                      final elementList = snapshot.data;
-                      return RadioGroup<String>(
-                        groupValue: selectedLocationRadio,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedLocationRadio = value;
-                          });
-                        },
-                        child: ListView.builder(
-                          itemCount: elementList!.length,
-                          itemBuilder: (context, index) {
-                            return SizedBox(
-                              child: ListTile(
-                                leading: Radio(value: elementList[index]),
-                                title: Text(elementList[index]),
-                              ),
-                            );
+              ? Semantics(
+                  label:l10n.accLabelListadoUbicaciones,
+                  hint: l10n.accHintListadoUbicaciones,
+                  child: Expanded(
+                    child: FutureBuilder(
+                      future: context.read<SupabaseService>().showLocations(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return Text(l10n.errorCargaDatos);
+                        }
+                        final elementList = snapshot.data;
+                        return RadioGroup<String>(
+                          groupValue: selectedLocationRadio,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedLocationRadio = value;
+                            });
                           },
-                        ),
-                      );
-                    },
+                          child: ListView.builder(
+                            itemCount: elementList!.length,
+                            itemBuilder: (context, index) {
+                              return SizedBox(
+                                child: ListTile(
+                                  leading: Radio(value: elementList[index]),
+                                  title: Text(elementList[index]),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 )
-              : Expanded(
-                  child: FutureBuilder(
-                    future: context.read<SupabaseService>().showTypes(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return Text(l10n.errorCargaDatos);
-                      }
-                      final elementList = snapshot.data;
-                      return RadioGroup<String>(
-                        groupValue: selectedTypeRadio,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedTypeRadio = value;
-                          });
-                        },
-                        child: ListView.builder(
-                          itemCount: elementList!.length,
-                          itemBuilder: (context, index) {
-                            return SizedBox(
-                              child: ListTile(
-                                leading: Radio(value: elementList[index]),
-                                title: Text(elementList[index]),
-                              ),
-                            );
+              : Semantics(
+                  label: l10n.accLabelListadoTiposProducto,
+                  hint: l10n.accHintListadoTiposProducto,
+                  child: Expanded(
+                    child: FutureBuilder(
+                      future: context.read<SupabaseService>().showTypes(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return Text(l10n.errorCargaDatos);
+                        }
+                        final elementList = snapshot.data;
+                        return RadioGroup<String>(
+                          groupValue: selectedTypeRadio,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedTypeRadio = value;
+                            });
                           },
-                        ),
-                      );
-                    },
+                          child: ListView.builder(
+                            itemCount: elementList!.length,
+                            itemBuilder: (context, index) {
+                              return SizedBox(
+                                child: ListTile(
+                                  leading: Radio(value: elementList[index]),
+                                  title: Text(elementList[index]),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pop<List<String?>?>(context, [
-            selectedLocationRadio,
-            selectedTypeRadio,
-          ]);
-        },
-        child: Icon(Icons.filter_list_rounded),
+      floatingActionButton: Semantics(
+        label: l10n.accLabelBtnFiltrar,
+        hint: l10n.accHintBtnFiltrar,
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.pop<List<String?>?>(context, [
+              selectedLocationRadio,
+              selectedTypeRadio,
+            ]);
+          },
+          child: Icon(Icons.filter_list_rounded),
+        ),
       ),
     );
   }

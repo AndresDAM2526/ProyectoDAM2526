@@ -22,8 +22,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: Column(
                 children: [
                   Semantics(
-                    label: "Apartado de modo oscuro",
-                    hint: "Apartado para cambiar el estilo de la aplicación",
+                    label: l10n.accLabelApartadoModoOscuro,
+                    hint: l10n.accHintApartadoModoOscuro,
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -37,9 +37,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         children: [
                           ListTile(
                             title: Semantics(
-                              label: "Selector de estilo",
+                              label: l10n.accLabelSelectorEstilo,
                               hint:
-                                  "Selector para cambiar el estilo de la aplicación",
+                                  l10n.accHintSelectorEstilo,
                               child: Switch(
                                 value: context.watch<ThemeViewmodel>().darkMode,
                                 onChanged: (value) {
@@ -57,8 +57,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   Semantics(
-                    label: "Apartado de idioma",
-                    hint: "Apartado para cambiar el idioma",
+                    label: l10n.accLabelApartadoIdioma,
+                    hint: l10n.accHintApartadoIdioma,
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -75,8 +75,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         children: [
                           ListTile(
                             title: Semantics(
-                              label: "Desplegable con los idiomas",
-                              hint: "Desplegable para cambiar el idioma",
+                              label: l10n.accLabelDesplegableIdioma,
+                              hint: l10n.accHintDesplegableIdioma,
                               child: DropdownButtonFormField(
                                 initialValue: context
                                     .read<ThemeViewmodel>()
@@ -104,8 +104,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   Semantics(
-                    label: "Apartado de tamaño de la fuente",
-                    hint: "Apartado para cambiar el tamaño de la fuente",
+                    label: l10n.accLabelApartadoTamanoFuente,
+                    hint: l10n.accHintApartadoTamanoFuente,
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -118,8 +118,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         title: Text(l10n.tamanioFuente),
                         children: [
                           Semantics(
-                            label: "Barra de cambio de tamaño de fuente",
-                            hint: "Barra para cambiar el tamaño de la fuente",
+                            label: l10n.accLabelBarraTamanioFuente,
+                            hint: l10n.accHintBarraTamanioFuente,
                             child: Slider(
                               divisions: 4,
                               min: 1,
@@ -144,8 +144,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: Column(
                 children: [
                   Semantics(
-                    label: "Apartado de modo oscuro",
-                    hint: "Apartado para cambiar el estilo de la aplicación",
+                    label: l10n.accLabelApartadoModoOscuro,
+                    hint: l10n.accHintApartadoModoOscuro,
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -159,9 +159,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         children: [
                           ListTile(
                             title: Semantics(
-                              label: "Selector de estilo",
+                              label: l10n.accLabelSelectorEstilo,
                               hint:
-                                  "Selector para cambiar el estilo de la aplicación",
+                                  l10n.accHintSelectorEstilo,
                               child: Switch(
                                 value: context.watch<ThemeViewmodel>().darkMode,
                                 onChanged: (value) {
@@ -179,8 +179,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   Semantics(
-                    label: "Apartado de idioma",
-                    hint: "Apartado para cambiar el idioma",
+                    label: l10n.accLabelApartadoIdioma,
+                    hint: l10n.accHintApartadoIdioma,
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -197,8 +197,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         children: [
                           ListTile(
                             title: Semantics(
-                              label: "Desplegable con los idiomas",
-                              hint: "Desplegable para cambiar el idioma",
+                              label: l10n.accLabelDesplegableIdioma,
+                              hint: l10n.accHintDesplegableIdioma,
                               child: DropdownButtonFormField(
                                 initialValue: context
                                     .read<ThemeViewmodel>()
@@ -226,8 +226,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   Semantics(
-                    label: "Apartado de tamaño de la fuente",
-                    hint: "Apartado para cambiar el tamaño de la fuente",
+                    label: l10n.accLabelApartadoTamanoFuente,
+                    hint: l10n.accHintApartadoTamanoFuente,
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -240,8 +240,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         title: Text(l10n.tamanioFuente),
                         children: [
                           Semantics(
-                            label: "Barra de cambio de tamaño de fuente",
-                            hint: "Barra para cambiar el tamaño de la fuente",
+                            label: l10n.accLabelBarraTamanioFuente,
+                            hint: l10n.accHintBarraTamanioFuente,
                             child: Slider(
                               divisions: 4,
                               min: 1,

@@ -38,11 +38,15 @@ class ConfirmMessageWidget extends StatelessWidget {
                 left: 8,
                 right: 10,
               ),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context, false);
-                },
-                child: Text(l10n.cancelar),
+              child: Semantics(
+                label:l10n.accLabelBtnCancelar,
+                hint: l10n.accHintBtnCancelar,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context, false);
+                  },
+                  child: Text(l10n.cancelar),
+                ),
               ),
             ),
             Padding(
@@ -52,11 +56,15 @@ class ConfirmMessageWidget extends StatelessWidget {
                 left: 8,
                 right: 10,
               ),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-                child: Text(l10n.aceptar),
+              child: Semantics(
+                label: l10n.accLabelBtnAceptar,
+                hint: l10n.accHintBtnAceptar,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
+                  child: Text(l10n.aceptar),
+                ),
               ),
             ),
           ],

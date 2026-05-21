@@ -21,8 +21,8 @@ class _TypesScreenState extends State<TypesScreen> {
       body: Column(
         children: [
           Semantics(
-            label: "Listado de tipos de producto",
-            hint: "Listado con todas los tipos de producto del inventario",
+            label:l10n.accLabelListadoTiposProducto,
+            hint: l10n.accHintListadoTiposProducto,
             child: Expanded(
               child: Consumer<SupabaseService>(
                 builder: (context, value, child) {
@@ -36,8 +36,8 @@ class _TypesScreenState extends State<TypesScreen> {
                       return ListTile(
                         title: Text(types[index]['type']),
                         trailing: Semantics(
-                          label: "Botón de borrar",
-                          hint: "Botón para borrar un tipo de producto",
+                          label: l10n.accLabelBtnBorrarElemento,
+                          hint: l10n.accHintBtnBorrarElemento,
                           child: IconButton(
                             onPressed: () async {
                               bool result = await context

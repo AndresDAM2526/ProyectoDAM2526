@@ -38,52 +38,68 @@ class DrawerWidget extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
-            title: Text(l10n.miPerfil),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProfileScreen(
-                    user: context.read<AuthService>().userDatabase,
+          Semantics(
+            label: l10n.accLabelBtnMiPerfil,
+            hint: l10n.accHintBtnMiPerfil,
+            child: ListTile(
+              title: Text(l10n.miPerfil),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfileScreen(
+                      user: context.read<AuthService>().userDatabase,
+                    ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
 
-          ListTile(
-            title: Text(l10n.historial),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => UserHistoryScreen()),
-              );
-            },
+          Semantics(
+            label: l10n.accLabelBtnHistorial,
+            hint:l10n.accHintBtnHistorial,
+            child: ListTile(
+              title: Text(l10n.historial),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => UserHistoryScreen()),
+                );
+              },
+            ),
           ),
 
           (context.read<AuthService>().userDatabase != null &&
                   context.read<AuthService>().userDatabase!.role ==
                       "Administrador")
-              ? ListTile(
-                  title: Text(l10n.administracion),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AdministrationScreen(),
-                      ),
-                    );
-                  },
-                )
+              ? Semantics(
+                label: l10n.accLabelBtnAdministracion,
+                hint: l10n.accHintBtnAdministracion,
+                child: ListTile(
+                    title: Text(l10n.administracion),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AdministrationScreen(),
+                        ),
+                      );
+                    },
+                  ),
+              )
               : Spacer(),
           Spacer(),
-          ListTile(
-            title: IconButton(
-              onPressed: () {
-                context.read<AuthService>().logOut();
-              },
-              icon: Icon(Icons.logout),
+          Semantics(
+            label: l10n.accLabelBtnCerrarSesion,
+            hint:  l10n.accHintBtnCerrarSesion,
+            child: ListTile(
+              title: IconButton(
+                onPressed: () {
+                  context.read<AuthService>().logOut();
+                },
+                icon: Icon(Icons.logout),
+              ),
             ),
           ),
           SizedBox(height: 20),

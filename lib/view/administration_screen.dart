@@ -236,8 +236,8 @@ class AdministrationScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Semantics(
-                label: "Apartado de modificar propiedades del inventario",
-                hint: "Apartado para modificar propiedades del inventario",
+                label: l10n.accLabelBtnApartadoModificarUsuarios,
+                hint: l10n.accHintBtnApartadoModificarUsuarios,
                 child: ExpansionTile(
                   title: Text(l10n.inventario),
                   children: [
@@ -247,9 +247,9 @@ class AdministrationScreen extends StatelessWidget {
                             ? Row(
                                 children: [
                                   Semantics(
-                                    label: "Botón de añadir producto",
+                                    label: l10n.accLabelBtnFormAnadirProducto,
                                     hint:
-                                        "Botón para desplegar el formulario de añadir producto",
+                                        l10n.accHintBtnFormAnadirProducto,
                                     child: GestureDetector(
                                       onTap: () async {
                                         bool? result = await Navigator.push(
@@ -353,9 +353,9 @@ class AdministrationScreen extends StatelessWidget {
                             : Column(
                                 children: [
                                   Semantics(
-                                    label: "Botón de añadir producto",
+                                    label: l10n.accLabelBtnFormAnadirProducto,
                                     hint:
-                                        "Botón para desplegar el formulario de añadir producto",
+                                        l10n.accHintBtnFormAnadirProducto,
                                     child: GestureDetector(
                                       onTap: () async {
                                         bool? result = await Navigator.push(
@@ -417,8 +417,8 @@ class AdministrationScreen extends StatelessWidget {
                                     ),
                                   ),
                                   Semantics(
-                                    label: "Botón de modificar el inventario",
-                                    hint: "Botón para modificar el inventario",
+                                    label: l10n.accLabelBtnModificarInventario,
+                                    hint: l10n.accHintBtnModificarInventario,
                                     child: GestureDetector(
                                       onTap: () {
                                         Navigator.push(
@@ -457,9 +457,9 @@ class AdministrationScreen extends StatelessWidget {
                                 ],
                               ),
                         Semantics(
-                          label: "Botón para ver el historial de movimientos",
+                          label: l10n.accLabelBtnHistorial,
                           hint:
-                              "Botón que redirecciona a la página de movimientos",
+                              l10n.accHintBtnHistorial,
                           child: GestureDetector(
                             onTap: () {
                               Navigator.push(

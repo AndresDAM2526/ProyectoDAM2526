@@ -51,8 +51,8 @@ class _ModifyInventoryState extends State<ModifyInventory> {
             ),
           ),
           Semantics(
-            label: "Listado de resultados",
-            hint: "Listado con los resultados de la búsqueda",
+            label: l10n.accLabelListadoResultados,
+            hint: l10n.accHintListadoResultados,
             child: FutureBuilder(
               future: context.watch<SupabaseService>().getProductsFromName(name!),
               builder: (context, snapshot) {
@@ -84,8 +84,8 @@ class _ModifyInventoryState extends State<ModifyInventory> {
                             type: products[index]['type']['type'],
                             quantity: products[index]['quantity'],
                             leftSideWidget: Semantics(
-                              label: "Botón de borrar",
-                              hint: "Botón para borrar un producto",
+                              label: l10n.accLabelBtnBorrarProducto,
+                              hint: l10n.accHintBtnBorrarElemento,
                               child: IconButton(
                                 onPressed: () async {
                                   bool? confirm = await context
@@ -131,8 +131,8 @@ class _ModifyInventoryState extends State<ModifyInventory> {
                               ),
                             ),
                             rightSideWidget: Semantics(
-                              label: "Botón de modificar",
-                              hint: "Botón que despliega el formulario para modificar un producto",
+                              label: l10n.accLabelBtnFormModificarProducto,
+                              hint: l10n.accHintBtnFormModificarProducto,
                               child: IconButton(
                                 onPressed: () {
                                   context

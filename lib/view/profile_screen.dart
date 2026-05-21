@@ -1,10 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/userDatabase.dart';
-import 'package:proyecto_dam_2526/utils/AppColors.dart';
 import 'package:proyecto_dam_2526/viewmodel/profileForm_viewmodel.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -26,8 +23,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             SizedBox(height: 10),
             Semantics(
-              label: "Campo para el nombre de usuario",
-              hint: "Campo con el nombre de usuario",
+              label: l10n.accLabelCampoUsuarioPerfil,
+              hint: l10n.accHintCampoUsuarioPerfil,
               child: Container(
                 margin: EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 10),
                 child: Row(
@@ -60,8 +57,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             Semantics(
-              label: "Campo para el correo electrónico",
-              hint: "Campo con el correo electrónico",
+              label: l10n.accLabelCampoCorreo,
+              hint: l10n.accHintCampoCorreo,
               child: Container(
                 margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
                 child: Row(
@@ -94,8 +91,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             Semantics(
-              label: "Campo para el nombre",
-              hint: "Campo con el nombre",
+              label: l10n.accLabelCampoNombre,
+              hint: l10n.accHintCampoNombre,
               child: Container(
                 margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
                 child: Row(
@@ -132,8 +129,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             Semantics(
-              label: "Campo para el rol",
-              hint: "Campo con el rol",
+              label: l10n.accLabelCampoRolPerfil,
+              hint: l10n.accHintCampoRolPerfil,
               child: Container(
                 margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 40),
                 child: Row(
@@ -166,8 +163,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             Semantics(
-              label: "Botón de cambio de contraseña",
-              hint: "Botón que despliega el formulario para cambiar la contraseña",
+              label: l10n.accLabelBtnFormCambioPass,
+              hint: l10n.accHintBtnFormCambioPass,
               child: ElevatedButton(
                 onPressed: () {
                   context.read<ProfileFormViewmodel>().showModifyPasswordDialog(

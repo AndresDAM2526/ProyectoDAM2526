@@ -20,8 +20,8 @@ class _UserHistoryScreenState extends State<UserHistoryScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(l10n.historial)),
       body: Semantics(
-        label: "Listado de registros",
-        hint: "Listado con todos los registros de un usuario",
+        label: l10n.accLabelListadoRegistrosUsuario,
+        hint: l10n.accHintListadoRegistrosUsuario,
         child: FutureBuilder(
           future: context.watch<SupabaseService>().getHistoryRegisterByIdUser(
             context.watch<AuthService>().userDatabase!.idUser,

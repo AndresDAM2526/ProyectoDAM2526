@@ -21,8 +21,8 @@ class _LocationsScreenState extends State<LocationsScreen> {
       body: Column(
         children: [
           Semantics(
-            label: "Listado de ubicaciones",
-            hint: "Listado con todas las ubicaciones del inventario",
+            label: l10n.accLabelListadoUbicaciones,
+            hint: l10n.accHintListadoUbicaciones,
             child: Expanded(
               child: Consumer<SupabaseService>(
                 builder: (context, value, child) {

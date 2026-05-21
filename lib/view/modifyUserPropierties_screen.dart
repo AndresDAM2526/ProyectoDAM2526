@@ -30,8 +30,8 @@ class _ModifyUserPropiertiesScreenState
                 child: Column(
                   children: [
                     Semantics(
-                      label: "Campo para el usuario",
-                      hint: "Campo para introducir el usuario",
+                      label: l10n.accLabelCampoUsuario,
+                      hint: l10n.accHintCampoUsuario,
                       child: Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
@@ -51,8 +51,8 @@ class _ModifyUserPropiertiesScreenState
                       ),
                     ),
                     Semantics(
-                      label: "Campo para el correo electrónico",
-                      hint: "Campo para introducir el correo electrónico",
+                      label: l10n.accLabelCampoCorreo,
+                      hint: l10n.accHintCampoCorreo,
                       child: Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
@@ -70,8 +70,8 @@ class _ModifyUserPropiertiesScreenState
                       ),
                     ),
                     Semantics(
-                      label: "Campo para el nombre",
-                      hint: "Campo para introducir el nombre de usuario",
+                      label: l10n.accLabelCampoNombreUsuario,
+                      hint: l10n.accHintCampoNombreUsuario,
                       child: Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
@@ -89,8 +89,8 @@ class _ModifyUserPropiertiesScreenState
                       ),
                     ),
                     Semantics(
-                      label: "Campo para el rol",
-                      hint: "Campo para seleccionar el rol",
+                      label: l10n.accLabelCampoRol,
+                      hint: l10n.accHintCampoRol,
                       child: Container(
                         margin: EdgeInsets.all(10),
                         child: Consumer<SupabaseService>(
@@ -128,8 +128,8 @@ class _ModifyUserPropiertiesScreenState
                       ),
                     ),
                     Semantics(
-                      label: "Botón de modificar",
-                      hint: "Botón para modificar un usuario",
+                      label: l10n.accLabelBtnEnviar,
+                      hint: l10n.accHintBtnEnviar,
                       child: ElevatedButton(
                         onPressed: () async {
                           if (checkForm.currentState!.validate()) {
@@ -172,8 +172,8 @@ class _ModifyUserPropiertiesScreenState
                 child: Column(
                   children: [
                     Semantics(
-                      label: "Campo para el usuario",
-                      hint: "Campo para introducir el nombre de usuario",
+                      label: l10n.accLabelCampoUsuario,
+                      hint: l10n.accHintCampoNombreUsuario,
                       child: Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
@@ -193,8 +193,8 @@ class _ModifyUserPropiertiesScreenState
                       ),
                     ),
                     Semantics(
-                      label: "Campo para el correo electrónico",
-                      hint: "Campo para introducir el correo electrónico",
+                      label: l10n.accLabelCampoCorreo,
+                      hint: l10n.accHintCampoCorreo,
                       child: Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
@@ -212,8 +212,8 @@ class _ModifyUserPropiertiesScreenState
                       ),
                     ),
                     Semantics(
-                      label: "Campo para el nombre",
-                      hint: "Campo para introducir el nombre",
+                      label: l10n.accLabelCampoNombreUsuario,
+                      hint: l10n.accHintCampoNombreUsuario,
                       child: Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
@@ -231,8 +231,8 @@ class _ModifyUserPropiertiesScreenState
                       ),
                     ),
                     Semantics(
-                      label: "Campo para el rol",
-                      hint: "Campo para seleccionar el rol",
+                      label: l10n.accLabelCampoRol,
+                      hint: l10n.accHintCampoRol,
                       child: Container(
                         margin: EdgeInsets.all(10),
                         child: Consumer<SupabaseService>(
@@ -270,8 +270,8 @@ class _ModifyUserPropiertiesScreenState
                       ),
                     ),
                     Semantics(
-                      label: "Botón de modificar",
-                      hint: "Botón para modificar un usuario",
+                      label: l10n.accLabelBtnEnviar,
+                      hint: l10n.accHintBtnEnviar,
                       child: ElevatedButton(
                         onPressed: () async {
                           if (checkForm.currentState!.validate()) {

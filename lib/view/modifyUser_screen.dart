@@ -23,9 +23,9 @@ class _ModifyUserScreenState extends State<ModifyUserScreen> {
       body: Column(
         children: [
           Semantics(
-            label: "Campo para buscar un usuario",
+            label: l10n.accLabelCampoBuscarUsuario,
             hint:
-                "Campo para buscar un usuario por su nombre o nombre de usuario",
+                l10n.accHintCampoBuscarUsuario,
             child: Container(
               margin: EdgeInsets.all(10),
               child: TextField(
@@ -42,8 +42,8 @@ class _ModifyUserScreenState extends State<ModifyUserScreen> {
           ),
           search!.isEmpty
               ? Semantics(
-                  label: "Resultado de la búsqueda",
-                  hint: "Listado con los resultados de la búsqueda",
+                  label: l10n.accLabelResultadoBusqueda,
+                  hint: l10n.accHintResultadoBusqueda,
                   child: Expanded(
                     child: FutureBuilder(
                       future: context.watch<SupabaseService>().getAllUsers(),
@@ -80,8 +80,8 @@ class _ModifyUserScreenState extends State<ModifyUserScreen> {
                   ),
                 )
               : Semantics(
-                  label: "Resultado de la búsqueda",
-                  hint: "Listado con los resultados de la búsqueda",
+                  label: l10n.accLabelResultadoBusqueda,
+                  hint: l10n.accHintResultadoBusqueda,
                   child: Expanded(
                     child: FutureBuilder(
                       future: context

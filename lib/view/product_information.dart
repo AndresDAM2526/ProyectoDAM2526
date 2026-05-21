@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_dam_2526/l10n/app_localizations.dart';
 import 'package:proyecto_dam_2526/model/product.dart';
-import 'package:proyecto_dam_2526/utils/AppColors.dart';
 
 class ProductInformation extends StatelessWidget {
   Product product;

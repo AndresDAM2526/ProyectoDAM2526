@@ -9,304 +9,409 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get accLabelCampoUbicacion => 'Campo para la ubicación';
-
-  @override
-  String get accHintCampoUbicacion => 'Campo para introducir la ubicación';
-
-  @override
-  String get accLabelBtnAnadirUbicacion => 'Botón de añadir ubicación';
-
-  @override
-  String get accHintBtnAnadirUbicacion => 'Botón para añadir una nueva ubicación';
-
-  @override
-  String get accLabelBtnBorrarUbicacion => 'Botón de borrar ubicación';
-
-  @override
-  String get accHintBtnBorrarUbicacion => 'Botón para borrar una ubicación';
-
-  @override
-  String get accLabelApartadoModificarUbicaciones => 'Apartado de modificar las ubicaciones';
-
-  @override
-  String get accHintApartadoModificarUbicaciones => 'Apartado para modificar las ubicaciones';
-
-  @override
-  String get accLabelCampoNombreProducto => 'Campo para el nombre del producto';
-
-  @override
-  String get acchintCampoNombreProducto => 'Campo para introducir el nombre del producto';
-
-  @override
-  String get accLabelCampoTipoProducto => 'Campo para el tipo de producto';
-
-  @override
-  String get accHintCampoTipoProducto => 'Campo para seleccionar el tipo de producto';
-
-  @override
-  String get accLabelCampoUbicacionProducto => 'Campo para la ubicación del producto';
-
-  @override
-  String get accHintCampoUbicacionProducto => 'Campo para seleccionar la ubicación';
-
-  @override
-  String get accLabelCampoCantidad => 'Campo para la cantidad';
-
-  @override
-  String get accHintCampoCantidad => 'Campo para introducir la cantidad';
-
-  @override
-  String get accLabelBtnAnadirProducto => 'Botón para añadir un producto';
-
-  @override
-  String get accHintBtnAnadirProducto => 'Botón para guardar el nuevo producto en el inventario';
-
-  @override
-  String get accLabelBtnFormProducto => 'Botón de añadir producto';
-
-  @override
-  String get accHintBtnFormProducto => 'Botón para desplegar el formulario de añadir producto';
-
-  @override
-  String get accLabelBtnModificarInventario => 'Botón de modificar el inventario';
-
-  @override
-  String get accHintBtnModificarInventario => 'Botón para modificar el inventario';
-
-  @override
-  String get accLabelTbProductos => 'Tabla de productos';
-
-  @override
-  String get accHintTbProductos => 'Tabla donde aparecen los productos del inventario';
-
-  @override
-  String get accLabelApartadoTiposProducto => 'Apartado de tipos de producto';
-
-  @override
-  String get accHintApartadoTiposProducto => 'Apartado para modificar los tipos de producto';
-
-  @override
-  String get accLabelBtnAnadirTipoProducto => 'Botón de añadir tipo de producto';
-
-  @override
-  String get accHintBtnAnadirTipoProducto => 'Botón para añadir tipo de producto';
-
-  @override
-  String get accLabelBtnBorrarTipoProducto => 'Botón de borrar tipo de producto';
-
-  @override
-  String get accHintBtnBorrarTipoProducto => 'Botón para borrar un tipo de producto';
-
-  @override
-  String get accLabelListadoTiposProducto => 'Listado de tipos de producto';
-
-  @override
-  String get accHintListadoTiposProducto => 'Listado con todos los tipos de producto del inventario';
-
-  @override
-  String get accLabelCampoNombreUsuario => 'Campo para el nombre';
-
-  @override
-  String get accHintCampoNombreUsuario => 'Campo para introducir el nombre de usuario';
-
-  @override
-  String get accLabelCampoUsuario => 'Campo para el usuario';
-
-  @override
-  String get accHintCampoUsuario => 'Campo para introducir el usuario';
-
-  @override
-  String get accLabelCampoRol => 'Campo para el rol';
-
-  @override
-  String get accHintCampoRol => 'Campo para seleccionar el rol';
-
-  @override
-  String get accLabelApartadoUsuarios => 'Apartado de usuarios';
-
-  @override
-  String get accHintApartadoUsuarios => 'Apartado para modificar propiedades de los usuarios';
-
-  @override
-  String get accLabelBtnFormAnadirUsuario => 'Botón de añadir usuario';
-
-  @override
-  String get accHintBtnFormAnadirUsuario => 'Botón para desplegar el formulario de añadir usuarios';
-
-  @override
-  String get accLabelBtnApartadoModificarUsuarios => 'Botón de modificar usuarios';
-
-  @override
-  String get accHintBtnApartadoModificarUsuarios => 'Botón que redirecciona al apartado de modificar usuarios';
-
-  @override
-  String get accLabelBtnModificarUsuario => 'Botón para modificar un usuario';
-
-  @override
-  String get accHintBtnModificarUsuario => 'Guarda los cambios del usuario seleccionado';
-
-  @override
-  String get accLabelCampoRolPerfil => 'Campo con el rol';
-
-  @override
-  String get accHintCampoRolPerfil => 'Muestra la información del rol';
-
-  @override
-  String get accLabelCampoUsuarioPerfil => 'Campo nombre de usuario';
-
-  @override
-  String get accHintCampoUsuarioPerfil => 'Muestra la información del nombre de usuario actual';
-
-  @override
-  String get accLabelCampoCorreo => 'Campo del correo electrónico';
-
-  @override
-  String get accHintCampoCorreo => 'Campo para introducir el correo electrónico';
-
-  @override
-  String get accLabelCampoPass => 'Campo de la contraseña';
-
-  @override
-  String get accHintCampoPass => 'Campo para introducir la contraseña';
-
-  @override
-  String get accLabelBtnIniciarSesion => 'Botón de iniciar sesión';
-
-  @override
-  String get accHintBtnIniciarSesion => 'Botón para iniciar sesión';
-
-  @override
-  String get accLabelBtnMostrarPass => 'Botón de mostrar contraseña';
-
-  @override
-  String get accHintBtnMostrarPass => 'Botón para mostrar u ocultar la contraseña en texto plano';
-
-  @override
-  String get accLabelActualPass => 'Campo de contraseña actual';
-
-  @override
   String get accHintActualPass => 'Campo para introducir la contraseña actual';
-
-  @override
-  String get accLabelNuevaPass => 'Campo de nueva contraseña';
-
-  @override
-  String get accHintNuevaPass => 'Campo para introducir la nueva contraseña';
-
-  @override
-  String get accLabelConfirmarPass => 'Campo de confirmar contraseña';
-
-  @override
-  String get accHintConfirmarPass => 'Campo para confirmar la contraseña';
-
-  @override
-  String get accLabelBtnFormCambioPass => 'Botón de cambio de contraseña';
-
-  @override
-  String get accHintBtnFormCambioPass => 'Botón que despliega el formulario para cambiar la contraseña';
-
-  @override
-  String get accLabelCampoBuscarProducto => 'Campo de buscar un producto';
-
-  @override
-  String get accHintCampoBuscarProducto => 'Campo para buscar un producto por su nombre';
-
-  @override
-  String get accLabelCampoBuscarRegistro => 'Campo para buscar un registro';
-
-  @override
-  String get accHintCampoBuscarRegistro => 'Campo para buscar un registro por su nombre';
-
-  @override
-  String get accLabelResultadoBusqueda => 'Resultado de la búsqueda';
-
-  @override
-  String get accHintResultadoBusqueda => 'Listado con los resultados de la búsqueda';
-
-  @override
-  String get accLabelBtnFiltrar => 'Botón de filtrar';
-
-  @override
-  String get accHintBtnFiltrar => 'Botón que despliega una pestaña para filtrar los productos';
-
-  @override
-  String get accLabelTextoFiltros => 'Texto con los filtros';
-
-  @override
-  String get accHintTextoFiltros => 'Texto donde aparecen los filtros aplicados';
-
-  @override
-  String get accLabelBtnListadoMovimientos => 'Botón para ver el historial de movimientos';
-
-  @override
-  String get accHintBtnListadoMovimientos => 'Botón que redirecciona a la página de movimientos';
-
-  @override
-  String get accLabelListadoRegistrosUsuario => 'Listado de registros';
-
-  @override
-  String get accHintListadoRegistrosUsuario => 'Listado con todos los registros de un usuario';
-
-  @override
-  String get accLabelApartadoModoOscuro => 'Apartado de modo oscuro';
-
-  @override
-  String get accHintApartadoModoOscuro => 'Apartado para cambiar el estilo de la aplicación';
-
-  @override
-  String get accLabelSelectorEstilo => 'Selector de estilo';
-
-  @override
-  String get accHintSelectorEstilo => 'Selector para cambiar el estilo de la aplicación';
-
-  @override
-  String get accLabelApartadoIdioma => 'Apartado de idioma';
 
   @override
   String get accHintApartadoIdioma => 'Apartado para cambiar el idioma';
 
   @override
-  String get accLabelDesplegableIdioma => 'Desplegable con los idiomas';
+  String get accHintApartadoModificarPropiedadesInventario => 'Apartado para modificar propiedades del inventario';
 
   @override
-  String get accHintDesplegableIdioma => 'Desplegable para cambiar el idioma';
+  String get accHintApartadoModificarUbicaciones => 'Apartado para modificar las ubicaciones';
 
   @override
-  String get accLabelApartadoTamanoFuente => 'Apartado de tamaño de la fuente';
+  String get accHintApartadoModoOscuro => 'Apartado para cambiar el estilo de la aplicación';
 
   @override
   String get accHintApartadoTamanoFuente => 'Apartado para cambiar el tamaño de la fuente';
 
   @override
-  String get accLabelBarraTamanioFuente => 'Barra de cambio de tamaño de fuente';
+  String get accHintApartadoTiposProducto => 'Apartado para modificar los tipos de producto';
+
+  @override
+  String get accHintApartadoUsuarios => 'Apartado para modificar propiedades de los usuarios';
 
   @override
   String get accHintBarraTamanioFuente => 'Barra para cambiar el tamaño de la fuente';
 
   @override
-  String get accLabelBtnEnviar => 'Botón de enviar';
+  String get accHintBtnAceptar => 'Botón para aceptar';
 
   @override
-  String get accHintBtnEnviar => 'Procesa y envía los datos del formulario actual';
+  String get accHintBtnAdministracion => 'Botón que redirecciona al apartado de administración';
 
   @override
-  String get accLabelLimpiarForm => 'Botón de limpiar el formulario';
+  String get accHintBtnAnadirProducto => 'Botón para guardar el nuevo producto en el inventario';
 
   @override
-  String get accHintLimpiarForm => 'Borra todos los campos introducidos';
+  String get accHintBtnAnadirTipoProducto => 'Botón para añadir tipo de producto';
 
   @override
-  String get accLabelBtnBorrarElemento => 'Botón de borrar';
+  String get accHintBtnAnadirUbicacion => 'Botón para añadir una nueva ubicación';
+
+  @override
+  String get accHintBtnApartadoModificarUsuarios => 'Botón que redirecciona al apartado de modificar usuarios';
 
   @override
   String get accHintBtnBorrarElemento => 'Elimina el elemento seleccionado de la base de datos';
 
   @override
-  String get accLabelBtnFormModificar => 'Botón de modificar';
+  String get accHintBtnBorrarTipoProducto => 'Botón para borrar un tipo de producto';
+
+  @override
+  String get accHintBtnBorrarUbicacion => 'Botón para borrar una ubicación';
+
+  @override
+  String get accHintBtnCancelar => 'Botón para cancelar';
+
+  @override
+  String get accHintBtnCerrarSesion => 'Botón que cierra la sesión';
+
+  @override
+  String get accHintBtnEnviar => 'Procesa y envía los datos del formulario actual';
+
+  @override
+  String get accHintBtnFiltrar => 'Botón para filtrar';
+
+  @override
+  String get accHintBtnFormAnadirProducto => 'Botón para desplegar el formulario de añadir producto';
+
+  @override
+  String get accHintBtnFormAnadirUsuario => 'Botón para desplegar el formulario de añadir usuarios';
+
+  @override
+  String get accHintBtnFormCambioPass => 'Botón que despliega un formulario para cambiar la contraseña';
 
   @override
   String get accHintBtnFormModificar => 'Botón que despliega el formulario para modificar el elemento';
+
+  @override
+  String get accHintBtnFormModificarProducto => 'Botón que despliega el formulario para modificar un producto';
+
+  @override
+  String get accHintBtnFormProducto => 'Botón para desplegar el formulario de añadir producto';
+
+  @override
+  String get accHintBtnHistorial => 'Botón que redirecciona al apartado de historial';
+
+  @override
+  String get accHintBtnIniciarSesion => 'Botón para iniciar sesión';
+
+  @override
+  String get accHintBtnListadoMovimientos => 'Botón que redirecciona a la página de movimientos';
+
+  @override
+  String get accHintBtnMiPerfil => 'Botón que redirecciona a mi perfil';
+
+  @override
+  String get accHintBtnModificar => 'Botón que despliega un formulario para modificar propiedades de un usuario';
+
+  @override
+  String get accHintBtnModificarInventario => 'Botón para modificar el inventario';
+
+  @override
+  String get accHintBtnModificarUsuario => 'Guarda los cambios del usuario seleccionado';
+
+  @override
+  String get accHintBtnMostrarPass => 'Botón para mostrar u ocultar la contraseña en texto plano';
+
+  @override
+  String get accHintBtnVolver => 'Botón para volver';
+
+  @override
+  String get accHintCampoBuscarProducto => 'Campo para buscar un producto por su nombre';
+
+  @override
+  String get accHintCampoBuscarRegistro => 'Campo para buscar un registro por su nombre';
+
+  @override
+  String get accHintCampoBuscarUsuario => 'Campo para buscar un usuario por su nombre o nombre de usuario';
+
+  @override
+  String get accHintCampoCantidad => 'Campo para introducir la cantidad';
+
+  @override
+  String get accHintCampoCorreo => 'Campo para introducir el correo electrónico';
+
+  @override
+  String get accHintCampoNombre => 'Campo con el nombre';
+
+  @override
+  String get accHintCampoNombreUsuario => 'Campo para introducir el nombre de usuario';
+
+  @override
+  String get accHintCampoPass => 'Campo para introducir la contraseña';
+
+  @override
+  String get accHintCampoRol => 'Campo para seleccionar el rol';
+
+  @override
+  String get accHintCampoRolPerfil => 'Muestra la información del rol';
+
+  @override
+  String get accHintCampoTipoProducto => 'Campo para seleccionar el tipo de producto';
+
+  @override
+  String get accHintCampoUbicacion => 'Campo para introducir la ubicación';
+
+  @override
+  String get accHintCampoUbicacionProducto => 'Campo para seleccionar la ubicación';
+
+  @override
+  String get accHintCampoUsuario => 'Campo para introducir el usuario';
+
+  @override
+  String get accHintCampoUsuarioPerfil => 'Muestra la información del nombre de usuario actual';
+
+  @override
+  String get accHintConfirmarPass => 'Campo para confirmar la contraseña';
+
+  @override
+  String get accHintDesplegableIdioma => 'Desplegable para cambiar el idioma';
+
+  @override
+  String get accHintLimpiarForm => 'Borra todos los campos introducidos';
+
+  @override
+  String get accHintListadoRegistrosUsuario => 'Listado con todos los registros de un usuario';
+
+  @override
+  String get accHintListadoResultados => 'Listado con los resultados de la búsqueda';
+
+  @override
+  String get accHintListadoTiposProducto => 'Listado que muestra los tipos de producto';
+
+  @override
+  String get accHintListadoTiposProductos => 'Listado con todas los tipos de producto del inventario';
+
+  @override
+  String get accHintListadoUbicaciones => 'Listado que muestra las ubicaciones';
+
+  @override
+  String get accHintMenuLateral => 'Menú lateral';
+
+  @override
+  String get accHintNuevaPass => 'Campo para introducir la nueva contraseña';
+
+  @override
+  String get accHintResultadoBusqueda => 'Listado con los resultados de la búsqueda';
+
+  @override
+  String get accHintSelectorEstilo => 'Selector para cambiar el estilo de la aplicación';
+
+  @override
+  String get accHintTbProductos => 'Tabla donde aparecen los productos del inventario';
+
+  @override
+  String get accHintTextoFiltros => 'Texto donde aparecen los filtros aplicados';
+
+  @override
+  String get accLabelActualPass => 'Campo de contraseña actual';
+
+  @override
+  String get accLabelApartadoIdioma => 'Apartado de idioma';
+
+  @override
+  String get accLabelApartadoModificarPropiedadesInventario => 'Apartado de modificar propiedades del inventario';
+
+  @override
+  String get accLabelApartadoModificarUbicaciones => 'Apartado de modificar las ubicaciones';
+
+  @override
+  String get accLabelApartadoModoOscuro => 'Apartado de modo oscuro';
+
+  @override
+  String get accLabelApartadoTamanoFuente => 'Apartado de tamaño de la fuente';
+
+  @override
+  String get accLabelApartadoTiposProducto => 'Apartado de tipos de producto';
+
+  @override
+  String get accLabelApartadoUsuarios => 'Apartado de usuarios';
+
+  @override
+  String get accLabelBarraTamanioFuente => 'Barra de cambio de tamaño de fuente';
+
+  @override
+  String get accLabelBtnAceptar => 'Botón de aceptar';
+
+  @override
+  String get accLabelBtnAdministracion => 'Botón de administración';
+
+  @override
+  String get accLabelBtnAnadirProducto => 'Botón para añadir un producto';
+
+  @override
+  String get accLabelBtnAnadirTipoProducto => 'Botón de añadir tipo de producto';
+
+  @override
+  String get accLabelBtnAnadirUbicacion => 'Botón de añadir ubicación';
+
+  @override
+  String get accLabelBtnApartadoModificarUsuarios => 'Botón de modificar usuarios';
+
+  @override
+  String get accLabelBtnBorrarElemento => 'Botón de borrar';
+
+  @override
+  String get accLabelBtnBorrarProducto => 'Botón de borrar';
+
+  @override
+  String get accLabelBtnBorrarTipoProducto => 'Botón de borrar tipo de producto';
+
+  @override
+  String get accLabelBtnBorrarUbicacion => 'Botón de borrar ubicación';
+
+  @override
+  String get accLabelBtnCancelar => 'Botón de cancelar';
+
+  @override
+  String get accLabelBtnCerrarSesion => 'Botón de cerrar sesión';
+
+  @override
+  String get accLabelBtnEnviar => 'Botón de enviar';
+
+  @override
+  String get accLabelBtnFiltrar => 'Botón de filtrar';
+
+  @override
+  String get accLabelBtnFormAnadirProducto => 'Botón de añadir producto';
+
+  @override
+  String get accLabelBtnFormAnadirUsuario => 'Botón de añadir usuario';
+
+  @override
+  String get accLabelBtnFormCambioPass => 'Botón de cambiar contraseña';
+
+  @override
+  String get accLabelBtnFormModificar => 'Botón de modificar';
+
+  @override
+  String get accLabelBtnFormModificarProducto => 'Botón de modificar';
+
+  @override
+  String get accLabelBtnFormProducto => 'Botón de añadir producto';
+
+  @override
+  String get accLabelBtnHistorial => 'Botón de historial';
+
+  @override
+  String get accLabelBtnIniciarSesion => 'Botón de iniciar sesión';
+
+  @override
+  String get accLabelBtnListadoMovimientos => 'Botón para ver el historial de movimientos';
+
+  @override
+  String get accLabelBtnMiPerfil => 'Botón de mi perfil';
+
+  @override
+  String get accLabelBtnModificar => 'Botón de modificar';
+
+  @override
+  String get accLabelBtnModificarInventario => 'Botón de modificar el inventario';
+
+  @override
+  String get accLabelBtnModificarUsuario => 'Botón para modificar un usuario';
+
+  @override
+  String get accLabelBtnMostrarPass => 'Botón de mostrar contraseña';
+
+  @override
+  String get accLabelBtnVolver => 'Botón de volver';
+
+  @override
+  String get accLabelCampoBuscarProducto => 'Campo de buscar un producto';
+
+  @override
+  String get accLabelCampoBuscarRegistro => 'Campo para buscar un registro';
+
+  @override
+  String get accLabelCampoBuscarUsuario => 'Campo para buscar un usuario';
+
+  @override
+  String get accLabelCampoCantidad => 'Campo para la cantidad';
+
+  @override
+  String get accLabelCampoCorreo => 'Campo del correo electrónico';
+
+  @override
+  String get accLabelCampoNombre => 'Campo para el nombre';
+
+  @override
+  String get accLabelCampoNombreProducto => 'Campo para el nombre del producto';
+
+  @override
+  String get accLabelCampoNombreUsuario => 'Campo para el nombre';
+
+  @override
+  String get accLabelCampoPass => 'Campo de la contraseña';
+
+  @override
+  String get accLabelCampoRol => 'Campo para el rol';
+
+  @override
+  String get accLabelCampoRolPerfil => 'Campo con el rol';
+
+  @override
+  String get accLabelCampoTipoProducto => 'Campo para el tipo de producto';
+
+  @override
+  String get accLabelCampoUbicacion => 'Campo para la ubicación';
+
+  @override
+  String get accLabelCampoUbicacionProducto => 'Campo para la ubicación del producto';
+
+  @override
+  String get accLabelCampoUsuario => 'Campo para el usuario';
+
+  @override
+  String get accLabelCampoUsuarioPerfil => 'Campo nombre de usuario';
+
+  @override
+  String get accLabelConfirmarPass => 'Campo de confirmar contraseña';
+
+  @override
+  String get accLabelDesplegableIdioma => 'Desplegable con los idiomas';
+
+  @override
+  String get accLabelLimpiarForm => 'Botón de limpiar el formulario';
+
+  @override
+  String get accLabelListadoRegistrosUsuario => 'Listado de registros';
+
+  @override
+  String get accLabelListadoResultados => 'Listado de resultados';
+
+  @override
+  String get accLabelListadoTiposProducto => 'Listado de tipos de producto';
+
+  @override
+  String get accLabelListadoTiposProductos => 'Listado de tipos de producto';
+
+  @override
+  String get accLabelListadoUbicaciones => 'Listado de ubicaciones';
+
+  @override
+  String get accLabelMenuLateral => 'Menú lateral';
+
+  @override
+  String get accLabelNuevaPass => 'Campo de nueva contraseña';
+
+  @override
+  String get accLabelResultadoBusqueda => 'Resultado de la búsqueda';
+
+  @override
+  String get accLabelSelectorEstilo => 'Selector de estilo';
+
+  @override
+  String get accLabelTbProductos => 'Tabla de productos';
+
+  @override
+  String get accLabelTextoFiltros => 'Texto con los filtros';
+
+  @override
+  String get acchintCampoNombreProducto => 'Campo para introducir el nombre del producto';
 
   @override
   String get aceptar => 'Aceptar';
@@ -333,10 +438,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get anadirUsuario => 'Añadir usuario';
 
   @override
-  String get borrarUbicacion => 'Borrar ubicación';
+  String get borrarTipo => 'Borrar tipo';
 
   @override
-  String get borrarTipo => 'Borrar tipo';
+  String get borrarUbicacion => 'Borrar ubicación';
 
   @override
   String get cambiarContrasena => 'Cambiar contraseña';
@@ -369,10 +474,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get coger => 'Get';
 
   @override
-  String get confirmarBorradoUsuario => '¿Desea borrar el usuario?';
+  String get confirmarBorradoProducto => '¿Desea borrar el producto?';
 
   @override
-  String get confirmarBorradoProducto => '¿Desea borrar el producto?';
+  String get confirmarBorradoUsuario => '¿Desea borrar el usuario?';
 
   @override
   String get confirmarContrasena => 'Confirmar contraseña';
@@ -384,10 +489,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get contrasenaActual => 'Contraseña actual';
 
   @override
-  String get contrasenaActualMensaje => 'Introduzca la contraseña actual';
+  String get contrasenaActualIncorrecta => 'La contraseña actual no es correcta, inténtelo de nuevo';
 
   @override
-  String get contrasenaActualIncorrecta => 'La contraseña actual no es correcta, inténtelo de nuevo';
+  String get contrasenaActualMensaje => 'Introduzca la contraseña actual';
 
   @override
   String get contrasenaActualizada => 'Se ha actualizado la contraseña';
@@ -615,10 +720,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get usuario => 'Usuario';
 
   @override
-  String get usuarios => 'Usuarios';
+  String get usuarioEliminado => 'Usuario eliminado';
 
   @override
-  String get usuarioEliminado => 'Usuario eliminado';
+  String get usuarios => 'Usuarios';
 
   @override
   String get vaciar => 'Vaciar';
